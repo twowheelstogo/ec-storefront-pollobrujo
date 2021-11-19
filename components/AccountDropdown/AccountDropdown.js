@@ -5,7 +5,8 @@ import { useRouter } from "next/router";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import ButtonBase from "@material-ui/core/ButtonBase";
-import AccountIcon from "mdi-material-ui/Account";
+import { AccountCircleOutline } from "mdi-material-ui";
+//import AccountIcon from "mdi-material-ui/Account";
 import Popover from "@material-ui/core/Popover";
 import useViewer from "hooks/viewer/useViewer";
 import ViewerInfo from "@reactioncommerce/components/ViewerInfo/v1";
@@ -17,11 +18,11 @@ import getAccountsHandler from "../../lib/accountsServer.js";
 const useStyles = makeStyles((theme) => ({
   accountDropdown: {
     width: 320,
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
   },
   marginBottom: {
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 const AccountDropdown = () => {
@@ -66,7 +67,7 @@ const AccountDropdown = () => {
         </ButtonBase>
       ) : (
         <IconButton color="inherit" onClick={toggleOpen}>
-          <AccountIcon />
+          <AccountCircleOutline />
         </IconButton>
       )}
 
@@ -74,7 +75,7 @@ const AccountDropdown = () => {
         anchorEl={anchorElement}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "center"
+          horizontal: "center",
         }}
         open={Boolean(anchorElement)}
         onClose={onClose}

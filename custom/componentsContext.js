@@ -62,6 +62,10 @@ import SelectableList from "@reactioncommerce/components/SelectableList/v1";
 import StockWarning from "@reactioncommerce/components/StockWarning/v1";
 import StripeForm from "@reactioncommerce/components/StripeForm/v1";
 import TextInput from "@reactioncommerce/components/TextInput/v1";
+import NavigationHeader from "components/NavigationHeader";
+import SearchBar from "components/SearchBar";
+import IconsActions from "components/IconsActions";
+import NavigationMenu from "components/NavigationMenu";
 import withLocales from "../lib/utils/withLocales";
 
 // Providing locales data
@@ -117,5 +121,10 @@ export default {
   SelectableList,
   StockWarning,
   StripeForm,
-  TextInput
+  TextInput,
+  NavigationHeader,
+  // eslint-disable-next-line comma-dangle
+  SearchBar,
+  IconsActions,
+  NavigationMenu,
 };

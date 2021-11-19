@@ -6,7 +6,7 @@ import MiniCartComponent from "@reactioncommerce/components/MiniCart/v1";
 import CartItems from "components/CartItems";
 import CartEmptyMessage from "@reactioncommerce/components/CartEmptyMessage/v1";
 import IconButton from "@material-ui/core/IconButton";
-import CartIcon from "mdi-material-ui/Cart";
+import { ShoppingOutline } from "mdi-material-ui";
 import Router from "translations/i18nRouter";
 import Badge from "@material-ui/core/Badge";
 import Popper from "@material-ui/core/Popper";
@@ -17,10 +17,10 @@ const styles = ({ palette, zIndex }) => ({
   popper: {
     marginTop: "0.5rem",
     marginRight: "1rem",
-    zIndex: zIndex.modal
+    zIndex: zIndex.modal,
   },
   cart: {
-    backgroundColor: palette.common.white
+    backgroundColor: palette.common.white,
   },
   emptyCart: {
     display: "flex",
@@ -28,14 +28,14 @@ const styles = ({ palette, zIndex }) => ({
     alignItems: "center",
     width: 360,
     height: 320,
-    border: palette.borders.default
+    border: palette.borders.default,
   },
   badge: {
     width: 20,
     height: 20,
     top: 10,
-    left: 20
-  }
+    left: 20,
+  },
 });
 
 class MiniCart extends Component {
@@ -44,12 +44,12 @@ class MiniCart extends Component {
       items: PropTypes.arrayOf(PropTypes.object),
       checkout: PropTypes.shape({
         itemTotal: PropTypes.shape({
-          displayAmount: PropTypes.string
+          displayAmount: PropTypes.string,
         }),
         taxTotal: PropTypes.shape({
-          displayAmount: PropTypes.string
-        })
-      })
+          displayAmount: PropTypes.string,
+        }),
+      }),
     }),
     classes: PropTypes.object.isRequired,
     hasMoreCartItems: PropTypes.bool,
@@ -59,9 +59,9 @@ class MiniCart extends Component {
     uiStore: PropTypes.shape({
       isCartOpen: PropTypes.bool.isRequired,
       openCart: PropTypes.func.isRequired,
-      closeCart: PropTypes.func.isRequired
-    })
-  }
+      closeCart: PropTypes.func.isRequired,
+    }),
+  };
 
   constructor(props) {
     super(props);
@@ -72,49 +72,51 @@ class MiniCart extends Component {
   }
 
   state = {
-    anchorElement: null
+    anchorElement: null,
   };
 
-  anchorElement = null
+  anchorElement = null;
 
   handlePopperOpen = () => {
-    const { uiStore: { openCart } } = this.props;
+    const {
+      uiStore: { openCart },
+    } = this.props;
     openCart();
-  }
+  };
 
   handleClick = () => Router.push("/");
 
   handleCheckoutButtonClick = () => {
     this.handleLeavePopper();
     Router.push("/cart/checkout");
-  }
+  };
 
   handlePopperClose = () => {
     const { closeCart } = this.props.uiStore;
     closeCart(0);
-  }
+  };
 
   handleEnterPopper = () => {
     const { openCart } = this.props.uiStore;
     openCart();
-  }
+  };
 
   handleLeavePopper = () => {
     const { closeCart } = this.props.uiStore;
     closeCart();
-  }
+  };
 
   handleOnClick = () => {
     const { closeCart } = this.props.uiStore;
     closeCart();
     Router.push("/cart");
-  }
+  };
 
   handleItemQuantityChange = (quantity, cartItemId) => {
     const { onChangeCartItemsQuantity } = this.props;
 
     onChangeCartItemsQuantity({ quantity, cartItemId });
-  }
+  };
 
   handleRemoveItem = async (itemId) => {
     const { onRemoveCartItems } = this.props;
@@ -139,7 +141,7 @@ class MiniCart extends Component {
                 onChangeCartItemQuantity={this.handleItemQuantityChange}
                 onLoadMoreCartItems={loadMoreCartItems}
               />
-            )
+            ),
           }}
         />
       );
@@ -157,28 +159,24 @@ class MiniCart extends Component {
   render() {
     const { cart, classes, uiStore } = this.props;
     const { isCartOpen } = uiStore;
-    const id = (isCartOpen) ? "simple-popper" : null;
+    const id = isCartOpen ? "simple-popper" : null;
 
     return (
       <Fragment>
         <div ref={this.setPopoverAnchorEl}>
-          <IconButton color="inherit"
+          <IconButton
+            color="inherit"
             onMouseEnter={this.handlePopperOpen}
             onMouseLeave={this.handlePopperClose}
             onClick={this.handleOnClick}
           >
-            {(cart && cart.totalItemQuantity > 0)
-              ? (
-                <Badge
-                  badgeContent={cart.totalItemQuantity}
-                  color="primary"
-                  classes={{ badge: classes.badge }}
-                >
-                  <CartIcon />
-                </Badge>
-              )
-              : <CartIcon />
-            }
+            {cart && cart.totalItemQuantity > 0 ? (
+              <Badge badgeContent={cart.totalItemQuantity} color="primary" classes={{ badge: classes.badge }}>
+                <ShoppingOutline />
+              </Badge>
+            ) : (
+              <ShoppingOutline />
+            )}
           </IconButton>
         </div>
 
@@ -193,9 +191,7 @@ class MiniCart extends Component {
         >
           {({ TransitionProps }) => (
             <Fade {...TransitionProps}>
-              <div className={classes.cart}>
-                {this.renderMiniCart()}
-              </div>
+              <div className={classes.cart}>{this.renderMiniCart()}</div>
             </Fade>
           )}
         </Popper>

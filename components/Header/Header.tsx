@@ -40,6 +40,8 @@ const styles = (theme: Theme) =>
       alignItems: "center",
       display: "flex",
       justifyContent: "space-between",
+      color: "#FFFFFF",
+      backgroundColor: "#000000",
     },
   });
 
