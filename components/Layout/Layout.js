@@ -44,8 +44,24 @@ class Layout extends Component {
       // shop,
       // viewer,
       components: { NavigationHeader },
+      components: { CustomFooter },
     } = this.props;
 
+    const Descripcion = {
+      imageUrl: "https://pollobrujo.com.gt/wp-content/uploads/2019/11/logo.png",
+      Mensaje1: "Contáctenos",
+      Mensaje2: "Encuétrenos",
+      ContenidoMensaje1: [
+        "+502 41427517",
+        "20 calle 24-26 bodega 15 zona 10 Ofibodegas Pradera",
+        "Lunes- Sábado: 8am - 8pm",
+        "Domingo: 10am - 8pm",
+      ],
+      ContenidoMensaje2: [
+        { Titulo: "Sobre Nosotros", ruta: "/sobre" },
+        { Titulo: "Extra", ruta: "/sobre" },
+      ],
+    };
     return (
       <React.Fragment>
         <div className={classes.root}>
@@ -66,7 +82,7 @@ class Layout extends Component {
           <main className={classes.main}>
             <article className={classes.article}>{children}</article>
           </main>
-          <Footer />
+          <CustomFooter Descripcion={Descripcion} />
         </div>
       </React.Fragment>
     );

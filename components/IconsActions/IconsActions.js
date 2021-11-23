@@ -55,6 +55,10 @@ const styles = (theme) => ({
       display: "flex",
       justifyContent: "center",
     },
+    ["@media (min-width:1281px)"]: {
+      display: "flex",
+      justifyContent: "flex-end",
+    },
   },
 });
 
@@ -73,13 +77,13 @@ class IconsActions extends Component {
       let nuevo = "";
       switch (tamaño) {
         case "xs":
-          nuevo = 4;
+          nuevo = 3;
           break;
-        case "xxl":
-          nuevo = 2;
+        case "xl":
+          nuevo = 1;
           break;
         default:
-          nuevo = 5;
+          nuevo = 4;
       }
       return nuevo;
     };

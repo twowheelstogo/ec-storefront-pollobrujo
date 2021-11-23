@@ -68,6 +68,7 @@ import IconsActions from "components/IconsActions";
 import withLocales from "../lib/utils/withLocales";
 import AccountDropdown from "components/AccountDropdown";
 import SlideHero from "components/SlideHero";
+import CustomFooter from "components/CustomFooter";
 // Providing locales data
 const AddressFormWithLocales = withLocales(AddressForm);
 
@@ -128,4 +129,5 @@ export default {
   SearchBar,
   IconsActions,
   SlideHero,
+  CustomFooter,
 };

@@ -50,6 +50,9 @@ const styles = (theme) => ({
       display: "flex",
       justifyContent: "flex-start",
     },
+    ["@media (min-width:1280px) "]: {
+      marginLeft: "auto",
+    },
   },
   Menu: {
     display: "flex",
