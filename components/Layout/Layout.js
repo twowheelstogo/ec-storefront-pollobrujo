@@ -58,12 +58,6 @@ class Layout extends Component {
             MetodoBusqueda={(Busqueda) => {
               alert(Busqueda);
             }}
-            MetodoUsuario={() => {
-              alert("usuario");
-            }}
-            MetodoCompra={() => {
-              alert("compra");
-            }}
             ImageCoverUrl={
               "https://pollobrujo.com.gt/wp-content/uploads/2020/09/Banner-de-inicio-pollo-sabor-unico-a-la-parrilla-1.jpg"
             }

@@ -27,8 +27,7 @@ const styles = (theme) => ({
       display: "flex",
       justifyContent: "center",
     },
-    marginTop: "10px",
-    //backgroundColor: "red",
+    marginTop: "2%",
   },
   searchbar: {
     color: "white",
@@ -47,7 +46,7 @@ const styles = (theme) => ({
     marginTop: "20px",
   },
   Iconos: {
-    ["@media (min-width:600px)"]: {
+    ["@media (max-width:1279px) and (min-width:600px) "]: {
       display: "flex",
       justifyContent: "flex-start",
     },
@@ -122,18 +121,13 @@ class NavigationHeader extends Component {
     //ColoresBusqueda: color 1 es el color de letra, color 2 es color de fondo y color 3 es el del icono, array de colores,["black", "red", "blue"]
     //ColoresIcono, son los colores del icono, entrada: nombre o hexa del color,ejemplo: #FFFFF
     //MetodoBusqueda, debe de ser un metodo y debe de contener como parametro la busqueda
-    //MetodoUsuario y MetodoCompra, debe de ser un metodo en el que se desea que se haga al darle click al icono
-    //OpcionesMenu, una lista con las opciones que contendra el nombre de la opcion y el icono, ejemplo: [{Icono: <AccountCircle/>,Opcion:"Menu",Link:"/lol",Color:"white"}], si lo quieren sin icono solo se pone en el campo de icono ""
     //FondoColorMenu, fondo de color de las opciones del menu para version movil y escritorio
     //ColorIconoMenu, fondo del icono del menu cuando para versiones moviles
     const {
       classes,
       urlLogo,
       ColoresBusqueda,
-      ColorIcono,
       MetodoBusqueda,
-      MetodoUsuario,
-      MetodoCompra,
       ImageCoverUrl,
       MessageCover,
       width,
@@ -161,12 +155,7 @@ class NavigationHeader extends Component {
 
                 {/* Iconos */}
                 <Grid item xs={2} sm={3} md={3} lg={3} className={classes.Iconos}>
-                  <IconsActions
-                    ColorIcono={ColorIcono}
-                    MetodoCompra={MetodoCompra}
-                    MetodoUsuario={MetodoUsuario}
-                    width={width}
-                  />
+                  <IconsActions width={width} />
                 </Grid>
 
                 <Grid container xs={12} md={12} lg={12} className={classes.Borde}>
@@ -187,24 +176,6 @@ class NavigationHeader extends Component {
                 </Grid>
               </Grid>
             </Grid>
-            {/* 
-            <Grid
-              container
-              xs={12}
-              md={12}
-              lg={12}
-              className={classes.ImageCover}
-              style={{
-                backgroundImage: `url(${ImageCoverUrl})`,
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center center",
-              }}
-            >
-              <Grid item xs={12} md={12} lg={12} className={classes.GridMensaje}>
-                <p className={classes.MessageCover}>{MessageCover}</p>
-              </Grid>
-            </Grid> */}
             {/* Espacio Extra */}
             <Grid xs={11} md={11} lg={11} className={classes.Espacio2}>
               <h1> </h1>
@@ -229,12 +200,7 @@ class NavigationHeader extends Component {
 
               {/* Iconos */}
               <Grid item xs={4} md={2} lg={2} className={classes.Iconos}>
-                <IconsActions
-                  ColorIcono={ColorIcono}
-                  MetodoCompra={MetodoCompra}
-                  MetodoUsuario={MetodoUsuario}
-                  width={width}
-                />
+                <IconsActions width={width} />
               </Grid>
 
               {/* Bara de busqueda */}

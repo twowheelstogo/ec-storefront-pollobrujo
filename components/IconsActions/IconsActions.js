@@ -14,15 +14,20 @@ const styles = (theme) => ({
     ["@media (min-width:1280px)"]: {
       display: "flex",
       justifyContent: "flex-end",
-      marginTop: "10px",
+      marginTop: "8%",
     },
-    ["@media (max-width:1280px) and (min-width: 600px)"]: {
+    ["@media (max-width:1279px) and (min-width: 946px)"]: {
       display: "flex",
       justifyContent: "flex-end",
-      marginTop: "10px",
+      marginTop: "12%",
+    },
+    ["@media (max-width:945px) and (min-width: 600px)"]: {
+      display: "flex",
+      justifyContent: "flex-end",
+      marginTop: "15%",
     },
     ["@media (max-width:599px)"]: {
-      marginTop: "10px",
+      marginTop: "10%",
       display: "flex",
       justifyContent: "flex-end",
     },
@@ -30,20 +35,25 @@ const styles = (theme) => ({
   Usuario: {
     ["@media (min-width:600px)"]: {
       display: "flex",
-      justifyContent: "flex-start",
+      justifyContent: "flex-end",
     },
     ["@media (max-width:599px) and (min-width:312px)"]: {
       display: "flex",
-      justifyContent: "flex-start",
+      justifyContent: "flex-end",
     },
     ["@media (max-width:311px)"]: {
-      marginLeft: "-30px",
+      display: "flex",
+      justifyContent: "flex-end",
     },
   },
   Compra: {
-    ["@media (max-width:599px) and (min-width:312px)"]: {
+    ["@media (max-width:599px)"]: {
       display: "flex",
-      justifyContent: "flex-start",
+      justifyContent: "center",
+    },
+    ["@media (max-width:1280px) and (min-width: 600px)"]: {
+      display: "flex",
+      justifyContent: "center",
     },
   },
 });
@@ -56,10 +66,26 @@ class IconsActions extends Component {
   static defaultProps = {
     classes: {},
   };
+
   render() {
     const { classes, width } = this.props;
+    const Validar = (tamaño) => {
+      let nuevo = "";
+      switch (tamaño) {
+        case "xs":
+          nuevo = 4;
+          break;
+        case "xxl":
+          nuevo = 2;
+          break;
+        default:
+          nuevo = 5;
+      }
+      return nuevo;
+    };
+    console.log(width);
     return (
-      <Grid container xs={12} md={12} lg={12} className={classes.root} spacing={width !== "xs" ? 5 : 4}>
+      <Grid container xs={12} md={12} lg={12} className={classes.root} spacing={() => Validar(width)}>
         <Grid item xs={1} md={2} lg={2} className={classes.Usuario}>
           <AccountDropdown />
         </Grid>
