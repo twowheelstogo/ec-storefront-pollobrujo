@@ -8,6 +8,7 @@ import { Silverware, Home } from "mdi-material-ui";
 const styles = (theme) => ({
   root: {
     minHeight: "100vh",
+    color: "white",
     backgroundColor: "#000000",
     //color: "white",
   },
@@ -52,8 +53,7 @@ class Layout extends Component {
 
           <NavigationHeader
             urlLogo={"https://pollobrujo.com.gt/wp-content/uploads/2019/11/logo.png"}
-            urlLogoSize={["150px", "100px"]}
-            ColoresBusqueda={["white", "#979797"]}
+            ColoresBusqueda={["#000000", "#dcdcdc"]}
             ColorIcono={"#FFFFFF"}
             MetodoBusqueda={(Busqueda) => {
               alert(Busqueda);
@@ -64,18 +64,10 @@ class Layout extends Component {
             MetodoCompra={() => {
               alert("compra");
             }}
-            OpcionesMenu={[
-              {
-                Icono: "",
-                Opcion: "Menú",
-                Link: "/lol",
-                Color: "#FFFFFF",
-              },
-              { Icono: "", Opcion: "Nosotros", Link: "/lol", Color: "#FFFFFF" },
-              { Icono: "", Opcion: "Ubicaciones", Link: "/lol", Color: "#FFFFFF" },
-              { Icono: "", Opcion: "Empleos", Link: "/lol", Color: "#FFFFFF" },
-            ]}
-            FondoColorMenu={"#000000"}
+            ImageCoverUrl={
+              "https://pollobrujo.com.gt/wp-content/uploads/2020/09/Banner-de-inicio-pollo-sabor-unico-a-la-parrilla-1.jpg"
+            }
+            MessageCover={"SABOR ÚNICO A LA PARILLA"}
           />
           <main className={classes.main}>
             <article className={classes.article}>{children}</article>

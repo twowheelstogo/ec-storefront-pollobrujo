@@ -65,9 +65,9 @@ import TextInput from "@reactioncommerce/components/TextInput/v1";
 import NavigationHeader from "components/NavigationHeader";
 import SearchBar from "components/SearchBar";
 import IconsActions from "components/IconsActions";
-import NavigationMenu from "components/NavigationMenu";
 import withLocales from "../lib/utils/withLocales";
-
+import AccountDropdown from "components/AccountDropdown";
+import SlideHero from "components/SlideHero";
 // Providing locales data
 const AddressFormWithLocales = withLocales(AddressForm);
 
@@ -78,6 +78,7 @@ export default {
   Address,
   AddressCapture,
   AddressChoice,
+  AccountDropdown,
   AddressForm: AddressFormWithLocales,
   AddressReview,
   BadgeOverlay,
@@ -126,5 +127,5 @@ export default {
   // eslint-disable-next-line comma-dangle
   SearchBar,
   IconsActions,
-  NavigationMenu,
+  SlideHero,
 };

@@ -7,7 +7,9 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = (theme) => ({
   root: {
-    marginTop: "20px",
+    ["@media (min-width:600px)"]: {
+      marginTop: "20px",
+    },
   },
   input: {
     color: "#979797",
@@ -58,7 +60,7 @@ class SearchBar extends Component {
               notchedOutline: classes.notchedOutline,
             },
             endAdornment: (
-              <InputAdornment position="end">
+              <InputAdornment position="end" style={{ borderRightColor: Colores[0], borderRightStyle: "solid" }}>
                 <Magnify style={{ color: Colores[1], cursor: "pointer" }} onClick={() => Metodo(this.state.Busqueda)} />
               </InputAdornment>
             ),

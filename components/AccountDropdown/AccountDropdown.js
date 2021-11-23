@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useEffect } from "react";
 import inject from "hocs/inject";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
@@ -22,6 +22,16 @@ const useStyles = makeStyles((theme) => ({
   },
   marginBottom: {
     marginBottom: theme.spacing(2),
+  },
+  Usuario: {
+    ["@media (min-width:600px)"]: {
+      width: "35px",
+      height: "35px",
+    },
+    ["@media (max-width:599px)"]: {
+      width: "25px",
+      height: "25px",
+    },
   },
 }));
 
@@ -67,7 +77,7 @@ const AccountDropdown = () => {
         </ButtonBase>
       ) : (
         <IconButton color="inherit" onClick={toggleOpen}>
-          <AccountCircleOutline />
+          <AccountCircleOutline className={classes.Usuario} />
         </IconButton>
       )}
 
@@ -86,28 +96,28 @@ const AccountDropdown = () => {
               <div className={classes.marginBottom}>
                 <Link href="/profile/address">
                   <Button color="primary" fullWidth>
-                    Profile
+                    Perfil
                   </Button>
                 </Link>
               </div>
               <div className={classes.marginBottom}>
                 <Button color="primary" fullWidth onClick={() => setEntryModal("change-password")}>
-                  Change Password
+                  Cambiar Contraseña
                 </Button>
               </div>
               <Button color="primary" fullWidth onClick={handleSignOut} variant="contained">
-                Sign Out
+                Cerrar Sesión
               </Button>
             </Fragment>
           ) : (
             <Fragment>
               <div className={classes.authContent}>
-                <Button color="primary" fullWidth variant="contained" onClick={() => setEntryModal("login")}>
-                  Sign In
+                <Button color="primary" fullWidth onClick={() => setEntryModal("login")}>
+                  Iniciar Sesión
                 </Button>
               </div>
               <Button color="primary" fullWidth onClick={() => setEntryModal("signup")}>
-                Create Account
+                Crear Cuenta
               </Button>
             </Fragment>
           )}

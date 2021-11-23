@@ -1,35 +1,43 @@
-// eslint-disable-next-line no-unused-vars
 import React, { Component, useEffect } from "react";
 import { withComponents } from "@reactioncommerce/components-context";
-import { Grid, useMediaQuery } from "@material-ui/core";
+import { Grid, Card, CardContent } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { withStyles, useTheme } from "@material-ui/core/styles";
+import withWidth, { isWidthUp, isWidthDown } from "@material-ui/core/withWidth";
+import { NavigationDesktop } from "components/NavigationDesktop";
+import { NavigationMobile, NavigationToggleMobile } from "components/NavigationMobile";
+import Hidden from "@material-ui/core/Hidden";
+import inject from "hocs/inject";
 
 const styles = (theme) => ({
   root: {
     marginLeft: "auto",
     marginRight: "auto",
+  },
+  Borde: {
     borderBottomStyle: "solid",
     borderBottomColor: "#979797",
   },
   Logo: {
-    marginRight: "5px",
+    [theme.breakpoints.up("xs")]: {
+      display: "flex",
+      justifyContent: "flex-start",
+    },
     [theme.breakpoints.down("xs")]: {
       display: "flex",
       justifyContent: "center",
     },
-    [theme.breakpoints.down("md")]: {
-      display: "flex",
-      justifyContent: "center",
-    },
-    [theme.breakpoints.down("lg")]: {
-      marginTop: "10px",
-    },
+    marginTop: "10px",
     //backgroundColor: "red",
   },
   searchbar: {
     color: "white",
-    marginTop: "1%",
+    ["@media (max-width:599px)"]: {
+      marginLeft: "auto",
+    },
+    ["@media (min-width:600px)"]: {
+      marginTop: "1%",
+    },
     //backgroundColor: "blue",
   },
   Espacio: {
@@ -39,27 +47,73 @@ const styles = (theme) => ({
     marginTop: "20px",
   },
   Iconos: {
-    marginLeft: "auto",
-    //backgroundColor: "orange",
+    ["@media (min-width:600px)"]: {
+      display: "flex",
+      justifyContent: "flex-start",
+    },
   },
   Menu: {
     display: "flex",
     justifyContent: "center",
+  },
+  LogoSize: {
+    width: "111px",
+    height: "71px",
+  },
+  ImageCover: {
+    ["@media (min-width:600px)"]: {
+      height: "480px",
+      marginTop: "15px",
+    },
+    ["@media (max-width:599px)"]: {
+      height: "327px",
+      marginTop: "20px",
+    },
+  },
+  MessageCover: {
+    fontWeight: "bold",
+    fontSize: "36px",
+    lineHeight: "42px",
+    marginLeft: "auto",
+    marginRight: "auto",
+    ["@media (max-width:599px)"]: {
+      width: "247px",
+      height: "101px",
+    },
+  },
+  GridMensaje: {
+    display: "flex",
+    justifyContent: "center",
+    ["@media (min-width:900px)"]: {
+      marginTop: "15%",
+    },
+    ["@media (max-width:899px) and (min-width:600px)"]: {
+      marginTop: "19%",
+    },
+    ["@media (max-width:599px)"]: {
+      marginTop: "20%",
+    },
   },
 });
 
 class NavigationHeader extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: "", bandera: false };
+    this.state = { value: "", bandera: false, showAlert: false };
   }
 
   static propTypes = {
     classes: PropTypes.object,
+    width: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
     classes: {},
+  };
+
+  hideAlert = () => this.setState({ showAlert: false });
+  handleNavigationToggleClick = () => {
+    this.props.uiStore.toggleMenuDrawerOpen();
   };
 
   render() {
@@ -70,59 +124,136 @@ class NavigationHeader extends Component {
     //MetodoBusqueda, debe de ser un metodo y debe de contener como parametro la busqueda
     //MetodoUsuario y MetodoCompra, debe de ser un metodo en el que se desea que se haga al darle click al icono
     //OpcionesMenu, una lista con las opciones que contendra el nombre de la opcion y el icono, ejemplo: [{Icono: <AccountCircle/>,Opcion:"Menu",Link:"/lol",Color:"white"}], si lo quieren sin icono solo se pone en el campo de icono ""
+    //FondoColorMenu, fondo de color de las opciones del menu para version movil y escritorio
+    //ColorIconoMenu, fondo del icono del menu cuando para versiones moviles
     const {
       classes,
       urlLogo,
-      urlLogoSize,
       ColoresBusqueda,
       ColorIcono,
       MetodoBusqueda,
       MetodoUsuario,
       MetodoCompra,
-      OpcionesMenu,
-      FondoColorMenu,
+      ImageCoverUrl,
+      MessageCover,
+      width,
       components: { SearchBar },
       components: { IconsActions },
-      components: { NavigationMenu },
+      components: { SlideHero },
     } = this.props;
 
     return (
-      <Grid xs={12} md={12} lg={12} spacing={5}>
-        {/* Contenedor Principal */}
-        <Grid container xs={11} md={11} lg={11} className={classes.root}>
-          {/* LOGO */}
-          <Grid item xs={12} md={3} lg={3} className={classes.Logo}>
-            <img src={urlLogo} width={urlLogoSize[0]} height={urlLogoSize[1]} />
-          </Grid>
+      <>
+        {isWidthUp("sm", width) ? (
+          <>
+            <Grid xs={12} md={12} lg={12} spacing={5}>
+              {/* Contenedor Principal */}
+              <Grid container xs={11} md={11} lg={11} className={classes.root}>
+                {/* LOGO */}
+                <Grid item xs={12} sm={3} md={3} lg={3} className={classes.Logo}>
+                  <img src={urlLogo} className={classes.LogoSize} />
+                </Grid>
 
-          {/* Bara de busqueda */}
-          <Grid item xs={8} md={6} lg={6} className={classes.searchbar}>
-            <SearchBar Metodo={MetodoBusqueda} Colores={ColoresBusqueda} />
-          </Grid>
+                {/* Bara de busqueda */}
+                <Grid item xs={8} sm={6} md={6} lg={6} className={classes.searchbar}>
+                  <SearchBar Metodo={MetodoBusqueda} Colores={ColoresBusqueda} />
+                </Grid>
 
-          {/* Iconos */}
-          <Grid item xs={2} md={2} lg={2} className={classes.Iconos}>
-            <IconsActions ColorIcono={ColorIcono} MetodoCompra={MetodoCompra} MetodoUsuario={MetodoUsuario} />
-          </Grid>
+                {/* Iconos */}
+                <Grid item xs={2} sm={3} md={3} lg={3} className={classes.Iconos}>
+                  <IconsActions
+                    ColorIcono={ColorIcono}
+                    MetodoCompra={MetodoCompra}
+                    MetodoUsuario={MetodoUsuario}
+                    width={width}
+                  />
+                </Grid>
 
-          {/* Espacio Extra */}
-          <Grid xs={12} md={12} lg={12} className={classes.Espacio}>
-            <h1> </h1>
-          </Grid>
-        </Grid>
+                <Grid container xs={12} md={12} lg={12} className={classes.Borde}>
+                  {/* Espacio Extra */}
+                  <Grid xs={11} md={11} lg={11} className={classes.Espacio}>
+                    <h1> </h1>
+                  </Grid>
+                </Grid>
 
-        {/* Espacio Extra */}
-        <Grid xs={12} md={12} lg={12} className={classes.Espacio2}>
-          <h1> </h1>
-        </Grid>
+                {/* Espacio Extra */}
+                <Grid xs={12} md={12} lg={12} className={classes.Espacio2}>
+                  <h1> </h1>
+                </Grid>
 
-        {/* Contenedor Navigation Menu */}
-        <Grid container xs={11} md={11} lg={11} className={classes.Menu}>
-          <NavigationMenu OpcionesMenu={OpcionesMenu} FondoColorMenu={FondoColorMenu} />
-        </Grid>
-      </Grid>
+                {/* Contenedor Navigation Menu */}
+                <Grid item xs={12} md={12} lg={12} className={classes.Menu}>
+                  <NavigationDesktop />
+                </Grid>
+              </Grid>
+            </Grid>
+            {/* 
+            <Grid
+              container
+              xs={12}
+              md={12}
+              lg={12}
+              className={classes.ImageCover}
+              style={{
+                backgroundImage: `url(${ImageCoverUrl})`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center center",
+              }}
+            >
+              <Grid item xs={12} md={12} lg={12} className={classes.GridMensaje}>
+                <p className={classes.MessageCover}>{MessageCover}</p>
+              </Grid>
+            </Grid> */}
+            {/* Espacio Extra */}
+            <Grid xs={11} md={11} lg={11} className={classes.Espacio2}>
+              <h1> </h1>
+            </Grid>
+            <SlideHero title={MessageCover} subtitle={""} background={ImageCoverUrl} type={"jpg"} />
+          </>
+        ) : (
+          <>
+            <Grid container xs={12} md={12} lg={12} spacing={5}>
+              {/* Contenedor Navigation Menu */}
+              <Grid item xs={4} md={4} lg={4} className={classes.Menu}>
+                <Hidden mdUp>
+                  <NavigationToggleMobile onClick={this.handleNavigationToggleClick} />
+                </Hidden>
+                <NavigationMobile />
+              </Grid>
+
+              {/* LOGO */}
+              <Grid item xs={4} md={3} lg={3} className={classes.Logo}>
+                <img src={urlLogo} className={classes.LogoSize} />
+              </Grid>
+
+              {/* Iconos */}
+              <Grid item xs={4} md={2} lg={2} className={classes.Iconos}>
+                <IconsActions
+                  ColorIcono={ColorIcono}
+                  MetodoCompra={MetodoCompra}
+                  MetodoUsuario={MetodoUsuario}
+                  width={width}
+                />
+              </Grid>
+
+              {/* Bara de busqueda */}
+              <Grid item xs={11} md={6} lg={6} className={classes.searchbar}>
+                <SearchBar Metodo={MetodoBusqueda} Colores={ColoresBusqueda} />
+              </Grid>
+            </Grid>
+            {/* Espacio Extra */}
+            <Grid xs={11} md={11} lg={11} className={classes.Espacio2}>
+              <h1> </h1>
+            </Grid>
+            <SlideHero title={MessageCover} subtitle={""} background={ImageCoverUrl} type={"jpg"} />
+          </>
+        )}
+      </>
     );
   }
 }
 
-export default withComponents(withStyles(styles)(NavigationHeader));
+export default withComponents(
+  withWidth({ initialWidth: "md" })(withStyles(styles)(inject("uiStore")(NavigationHeader))),
+);

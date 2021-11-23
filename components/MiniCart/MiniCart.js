@@ -36,6 +36,16 @@ const styles = ({ palette, zIndex }) => ({
     top: 10,
     left: 20,
   },
+  Compra: {
+    ["@media (min-width:600px)"]: {
+      width: "35px",
+      height: "35px",
+    },
+    ["@media (max-width:599px)"]: {
+      width: "25px",
+      height: "25px",
+    },
+  },
 });
 
 class MiniCart extends Component {
@@ -172,10 +182,10 @@ class MiniCart extends Component {
           >
             {cart && cart.totalItemQuantity > 0 ? (
               <Badge badgeContent={cart.totalItemQuantity} color="primary" classes={{ badge: classes.badge }}>
-                <ShoppingOutline />
+                <ShoppingOutline className={classes.Compra} />
               </Badge>
             ) : (
-              <ShoppingOutline />
+              <ShoppingOutline className={classes.Compra} />
             )}
           </IconButton>
         </div>
