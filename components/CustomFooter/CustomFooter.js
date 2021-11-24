@@ -4,7 +4,6 @@ import { Grid, IconButton } from "@material-ui/core";
 import styled from "styled-components";
 import Divider from "@material-ui/core/Divider";
 import Hidden from "@material-ui/core/Hidden";
-import { Facebook as FacebookIcon, Instagram as InstagramIcon, Whatsapp as WhatsAppIcon } from "mdi-material-ui";
 import Link from "components/Link";
 
 const date = new Date();
@@ -15,7 +14,6 @@ const styles = (theme) => ({
     paddingRight: theme.spacing(2),
     paddingTop: theme.spacing(10),
     paddingBottom: theme.spacing(5),
-    color: "white",
   },
   main: {
     flex: "1 1 auto",
@@ -26,6 +24,7 @@ const styles = (theme) => ({
   },
   items: {
     display: "flex",
+    justifyContent: "flex-start",
     flexDirection: "column",
     gap: "20px",
   },
@@ -37,9 +36,12 @@ const styles = (theme) => ({
   bottomItems: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
     paddingBottom: theme.spacing(2),
     paddingTop: theme.spacing(1),
+    justifyContent: "space-between",
+    [theme.breakpoints.down("xs")]: {
+      justifyContent: "flex-end",
+    },
   },
   copyright: {
     alignItems: "center",
@@ -47,6 +49,7 @@ const styles = (theme) => ({
     justifyContent: "center",
     marginBottom: theme.spacing(2),
     opacity: "50%",
+    fontSize: "15px",
   },
   flexItems: {
     display: "flex",
@@ -80,11 +83,14 @@ const CustomFooter = (props) => {
     <React.Fragment>
       <br></br>
       <br></br>
-      <div className={classes.root}>
+      <div
+        className={classes.root}
+        style={{ backgroundColor: Descripcion.Colores.Fondo, color: Descripcion.Colores.Letra }}
+      >
         <div className={classes.main}>
-          <Grid container direction="row" alignItems="center" spacing={2}>
-            <Grid item xs={12} md={3}>
-              <img src={Descripcion.imageUrl} width={"130px"} />
+          <Grid container direction="row" spacing={2}>
+            <Grid item xs={12} md={3} lg={3}>
+              <img src={Descripcion.urlLogo} width={"130px"} />
             </Grid>
             <Grid item xs={12} md={3} className={classes.items}>
               <CustomTitle>{Descripcion.Mensaje1}</CustomTitle>
@@ -92,7 +98,7 @@ const CustomFooter = (props) => {
                 return <CustomItem>{Descripcion.ContenidoMensaje1[i]}</CustomItem>;
               })}
             </Grid>
-            <Grid item xs={12} md={3} className={classes.items}>
+            <Grid item xs={12} md={3} lg={3} className={classes.items}>
               <CustomTitle>{Descripcion.Mensaje2}</CustomTitle>
               {Object.keys(Descripcion.ContenidoMensaje2).map((i) => {
                 return (
@@ -106,39 +112,40 @@ const CustomFooter = (props) => {
           <br></br>
           <Divider className={classes.divider} />
           <div className={classes.bottomItems}>
+            <Hidden xsDown>
+              <div className={classes.flexItems}>
+                <div className={classes.copyright}>
+                  <small style={{ fontSize: "15px" }}>
+                    &copy; {`${Descripcion.NombreEmpresa} ${date.getFullYear()}`}
+                  </small>
+                </div>
+              </div>
+            </Hidden>
+
             <div className={classes.flexIcons}>
-              <IconButton color="inherit" size="small" onClick={() => goToPage("https://www.instagram.com/lulis.gt/")}>
-                <InstagramIcon />
-              </IconButton>
-              <IconButton
-                color="inherit"
-                size="small"
-                onClick={() => goToPage("https://www.facebook.com/LulisGourmetTreats")}
-              >
-                <FacebookIcon />
-              </IconButton>
-              <IconButton color="inherit" size="small" onClick={() => goToPage("https://wa.me/50245485624")}>
-                <WhatsAppIcon />
-              </IconButton>
-            </div>
-            <div className={classes.flexItems}>
-              <Hidden xsDown>
-                <Link href="/politics">
-                  <CustomItem>{"Políticas de Devolución"}</CustomItem>
-                </Link>
-                <Link href="/terms">
-                  <CustomItem>{"Términos y Condiciones"}</CustomItem>
-                </Link>
-              </Hidden>
+              <p style={{ fontSize: "15px" }}>Siguenos</p>
+              {Object.keys(Descripcion.RedesSociales).map((i) => {
+                return (
+                  <IconButton
+                    color="inherit"
+                    size="small"
+                    onClick={() => goToPage(`${Descripcion.RedesSociales[i].ruta}`)}
+                  >
+                    {Descripcion.RedesSociales[i].Icono}
+                  </IconButton>
+                );
+              })}
             </div>
           </div>
-          <div className={classes.copyright}>
-            <small>&copy; {date.getFullYear()} Lulis GT</small>
-          </div>
+          <Hidden smUp>
+            <div className={classes.copyright}>
+              <small style={{ fontSize: "15px" }}>&copy; {`${Descripcion.NombreEmpresa} ${date.getFullYear()}`}</small>
+            </div>
+          </Hidden>
         </div>
       </div>
     </React.Fragment>
   );
 };
-//const imageUrl = "https://firebasestorage.googleapis.com/v0/b/twowheelstogo-572d7.appspot.com/o/resources%2FArtboard%201.png?alt=media&token=d217eb7f-efbe-4519-8bfa-1130b1725331";
+
 export default withStyles(styles)(CustomFooter);

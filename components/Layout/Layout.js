@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Footer from "components/Footer";
 import { withComponents } from "@reactioncommerce/components-context";
-import { Silverware, Home } from "mdi-material-ui";
+import {
+  Facebook as FacebookIcon,
+  Instagram as InstagramIcon,
+  Whatsapp as WhatsAppIcon,
+  Twitter,
+} from "mdi-material-ui";
 
 const styles = (theme) => ({
   root: {
@@ -48,7 +52,7 @@ class Layout extends Component {
     } = this.props;
 
     const Descripcion = {
-      imageUrl: "https://pollobrujo.com.gt/wp-content/uploads/2019/11/logo.png",
+      urlLogo: "https://pollobrujo.com.gt/wp-content/uploads/2019/11/logo.png",
       Mensaje1: "Contáctenos",
       Mensaje2: "Encuétrenos",
       ContenidoMensaje1: [
@@ -61,6 +65,13 @@ class Layout extends Component {
         { Titulo: "Sobre Nosotros", ruta: "/sobre" },
         { Titulo: "Extra", ruta: "/sobre" },
       ],
+      NombreEmpresa: "Pollo Brujo",
+      RedesSociales: [
+        { Icono: <InstagramIcon />, ruta: "https://www.instagram.com/pollobrujoguatemala/" },
+        { Icono: <FacebookIcon />, ruta: "https://www.facebook.com/pollobrujoguatemala" },
+        { Icono: <Twitter />, ruta: "https://twitter.com/pollobrujogt" },
+      ],
+      Colores: { Fondo: "#000000", Letra: "#C88E2B" },
     };
     return (
       <React.Fragment>
