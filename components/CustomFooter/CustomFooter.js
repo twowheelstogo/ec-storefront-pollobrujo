@@ -14,8 +14,10 @@ const styles = (theme) => ({
     paddingRight: theme.spacing(2),
     paddingTop: theme.spacing(10),
     paddingBottom: theme.spacing(5),
-    marginLeft: "auto",
-    marginRight: "auto",
+    [theme.breakpoints.between("xs", "md")]: {
+      marginLeft: "10%",
+    },
+    marginLeft: "5%",
   },
   main: {
     flex: "1 1 auto",
@@ -88,14 +90,16 @@ const CustomFooter = (props) => {
       <br></br>
 
       <Grid
-        xs={11}
-        md={11}
-        lg={11}
+        xs={12}
+        md={12}
+        sm={12}
+        lg={12}
         className={classes.root}
         style={{ backgroundColor: Descripcion.Colores.Fondo, color: Descripcion.Colores.Letra }}
+        alignItems="center"
       >
         <div className={classes.main}>
-          <Grid container direction="row" spacing={2} xs={12} md={12} lg={12}>
+          <Grid container direction="row" spacing={2} xs={12} md={11} lg={11}>
             <Grid item xs={12} md={3} lg={3}>
               <img src={Descripcion.urlLogo} width={"130px"} />
             </Grid>
