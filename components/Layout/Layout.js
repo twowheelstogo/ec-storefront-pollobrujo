@@ -103,7 +103,7 @@ class Layout extends Component {
           <main className={classes.main}>
             <article className={classes.article}>{children}</article>
           </main>
-          <CustomFooter Descripcion={Descripcion} />
+          <CustomFooter Descripcion={Descripcion} style={{ marginRight: "auto", marginLeft: "auto" }} />
         </div>
       </React.Fragment>
     );

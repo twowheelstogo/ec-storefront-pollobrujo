@@ -14,18 +14,9 @@ const styles = (theme) => ({
     paddingRight: theme.spacing(2),
     paddingTop: theme.spacing(10),
     paddingBottom: theme.spacing(5),
-    [theme.breakpoints.between("xs", "md")]: {
-      marginLeft: "10%",
-    },
     marginLeft: "5%",
   },
-  main: {
-    flex: "1 1 auto",
-    maxWidth: theme.layout.mainContentMaxWidth,
-    marginLeft: "auto",
-    marginRight: "auto",
-    // background:theme.palette.primary.light
-  },
+
   items: {
     display: "flex",
     justifyContent: "flex-start",
@@ -37,6 +28,7 @@ const styles = (theme) => ({
     opacity: "50%",
     marginLeft: "auto",
     marginRight: "auto",
+    marginTop: "10px",
   },
   bottomItems: {
     display: "flex",
@@ -85,15 +77,11 @@ const CustomFooter = (props) => {
     window.open(url, "_blank").focus();
   };
   return (
-    <React.Fragment>
+    <>
       <br></br>
       <br></br>
 
-      <Grid
-        xs={12}
-        md={12}
-        sm={12}
-        lg={12}
+      <div
         className={classes.root}
         style={{ backgroundColor: Descripcion.Colores.Fondo, color: Descripcion.Colores.Letra }}
       >
@@ -120,11 +108,10 @@ const CustomFooter = (props) => {
             })}
           </Grid>
         </Grid>
-        <br></br>
+
         <Grid item xs={11} md={11} lg={11}>
           <Divider className={classes.divider} style={{ borderBottomColor: Descripcion.Colores.Letra }} />
         </Grid>
-
         <Grid item xs={11} md={11} lg={11} className={classes.bottomItems}>
           <Hidden xsDown>
             <div className={classes.flexItems}>
@@ -157,8 +144,8 @@ const CustomFooter = (props) => {
             <small style={{ fontSize: "15px" }}>&copy; {`${Descripcion.NombreEmpresa} ${date.getFullYear()}`}</small>
           </div>
         </Hidden>
-      </Grid>
-    </React.Fragment>
+      </div>
+    </>
   );
 };
 
