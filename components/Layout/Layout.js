@@ -71,7 +71,7 @@ class Layout extends Component {
         { Icono: <FacebookIcon />, ruta: "https://www.facebook.com/pollobrujoguatemala" },
         { Icono: <Twitter />, ruta: "https://twitter.com/pollobrujogt" },
       ],
-      Colores: { Fondo: "#000000", Letra: "#C88E2B" },
+      Colores: { Fondo: "#000000", Letra: "#FFFFF" },
     };
     return (
       <React.Fragment>

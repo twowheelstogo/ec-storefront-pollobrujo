@@ -14,6 +14,8 @@ const styles = (theme) => ({
     paddingRight: theme.spacing(2),
     paddingTop: theme.spacing(10),
     paddingBottom: theme.spacing(5),
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   main: {
     flex: "1 1 auto",
@@ -29,9 +31,10 @@ const styles = (theme) => ({
     gap: "20px",
   },
   divider: {
-    color: "white",
-    background: "white",
+    borderBottomStyle: "solid",
     opacity: "50%",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   bottomItems: {
     display: "flex",
@@ -83,15 +86,21 @@ const CustomFooter = (props) => {
     <React.Fragment>
       <br></br>
       <br></br>
-      <div
+
+      <Grid
+        xs={11}
+        md={11}
+        lg={11}
         className={classes.root}
         style={{ backgroundColor: Descripcion.Colores.Fondo, color: Descripcion.Colores.Letra }}
       >
         <div className={classes.main}>
-          <Grid container direction="row" spacing={2}>
+          <Grid container direction="row" spacing={2} xs={12} md={12} lg={12}>
             <Grid item xs={12} md={3} lg={3}>
               <img src={Descripcion.urlLogo} width={"130px"} />
             </Grid>
+            <Grid item xs={12} md={3} className={classes.items}></Grid>
+
             <Grid item xs={12} md={3} className={classes.items}>
               <CustomTitle>{Descripcion.Mensaje1}</CustomTitle>
               {Object.keys(Descripcion.ContenidoMensaje1).map((i) => {
@@ -110,8 +119,11 @@ const CustomFooter = (props) => {
             </Grid>
           </Grid>
           <br></br>
-          <Divider className={classes.divider} />
-          <div className={classes.bottomItems}>
+          <Grid item xs={11} md={11} lg={11}>
+            <Divider className={classes.divider} style={{ borderBottomColor: Descripcion.Colores.Letra }} />
+          </Grid>
+
+          <Grid item xs={11} md={11} lg={11} className={classes.bottomItems}>
             <Hidden xsDown>
               <div className={classes.flexItems}>
                 <div className={classes.copyright}>
@@ -136,14 +148,15 @@ const CustomFooter = (props) => {
                 );
               })}
             </div>
-          </div>
+          </Grid>
+
           <Hidden smUp>
             <div className={classes.copyright}>
               <small style={{ fontSize: "15px" }}>&copy; {`${Descripcion.NombreEmpresa} ${date.getFullYear()}`}</small>
             </div>
           </Hidden>
         </div>
-      </div>
+      </Grid>
     </React.Fragment>
   );
 };
