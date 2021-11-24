@@ -89,6 +89,7 @@ class Layout extends Component {
 
           <NavigationHeader
             Logo={Logo}
+            AppColor={"#000000"}
             ColoresBusqueda={["#000000", "#dcdcdc"]}
             ColorIcono={"#FFFFFF"}
             MetodoBusqueda={(Busqueda) => {

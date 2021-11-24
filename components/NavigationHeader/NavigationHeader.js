@@ -1,6 +1,6 @@
 import React, { Component, useEffect } from "react";
 import { withComponents } from "@reactioncommerce/components-context";
-import { Grid, Card, CardContent } from "@material-ui/core";
+import { Grid, AppBar, Toolbar, Box } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { withStyles, useTheme } from "@material-ui/core/styles";
 import withWidth, { isWidthUp, isWidthDown } from "@material-ui/core/withWidth";
@@ -55,8 +55,14 @@ const styles = (theme) => ({
     },
   },
   Menu: {
-    display: "flex",
-    justifyContent: "center",
+    ["@media (max-width:599px)"]: {
+      display: "flex",
+      justifyContent: "flex-start",
+    },
+    ["@media (min-width:600px)"]: {
+      display: "flex",
+      justifyContent: "center",
+    },
   },
   LogoSize: {
     width: "111px",
@@ -133,6 +139,7 @@ class NavigationHeader extends Component {
       MetodoBusqueda,
       ImageCoverUrl,
       MessageCover,
+      AppColor,
       width,
       components: { SearchBar },
       components: { IconsActions },
@@ -146,20 +153,24 @@ class NavigationHeader extends Component {
             <Grid xs={12} md={12} lg={12} spacing={5}>
               {/* Contenedor Principal */}
               <Grid container xs={11} md={11} lg={11} className={classes.root}>
-                {/* LOGO */}
-                <Grid item xs={12} sm={3} md={3} lg={3} className={classes.Logo}>
-                  <img src={Logo.urlLogo} width={Logo.WidthDesktop} height={Logo.HeightDesktop} />
-                </Grid>
+                <AppBar position="static" style={{ backgroundColor: AppColor }}>
+                  <Toolbar>
+                    {/* LOGO */}
+                    <Grid item xs={12} sm={3} md={3} lg={3} className={classes.Logo}>
+                      <img src={Logo.urlLogo} width={Logo.WidthDesktop} height={Logo.HeightDesktop} />
+                    </Grid>
 
-                {/* Bara de busqueda */}
-                <Grid item xs={8} sm={6} md={6} lg={6} className={classes.searchbar}>
-                  <SearchBar Metodo={MetodoBusqueda} Colores={ColoresBusqueda} />
-                </Grid>
+                    {/* Bara de busqueda */}
+                    <Grid item xs={8} sm={6} md={8} lg={8} xl={8} className={classes.searchbar}>
+                      <SearchBar Metodo={MetodoBusqueda} Colores={ColoresBusqueda} />
+                    </Grid>
 
-                {/* Iconos */}
-                <Grid item xs={2} sm={3} md={3} lg={3} className={classes.Iconos}>
-                  <IconsActions width={width} />
-                </Grid>
+                    {/* Iconos */}
+                    <Grid item xs={2} sm={3} md={3} lg={3} className={classes.Iconos}>
+                      <IconsActions width={width} />
+                    </Grid>
+                  </Toolbar>
+                </AppBar>
 
                 <Grid container xs={12} md={12} lg={12} className={classes.Borde}>
                   {/* Espacio Extra */}
@@ -187,30 +198,43 @@ class NavigationHeader extends Component {
           </>
         ) : (
           <>
-            <Grid container xs={12} md={12} lg={12} spacing={5}>
-              {/* Contenedor Navigation Menu */}
-              <Grid item xs={4} md={4} lg={4} className={classes.Menu}>
-                <Hidden mdUp>
-                  <NavigationToggleMobile onClick={this.handleNavigationToggleClick} />
-                </Hidden>
-                <NavigationMobile />
-              </Grid>
+            <Grid xs={12} md={12} lg={12} spacing={5} spacing={5}>
+              {/* Contenedor Principal */}
+              <Grid container xs={11} md={11} lg={11} className={classes.root}>
+                <AppBar position="static" style={{ backgroundColor: AppColor }}>
+                  <Toolbar>
+                    {/* Contenedor Navigation Menu */}
+                    <Grid item xs={4} md={4} lg={4} className={classes.Menu}>
+                      <Hidden mdUp>
+                        <NavigationToggleMobile onClick={this.handleNavigationToggleClick} />
+                      </Hidden>
+                      <NavigationMobile />
+                    </Grid>
 
-              {/* LOGO */}
-              <Grid item xs={4} md={3} lg={3} className={classes.Logo}>
-                <img src={Logo.urlLogo} width={Logo.WidthMobile} height={Logo.HeightMobile} />
-              </Grid>
+                    {/* LOGO */}
+                    <Grid item xs={4} md={3} lg={3} className={classes.Logo}>
+                      <img src={Logo.urlLogo} width={Logo.WidthMobile} height={Logo.HeightMobile} />
+                    </Grid>
 
-              {/* Iconos */}
-              <Grid item xs={4} md={2} lg={2} className={classes.Iconos}>
-                <IconsActions width={width} />
-              </Grid>
+                    {/* Iconos */}
+                    <Grid item xs={4} md={2} lg={2} className={classes.Iconos}>
+                      <IconsActions width={width} />
+                    </Grid>
+                  </Toolbar>
+                </AppBar>
 
-              {/* Bara de busqueda */}
-              <Grid item xs={11} md={6} lg={6} className={classes.searchbar}>
-                <SearchBar Metodo={MetodoBusqueda} Colores={ColoresBusqueda} />
+                {/* Espacio Extra */}
+                <Grid xs={11} md={11} lg={11} className={classes.Espacio2}>
+                  <h1> </h1>
+                </Grid>
+
+                {/* Bara de busqueda */}
+                <Grid item xs={11} md={6} lg={6} className={classes.searchbar}>
+                  <SearchBar Metodo={MetodoBusqueda} Colores={ColoresBusqueda} />
+                </Grid>
               </Grid>
             </Grid>
+
             {/* Espacio Extra */}
             <Grid xs={11} md={11} lg={11} className={classes.Espacio2}>
               <h1> </h1>

@@ -96,70 +96,67 @@ const CustomFooter = (props) => {
         lg={12}
         className={classes.root}
         style={{ backgroundColor: Descripcion.Colores.Fondo, color: Descripcion.Colores.Letra }}
-        alignItems="center"
       >
-        <div className={classes.main}>
-          <Grid container direction="row" spacing={2} xs={12} md={11} lg={11}>
-            <Grid item xs={12} md={3} lg={3}>
-              <img src={Descripcion.urlLogo} width={"130px"} />
-            </Grid>
-            <Grid item xs={12} md={3} className={classes.items}></Grid>
-
-            <Grid item xs={12} md={3} className={classes.items}>
-              <CustomTitle>{Descripcion.Mensaje1}</CustomTitle>
-              {Object.keys(Descripcion.ContenidoMensaje1).map((i) => {
-                return <CustomItem>{Descripcion.ContenidoMensaje1[i]}</CustomItem>;
-              })}
-            </Grid>
-            <Grid item xs={12} md={3} lg={3} className={classes.items}>
-              <CustomTitle>{Descripcion.Mensaje2}</CustomTitle>
-              {Object.keys(Descripcion.ContenidoMensaje2).map((i) => {
-                return (
-                  <Link href={`${Descripcion.ContenidoMensaje2[i].ruta}`}>
-                    <CustomItem>{Descripcion.ContenidoMensaje2[i].Titulo}</CustomItem>
-                  </Link>
-                );
-              })}
-            </Grid>
+        <Grid container direction="row" spacing={2} xs={12} md={11} lg={11}>
+          <Grid item xs={12} md={3} lg={3}>
+            <img src={Descripcion.urlLogo} width={"130px"} />
           </Grid>
-          <br></br>
-          <Grid item xs={11} md={11} lg={11}>
-            <Divider className={classes.divider} style={{ borderBottomColor: Descripcion.Colores.Letra }} />
-          </Grid>
+          <Grid item xs={12} md={3} className={classes.items}></Grid>
 
-          <Grid item xs={11} md={11} lg={11} className={classes.bottomItems}>
-            <Hidden xsDown>
-              <div className={classes.flexItems}>
-                <div className={classes.copyright}>
-                  <small style={{ fontSize: "15px" }}>
-                    &copy; {`${Descripcion.NombreEmpresa} ${date.getFullYear()}`}
-                  </small>
-                </div>
+          <Grid item xs={12} md={3} className={classes.items}>
+            <CustomTitle>{Descripcion.Mensaje1}</CustomTitle>
+            {Object.keys(Descripcion.ContenidoMensaje1).map((i) => {
+              return <CustomItem>{Descripcion.ContenidoMensaje1[i]}</CustomItem>;
+            })}
+          </Grid>
+          <Grid item xs={12} md={3} lg={3} className={classes.items}>
+            <CustomTitle>{Descripcion.Mensaje2}</CustomTitle>
+            {Object.keys(Descripcion.ContenidoMensaje2).map((i) => {
+              return (
+                <Link href={`${Descripcion.ContenidoMensaje2[i].ruta}`}>
+                  <CustomItem>{Descripcion.ContenidoMensaje2[i].Titulo}</CustomItem>
+                </Link>
+              );
+            })}
+          </Grid>
+        </Grid>
+        <br></br>
+        <Grid item xs={11} md={11} lg={11}>
+          <Divider className={classes.divider} style={{ borderBottomColor: Descripcion.Colores.Letra }} />
+        </Grid>
+
+        <Grid item xs={11} md={11} lg={11} className={classes.bottomItems}>
+          <Hidden xsDown>
+            <div className={classes.flexItems}>
+              <div className={classes.copyright}>
+                <small style={{ fontSize: "15px" }}>
+                  &copy; {`${Descripcion.NombreEmpresa} ${date.getFullYear()}`}
+                </small>
               </div>
-            </Hidden>
-
-            <div className={classes.flexIcons}>
-              <p style={{ fontSize: "15px" }}>Siguenos</p>
-              {Object.keys(Descripcion.RedesSociales).map((i) => {
-                return (
-                  <IconButton
-                    color="inherit"
-                    size="small"
-                    onClick={() => goToPage(`${Descripcion.RedesSociales[i].ruta}`)}
-                  >
-                    {Descripcion.RedesSociales[i].Icono}
-                  </IconButton>
-                );
-              })}
-            </div>
-          </Grid>
-
-          <Hidden smUp>
-            <div className={classes.copyright}>
-              <small style={{ fontSize: "15px" }}>&copy; {`${Descripcion.NombreEmpresa} ${date.getFullYear()}`}</small>
             </div>
           </Hidden>
-        </div>
+
+          <div className={classes.flexIcons}>
+            <p style={{ fontSize: "15px" }}>Siguenos</p>
+            {Object.keys(Descripcion.RedesSociales).map((i) => {
+              return (
+                <IconButton
+                  color="inherit"
+                  size="small"
+                  onClick={() => goToPage(`${Descripcion.RedesSociales[i].ruta}`)}
+                >
+                  {Descripcion.RedesSociales[i].Icono}
+                </IconButton>
+              );
+            })}
+          </div>
+        </Grid>
+
+        <Hidden smUp>
+          <div className={classes.copyright}>
+            <small style={{ fontSize: "15px" }}>&copy; {`${Descripcion.NombreEmpresa} ${date.getFullYear()}`}</small>
+          </div>
+        </Hidden>
       </Grid>
     </React.Fragment>
   );
