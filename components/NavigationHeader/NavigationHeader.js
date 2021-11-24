@@ -128,7 +128,7 @@ class NavigationHeader extends Component {
     //ColorIconoMenu, fondo del icono del menu cuando para versiones moviles
     const {
       classes,
-      urlLogo,
+      Logo,
       ColoresBusqueda,
       MetodoBusqueda,
       ImageCoverUrl,
@@ -148,7 +148,7 @@ class NavigationHeader extends Component {
               <Grid container xs={11} md={11} lg={11} className={classes.root}>
                 {/* LOGO */}
                 <Grid item xs={12} sm={3} md={3} lg={3} className={classes.Logo}>
-                  <img src={urlLogo} className={classes.LogoSize} />
+                  <img src={Logo.urlLogo} width={Logo.WidthDesktop} height={Logo.HeightDesktop} />
                 </Grid>
 
                 {/* Bara de busqueda */}
@@ -198,7 +198,7 @@ class NavigationHeader extends Component {
 
               {/* LOGO */}
               <Grid item xs={4} md={3} lg={3} className={classes.Logo}>
-                <img src={urlLogo} className={classes.LogoSize} />
+                <img src={Logo.urlLogo} width={Logo.WidthMobile} height={Logo.HeightMobile} />
               </Grid>
 
               {/* Iconos */}
