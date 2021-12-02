@@ -5,13 +5,16 @@ import MenuIcon from "mdi-material-ui/Menu";
 
 class NavigationToggleMobile extends Component {
   static propTypes = {
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    ModalMenuColores: PropTypes.object,
   };
 
   render() {
+    const { ModalMenuColores } = this.props;
+
     return (
       <IconButton color="inherit" onClick={this.props.onClick}>
-        <MenuIcon />
+        <MenuIcon style={{ color: ModalMenuColores.Icono }} />
       </IconButton>
     );
   }

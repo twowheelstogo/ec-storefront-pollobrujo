@@ -72,7 +72,7 @@ class IconsActions extends Component {
   };
 
   render() {
-    const { classes, width } = this.props;
+    const { classes, width, Letra } = this.props;
     const Validar = (tamaño) => {
       let nuevo = "";
       switch (tamaño) {
@@ -91,10 +91,10 @@ class IconsActions extends Component {
     return (
       <Grid container xs={12} md={12} lg={12} className={classes.root} spacing={() => Validar(width)}>
         <Grid item xs={1} md={2} lg={2} className={classes.Usuario}>
-          <AccountDropdown />
+          <AccountDropdown Letra={Letra} />
         </Grid>
         <Grid item xs={1} md={2} lg={2} className={classes.Compra}>
-          <MiniCart />
+          <MiniCart Letra={Letra} />
         </Grid>
       </Grid>
     );

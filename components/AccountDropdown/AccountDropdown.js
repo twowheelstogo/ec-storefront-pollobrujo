@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AccountDropdown = () => {
+const AccountDropdown = (props) => {
   const router = useRouter();
   const { uiStore } = useStores();
   const { setEntryModal } = uiStore;
@@ -68,6 +68,8 @@ const AccountDropdown = () => {
     setAnchorElement(event.currentTarget);
   };
 
+  const { Letra } = props;
+
   return (
     <Fragment>
       <EntryModal onClose={onClose} resetToken={resetToken} />
@@ -77,7 +79,7 @@ const AccountDropdown = () => {
         </ButtonBase>
       ) : (
         <IconButton color="inherit" onClick={toggleOpen}>
-          <AccountCircleOutline className={classes.Usuario} />
+          <AccountCircleOutline className={classes.Usuario} style={{ color: Letra }} />
         </IconButton>
       )}
 

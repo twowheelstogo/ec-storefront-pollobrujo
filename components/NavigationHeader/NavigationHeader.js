@@ -33,6 +33,7 @@ const styles = (theme) => ({
     color: "white",
     ["@media (max-width:599px)"]: {
       marginLeft: "auto",
+      marginRight: "auto",
     },
     ["@media (min-width:600px)"]: {
       marginTop: "1%",
@@ -78,6 +79,9 @@ const styles = (theme) => ({
       marginTop: "20px",
     },
   },
+  AppBar_: {
+    boxShadow: "0px 0px 0px 0px rgb(0 0 0 / 20%), 0px 0px 0px 0px rgb(0 0 0 / 14%), 0px 0px 0px 0px rgb(0 0 0 / 12%)",
+  },
   MessageCover: {
     fontWeight: "bold",
     fontSize: "36px",
@@ -113,6 +117,13 @@ class NavigationHeader extends Component {
   static propTypes = {
     classes: PropTypes.object,
     width: PropTypes.string.isRequired,
+    shop: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }),
+    uiStore: PropTypes.shape({
+      toggleMenuDrawerOpen: PropTypes.func.isRequired,
+    }).isRequired,
+    viewer: PropTypes.object,
   };
 
   static defaultProps = {
@@ -140,6 +151,9 @@ class NavigationHeader extends Component {
       ImageCoverUrl,
       MessageCover,
       AppColor,
+      ModalMenuColores,
+      shop,
+      viewer,
       width,
       components: { SearchBar },
       components: { IconsActions },
@@ -153,7 +167,7 @@ class NavigationHeader extends Component {
             <Grid xs={12} md={12} lg={12} spacing={5}>
               {/* Contenedor Principal */}
               <Grid container xs={11} md={11} lg={11} className={classes.root}>
-                <AppBar position="static" style={{ backgroundColor: AppColor }}>
+                <AppBar className={classes.AppBar_} position="static" style={{ backgroundColor: AppColor }}>
                   <Toolbar>
                     {/* LOGO */}
                     <Grid item xs={12} sm={3} md={3} lg={3} className={classes.Logo}>
@@ -167,7 +181,7 @@ class NavigationHeader extends Component {
 
                     {/* Iconos */}
                     <Grid item xs={2} sm={3} md={3} lg={3} className={classes.Iconos}>
-                      <IconsActions width={width} />
+                      <IconsActions width={width} Letra={ModalMenuColores.Letra} />
                     </Grid>
                   </Toolbar>
                 </AppBar>
@@ -201,14 +215,17 @@ class NavigationHeader extends Component {
             <Grid xs={12} md={12} lg={12} spacing={5} spacing={5}>
               {/* Contenedor Principal */}
               <Grid container xs={11} md={11} lg={11} className={classes.root}>
-                <AppBar position="static" style={{ backgroundColor: AppColor }}>
+                <AppBar className={classes.AppBar_} position="static" style={{ backgroundColor: AppColor }}>
                   <Toolbar>
                     {/* Contenedor Navigation Menu */}
                     <Grid item xs={4} md={4} lg={4} className={classes.Menu}>
                       <Hidden mdUp>
-                        <NavigationToggleMobile onClick={this.handleNavigationToggleClick} />
+                        <NavigationToggleMobile
+                          onClick={this.handleNavigationToggleClick}
+                          ModalMenuColores={ModalMenuColores}
+                        />
                       </Hidden>
-                      <NavigationMobile />
+                      <NavigationMobile ModalMenuColores={ModalMenuColores} shop={shop} Logo={Logo.urlLogo} />
                     </Grid>
 
                     {/* LOGO */}
@@ -218,7 +235,7 @@ class NavigationHeader extends Component {
 
                     {/* Iconos */}
                     <Grid item xs={4} md={2} lg={2} className={classes.Iconos}>
-                      <IconsActions width={width} />
+                      <IconsActions width={width} Letra={ModalMenuColores.Letra} />
                     </Grid>
                   </Toolbar>
                 </AppBar>

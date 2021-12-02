@@ -71,6 +71,7 @@ class MiniCart extends Component {
       openCart: PropTypes.func.isRequired,
       closeCart: PropTypes.func.isRequired,
     }),
+    Letra: PropTypes.Object,
   };
 
   constructor(props) {
@@ -83,6 +84,7 @@ class MiniCart extends Component {
 
   state = {
     anchorElement: null,
+    Letra: this.props,
   };
 
   anchorElement = null;
@@ -167,7 +169,7 @@ class MiniCart extends Component {
   }
 
   render() {
-    const { cart, classes, uiStore } = this.props;
+    const { cart, classes, uiStore, Letra } = this.props;
     const { isCartOpen } = uiStore;
     const id = isCartOpen ? "simple-popper" : null;
 
@@ -182,10 +184,10 @@ class MiniCart extends Component {
           >
             {cart && cart.totalItemQuantity > 0 ? (
               <Badge badgeContent={cart.totalItemQuantity} color="primary" classes={{ badge: classes.badge }}>
-                <ShoppingOutline className={classes.Compra} />
+                <ShoppingOutline className={classes.Compra} style={{ color: Letra }} />
               </Badge>
             ) : (
-              <ShoppingOutline className={classes.Compra} />
+              <ShoppingOutline className={classes.Compra} style={{ color: Letra }} />
             )}
           </IconButton>
         </div>

@@ -45,8 +45,8 @@ class Layout extends Component {
     const {
       classes,
       children,
-      // shop,
-      // viewer,
+      viewer,
+      shop,
       components: { NavigationHeader },
       components: { CustomFooter },
     } = this.props;
@@ -55,8 +55,8 @@ class Layout extends Component {
       urlLogo:
         "https://firebasestorage.googleapis.com/v0/b/twg-vehicle-dashboard.appspot.com/o/Iconos%2Flogo.png?alt=media&token=585118cc-e2a5-43b2-be99-582ba654fdff",
       WidthDesktop: "111px",
-      WidthMobile: "111px",
-      HeightDesktop: "71px",
+      WidthMobile: "71px",
+      HeightDesktop: "111px",
       HeightMobile: "71px",
     };
 
@@ -82,12 +82,15 @@ class Layout extends Component {
       ],
       Colores: { Fondo: "#000000", Letra: "#FFFFFF" },
     };
+
     return (
       <React.Fragment>
         <div className={classes.root}>
           {/* <Header shop={shop} viewer={viewer} /> */}
 
           <NavigationHeader
+            shop={shop}
+            viewer={viewer}
             Logo={Logo}
             AppColor={"#000000"}
             ColoresBusqueda={["#000000", "#dcdcdc"]}
@@ -99,11 +102,13 @@ class Layout extends Component {
               "https://firebasestorage.googleapis.com/v0/b/twg-vehicle-dashboard.appspot.com/o/Iconos%2FBanner-de-inicio-pollo-sabor-unico-a-la-parrilla-1.jpg?alt=media&token=c5a89313-1e99-4f9d-ba04-a8c9be3763e3"
             }
             MessageCover={"SABOR ÚNICO A LA PARILLA"}
+            ModalMenuColores={{ Fondo: "#1D0D13", Letra: "#FFFFFF", Icono: "#FFFFFF" }}
           />
+
           <main className={classes.main}>
             <article className={classes.article}>{children}</article>
           </main>
-          <CustomFooter Descripcion={Descripcion} style={{ marginRight: "auto", marginLeft: "auto" }} />
+          <CustomFooter Descripcion={Descripcion} />
         </div>
       </React.Fragment>
     );
