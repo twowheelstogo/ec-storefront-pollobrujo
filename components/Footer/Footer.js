@@ -16,10 +16,9 @@ const styles = (theme) => ({
 
 const Footer = ({ ...props }) => (
   <footer className={props.classes.footer}>
-    <Typography variant="caption">&copy; {date.getFullYear()} Ivan Commerce 2.0.5</Typography>
+    <Typography variant="caption">&copy; {date.getFullYear()} Reaction Commerce</Typography>
   </footer>
 );
-
 Footer.propTypes = {
   classes: PropTypes.object,
 };

@@ -65,6 +65,7 @@ const styles = (theme) => ({
 class IconsActions extends Component {
   static propTypes = {
     classes: PropTypes.object,
+    cart: PropTypes.object,
   };
 
   static defaultProps = {
@@ -72,7 +73,7 @@ class IconsActions extends Component {
   };
 
   render() {
-    const { classes, width, Letra } = this.props;
+    const { classes, width, Letra, cart } = this.props;
     const Validar = (tamaño) => {
       let nuevo = "";
       switch (tamaño) {
@@ -94,7 +95,7 @@ class IconsActions extends Component {
           <AccountDropdown Letra={Letra} />
         </Grid>
         <Grid item xs={1} md={2} lg={2} className={classes.Compra}>
-          <MiniCart Letra={Letra} />
+          <MiniCart Letra={Letra} {...cart} />
         </Grid>
       </Grid>
     );

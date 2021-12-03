@@ -154,6 +154,7 @@ class NavigationHeader extends Component {
       ModalMenuColores,
       shop,
       viewer,
+      cart,
       width,
       components: { SearchBar },
       components: { IconsActions },
@@ -181,7 +182,7 @@ class NavigationHeader extends Component {
 
                     {/* Iconos */}
                     <Grid item xs={2} sm={3} md={3} lg={3} className={classes.Iconos}>
-                      <IconsActions width={width} Letra={ModalMenuColores.Letra} />
+                      <IconsActions width={width} Letra={ModalMenuColores.Letra} cart={cart} />
                     </Grid>
                   </Toolbar>
                 </AppBar>
@@ -235,7 +236,7 @@ class NavigationHeader extends Component {
 
                     {/* Iconos */}
                     <Grid item xs={4} md={2} lg={2} className={classes.Iconos}>
-                      <IconsActions width={width} Letra={ModalMenuColores.Letra} />
+                      <IconsActions width={width} Letra={ModalMenuColores.Letra} cart={cart} />
                     </Grid>
                   </Toolbar>
                 </AppBar>
