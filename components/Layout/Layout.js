@@ -56,8 +56,8 @@ class Layout extends Component {
         "https://firebasestorage.googleapis.com/v0/b/twg-vehicle-dashboard.appspot.com/o/Iconos%2Flogo.png?alt=media&token=585118cc-e2a5-43b2-be99-582ba654fdff",
       WidthDesktop: "111px",
       WidthMobile: "71px",
-      HeightDesktop: "111px",
-      HeightMobile: "71px",
+      HeightDesktop: "105px",
+      HeightMobile: "50px",
     };
 
     const Descripcion = {
@@ -93,7 +93,7 @@ class Layout extends Component {
             viewer={viewer}
             Logo={Logo}
             AppColor={"#000000"}
-            ColoresBusqueda={["#000000", "#dcdcdc"]}
+            ColoresBusqueda={["rgba(216, 216, 216, 0.2)", "#9B9B9B"]}
             ColorIcono={"#FFFFFF"}
             MetodoBusqueda={(Busqueda) => {
               alert(Busqueda);

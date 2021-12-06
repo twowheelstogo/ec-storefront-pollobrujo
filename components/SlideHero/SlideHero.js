@@ -1,6 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
+import withWidth, { isWidthUp, isWidthDown } from "@material-ui/core/withWidth";
+import { withComponents } from "@reactioncommerce/components-context";
 
 const useStyles = makeStyles((theme) => ({
   videoPlayer: {
@@ -42,8 +44,19 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     [theme.breakpoints.up("md")]: {
       height: "540px",
-    },
+    },  
   },
+  Mensaje: {    
+    color: "white",
+      fontSize: "36px",
+    ["@media (min-width:600px)"]: {      
+      letterSpacing: ".0119em",    
+    },        
+    ["@media (max-width:599px)"]: {
+      width:"250px",
+      lineHeight: "42px",      
+    },    
+  }
 }));
 function SlideHero(props) {
   const { title, subtitle, background, type } = props;
@@ -69,12 +82,8 @@ function SlideHero(props) {
           <img src={background} className={classes.background} width="100%"></img>
         )}
         <div className={classes.slideContent}>
-          <h1
-            style={{
-              color: "white",
-              fontSize: "36px",
-              letterSpacing: ".0119em",
-            }}
+          <h1          
+            className={classes.Mensaje}
           >
             {title}
           </h1>
@@ -89,4 +98,9 @@ SlideHero.propTypes = {
   background: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };
+
 export default SlideHero;
+//(withWidth({ initialWidth: "md" }));
+
+//withComponents(withWidth({ initialWidth: "md" })(inject("uiStore")(SlideHero)));
+
