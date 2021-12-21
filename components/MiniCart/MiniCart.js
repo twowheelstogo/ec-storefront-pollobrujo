@@ -2,9 +2,9 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import inject from "hocs/inject";
 import { withStyles } from "@material-ui/core/styles";
-import MiniCartComponent from "@reactioncommerce/components/MiniCart/v1";
 import CartItems from "components/CartItems";
-import CartEmptyMessage from "@reactioncommerce/components/CartEmptyMessage/v1";
+import MiniCartComponent from "components/MiniCartComponent";
+import CartEmptyMessage from "components/CartEmptyMessage";
 import IconButton from "@material-ui/core/IconButton";
 import { ShoppingOutline } from "mdi-material-ui";
 import Router from "translations/i18nRouter";
@@ -12,6 +12,7 @@ import Badge from "@material-ui/core/Badge";
 import Popper from "@material-ui/core/Popper";
 import Fade from "@material-ui/core/Fade";
 import withCart from "containers/cart/withCart";
+
 
 const styles = ({ palette, zIndex }) => ({
   popper: {
@@ -136,12 +137,14 @@ class MiniCart extends Component {
   };
 
   renderMiniCart() {
-    const { cart, classes, hasMoreCartItems, loadMoreCartItems } = this.props;
+    const { cart, classes, hasMoreCartItems, loadMoreCartItems, MiniCardColors        
+    } = this.props;
 
     if (cart && Array.isArray(cart.items) && cart.items.length) {
       return (
         <MiniCartComponent
           cart={cart}
+          MiniCardColors={MiniCardColors}
           onCheckoutButtonClick={this.handleCheckoutButtonClick}
           components={{
             QuantityInput: "div",

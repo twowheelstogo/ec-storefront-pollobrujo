@@ -12,8 +12,10 @@ import {
 const styles = (theme) => ({
   root: {
     minHeight: "100vh",
-    backgroundColor: "#000000",
-    color: "#FFFFFF",
+    //backgroundColor: "#000000",
+    backgroundColor: "white",
+    //color: "#FFFFFF",
+    color: "black",
   },
   main: {
     flex: "1 1 auto",
@@ -54,10 +56,10 @@ class Layout extends Component {
     const Logo = {
       urlLogo:
         "https://firebasestorage.googleapis.com/v0/b/twg-vehicle-dashboard.appspot.com/o/Iconos%2Flogo.png?alt=media&token=585118cc-e2a5-43b2-be99-582ba654fdff",
-      WidthDesktop: "111px",
+      WidthDesktop: "120px",
       WidthMobile: "71px",
-      HeightDesktop: "105px",
-      HeightMobile: "50px",
+      HeightDesktop: "111px",
+      HeightMobile: "71px",
     };
 
     const Descripcion = {
@@ -83,18 +85,21 @@ class Layout extends Component {
       Colores: { Fondo: "#000000", Letra: "#FFFFFF" },
     };
 
+
+
     return (
       <React.Fragment>
         <div className={classes.root}>
           {/* <Header shop={shop} viewer={viewer} /> */}
-
+          
           <NavigationHeader
             shop={shop}
             viewer={viewer}
             Logo={Logo}
             AppColor={"#000000"}
-            ColoresBusqueda={["rgba(216, 216, 216, 0.2)", "#9B9B9B"]}
+            ColoresBusqueda={["#000000", "#dcdcdc"]}
             ColorIcono={"#FFFFFF"}
+            MiniCardColors={{Fondo: "#000000", Letra: "#EA6D23"}}
             MetodoBusqueda={(Busqueda) => {
               alert(Busqueda);
             }}
@@ -103,7 +108,7 @@ class Layout extends Component {
             }
             MessageCover={"SABOR ÚNICO A LA PARILLA"}
             ModalMenuColores={{ Fondo: "#1D0D13", Letra: "#FFFFFF", Icono: "#FFFFFF" }}
-          />
+          />                      
 
           <main className={classes.main}>
             <article className={classes.article}>{children}</article>

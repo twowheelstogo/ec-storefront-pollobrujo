@@ -73,7 +73,7 @@ class IconsActions extends Component {
   };
 
   render() {
-    const { classes, width, Letra, cart } = this.props;
+    const { classes, width, Letra, cart,MiniCardColors } = this.props;
     const Validar = (tamaño) => {
       let nuevo = "";
       switch (tamaño) {
@@ -95,7 +95,7 @@ class IconsActions extends Component {
           <AccountDropdown Letra={Letra} />
         </Grid>
         <Grid item xs={1} md={2} lg={2} className={classes.Compra}>
-          <MiniCart Letra={Letra} {...cart} />
+          <MiniCart Letra={Letra} {...cart} MiniCardColors={MiniCardColors} />
         </Grid>
       </Grid>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TextField, InputAdornment } from "@material-ui/core";
+import { TextField, InputAdornment,Divider } from "@material-ui/core";
 import { Magnify } from "mdi-material-ui";
 //import { withComponents } from "@reactioncommerce/components-context";
 import PropTypes from "prop-types";
@@ -61,6 +61,7 @@ class SearchBar extends Component {
             },
             endAdornment: (
               <InputAdornment position="end" style={{ borderRightColor: Colores[0], borderRightStyle: "solid" }}>
+                
                 <Magnify style={{ color: Colores[1], cursor: "pointer" }} onClick={() => Metodo(this.state.Busqueda)} />
               </InputAdornment>
             ),

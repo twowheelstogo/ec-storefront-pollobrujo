@@ -157,6 +157,7 @@ class NavigationHeader extends Component {
       viewer,
       cart,
       width,
+      MiniCardColors,
       components: { SearchBar },
       components: { IconsActions },
       components: { SlideHero },
@@ -183,7 +184,9 @@ class NavigationHeader extends Component {
 
                     {/* Iconos */}
                     <Grid item xs={2} sm={3} md={3} lg={3} className={classes.Iconos}>
-                      <IconsActions width={width} Letra={ModalMenuColores.Letra} cart={cart} />
+                      <IconsActions
+                      MiniCardColors={MiniCardColors}
+                      width={width} Letra={ModalMenuColores.Letra} cart={cart} />
                     </Grid>
                   </Toolbar>
                 </AppBar>
@@ -237,7 +240,9 @@ class NavigationHeader extends Component {
 
                 {/* Iconos */}
                 <Grid item xs={4} md={2} lg={2} className={classes.Iconos}>
-                  <IconsActions width={width} Letra={ModalMenuColores.Letra} cart={cart} />
+                  <IconsActions 
+                  MiniCardColors={MiniCardColors}
+                  width={width} Letra={ModalMenuColores.Letra} cart={cart} />
                 </Grid>
                 {/* </Toolbar> */}
                 

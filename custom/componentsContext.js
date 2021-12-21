@@ -1,17 +1,3 @@
-/**
- * All Reaction Design System components are injected into the app from this single file.
- * This allows you to easily swap out one of the default components for your own, everywhere
- * in the app. It also allows you to take updates to the `@reactioncommerce/components` package
- * without worrying about it pulling in new component versions everywhere automatically. Instead,
- * you can switch from the `v1` import path to the `v2` import path, e.g., for a single component
- * when you're ready.
- *
- * You may also import your custom React components here and add them to the exported object.
- * They will then be available in the `components` property of all Reaction Design
- * System components, as well as any of your own components that you've wrapped
- * with the `withComponents` higher-order component.
- */
-
 import iconAmericanExpress from "@reactioncommerce/components/svg/iconAmericanExpress";
 import iconClear from "@reactioncommerce/components/svg/iconClear";
 import iconDiscover from "@reactioncommerce/components/svg/iconDiscover";
@@ -33,7 +19,7 @@ import AddressForm from "@reactioncommerce/components/AddressForm/v1";
 import AddressReview from "@reactioncommerce/components/AddressReview/v1";
 import BadgeOverlay from "@reactioncommerce/components/BadgeOverlay/v1";
 import Button from "@reactioncommerce/components/Button/v1";
-import CartItem from "@reactioncommerce/components/CartItem/v1";
+//import CartItem from "@reactioncommerce/components/CartItem/v1";
 import CartItemDetail from "@reactioncommerce/components/CartItemDetail/v1";
 import CartItems from "@reactioncommerce/components/CartItems/v1";
 import CartSummary from "@reactioncommerce/components/CartSummary/v1";
@@ -69,6 +55,9 @@ import withLocales from "../lib/utils/withLocales";
 import AccountDropdown from "components/AccountDropdown";
 import SlideHero from "components/SlideHero";
 import CustomFooter from "components/CustomFooter";
+import CartEmptyMessage from "components/CartEmptyMessage";
+import MiniCartComponent from "components/MiniCartComponent";
+import CartItem from "components/CartItem";
 // Providing locales data
 const AddressFormWithLocales = withLocales(AddressForm);
 
@@ -130,4 +119,6 @@ export default {
   IconsActions,
   SlideHero,
   CustomFooter,
+  MiniCartComponent,
+  CartEmptyMessage
 };
