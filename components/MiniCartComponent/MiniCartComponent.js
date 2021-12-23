@@ -3,6 +3,30 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { withComponents } from "@reactioncommerce/components-context";
 import { addTypographyStyles, applyTheme, CustomPropTypes } from "@reactioncommerce/components/utils";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = (theme) => ({
+   Inicio: {
+      height: "75px",  
+      fontSize: "24px",
+      fontWeight: "800",
+      lineHeight: "19px",
+      width:"100%",                                        
+      display:"flex",
+      alignItems:"center",
+      backgroundColor: theme.palette.background.Carrito,    
+      color: theme.palette.colors.TextTheme,
+   } ,
+   Titulo:{
+      marginLeft:"10px"
+   }, 
+   BotonPrincipal:{
+      backgroundColor: theme.palette.secondary.botones,    
+      color: theme.palette.colors.BotonColor,
+      borderColor: theme.palette.secondary.botones, 
+      height: "50px"
+    },  
+ });
 
 const Cart = styled.div`
   border-bottom-color: ${applyTheme("MiniCart.borderBottomColor")};
@@ -161,10 +185,20 @@ class MiniCartComponent extends Component {
   	footerMessageText: "Envío calculado en el proceso de compra"
   };
 
+  static propTypes = {    
+   classes: PropTypes.object,    
+ };
+
+ static defaultProps = {
+   classes: {},
+ };
+
+
   render() {
   	const {
   		cart: { checkout: { summary }, items },
   		className,
+        classes,
   		checkoutButtonText,
   		components: { Button, CartCheckoutButton, CartItems,CartItem, MiniCartSummary },
   		footerMessageText,          
@@ -173,18 +207,8 @@ class MiniCartComponent extends Component {
   	} = this.props;
   	return (
   		<Cart className={className}>
-                  <div
-                                    style={{                        
-                                        height: "75px",  
-                                        fontSize: "24px",
-                                        fontWeight: "800",
-                                        lineHeight: "19px",
-                                        width:"100%",                                        
-                                        display:"flex",
-                                        alignItems:"center"
-                                    }}
-                                    >
-                                    <div style={{marginLeft:"10px"}}>Mi Carrito</div>                                                                        
+                  <div className={classes.Inicio}>
+                                    <div className={classes.Titulo}>Mi Carrito</div>                                                                        
                                     </div> 
 
   			<Items>
@@ -195,7 +219,9 @@ class MiniCartComponent extends Component {
   			<Footer count={items.length}>
   				<MiniCartSummary displaySubtotal={summary.itemTotal.displayAmount} />
   				{(CartCheckoutButton && <CartCheckoutButton onClick={onCheckoutButtonClick} />) || (
-  					<Button actionType="important" isFullWidth onClick={onCheckoutButtonClick}>
+  					<Button actionType="important" isFullWidth onClick={onCheckoutButtonClick}
+                 className={classes.BotonPrincipal}
+                 >
   						{checkoutButtonText}
   					</Button>
   				)}
@@ -206,4 +232,4 @@ class MiniCartComponent extends Component {
   }
 }
 
-export default withComponents(MiniCartComponent);
+export default withComponents(withStyles(styles)(MiniCartComponent));

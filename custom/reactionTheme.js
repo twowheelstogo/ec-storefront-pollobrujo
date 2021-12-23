@@ -14,8 +14,7 @@ const theme = createMuiTheme({
       light: "#26B0F9",
       main: "#1999DD",
       dark: "#172F3C",
-      contrastText: "#FFFFFF"
-
+      contrastText: "#FFFFFF"      
     },
     //Tamaño del logo
     Logo:{
@@ -28,7 +27,8 @@ const theme = createMuiTheme({
       light: "#5d8ea9",
       main: "#5E7480",
       dark: "#1D1D1D",
-      contrastText: "#000000"
+      contrastText: "#000000",
+      botones: "#FFEB3B",            
     },
     background: {
       default: "#ffffff",
@@ -36,7 +36,9 @@ const theme = createMuiTheme({
       theme_: "#000000",
       Main: "#000000",
       //el main es para los que cambian de color en el centro
-      Modal: "#1D0D13"
+      Modal: "#1D0D13",
+      //Fondo cart carrito
+      Carrito: "#202124"
     },
     error: {
       light: "#E54F5D",
@@ -53,8 +55,11 @@ const theme = createMuiTheme({
 
       //color principal de la letra
       TextTheme: "#FFFFFF",
-      SearchColor: "#dcdcdc"
+      SearchColor: "#dcdcdc",
       //text theme es el color de la letra
+
+      //texto botones secundarios
+      BotonColor: "#000000"
     },
     borders: {
       default: "1px solid #e6e6e6"

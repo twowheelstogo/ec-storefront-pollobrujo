@@ -3,6 +3,15 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { withComponents } from "@reactioncommerce/components-context";
 import { addTypographyStyles, applyTheme, CustomPropTypes } from "@reactioncommerce/components/utils";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = (theme) => ({ 
+  BotonPrincipal:{
+    backgroundColor: theme.palette.secondary.botones,    
+    color: theme.palette.colors.BotonColor,
+    borderColor: theme.palette.secondary.botones, 
+  },
+});
 
 const EmptyButton = styled.div`
   display: flex;
@@ -49,26 +58,34 @@ class CartEmptyMessage extends Component {
 
   static defaultProps = {
     buttonText: "Continuar comprando",
-    messageText: "Tu carrito se encuentra vacío."
+    messageText: "Tu carrito se encuentra vacío.",
+    classes: {},
   };
 
   handleOnClick = () => {
     this.props.onClick();
   }
 
+  static propTypes = {    
+    classes: PropTypes.object,    
+  };
+
+
   render() {
-    const { buttonText, components, messageText } = this.props;
+    const { classes,buttonText, components, messageText } = this.props;
     const { Button } = components;
 
     return (
       <Fragment>
         <EmptyMessage>{messageText}</EmptyMessage>
-        <EmptyButton>
-          <Button onClick={this.handleOnClick} color="primary">{buttonText}</Button>
+        <EmptyButton className={classes.BotonPrincipal}  >
+          <Button onClick={this.handleOnClick} 
+          className={classes.BotonPrincipal}          
+          >{buttonText}</Button>
         </EmptyButton>
       </Fragment>
     );
   }
 }
 
-export default withComponents(CartEmptyMessage);
+export default withComponents(withStyles(styles)(CartEmptyMessage));
