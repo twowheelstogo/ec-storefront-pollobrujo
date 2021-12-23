@@ -9,7 +9,7 @@ import { NavigationMobile, NavigationToggleMobile } from "components/NavigationM
 import Hidden from "@material-ui/core/Hidden";
 import inject from "hocs/inject";
 
-const styles = (theme) => ({
+const styles = (theme) => ({  
   root: {
     marginLeft: "auto",
     marginRight: "auto",
@@ -82,6 +82,7 @@ const styles = (theme) => ({
   },
   AppBar_: {
     boxShadow: "0px 0px 0px 0px rgb(0 0 0 / 20%), 0px 0px 0px 0px rgb(0 0 0 / 14%), 0px 0px 0px 0px rgb(0 0 0 / 12%)",
+    backgroundColor: theme.palette.background.theme_,
   },
   MessageCover: {
     fontWeight: "bold",
@@ -107,6 +108,14 @@ const styles = (theme) => ({
       marginTop: "20%",
     },
   },
+  LogoDesktop:{
+    width: theme.palette.Logo.WidthDesktop,
+    heigth: theme.palette.Logo.HeightDesktop
+  },
+  LogoMobile:{
+    width: theme.palette.Logo.WidthMobile,
+    heigth: theme.palette.Logo.HeightMobile
+  }
 });
 
 class NavigationHeader extends Component {
@@ -146,18 +155,14 @@ class NavigationHeader extends Component {
     //ColorIconoMenu, fondo del icono del menu cuando para versiones moviles
     const {
       classes,
-      Logo,
-      ColoresBusqueda,
+      Logo,      
       MetodoBusqueda,
       ImageCoverUrl,
-      MessageCover,
-      AppColor,
-      ModalMenuColores,
-      shop,
-      viewer,
+      MessageCover,            
+      shop,      
       cart,
-      width,
-      MiniCardColors,
+      BanderaSlideHero,
+      width,      
       components: { SearchBar },
       components: { IconsActions },
       components: { SlideHero },
@@ -170,23 +175,22 @@ class NavigationHeader extends Component {
             <Grid xs={12} md={12} lg={12} spacing={5}>
               {/* Contenedor Principal */}
               <Grid container xs={11} md={11} lg={11} className={classes.root}>
-                <AppBar className={classes.AppBar_} position="static" style={{ backgroundColor: AppColor }}>
+                <AppBar className={classes.AppBar_} position="static">
                   <Toolbar>
                     {/* LOGO */}
                     <Grid item xs={12} sm={3} md={3} lg={3} className={classes.Logo}>
-                      <img src={Logo.urlLogo} width={Logo.WidthDesktop} height={Logo.HeightDesktop} />
+                      <img src={Logo.urlLogo} className={classes.LogoDesktop} />
                     </Grid>
 
                     {/* Bara de busqueda */}
                     <Grid item xs={8} sm={6} md={8} lg={8} xl={8} className={classes.searchbar}>
-                      <SearchBar Metodo={MetodoBusqueda} Colores={ColoresBusqueda} />
+                      <SearchBar Metodo={MetodoBusqueda} />
                     </Grid>
 
                     {/* Iconos */}
                     <Grid item xs={2} sm={3} md={3} lg={3} className={classes.Iconos}>
-                      <IconsActions
-                      MiniCardColors={MiniCardColors}
-                      width={width} Letra={ModalMenuColores.Letra} cart={cart} />
+                      <IconsActions                      
+                      width={width}  cart={cart} />
                     </Grid>
                   </Toolbar>
                 </AppBar>
@@ -213,7 +217,8 @@ class NavigationHeader extends Component {
             <Grid xs={11} md={11} lg={11} className={classes.Espacio2}>
               <h1> </h1>
             </Grid>
-            <SlideHero title={MessageCover} subtitle={""} background={ImageCoverUrl} type={"jpg"} />
+
+            {BanderaSlideHero ? <SlideHero title={MessageCover} subtitle={""} background={ImageCoverUrl} type={"jpg"} /> : null}
           </>
         ) : (
           <>
@@ -226,23 +231,21 @@ class NavigationHeader extends Component {
                 <Grid item xs={4} md={4} lg={4} className={classes.Menu}>
                   <Hidden mdUp>
                     <NavigationToggleMobile
-                      onClick={this.handleNavigationToggleClick}
-                      ModalMenuColores={ModalMenuColores}
+                      onClick={this.handleNavigationToggleClick}                      
                     />
                   </Hidden>
-                  <NavigationMobile ModalMenuColores={ModalMenuColores} shop={shop} Logo={Logo.urlLogo} />
+                  <NavigationMobile  shop={shop} Logo={Logo.urlLogo} />
                 </Grid>
 
                 {/* LOGO */}
                 <Grid item xs={4} md={3} lg={3} className={classes.Logo}>
-                  <img src={Logo.urlLogo} width={Logo.WidthMobile} height={Logo.HeightMobile} />
+                <img src={Logo.urlLogo} className={classes.LogoMobile} />
                 </Grid>
 
                 {/* Iconos */}
                 <Grid item xs={4} md={2} lg={2} className={classes.Iconos}>
-                  <IconsActions 
-                  MiniCardColors={MiniCardColors}
-                  width={width} Letra={ModalMenuColores.Letra} cart={cart} />
+                  <IconsActions                   
+                  width={width}  cart={cart} />
                 </Grid>
                 {/* </Toolbar> */}
                 
@@ -252,14 +255,14 @@ class NavigationHeader extends Component {
 
             {/* Bara de busqueda */}
             <Grid  xs={11} md={6} lg={6} className={classes.searchbar}>
-                  <SearchBar Metodo={MetodoBusqueda} Colores={ColoresBusqueda} />
+                  <SearchBar Metodo={MetodoBusqueda} />
                 </Grid>
 
             {/* Espacio Extra */}
             <Grid xs={11} md={11} lg={11} className={classes.Espacio2}>
               <h1> </h1>
             </Grid>
-            <SlideHero title={MessageCover} subtitle={""} background={ImageCoverUrl} type={"jpg"} />
+            {BanderaSlideHero ? <SlideHero title={MessageCover} subtitle={""} background={ImageCoverUrl} type={"jpg"} /> : null}            
           </>
         )}
       </>

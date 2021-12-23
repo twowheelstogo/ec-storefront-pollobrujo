@@ -48,8 +48,7 @@ class NavigationItemMobile extends Component {
     shouldShowDivider: PropTypes.bool,
     uiStore: PropTypes.shape({
       closeMenuDrawer: PropTypes.func.isRequired,
-    }),
-    colorBorder: PropTypes.object,
+    }),    
   };
 
   static defaultProps = {

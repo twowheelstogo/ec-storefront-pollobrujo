@@ -9,7 +9,7 @@ import { withStyles } from "@material-ui/core/styles";
 import inject from "hocs/inject";
 import MiniCart from "components/MiniCart";
 
-const styles = (theme) => ({
+const styles = (theme) => ({ 
   root: {
     ["@media (min-width:1280px)"]: {
       display: "flex",
@@ -73,7 +73,7 @@ class IconsActions extends Component {
   };
 
   render() {
-    const { classes, width, Letra, cart,MiniCardColors } = this.props;
+    const { classes, width, cart} = this.props;
     const Validar = (tamaño) => {
       let nuevo = "";
       switch (tamaño) {
@@ -92,10 +92,10 @@ class IconsActions extends Component {
     return (
       <Grid container xs={12} md={12} lg={12} className={classes.root} spacing={() => Validar(width)}>
         <Grid item xs={1} md={2} lg={2} className={classes.Usuario}>
-          <AccountDropdown Letra={Letra} />
+          <AccountDropdown/>
         </Grid>
         <Grid item xs={1} md={2} lg={2} className={classes.Compra}>
-          <MiniCart Letra={Letra} {...cart} MiniCardColors={MiniCardColors} />
+          <MiniCart {...cart} />
         </Grid>
       </Grid>
     );

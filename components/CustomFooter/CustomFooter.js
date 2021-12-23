@@ -9,7 +9,8 @@ import Link from "components/Link";
 const date = new Date();
 const styles = (theme) => ({
   root: {
-    background: theme.palette.primary.main,
+    backgroundColor: theme.palette.background.theme_,    
+    color: theme.palette.colors.TextTheme,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
     paddingTop: theme.spacing(10),
@@ -29,6 +30,7 @@ const styles = (theme) => ({
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: "10px",
+    borderBottomColor: theme.palette.colors.TextTheme,
   },
   bottomItems: {
     display: "flex",
@@ -58,7 +60,7 @@ const styles = (theme) => ({
     flexDirection: "row",
     gap: "5px",
     opacity: "75%",
-  },
+  },  
 });
 const CustomTitle = styled.div`
   font-size: 16px;
@@ -82,8 +84,7 @@ const CustomFooter = (props) => {
       <br></br>
 
       <div
-        className={classes.root}
-        style={{ backgroundColor: Descripcion.Colores.Fondo, color: Descripcion.Colores.Letra }}
+        className={classes.root}        
       >
         <Grid container direction="row" spacing={2} xs={12} md={11} lg={11}>
           <Grid item xs={12} md={3} lg={3}>
@@ -110,7 +111,7 @@ const CustomFooter = (props) => {
         </Grid>
 
         <Grid item xs={11} md={11} lg={11}>
-          <Divider className={classes.divider} style={{ borderBottomColor: Descripcion.Colores.Letra }} />
+          <Divider className={classes.divider}/>
         </Grid>
         <Grid item xs={11} md={11} lg={11} className={classes.bottomItems}>
           <Hidden xsDown>

@@ -38,6 +38,7 @@ const styles = ({ palette, zIndex }) => ({
     left: 20,
   },
   Compra: {
+    color: palette.colors.TextTheme,
     ["@media (min-width:600px)"]: {
       width: "35px",
       height: "35px",
@@ -137,14 +138,12 @@ class MiniCart extends Component {
   };
 
   renderMiniCart() {
-    const { cart, classes, hasMoreCartItems, loadMoreCartItems, MiniCardColors        
-    } = this.props;
+    const { cart, classes, hasMoreCartItems, loadMoreCartItems} = this.props;
 
     if (cart && Array.isArray(cart.items) && cart.items.length) {
       return (
         <MiniCartComponent
-          cart={cart}
-          MiniCardColors={MiniCardColors}
+          cart={cart}          
           onCheckoutButtonClick={this.handleCheckoutButtonClick}
           components={{
             QuantityInput: "div",
@@ -172,7 +171,7 @@ class MiniCart extends Component {
   }
 
   render() {
-    const { cart, classes, uiStore, Letra } = this.props;
+    const { cart, classes, uiStore } = this.props;
     const { isCartOpen } = uiStore;
     const id = isCartOpen ? "simple-popper" : null;
 
@@ -187,10 +186,10 @@ class MiniCart extends Component {
           >
             {cart && cart.totalItemQuantity > 0 ? (
               <Badge badgeContent={cart.totalItemQuantity} color="primary" classes={{ badge: classes.badge }}>
-                <ShoppingOutline className={classes.Compra} style={{ color: Letra }} />
+                <ShoppingOutline className={classes.Compra}  />
               </Badge>
             ) : (
-              <ShoppingOutline className={classes.Compra} style={{ color: Letra }} />
+              <ShoppingOutline className={classes.Compra}  />
             )}
           </IconButton>
         </div>

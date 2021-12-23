@@ -16,6 +16,9 @@ import EntryModal from "../Entry/EntryModal";
 import getAccountsHandler from "../../lib/accountsServer.js";
 
 const useStyles = makeStyles((theme) => ({
+  ColoresPrincipales: {
+    color: theme.palette.colors.TextTheme,
+  },
   accountDropdown: {
     width: 320,
     padding: theme.spacing(2),
@@ -24,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   Usuario: {
+    color: theme.palette.colors.TextTheme,
     ["@media (min-width:600px)"]: {
       width: "35px",
       height: "35px",
@@ -67,9 +71,7 @@ const AccountDropdown = (props) => {
   const toggleOpen = (event) => {
     setAnchorElement(event.currentTarget);
   };
-
-  const { Letra } = props;
-
+  
   return (
     <Fragment>
       <EntryModal onClose={onClose} resetToken={resetToken} />
@@ -79,7 +81,7 @@ const AccountDropdown = (props) => {
         </ButtonBase>
       ) : (
         <IconButton color="inherit" onClick={toggleOpen}>
-          <AccountCircleOutline className={classes.Usuario} style={{ color: Letra }} />
+          <AccountCircleOutline className={classes.Usuario}/>
         </IconButton>
       )}
 

@@ -11,18 +11,16 @@ import {
 
 const styles = (theme) => ({
   root: {
-    minHeight: "100vh",
-    //backgroundColor: "#000000",
-    backgroundColor: "white",
-    //color: "#FFFFFF",
-    color: "black",
+    minHeight: "100vh",    
+    backgroundColor: theme.palette.background.theme_,    
+    color: theme.palette.colors.TextTheme,
   },
   main: {
     flex: "1 1 auto",
     maxWidth: theme.layout.mainContentMaxWidth,
     marginLeft: "auto",
     marginRight: "auto",
-    //backgroundColor: "white",
+    backgroundColor: theme.palette.background.Main,
   },
   article: {
     padding: theme.spacing(3),
@@ -55,11 +53,7 @@ class Layout extends Component {
 
     const Logo = {
       urlLogo:
-        "https://firebasestorage.googleapis.com/v0/b/twg-vehicle-dashboard.appspot.com/o/Iconos%2Flogo.png?alt=media&token=585118cc-e2a5-43b2-be99-582ba654fdff",
-      WidthDesktop: "120px",
-      WidthMobile: "71px",
-      HeightDesktop: "111px",
-      HeightMobile: "71px",
+        "https://firebasestorage.googleapis.com/v0/b/twg-vehicle-dashboard.appspot.com/o/Iconos%2Flogo.png?alt=media&token=585118cc-e2a5-43b2-be99-582ba654fdff",     
     };
 
     const Descripcion = {
@@ -81,33 +75,25 @@ class Layout extends Component {
         { Icono: <InstagramIcon />, ruta: "https://www.instagram.com/pollobrujoguatemala/" },
         { Icono: <FacebookIcon />, ruta: "https://www.facebook.com/pollobrujoguatemala" },
         { Icono: <Twitter />, ruta: "https://twitter.com/pollobrujogt" },
-      ],
-      Colores: { Fondo: "#000000", Letra: "#FFFFFF" },
+      ],      
     };
-
-
 
     return (
       <React.Fragment>
         <div className={classes.root}>
-          {/* <Header shop={shop} viewer={viewer} /> */}
-          
+          {/* <Header shop={shop} viewer={viewer} /> */}          
           <NavigationHeader
             shop={shop}
             viewer={viewer}
-            Logo={Logo}
-            AppColor={"#000000"}
-            ColoresBusqueda={["#000000", "#dcdcdc"]}
-            ColorIcono={"#FFFFFF"}
-            MiniCardColors={{Fondo: "#000000", Letra: "#EA6D23"}}
+            Logo={Logo}                                    
             MetodoBusqueda={(Busqueda) => {
               alert(Busqueda);
             }}
             ImageCoverUrl={
               "https://firebasestorage.googleapis.com/v0/b/twg-vehicle-dashboard.appspot.com/o/Iconos%2FBanner-de-inicio-pollo-sabor-unico-a-la-parrilla-1.jpg?alt=media&token=c5a89313-1e99-4f9d-ba04-a8c9be3763e3"
             }
-            MessageCover={"SABOR ÚNICO A LA PARILLA"}
-            ModalMenuColores={{ Fondo: "#1D0D13", Letra: "#FFFFFF", Icono: "#FFFFFF" }}
+            MessageCover={"SABOR ÚNICO A LA PARILLA"}  
+            BanderaSlideHero={true}          
           />                      
 
           <main className={classes.main}>

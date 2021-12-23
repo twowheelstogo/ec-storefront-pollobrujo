@@ -15,6 +15,14 @@ const theme = createMuiTheme({
       main: "#1999DD",
       dark: "#172F3C",
       contrastText: "#FFFFFF"
+
+    },
+    //Tamaño del logo
+    Logo:{
+      WidthDesktop: "120px",
+      WidthMobile: "71px",
+      HeightDesktop: "111px",
+      HeightMobile: "60px",
     },
     secondary: {
       light: "#5d8ea9",
@@ -23,7 +31,12 @@ const theme = createMuiTheme({
       contrastText: "#000000"
     },
     background: {
-      default: "#ffffff"
+      default: "#ffffff",
+      //es el color principal de la pagina
+      theme_: "#000000",
+      Main: "#000000",
+      //el main es para los que cambian de color en el centro
+      Modal: "#1D0D13"
     },
     error: {
       light: "#E54F5D",
@@ -36,7 +49,12 @@ const theme = createMuiTheme({
       selected: "#f5f5f5"
     },
     colors: {
-      buttonBorderColor: "#5e7480"
+      buttonBorderColor: "#5e7480",
+
+      //color principal de la letra
+      TextTheme: "#FFFFFF",
+      SearchColor: "#dcdcdc"
+      //text theme es el color de la letra
     },
     borders: {
       default: "1px solid #e6e6e6"

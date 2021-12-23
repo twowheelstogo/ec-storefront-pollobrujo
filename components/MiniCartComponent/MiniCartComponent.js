@@ -167,8 +167,7 @@ class MiniCartComponent extends Component {
   		className,
   		checkoutButtonText,
   		components: { Button, CartCheckoutButton, CartItems,CartItem, MiniCartSummary },
-  		footerMessageText,
-          MiniCardColors,
+  		footerMessageText,          
   		onCheckoutButtonClick,
   		...props
   	} = this.props;
@@ -180,9 +179,7 @@ class MiniCartComponent extends Component {
                                         fontSize: "24px",
                                         fontWeight: "800",
                                         lineHeight: "19px",
-                                        width:"100%",
-                                        color: MiniCardColors.Letra,                                        
-                                        backgroundColor: MiniCardColors.Fondo,
+                                        width:"100%",                                        
                                         display:"flex",
                                         alignItems:"center"
                                     }}
@@ -192,8 +189,7 @@ class MiniCartComponent extends Component {
 
   			<Items>
   				{/* <CartItems items={items} {...props} isMiniCart /> */}
-                  <CartItem
-                  MiniCardColors={MiniCardColors}
+                  <CartItem                  
                   />
   			</Items>
   			<Footer count={items.length}>

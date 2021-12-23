@@ -19,6 +19,17 @@ const styles = (theme) => ({
     borderWidth: "1px",
     borderColor: "#E3E3E3 !important",
   },
+  Magnify_: {
+    color: theme.palette.colors.SearchColor,
+    cursor: "pointer"
+  },
+  InputAdornment_: {
+    borderRightColor: theme.palette.colors.SearchColor,
+    borderRightStyle: "solid"
+  },
+  TextField_:{
+    backgroundColor: theme.palette.background.theme_,
+  }
 });
 
 class SearchBar extends Component {
@@ -36,7 +47,7 @@ class SearchBar extends Component {
   };
 
   render() {
-    const { classes, Metodo, Colores } = this.props;
+    const { classes, Metodo } = this.props;
     return (
       <div className={classes.root}>
         <TextField
@@ -44,7 +55,7 @@ class SearchBar extends Component {
           rows="10"
           placeholder="Buscar producto..."
           fullWidth
-          style={{ backgroundColor: Colores[0] }}
+          className={classes.TextField_}
           onChange={(e) => {
             this.setState({ Busqueda: e.target.value });
           }}
@@ -60,9 +71,8 @@ class SearchBar extends Component {
               notchedOutline: classes.notchedOutline,
             },
             endAdornment: (
-              <InputAdornment position="end" style={{ borderRightColor: Colores[0], borderRightStyle: "solid" }}>
-                
-                <Magnify style={{ color: Colores[1], cursor: "pointer" }} onClick={() => Metodo(this.state.Busqueda)} />
+              <InputAdornment position="end" className={classes.InputAdornment_}>                
+                <Magnify className={classes.Magnify_}  onClick={() => Metodo(this.state.Busqueda)} />
               </InputAdornment>
             ),
           }}

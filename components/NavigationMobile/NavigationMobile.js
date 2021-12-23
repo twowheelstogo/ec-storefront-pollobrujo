@@ -46,17 +46,31 @@ const styles = (theme) => ({
     width: 320,
     height: "100vh",
     backgroundColor: theme.palette.background.default,
-  },
-  Borde: {
-    "& .MuiDivider-root": {
-      borderBottomStyle: "solid",
-    },
-  },
+  },  
   logo: {
     margin: theme.spacing(2, 0),
     width: 75,
     height: "auto",
   },
+  Toolbar_ : {
+    backgroundColor: theme.palette.background.theme_,    
+    color: theme.palette.colors.TextTheme,
+  },
+  CloseIcon_:{
+    color: theme.palette.colors.TextTheme,
+  },
+  Divider_:{
+    backgroundColor: theme.palette.background.theme_, 
+    height: "3px"
+  },
+  MenuList_:{    
+    backgroundColor: theme.palette.background.theme_,    
+    color: theme.palette.colors.TextTheme,
+      height: "100%",    
+      "& .MuiDivider-root": {
+        borderBottomStyle: "solid",
+      },
+  }
 });
 
 class NavigationMobile extends Component {
@@ -98,7 +112,7 @@ class NavigationMobile extends Component {
   };
 
   render() {
-    const { classes, navItems, uiStore, shop, ModalMenuColores, Logo } = this.props;
+    const { classes, navItems, uiStore, shop, Logo } = this.props;
 
     const renderNavItem = (navItem, index) => (
       <>
@@ -106,8 +120,7 @@ class NavigationMobile extends Component {
           key={index}
           isTopLevel
           navItem={navItem}
-          onClick={this.handleNavItemClick}
-          colorBorder={ModalMenuColores.Letra}
+          onClick={this.handleNavItemClick}          
         />
       </>
     );
@@ -118,32 +131,9 @@ class NavigationMobile extends Component {
           <div className={classes.header}>
             <Toolbar
               disableGutters
-              style={{
-                backgroundColor: ModalMenuColores.Fondo,
-                color: ModalMenuColores.Letra,
-              }}
+              className={classes.Toolbar_}
             >
-              <div className={classes.toolbarTitle}>
-                {/*
-                <Typography
-                  className={classes.title}
-                  style={{
-                    color: ModalMenuColores.Letra,
-                    borderBottom: `solid ${ModalMenuColores.Letra}`,
-                  }}
-                  color="inherit"
-                  variant="h6"
-                >
-                  <Link route="/" onClick={this.handleClose}>
-                    {shop ? 
-                    <ShopLogo shopName={shop.name}
-                    
-                    />
-                    
-                    : "Example Storefront"}
-                  </Link>
-                </Typography> */}
-
+              <div className={classes.toolbarTitle}>              
                 <Link route="/">
                   <img
                     // src = 'https://firebasestorage.googleapis.com/v0/b/twg-rrhh.appspot.com/o/company-logos%2Flulis-logo%20(2).png?alt=media&token=50e9772a-81c8-43d8-ba5d-29c70ed918c4'
@@ -153,20 +143,15 @@ class NavigationMobile extends Component {
                 </Link>
               </div>
               <IconButton onClick={this.handleClose}>
-                <CloseIcon style={{ color: ModalMenuColores.Letra }} />
+                <CloseIcon className={classes.CloseIcon_} />
               </IconButton>
             </Toolbar>
-            <Divider style={{ backgroundColor: ModalMenuColores.Letra, height: "3px" }} />
+            <Divider className={classes.Divider_} />
           </div>
           <nav className={classes.menu}>
             <MenuList
-              style={{
-                backgroundColor: ModalMenuColores.Fondo,
-                color: ModalMenuColores.Letra,
-                height: "100%",
-              }}
-              disablePadding
-              className={classes.Borde}
+              className={classes.MenuList_}              
+              disablePadding              
             >
               {navItems.items.map(renderNavItem)}
             </MenuList>

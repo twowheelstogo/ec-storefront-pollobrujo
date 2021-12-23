@@ -158,7 +158,7 @@ const datos = [
 
 
 const CartItem = (props) => {
-    const { MiniCardColors} = props;        
+    const { } = props;        
     
     return (
             <Fragment>      
@@ -190,8 +190,7 @@ const CartItem = (props) => {
                                                         style={{
                                                             width: "35px",
                                                             height: "30px",
-                                                            color: 'white',                                        
-                                                            backgroundColor: MiniCardColors.Letra
+                                                            color: 'white',                                                                                                    
                                                         }}
                                                         aria-label="add"
                                                     >
@@ -207,8 +206,7 @@ const CartItem = (props) => {
                                                         style={{
                                                             width: "35px",
                                                             height: "30px",
-                                                            color: 'white',                                        
-                                                            backgroundColor: MiniCardColors.Letra
+                                                            color: 'white',                                                                                                    
                                                         }}
                                                         aria-label="add"
                                                     >

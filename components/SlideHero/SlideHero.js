@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     },  
   },
   Mensaje: {    
-    color: "white",
+    color: theme.palette.colors.TextTheme,
       fontSize: "36px",
     ["@media (min-width:600px)"]: {      
       letterSpacing: ".0119em",    
