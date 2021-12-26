@@ -1,25 +1,52 @@
-import React, { Fragment } from 'react'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Divider, Box, Fab, Grid } from "@material-ui/core";
-import { Plus, Minus } from "mdi-material-ui";
-import { withStyles } from "@material-ui/core/styles";
+import { withComponents } from "@reactioncommerce/components-context";
+import { CustomPropTypes } from "@reactioncommerce/components/utils";
 
-const styles = () => ({
-    fabDesign: (colors, backgroundColors) => ({
-        width: "35px",
-        height: "30px",
-        backgroundColor: (backgroundColors) ? backgroundColors : "red",
-        color: (colors) ? colors : "blue"
-    })
-})
+const Item = styled.div`
+display: table;
+width: 100%;
+padding-left: 20px;
+`;
 
-const TitleProduct = styled.div`
-font-size: 18px;
-text-align: left; 
-font-weight: 800;
-display: flex;
+const ItemContent = styled.div`
+display: table;
+`;
+
+const ItemContentDetail = styled.div`
+display: table-cell;
+position: relative;
+`;
+
+const ItemContentDetailInner = styled.div``;
+
+const ItemContentDetailInfo = styled.div``;
+
+const ItemContentQuantityInput = styled.div`
+bottom: 0;
+left: 0;
+width: 100%;
+margin: 0 auto;
+position: absolute;
 padding-bottom: 10px;
 `;
+
+const ItemContentPrice = styled.div`
+display: table-cell;
+position: relative;
+text-align: right;
+padding-bottom: 20px;
+padding-top:20px;
+padding-left: 150px;
+`;
+
+const ItemContentSubtotal = styled.div`
+font-size: 14px; 
+font-weight: 700;
+}`;
+
+const ItemContentSubtotalTitle = styled.div``;
 
 const OptionProductSelect = styled.div`
 font-size: 14px;
@@ -35,197 +62,291 @@ display: flex;
 font-weight: 800;
 padding-bottom: 5px; 
 `
-const Div = styled.div``;
+class CartItem extends Component {
+    static propTypes = {
+        /**
+         * You can provide a `className` prop that will be applied to the outermost DOM element
+         * rendered by this component. We do not recommend using this for styling purposes, but
+         * it can be useful as a selector in some situations.
+         */
+        className: PropTypes.string,
+        /**
+         * If you've set up a components context using
+         * [@reactioncommerce/components-context](https://github.com/reactioncommerce/components-context)
+         * (recommended), then this prop will come from there automatically. If you have not
+         * set up a components context or you want to override one of the components in a
+         * single spot, you can pass in the components prop directly.
+         */
+        components: PropTypes.shape({
+            /**
+             * Pass either the Reaction CartItemDetail component or your own component that
+             * accepts compatible props.
+             */
+            CartItemDetail: CustomPropTypes.component.isRequired,
+            /**
+             * Pass either the Reaction Price component or your own component that
+             * accepts compatible props.
+             */
+            Price: CustomPropTypes.component.isRequired,
+            /**
+             * Pass either the Reaction QuantityInput component or your own component that
+             * accepts compatible props.
+             */
+            QuantityInput: CustomPropTypes.component.isRequired,
+            /**
+             * Pass either the Reaction StockWarning component or your own component that
+             * accepts compatible props.
+             */
+            StockWarning: CustomPropTypes.component.isRequired
+        }).isRequired,
+        /**
+         * Is in a MiniCart component
+         */
+        isMiniCart: PropTypes.bool,
+        /**
+         * Hide remove button and quantity input
+         */
+        isReadOnly: PropTypes.bool,
+        /**
+         * CartItem data
+         */
+        item: PropTypes.shape({
+            /**
+             * The cart item ID
+             */
+            _id: PropTypes.string,
+            /**
+             * Array of additional attributes of the chosen item.
+             */
+            attributes: PropTypes.arrayOf(PropTypes.object),
+            /**
+             * The current compareAt price (MSRP)
+             */
+            compareAtPrice: PropTypes.shape({
+                /**
+                 * The display price
+                 */
+                displayAmount: PropTypes.string.isRequired
+            }),
+            /**
+             * Current stock quantity of item
+             */
+            currentQuantity: PropTypes.number,
+            /**
+             * Image URLs of chosen item
+             */
+            imageURLs: PropTypes.shape({
+                large: PropTypes.string,
+                medium: PropTypes.string,
+                original: PropTypes.string,
+                small: PropTypes.string,
+                thumbnail: PropTypes.string
+            }),
+            /**
+             * Is the chosen item have a low quantity
+             */
+            isLowQuantity: PropTypes.bool,
+            /**
+             * Price object of chosen item
+             */
+            price: PropTypes.shape({
+                /**
+                 * The display price
+                 */
+                displayAmount: PropTypes.string.isRequired
+            }).isRequired,
+            /**
+             * Chosen items slug
+             */
+            productSlug: PropTypes.string,
+            /**
+             * Chosen items vendor
+             */
+            productVendor: PropTypes.string,
+            /**
+             * Chosen items title
+             */
+            subtotal: PropTypes.shape({
+                /**
+                 * The display subtotal
+                 */
+                displayAmount: PropTypes.string
+            }),
+            title: PropTypes.string,
+            /**
+             * Quantity of chosen item in cart
+             */
+            quantity: PropTypes.number
+        }).isRequired,
+        /**
+         * On cart item quantity change handler
+         */
+        onChangeCartItemQuantity: PropTypes.func,
+        /**
+         * On remove item from cart handler
+         */
+        onRemoveItemFromCart: PropTypes.func,
+        /**
+         * Product URL path to be prepended before the slug
+         */
+        productURLPath: PropTypes.string,
+        /**
+         * Text to display inside the remove button
+         */
+        removeText: PropTypes.string,
+        /**
+         * The text for the "Total" title text.
+         */
+        totalText: PropTypes.string
+    };
 
-const ProductCost = styled.div`
-font-size: 14px; 
-font-weight: 700;
-padding-right: 10px;
-`;
+    static defaultProps = {
+        isMiniCart: false,
+        isReadOnly: false,
+        onChangeCartItemQuantity() { },
+        onRemoveItemFromCart() { },
+        removeText: "Remove",
+        totalText: "Total"
+    };
 
-const ProductTotalCost = styled.div`
-font-size: 14px; 
-font-weight: 700;
-padding-right: 10px;
-`;
+    state = {
+        isProcessing: false
+    };
 
-const TableCellFirst = styled.div`
-display: table-cell;
-position: relative;
-padding-bottom: 35px;
-`;
+    handleChangeCartItemQuantity = (value) => {
+        const { onChangeCartItemQuantity, item: { _id } } = this.props;
+        onChangeCartItemQuantity(value, _id);
+    };
 
-const TableCellSecond = styled.div`
-display: table-cell;
-position: relative;
-text-align: right;
-`;
+    handleRemoveItemFromCart = () => {
+        const { onRemoveItemFromCart, item: { _id } } = this.props;
+        onRemoveItemFromCart(_id);
+    };
 
-const GeneralTableCell = styled.div`
-display: table;
-width: 100%;
-padding-left: 20px;
-`;
+    renderImage() {
+        const { isMiniCart, item: { imageURLs, productSlug }, productURLPath } = this.props;
 
-const DesignGroupItems = styled.div`
-bottom: 0;
-left: 0;
-width: 100%;
-margin: 0 auto;
-position: absolute;
-padding-right: ${({ padding }) => padding ? padding : "0px"};
-padding-bottom: ${({ bottomP }) => bottomP ? bottomP : "0px"};
-padding-top: ${({ TopmP }) => TopmP ? TopmP : "0px"} 
-`;
+        const { small, thumbnail } = imageURLs || {};
 
-const datos = [
-    {
-        "productTitle": "Duo Estandar",
-        "options": [
-            {
-                "title": "Duos Estandar",
-                "selectProduct": "Muffind De Vainilla"
-            },
-            {
-                "title": "Bebidas Duos",
-                "selectProduct": "café americano"
-            },
-            {
-                "title": "Elige tipo de leche",
-                "selectProduct": "Entera"
-            },
-            {
-                "title": "Elige el tipo de azúcar",
-                "selectProduct": "Sin azúcar"
-            },
-        ],
-        "instrutions": {
-            "text": "agregarle mas sobresitos de azúcar porfavor"
-        },
-        "account": "2"
-    },
-    {
-        "productTitle": "Duo Estandar",
-        "options": [
-            {
-                "title": "Duos Estandar",
-                "selectProduct": "Muffind De Vainilla"
-            },
-            {
-                "title": "Bebidas Duos",
-                "selectProduct": "café americano"
-            },
-            {
-                "title": "Elige tipo de leche",
-                "selectProduct": "Entera"
-            },
-            {
-                "title": "Elige el tipo de azúcar",
-                "selectProduct": "Sin azúcar"
-            },
-        ],
-        "instrutions": {
-            "text": "agregarle mas sobresitos de azúcar porfavor"
-        },
-        "account": "2"
-    },
-    {
-        "productTitle": "Duo Estandar",
-        "options": [
-            {
-                "title": "Duos Estandar",
-                "selectProduct": "Muffind De Vainilla"
-            },
-            {
-                "title": "Bebidas Duos",
-                "selectProduct": "café americano"
-            },
-            {
-                "title": "Elige tipo de leche",
-                "selectProduct": "Entera"
-            },
-            {
-                "title": "Elige el tipo de azúcar",
-                "selectProduct": "Sin azúcar"
-            },
-        ],
-        "instrutions": {
-            "text": "agregarle mas sobresitos de azúcar porfavor"
-        },
-        "account": "2"
-    },
-];
+        if (!small || !thumbnail) return null;
 
+        return (
+            <a href={[productURLPath, productSlug].join("")}>
+                <picture>
+                    {isMiniCart ? "" : <source srcSet={small} media="(min-width: 768px)" />}
+                    <img src={thumbnail} alt="" style={{ display: "block" }} />
+                </picture>
+            </a>
+        );
+    }
 
-const CartItem = (props) => {
-    const { } = props;        
-    
-    return (
-            <Fragment>      
-            {
-                datos.length !== 0 && (
-                    <Fragment>
-                        <div>
-                            {datos.map((el) => (
-                                <Div>                                    
-                                    <GeneralTableCell>
-                                        <TableCellFirst>
-                                            <TitleProduct>{el.productTitle}</TitleProduct>
-                                            {el.options.map((prod) => (
-                                                <Div>
-                                                    <OptionProductTitle>{prod.title}</OptionProductTitle>
-                                                    <OptionProductSelect>
-                                                        {prod.selectProduct}
-                                                    </OptionProductSelect>
-                                                </Div>
-                                            ))}
-                                        </TableCellFirst>                                        
-                                        <TableCellSecond>
-                                            <ProductCost>Q26.00 </ProductCost>
-                                            <ProductTotalCost> {`Total (2) Q52.00`} </ProductTotalCost>
-                                            <DesignGroupItems padding={"10px"} bottomP={"10px"}>
-                                                <Box>                                                    
-                                                    <Fab
-                                                        key={el.productTitle}
-                                                        style={{
-                                                            width: "35px",
-                                                            height: "30px",
-                                                            color: 'white',                                                                                                    
-                                                        }}
-                                                        aria-label="add"
-                                                    >
-                                                        <Plus />
-                                                    </Fab>
-                                                </Box>
-                                            </DesignGroupItems>
-                                            <DesignGroupItems padding={"55px"} bottomP={"17px"}>{el.account}</DesignGroupItems>
-                                            <DesignGroupItems padding={"90px"} bottomP={"10px"}>
-                                                <Box>                                                
-                                                    <Fab
-                                                        key={el.productTitle}
-                                                        style={{
-                                                            width: "35px",
-                                                            height: "30px",
-                                                            color: 'white',                                                                                                    
-                                                        }}
-                                                        aria-label="add"
-                                                    >
-                                                    <Minus />
-                                                    </Fab>
-                                                </Box>
-                                            </DesignGroupItems>
-                                        </TableCellSecond>
-                                    </GeneralTableCell>
-                                    <Divider />
-                                </Div>
-                            ))}
-                        </div>
+    render() {
+        const {
+            className,
+            components,
+            isMiniCart,
+            isReadOnly,
+            productURLPath,
+            item: {
+                attributes,
+                compareAtPrice,
+                currentQuantity,
+                productSlug,
+                productVendor,
+                title,
+                quantity,
+                isLowQuantity,
+                price: { displayAmount: displayPrice },
+                subtotal
+            },
+            totalText
+        } = this.props;
 
-                    </Fragment>
-                )
-            }                
-    </Fragment>
-    )
+        const { displayAmount: displaySubtotal } = subtotal || {};
+        const { displayAmount: displayCompareAtPrice } = compareAtPrice || {};
+        const {
+            CartItemDetail,
+            Price,
+            QuantityInput,
+            StockWarning
+        } = components || {};
+
+        return (
+            <Item style={{ borderBottom: '1px solid #dcdcdc' }} className={className}>
+                {this.renderImage()}
+                <ItemContent>
+                    <ItemContentDetail>
+                        <ItemContentDetailInner>
+                            <ItemContentDetailInfo isMiniCart={isMiniCart}>
+                                <CartItemDetail
+                                    attributes={attributes}
+                                    isMiniCart={isMiniCart}
+                                    productURLPath={productURLPath}
+                                    productSlug={productSlug}
+                                    productVendor={productVendor}
+                                    quantity={isReadOnly ? quantity : null}
+                                    title={title}
+                                />
+                                <StockWarning
+                                    inventoryQuantity={currentQuantity}
+                                    isLowInventoryQuantity={isLowQuantity}
+                                />
+                            </ItemContentDetailInfo>
+                        </ItemContentDetailInner>
+                        <OptionProductTitle>
+                            Duos estandar
+                        </OptionProductTitle>
+                        <OptionProductSelect>
+                            Muffin de vainilla
+                        </OptionProductSelect>
+                        <OptionProductTitle>
+                            Bebidas duos
+                        </OptionProductTitle>
+                        <OptionProductSelect>
+                            Café americano
+                        </OptionProductSelect>
+                        <OptionProductTitle>
+                            Elige tipo de leche
+                        </OptionProductTitle>
+                        <OptionProductSelect>
+                            Entera
+                        </OptionProductSelect>
+                        <OptionProductTitle>
+                            Elige el tipo de azúcar
+                        </OptionProductTitle>
+                        <OptionProductSelect>
+                            Sin azúcar
+                        </OptionProductSelect>
+                    </ItemContentDetail>
+                </ItemContent>
+                <ItemContentPrice isMiniCart={isMiniCart}>
+                    <ItemContentSubtotalTitle>
+                        <Price
+                            displayPrice={displayPrice}
+                            displayCompareAtPrice={displayCompareAtPrice}
+                            hasPriceBottom={isMiniCart}
+                        />
+                    </ItemContentSubtotalTitle>
+                    {quantity !== 1 ?
+                        <ItemContentSubtotal isMiniCart={isMiniCart}>
+                            <ItemContentSubtotalTitle>{totalText} ({quantity}): {displaySubtotal}</ItemContentSubtotalTitle>
+                        </ItemContentSubtotal>
+                        :
+                        null
+                    }
+                    {!isReadOnly &&
+                        <ItemContentQuantityInput>
+                            <QuantityInput
+                                value={quantity}
+                                onChange={this.handleChangeCartItemQuantity}
+                            />
+                        </ItemContentQuantityInput>
+                    }
+                </ItemContentPrice>
+            </Item>
+
+        );
+    }
 }
 
-export default withStyles(styles)(CartItem); 
+export default withComponents(CartItem);

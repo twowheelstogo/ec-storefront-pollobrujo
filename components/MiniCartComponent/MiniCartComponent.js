@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { withComponents } from "@reactioncommerce/components-context";
 import { addTypographyStyles, applyTheme, CustomPropTypes } from "@reactioncommerce/components/utils";
 import { withStyles } from "@material-ui/core/styles";
+import { Grid } from "@material-ui/core";
 
 const styles = (theme) => ({
    Inicio: {
@@ -21,11 +22,19 @@ const styles = (theme) => ({
       marginLeft:"10px"
    }, 
    BotonPrincipal:{
-      backgroundColor: theme.palette.secondary.botones,    
-      color: theme.palette.colors.BotonColor,
-      borderColor: theme.palette.secondary.botones, 
-      height: "50px"
+      backgroundColor:theme.palette.secondary.botones,    
+      color:theme.palette.colors.BotonColor,
+      borderColor:theme.palette.secondary.botones, 
+      height: "50px",
+      fontWeight: "800",
     },  
+    SubTotal_:{
+       fontSize:"17px"
+    },
+    Total_:{
+      fontSize:"18px",
+      fontWeight:"800"
+   },
  });
 
 const Cart = styled.div`
@@ -74,7 +83,7 @@ const FooterMessage = styled.span`
   padding-left: ${applyTheme("MiniCartFooterMessage.paddingLeft")};
   padding-right: ${applyTheme("MiniCartFooterMessage.paddingRight")};
   padding-top: ${applyTheme("MiniCartFooterMessage.paddingTop")};
-  text-align: center;
+  text-align: start;
 `;
 
 class MiniCartComponent extends Component {
@@ -200,31 +209,48 @@ class MiniCartComponent extends Component {
   		className,
         classes,
   		checkoutButtonText,
-  		components: { Button, CartCheckoutButton, CartItems,CartItem, MiniCartSummary },
+  		components: { Button, CartCheckoutButton, CartItems, MiniCartSummary },
   		footerMessageText,          
   		onCheckoutButtonClick,
   		...props
   	} = this.props;
+     console.log(summary);
   	return (
   		<Cart className={className}>
                   <div className={classes.Inicio}>
-                                    <div className={classes.Titulo}>Mi Carrito</div>                                                                        
+                                    <div className={classes.Titulo}>Mi Carritos</div>                                                                        
                                     </div> 
 
   			<Items>
-  				{/* <CartItems items={items} {...props} isMiniCart /> */}
-                  <CartItem                  
-                  />
+  				<CartItems items={items} {...props} isMiniCart /> 
+                  {/* <CartItem*/}                  
   			</Items>
-  			<Footer count={items.length}>
-  				<MiniCartSummary displaySubtotal={summary.itemTotal.displayAmount} />
+  			<Footer count={items.length}>         
+           <Grid xs={12} md={12} lg={12}>
+           <Grid xs={12} md={12} lg={12} container style={{marginLeft:"auto",marginRight:"auto"}}>
+
+           <Grid item xs={6} md={6} lg={6} style={{display:"flex",justifyContent:"flex-start"}}>
+               <p className={classes.SubTotal_}>Subtotal</p>
+              </Grid>
+              <Grid item xs={6} md={6} lg={6} style={{display:"flex",justifyContent:"flex-end"}}>
+                 <p className={classes.SubTotal_}>{summary.itemTotal.displayAmount}</p> </Grid>
+
+
+              <Grid item xs={6} md={6} lg={6} style={{display:"flex",justifyContent:"flex-start"}}>
+               <p className={classes.Total_}>Total</p>
+              </Grid>
+              <Grid item xs={6} md={6} lg={6} style={{display:"flex",justifyContent:"flex-end"}}>
+                 <p className={classes.Total_}>{summary.total.displayAmount}</p> </Grid>
+           </Grid>
+
+           </Grid>
+              {/* {"Total " + summary.total.displayAmount} */}
+                         
   				{(CartCheckoutButton && <CartCheckoutButton onClick={onCheckoutButtonClick} />) || (
-  					<Button actionType="important" isFullWidth onClick={onCheckoutButtonClick}
-                 className={classes.BotonPrincipal}
-                 >
+  					<Button actionType="important" isFullWidth onClick={onCheckoutButtonClick}>
   						{checkoutButtonText}
   					</Button>
-  				)}
+  				)}         
   				<FooterMessage>{footerMessageText}</FooterMessage>
   			</Footer>
   		</Cart>

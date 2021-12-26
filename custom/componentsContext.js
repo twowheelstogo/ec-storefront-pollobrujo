@@ -22,7 +22,7 @@ import Button from "@reactioncommerce/components/Button/v1";
 //import CartItem from "@reactioncommerce/components/CartItem/v1";
 import CartItemDetail from "@reactioncommerce/components/CartItemDetail/v1";
 import CartItems from "@reactioncommerce/components/CartItems/v1";
-import CartSummary from "@reactioncommerce/components/CartSummary/v1";
+import CartSummary from "components/CartSummary";
 import CatalogGrid from "@reactioncommerce/components/CatalogGrid/v1";
 import CatalogGridItem from "components/CatalogGridItem";
 import Checkbox from "@reactioncommerce/components/Checkbox/v1";
@@ -58,6 +58,7 @@ import CustomFooter from "components/CustomFooter";
 import CartEmptyMessage from "components/CartEmptyMessage";
 import MiniCartComponent from "components/MiniCartComponent";
 import CartItem from "components/CartItem";
+import CartItemsList from "components/CartItemsList";
 // Providing locales data
 const AddressFormWithLocales = withLocales(AddressForm);
 
@@ -120,5 +121,6 @@ export default {
   SlideHero,
   CustomFooter,
   MiniCartComponent,
-  CartEmptyMessage
+  CartEmptyMessage,
+  CartItemsList
 };

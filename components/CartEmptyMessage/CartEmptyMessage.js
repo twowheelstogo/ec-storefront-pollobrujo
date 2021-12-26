@@ -10,13 +10,14 @@ const styles = (theme) => ({
     backgroundColor: theme.palette.secondary.botones,    
     color: theme.palette.colors.BotonColor,
     borderColor: theme.palette.secondary.botones, 
+    fontWeigth: "800",
+    fontSize:"18px"
   },
 });
 
-const EmptyButton = styled.div`
+const EmptyButton = styled.div` 
   display: flex;
-  justify-content: center;
-  background: black;
+  justify-content: center;  
 `;
 
 const EmptyMessage = styled.div`
