@@ -40,7 +40,7 @@ import PhoneNumberInput from "@reactioncommerce/components/PhoneNumberInput/v1";
 import Price from "@reactioncommerce/components/Price/v1";
 import ProfileImage from "@reactioncommerce/components/ProfileImage/v1";
 import ProgressiveImage from "components/ProgressiveImage";
-import QuantityInput from "@reactioncommerce/components/QuantityInput/v1";
+//import QuantityInput from "@reactioncommerce/components/QuantityInput/v1";
 import RegionInput from "@reactioncommerce/components/RegionInput/v1";
 import Select from "@reactioncommerce/components/Select/v1";
 import SelectableItem from "@reactioncommerce/components/SelectableItem/v1";
@@ -59,6 +59,8 @@ import CartEmptyMessage from "components/CartEmptyMessage";
 import MiniCartComponent from "components/MiniCartComponent";
 import CartItem from "components/CartItem";
 import CartItemsList from "components/CartItemsList";
+import QuantityInput from "components/Quantityinput";
+
 // Providing locales data
 const AddressFormWithLocales = withLocales(AddressForm);
 
@@ -104,8 +106,7 @@ export default {
   PhoneNumberInput,
   Price,
   ProfileImage,
-  ProgressiveImage,
-  QuantityInput,
+  ProgressiveImage,  
   RegionInput,
   Select,
   spinner,
@@ -122,5 +123,6 @@ export default {
   CustomFooter,
   MiniCartComponent,
   CartEmptyMessage,
-  CartItemsList
+  CartItemsList,
+  QuantityInput
 };

@@ -50,8 +50,11 @@ const styles = ({ palette, zIndex }) => ({
     width: 20,
     height: 20,
     top: 10,
-    left: 20
-  }
+    left: 20,
+    background: palette.primary.main,
+    color: palette.primary.light,
+     
+  },  
 });
 
 class MiniCart extends Component {
@@ -140,7 +143,7 @@ class MiniCart extends Component {
   renderMiniCart() {
     const { cart, classes, hasMoreCartItems, loadMoreCartItems,
     components:{MiniCartComponent,CartItems,CartEmptyMessage,Button} } = this.props;
-    console.log(cart);
+    
     if (cart && Array.isArray(cart.items) && cart.items.length) {
       return (
         <MiniCartComponent
@@ -160,7 +163,7 @@ class MiniCart extends Component {
             CartCheckoutButton: (cartCheckoutProps) => (
   						<Button 
               className={classes.BotonPrincipal}      
-              {...cartCheckoutProps} isFullWidth>{"Proceder a la compra - " + cart.checkout.summary.total.displayAmount}</Button>          
+              {...cartCheckoutProps} isFullWidth>{"Proceder a la compra - " + cart.checkout.summary.itemTotal.displayAmount}</Button>          
   					)
           }}
         />
@@ -191,10 +194,10 @@ class MiniCart extends Component {
           >
             {(cart && cart.totalItemQuantity > 0)
               ? (
-                <Badge
-                  badgeContent={cart.totalItemQuantity}
-                  color="primary"
-                  classes={{ badge: classes.badge }}
+                <Badge                  
+                  badgeContent={cart.totalItemQuantity}                  
+                  classes={{ badge: classes.badge                  
+                  }}
                 >
                    <ShoppingOutline className={classes.Compra}  />
                 </Badge>

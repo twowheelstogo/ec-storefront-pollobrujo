@@ -11,10 +11,12 @@ const theme = createMuiTheme({
   },
   palette: {
     primary: {
-      light: "#26B0F9",
-      main: "#1999DD",
-      dark: "#172F3C",
-      contrastText: "#FFFFFF"      
+      light: "#000000",
+      main: "#FFFFFF",
+      //badge number color
+      dark: "#000000",
+      //badge number background color
+      contrastText: "#FFFFFF"            
     },
     //Tamaño del logo
     Logo:{
@@ -37,7 +39,7 @@ const theme = createMuiTheme({
       Main: "#000000",
       //el main es para los que cambian de color en el centro
       Modal: "#1D0D13",
-      //Fondo cart carrito
+      //Fondo del mensaje mi carrito de cart carrito
       Carrito: "#202124"
     },
     error: {

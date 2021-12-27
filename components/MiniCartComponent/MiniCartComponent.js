@@ -29,12 +29,19 @@ const styles = (theme) => ({
       fontWeight: "800",
     },  
     SubTotal_:{
-       fontSize:"17px"
+       fontSize:"17px",
+       color: theme.palette.colors.TextTheme,
     },
     Total_:{
       fontSize:"18px",
-      fontWeight:"800"
+      fontWeight:"800",
+      color: theme.palette.colors.TextTheme,
+      marginTop:"-5px"
    },
+   Cart_:{
+      backgroundColor: theme.palette.background.theme_,    
+      color: theme.palette.colors.TextTheme,
+   }
  });
 
 const Cart = styled.div`
@@ -66,7 +73,7 @@ const Items = styled.div`
 
 const Footer = styled.div`
   border-top-color: ${applyTheme("MiniCartFooter.borderTopColor")};
-  border-top-style: solid;
+  border-top-style: 1px solid;
   border-top-width: ${applyTheme("MiniCartFooter.borderTopWidth")};
   box-shadow: ${({ count }) =>
 		(count > 2 ? applyTheme("MiniCartFooter.boxShadow_overflow") : applyTheme("MiniCartFooter.boxShadow"))};
@@ -214,11 +221,11 @@ class MiniCartComponent extends Component {
   		onCheckoutButtonClick,
   		...props
   	} = this.props;
-     console.log(summary);
+     
   	return (
-  		<Cart className={className}>
+  		<Cart className={classes.Cart_}>
                   <div className={classes.Inicio}>
-                                    <div className={classes.Titulo}>Mi Carritos</div>                                                                        
+                                    <div className={classes.Titulo}>Mi Carrito</div>                                                                        
                                     </div> 
 
   			<Items>
