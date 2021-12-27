@@ -16,7 +16,7 @@ const styles = ({ palette, zIndex }) => ({
     backgroundColor: palette.secondary.botones,    
     color: palette.colors.BotonColor,
     borderColor: palette.secondary.botones, 
-    fontWeigth: "800",
+    fontWeight:"800",
     fontSize:"18px"
   },
   Compra: {
@@ -140,7 +140,7 @@ class MiniCart extends Component {
   renderMiniCart() {
     const { cart, classes, hasMoreCartItems, loadMoreCartItems,
     components:{MiniCartComponent,CartItems,CartEmptyMessage,Button} } = this.props;
-
+    console.log(cart);
     if (cart && Array.isArray(cart.items) && cart.items.length) {
       return (
         <MiniCartComponent
@@ -160,7 +160,7 @@ class MiniCart extends Component {
             CartCheckoutButton: (cartCheckoutProps) => (
   						<Button 
               className={classes.BotonPrincipal}      
-              {...cartCheckoutProps} isFullWidth>{"Proceder a la compra"}</Button>          
+              {...cartCheckoutProps} isFullWidth>{"Proceder a la compra - " + cart.checkout.summary.total.displayAmount}</Button>          
   					)
           }}
         />

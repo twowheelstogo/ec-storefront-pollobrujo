@@ -235,7 +235,7 @@ class MiniCartComponent extends Component {
               <Grid item xs={6} md={6} lg={6} style={{display:"flex",justifyContent:"flex-end"}}>
                  <p className={classes.SubTotal_}>{summary.itemTotal.displayAmount}</p> </Grid>
 
-
+ 
               <Grid item xs={6} md={6} lg={6} style={{display:"flex",justifyContent:"flex-start"}}>
                <p className={classes.Total_}>Total</p>
               </Grid>
