@@ -37,7 +37,8 @@ import InventoryStatus from "@reactioncommerce/components/InventoryStatus/v1";
 import Link from "components/Link";
 import MiniCartSummary from "@reactioncommerce/components/MiniCartSummary/v1";
 import PhoneNumberInput from "@reactioncommerce/components/PhoneNumberInput/v1";
-import Price from "@reactioncommerce/components/Price/v1";
+//import Price from "@reactioncommerce/components/Price/v1";
+import Price from "components/Price";
 import ProfileImage from "@reactioncommerce/components/ProfileImage/v1";
 import ProgressiveImage from "components/ProgressiveImage";
 //import QuantityInput from "@reactioncommerce/components/QuantityInput/v1";
@@ -60,11 +61,16 @@ import MiniCartComponent from "components/MiniCartComponent";
 import CartItem from "components/CartItem";
 import CartItemsList from "components/CartItemsList";
 import QuantityInput from "components/Quantityinput";
-
+import CatalogLayout from "components/CatalogLayout";
+import HorizontalTagsProducts from "components/HorizontalTagsProducts";
+import HorizontalProductCard from "components/HorizontalProductCard";
 // Providing locales data
 const AddressFormWithLocales = withLocales(AddressForm);
 
 export default {
+  HorizontalTagsProducts,
+  HorizontalProductCard,
+  CatalogLayout,
   Accordion,
   AccordionFormList,
   AddressBook,

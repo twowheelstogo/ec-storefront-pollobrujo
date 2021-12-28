@@ -19,12 +19,14 @@ const styles = (theme) => ({
     flex: "1 1 auto",
     maxWidth: theme.layout.mainContentMaxWidth,
     marginLeft: "auto",
-    marginRight: "auto",
-    backgroundColor: theme.palette.background.Main,
+    marginRight: "auto"
   },
   article: {
     padding: theme.spacing(3),
-  },
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(0)
+    }
+  }
 });
 
 class Layout extends Component {

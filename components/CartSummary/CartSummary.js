@@ -33,15 +33,23 @@ const Td = styled.td`
   padding-right: 0;
   padding-top: ${(props) => (props.isDense ? applyTheme("CartSummary.rowDensePaddingTop")(props) : applyTheme("CartSummary.rowPaddingTop")(props))};
   text-align: left;
+  font-weight: 400; 
+  color: #262211;
+  font-size: 17px;
 `;
 
 const TdValue = styled(Td)`
   ${addTypographyStyles("CartSummaryRightColumn", "labelText")}
   text-align: right;
+  font-size: 17px;
+  font-weight: 400; 
+  color: #262211;
 `;
 
-const Title = styled.span`
-  ${addTypographyStyles("CartSummaryTitle", "bodyTextBold")}
+const Title = styled.div`
+  ${addTypographyStyles("CartSummaryTitle", "bodyTextBold")};
+  font-size: 24px;
+  color: #262211;
 `;
 
 const Discount = styled.span`
@@ -77,6 +85,8 @@ const TdTotal = styled.td`
   padding-right: 0;
   padding-top: ${applyTheme("CartSummary.rowPaddingTop")};
   text-align: left;
+  font-size: 17px;
+  font-weight: bold;
 `;
 
 const TdTotalValue = styled(Td)`
@@ -172,28 +182,27 @@ class CartSummary extends Component {
   }
 
   static defaultProps = {
-    cartTitleText: "Resúmen de la orden",
+    cartTitleText: "Resúmen De Compra",
     freeText: "FREE",
-    itemLabelText: "Artículos",
-    itemsText: "artículos",
-    orderTotalLabelText: "Total de la orden",
-    promoCodeText: "Código de promoción aplicado",
-    shippingLabelText: "Envío",
-    surchargesLabelText: "Cargos",
-    taxLabelText: "Impuesto"
-}
+    itemLabelText: "Items",
+    itemsText: "items",
+    orderTotalLabelText: "Total",
+    promoCodeText: "Promo code applied",
+    shippingLabelText: "Envio",
+    surchargesLabelText: "Surcharges",
+    taxLabelText: "Tax"
+  }
 
   renderHeader() {
     const { cartTitleText, itemsQuantity, itemsText } = this.props;
     const itemsLabel = itemsQuantity >= 0 ? `${itemsQuantity} ${itemsText}` : null;
-
+    console.log(this.props);
     return (
       <thead>
         <tr>
           <Th>
             <Title>{cartTitleText}</Title>
           </Th>
-          <Thr>{itemsLabel}</Thr>
         </tr>
       </thead>
     );
@@ -228,7 +237,8 @@ class CartSummary extends Component {
       orderTotalLabelText,
       shippingLabelText,
       surchargesLabelText,
-      taxLabelText
+      taxLabelText,
+      itemsQuantity
     } = this.props;
 
     // Use "-" to indicate we are still calculating this field.
@@ -243,22 +253,14 @@ class CartSummary extends Component {
         {header}
         <tbody>
           <tr>
-            <Td isDense={isDense}>{itemLabelText}:</Td>
+            <Td isDense={isDense}>{itemLabelText}{`(${itemsQuantity})`}:</Td>
             <TdValue isDense={isDense}>{displaySubtotal}</TdValue>
           </tr>
           <tr>
             <Td isDense={isDense}>{shippingLabelText}:</Td>
             <TdValue isDense={isDense}>{shipping}</TdValue>
           </tr>
-          {discount}
-          <tr>
-            <Td isDense={isDense}>{surchargesLabelText}:</Td>
-            <TdValue isDense={isDense}>{surcharge}</TdValue>
-          </tr>
-          <tr>
-            <TdTax isDense={isDense}>{taxLabelText}:</TdTax>
-            <TdTaxValue isDense={isDense}>{tax}</TdTaxValue>
-          </tr>
+            {discount}
           <tr>
             <TdTotal isDense={isDense} isBordered>{orderTotalLabelText}:</TdTotal>
             <TdTotalValue isDense={isDense} isBordered>

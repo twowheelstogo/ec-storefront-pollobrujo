@@ -13,6 +13,7 @@ query catalogItemsQuery($shopId: ID!, $tagIds: [ID] $first: ConnectionLimitInt, 
         _id
         ... on CatalogItemProduct {
           product {
+            tagIds
             _id
             title
             slug
