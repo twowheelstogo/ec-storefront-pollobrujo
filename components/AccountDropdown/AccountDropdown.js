@@ -15,16 +15,17 @@ import useStores from "hooks/useStores";
 import EntryModal from "../Entry/EntryModal";
 import getAccountsHandler from "../../lib/accountsServer.js";
 
-const useStyles = makeStyles((theme) => ({
-  ColoresPrincipales: {
-    color: theme.palette.colors.TextTheme,
-  },
+const useStyles = makeStyles((theme) => ({  
   accountDropdown: {
     width: 320,
     padding: theme.spacing(2),
+    backgroundColor: theme.palette.background.theme_, 
+    border:"1px solid white"
   },
   marginBottom: {
     marginBottom: theme.spacing(2),
+    backgroundColor: theme.palette.background.theme_, 
+    border:"1px solid"
   },
   Usuario: {
     color: theme.palette.colors.TextTheme,
@@ -37,6 +38,16 @@ const useStyles = makeStyles((theme) => ({
       height: "25px",
     },
   },
+  BotonPrincipal:{
+    backgroundColor: theme.palette.secondary.botones,    
+    color: theme.palette.colors.BotonColor,    
+    fontWeigth: "800",    
+  },  
+  Borde:{
+    marginTop: "0.5rem",
+    marginRight: "1rem",        
+  },
+
 }));
 
 const AccountDropdown = (props) => {
@@ -85,7 +96,7 @@ const AccountDropdown = (props) => {
         </IconButton>
       )}
 
-      <Popover
+      <Popover      
         anchorEl={anchorElement}
         anchorOrigin={{
           vertical: "bottom",
@@ -93,34 +104,36 @@ const AccountDropdown = (props) => {
         }}
         open={Boolean(anchorElement)}
         onClose={onClose}
+        className={classes.Borde}
       >
         <div className={classes.accountDropdown}>
           {isAuthenticated ? (
-            <Fragment>
+            <Fragment >
               <div className={classes.marginBottom}>
                 <Link href="/profile/address">
-                  <Button color="primary" fullWidth>
+                  <Button  className={classes.BotonPrincipal} fullWidth>
                     Perfil
                   </Button>
                 </Link>
               </div>
               <div className={classes.marginBottom}>
-                <Button color="primary" fullWidth onClick={() => setEntryModal("change-password")}>
+                <Button className={classes.BotonPrincipal} fullWidth onClick={() => setEntryModal("change-password")}>
                   Cambiar Contraseña
                 </Button>
-              </div>
-              <Button color="primary" fullWidth onClick={handleSignOut} variant="contained">
+              </div>              
+              <Button className={classes.BotonPrincipal} fullWidth onClick={handleSignOut} variant="contained">
                 Cerrar Sesión
               </Button>
             </Fragment>
           ) : (
             <Fragment>
               <div className={classes.authContent}>
-                <Button color="primary" fullWidth onClick={() => setEntryModal("login")}>
+                <Button className={classes.BotonPrincipal}  fullWidth onClick={() => setEntryModal("login")}>
                   Iniciar Sesión
                 </Button>
               </div>
-              <Button color="primary" fullWidth onClick={() => setEntryModal("signup")}>
+              <br/>
+              <Button className={classes.BotonPrincipal} fullWidth onClick={() => setEntryModal("signup")}>
                 Crear Cuenta
               </Button>
             </Fragment>

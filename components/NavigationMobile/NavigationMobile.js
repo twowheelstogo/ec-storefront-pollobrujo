@@ -60,7 +60,7 @@ const styles = (theme) => ({
     color: theme.palette.colors.TextTheme,
   },
   Divider_:{
-    backgroundColor: theme.palette.background.theme_, 
+    backgroundColor: theme.palette.colors.TextTheme, 
     height: "3px"
   },
   MenuList_:{    

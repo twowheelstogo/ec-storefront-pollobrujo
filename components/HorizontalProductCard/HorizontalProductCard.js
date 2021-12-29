@@ -106,6 +106,10 @@ const styles = (theme) => ({
     productPadding: {
         paddingLeft: '1%',
     },
+    cardMobil:{
+        paddingLeft: '10px',
+        paddingRight: '10px'
+    }
 })
 
 const HorizontalProductCard = props => {
@@ -134,7 +138,7 @@ const HorizontalProductCard = props => {
     const matches = useMediaQuery(theme.breakpoints.down("xs"));
     console.log(tags)
     return (
-        <Fragment>
+        <Fragment style={{display:"flex",justifyContent:"center"}}>
             {matches !== true ? (
                 <div className={classes.productPaddingHorizontaal}>
                     {
@@ -197,11 +201,11 @@ const HorizontalProductCard = props => {
                                         <Typography className={classes.titleMobil}>
                                             {tags.displayTitle}
                                         </Typography>
-                                        <Grid container spacing={2} >
+                                        <Grid container >                                            
                                             {
                                                 tags.catalogProducts.length !== 0 && (
                                                     tags.catalogProducts.map((values) => (
-                                                        <Grid item xs={6} key={values._id}>
+                                                        <Grid item xs={6} key={values._id} className={classes.cardMobil}>
                                                             <Link
                                                                 href={values.slug && "/product/[...slugOrId]"}
                                                                 as={values.slug && `/product/${values.slug}`}
@@ -229,7 +233,7 @@ const HorizontalProductCard = props => {
                                                         </Grid>
                                                     ))
                                                 )
-                                            }
+                                            }                                            
                                         </Grid>
                                     </div>
                                 )
