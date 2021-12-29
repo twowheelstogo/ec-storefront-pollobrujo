@@ -13,6 +13,9 @@ const styles = (theme) => ({
     fontWeigth: "800",
     fontSize:"18px"
   },
+  Texto_:{
+    color: theme.palette.colors.TextTheme,
+  }
 });
 
 const EmptyButton = styled.div` 
@@ -78,11 +81,11 @@ class CartEmptyMessage extends Component {
 
     return (
       <Fragment>
-        <EmptyMessage>{messageText}</EmptyMessage>
+        <EmptyMessage  className={classes.Texto_}>{messageText}</EmptyMessage>
         <EmptyButton className={classes.BotonPrincipal}  >
           <Button onClick={this.handleOnClick} 
           className={classes.BotonPrincipal}          
-          >{buttonText}</Button>
+          >Continuar comprando</Button>
         </EmptyButton>
       </Fragment>
     );

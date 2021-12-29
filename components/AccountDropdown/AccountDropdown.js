@@ -4,6 +4,7 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
+import Avatar from "@material-ui/core/Avatar";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { AccountCircleOutline } from "mdi-material-ui";
 //import AccountIcon from "mdi-material-ui/Account";
@@ -27,6 +28,21 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.theme_, 
     border:"1px solid"
   },
+  Info_: {
+    color: theme.palette.colors.TextTheme,
+    ["@media(max-width:1099px) and (min-width:600px)"]: {
+      width: "26px",
+      height: "26px",
+      marginRight:"1%"
+    },
+    ["@media (min-width:1100px)"]: {
+      width: "30px",
+      height: "30px",
+    },
+    ["@media (max-width:599px)"]: {
+      width: "23px",
+      height: "23px",
+    }},
   Usuario: {
     color: theme.palette.colors.TextTheme,
     ["@media (min-width:600px)"]: {
@@ -83,13 +99,19 @@ const AccountDropdown = (props) => {
     setAnchorElement(event.currentTarget);
   };
   
+
+  
   return (
     <Fragment>
       <EntryModal onClose={onClose} resetToken={resetToken} />
       {isAuthenticated ? (
-        <ButtonBase onClick={toggleOpen}>
-          <ViewerInfo viewer={viewer} />
-        </ButtonBase>
+        // <ButtonBase onClick={toggleOpen}>        
+        //   <AccountCircleOutline className={classes.Usuario}/>
+        //   {/* <ViewerInfo viewer={viewer} className={classes.InfoUsuario}/> */}
+        // </ButtonBase>
+        <IconButton color="inherit" onClick={toggleOpen}>
+          <AccountCircleOutline className={classes.Usuario}/>
+        </IconButton>
       ) : (
         <IconButton color="inherit" onClick={toggleOpen}>
           <AccountCircleOutline className={classes.Usuario}/>
