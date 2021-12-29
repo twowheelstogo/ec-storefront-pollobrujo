@@ -3,25 +3,38 @@ import throttle from "lodash/throttle";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Box from "@material-ui/core/Box";
 
 const tabHeight = 69;
 const StyledTabs = withStyles({
     indicator: {
         display: "flex",
         justifyContent: "center",
-        backgroundColor: "transparent",
+        backgroundColor: "#fff",
         "& > div": {
             maxWidth: "100%",
             width: "100%",
-            backgroundColor: "#FFFFFF"
+            backgroundColor: "#fff"
         }
     },
     scroller: {
         flexGrow: "0"
     }
 })(props => {
-    return <Tabs {...props} TabIndicatorProps={{ children: <div /> }} scrollButtons="on"
-        variant={"scrollable"} />
+    return (
+        <div
+            style={{
+                overflowX: "scroll",
+                overflow: "hidden",
+                scrollBehavior: "smooth"
+            }}
+        >
+            <Box>
+                <Tabs {...props} TabIndicatorProps={{ children: <div /> }} scrollButtons="on"
+                    variant={"scrollable"} />
+            </Box>
+        </div>
+    )
 });
 
 const StyledTab = withStyles(theme => ({
@@ -45,7 +58,7 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(1)
     },
     demo2: {
-        backgroundColor: "#000000",
+        backgroundColor: "#000",
         position: "sticky",
         top: 0,
         left: 0,
