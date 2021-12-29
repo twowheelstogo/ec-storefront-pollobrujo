@@ -10,20 +10,17 @@ const styles = (theme) => ({
     alignItems: "center",
     display: "flex",
     justifyContent: "center",
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 });
 
 const Footer = ({ ...props }) => (
   <footer className={props.classes.footer}>
-    <Typography variant="caption">
-      &copy; {date.getFullYear()} Reaction Commerce
-    </Typography>
+    <Typography variant="caption">&copy; {date.getFullYear()} Reaction Commerce</Typography>
   </footer>
 );
-
 Footer.propTypes = {
-  classes: PropTypes.object
+  classes: PropTypes.object,
 };
 
 export default withStyles(styles, { name: "SkFooter" })(Footer);

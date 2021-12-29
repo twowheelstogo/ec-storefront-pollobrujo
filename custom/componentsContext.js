@@ -1,17 +1,3 @@
-/**
- * All Reaction Design System components are injected into the app from this single file.
- * This allows you to easily swap out one of the default components for your own, everywhere
- * in the app. It also allows you to take updates to the `@reactioncommerce/components` package
- * without worrying about it pulling in new component versions everywhere automatically. Instead,
- * you can switch from the `v1` import path to the `v2` import path, e.g., for a single component
- * when you're ready.
- *
- * You may also import your custom React components here and add them to the exported object.
- * They will then be available in the `components` property of all Reaction Design
- * System components, as well as any of your own components that you've wrapped
- * with the `withComponents` higher-order component.
- */
-
 import iconAmericanExpress from "@reactioncommerce/components/svg/iconAmericanExpress";
 import iconClear from "@reactioncommerce/components/svg/iconClear";
 import iconDiscover from "@reactioncommerce/components/svg/iconDiscover";
@@ -33,10 +19,10 @@ import AddressForm from "@reactioncommerce/components/AddressForm/v1";
 import AddressReview from "@reactioncommerce/components/AddressReview/v1";
 import BadgeOverlay from "@reactioncommerce/components/BadgeOverlay/v1";
 import Button from "@reactioncommerce/components/Button/v1";
-import CartItem from "@reactioncommerce/components/CartItem/v1";
+//import CartItem from "@reactioncommerce/components/CartItem/v1";
 import CartItemDetail from "@reactioncommerce/components/CartItemDetail/v1";
 import CartItems from "@reactioncommerce/components/CartItems/v1";
-import CartSummary from "@reactioncommerce/components/CartSummary/v1";
+import CartSummary from "components/CartSummary";
 import CatalogGrid from "@reactioncommerce/components/CatalogGrid/v1";
 import CatalogGridItem from "components/CatalogGridItem";
 import Checkbox from "@reactioncommerce/components/Checkbox/v1";
@@ -51,10 +37,11 @@ import InventoryStatus from "@reactioncommerce/components/InventoryStatus/v1";
 import Link from "components/Link";
 import MiniCartSummary from "@reactioncommerce/components/MiniCartSummary/v1";
 import PhoneNumberInput from "@reactioncommerce/components/PhoneNumberInput/v1";
-import Price from "@reactioncommerce/components/Price/v1";
+//import Price from "@reactioncommerce/components/Price/v1";
+import Price from "components/Price";
 import ProfileImage from "@reactioncommerce/components/ProfileImage/v1";
 import ProgressiveImage from "components/ProgressiveImage";
-import QuantityInput from "@reactioncommerce/components/QuantityInput/v1";
+//import QuantityInput from "@reactioncommerce/components/QuantityInput/v1";
 import RegionInput from "@reactioncommerce/components/RegionInput/v1";
 import Select from "@reactioncommerce/components/Select/v1";
 import SelectableItem from "@reactioncommerce/components/SelectableItem/v1";
@@ -62,18 +49,35 @@ import SelectableList from "@reactioncommerce/components/SelectableList/v1";
 import StockWarning from "@reactioncommerce/components/StockWarning/v1";
 import StripeForm from "@reactioncommerce/components/StripeForm/v1";
 import TextInput from "@reactioncommerce/components/TextInput/v1";
+import NavigationHeader from "components/NavigationHeader";
+import SearchBar from "components/SearchBar";
+import IconsActions from "components/IconsActions";
 import withLocales from "../lib/utils/withLocales";
-
+import AccountDropdown from "components/AccountDropdown";
+import SlideHero from "components/SlideHero";
+import CustomFooter from "components/CustomFooter";
+import CartEmptyMessage from "components/CartEmptyMessage";
+import MiniCartComponent from "components/MiniCartComponent";
+import CartItem from "components/CartItem";
+import CartItemsList from "components/CartItemsList";
+import QuantityInput from "components/Quantityinput";
+import CatalogLayout from "components/CatalogLayout";
+import HorizontalTagsProducts from "components/HorizontalTagsProducts";
+import HorizontalProductCard from "components/HorizontalProductCard";
 // Providing locales data
 const AddressFormWithLocales = withLocales(AddressForm);
 
 export default {
+  HorizontalTagsProducts,
+  HorizontalProductCard,
+  CatalogLayout,
   Accordion,
   AccordionFormList,
   AddressBook,
   Address,
   AddressCapture,
   AddressChoice,
+  AccountDropdown,
   AddressForm: AddressFormWithLocales,
   AddressReview,
   BadgeOverlay,
@@ -108,8 +112,7 @@ export default {
   PhoneNumberInput,
   Price,
   ProfileImage,
-  ProgressiveImage,
-  QuantityInput,
+  ProgressiveImage,  
   RegionInput,
   Select,
   spinner,
@@ -117,5 +120,15 @@ export default {
   SelectableList,
   StockWarning,
   StripeForm,
-  TextInput
+  TextInput,
+  NavigationHeader,
+  // eslint-disable-next-line comma-dangle
+  SearchBar,
+  IconsActions,
+  SlideHero,
+  CustomFooter,
+  MiniCartComponent,
+  CartEmptyMessage,
+  CartItemsList,
+  QuantityInput
 };

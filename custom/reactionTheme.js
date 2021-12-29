@@ -6,24 +6,41 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
   layout: {
-    mainContentMaxWidth: "1440px",
+    mainContentMaxWidth: "1800px",
     mainLoginMaxWidth: "1024px"
   },
   palette: {
     primary: {
-      light: "#26B0F9",
-      main: "#1999DD",
-      dark: "#172F3C",
-      contrastText: "#FFFFFF"
+      light: "#000000",
+      main: "#FFFFFF",
+      //badge number color
+      dark: "#000000",
+      //badge number background color
+      contrastText: "#FFFFFF"            
+    },
+    //Tamaño del logo
+    Logo:{
+      WidthDesktop: "120px",
+      WidthMobile: "71px",
+      HeightDesktop: "111px",
+      HeightMobile: "60px",
     },
     secondary: {
       light: "#5d8ea9",
       main: "#5E7480",
       dark: "#1D1D1D",
-      contrastText: "#000000"
+      contrastText: "#000000",
+      botones: "#FFEB3B",            
     },
     background: {
-      default: "#ffffff"
+      default: "#ffffff",
+      //es el color principal de la pagina
+      theme_: "#000000",
+      Main: "#000000",
+      //el main es para los que cambian de color en el centro
+      Modal: "#1D0D13",
+      //Fondo del mensaje mi carrito de cart carrito
+      Carrito: "#202124"
     },
     error: {
       light: "#E54F5D",
@@ -36,7 +53,15 @@ const theme = createMuiTheme({
       selected: "#f5f5f5"
     },
     colors: {
-      buttonBorderColor: "#5e7480"
+      buttonBorderColor: "#5e7480",
+
+      //color principal de la letra
+      TextTheme: "#FFFFFF",
+      SearchColor: "#dcdcdc",
+      //text theme es el color de la letra
+
+      //texto botones secundarios
+      BotonColor: "#000000"
     },
     borders: {
       default: "1px solid #e6e6e6"

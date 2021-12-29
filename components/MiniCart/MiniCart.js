@@ -2,18 +2,34 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import inject from "hocs/inject";
 import { withStyles } from "@material-ui/core/styles";
-import MiniCartComponent from "@reactioncommerce/components/MiniCart/v1";
-import CartItems from "components/CartItems";
-import CartEmptyMessage from "@reactioncommerce/components/CartEmptyMessage/v1";
 import IconButton from "@material-ui/core/IconButton";
-import CartIcon from "mdi-material-ui/Cart";
+import { ShoppingOutline } from "mdi-material-ui";
 import Router from "translations/i18nRouter";
 import Badge from "@material-ui/core/Badge";
 import Popper from "@material-ui/core/Popper";
 import Fade from "@material-ui/core/Fade";
 import withCart from "containers/cart/withCart";
+import { withComponents } from "@reactioncommerce/components-context";
 
 const styles = ({ palette, zIndex }) => ({
+  BotonPrincipal:{
+    backgroundColor: palette.secondary.botones,    
+    color: palette.colors.BotonColor,
+    borderColor: palette.secondary.botones, 
+    fontWeight:"800",
+    fontSize:"18px"
+  },
+  Compra: {
+    color: palette.colors.TextTheme,
+    ["@media (min-width:600px)"]: {
+      width: "35px",
+      height: "35px",
+    },
+    ["@media (max-width:599px)"]: {
+      width: "25px",
+      height: "25px",
+    },
+  },
   popper: {
     marginTop: "0.5rem",
     marginRight: "1rem",
@@ -34,8 +50,11 @@ const styles = ({ palette, zIndex }) => ({
     width: 20,
     height: 20,
     top: 10,
-    left: 20
-  }
+    left: 20,
+    background: palette.primary.main,
+    color: palette.primary.light,
+     
+  },  
 });
 
 class MiniCart extends Component {
@@ -122,8 +141,9 @@ class MiniCart extends Component {
   };
 
   renderMiniCart() {
-    const { cart, classes, hasMoreCartItems, loadMoreCartItems } = this.props;
-
+    const { cart, classes, hasMoreCartItems, loadMoreCartItems,
+    components:{MiniCartComponent,CartItems,CartEmptyMessage,Button} } = this.props;
+    
     if (cart && Array.isArray(cart.items) && cart.items.length) {
       return (
         <MiniCartComponent
@@ -139,7 +159,12 @@ class MiniCart extends Component {
                 onChangeCartItemQuantity={this.handleItemQuantityChange}
                 onLoadMoreCartItems={loadMoreCartItems}
               />
-            )
+            ),
+            CartCheckoutButton: (cartCheckoutProps) => (
+  						<Button 
+              className={classes.BotonPrincipal}      
+              {...cartCheckoutProps} isFullWidth>{"Proceder a la compra - " + cart.checkout.summary.itemTotal.displayAmount}</Button>          
+  					)
           }}
         />
       );
@@ -169,16 +194,16 @@ class MiniCart extends Component {
           >
             {(cart && cart.totalItemQuantity > 0)
               ? (
-                <Badge
-                  badgeContent={cart.totalItemQuantity}
-                  color="primary"
-                  classes={{ badge: classes.badge }}
+                <Badge                  
+                  badgeContent={cart.totalItemQuantity}                  
+                  classes={{ badge: classes.badge                  
+                  }}
                 >
-                  <CartIcon />
+                   <ShoppingOutline className={classes.Compra}  />
                 </Badge>
-              )
-              : <CartIcon />
-            }
+             ): (
+              <ShoppingOutline className={classes.Compra}  />
+            )}
           </IconButton>
         </div>
 
@@ -204,4 +229,4 @@ class MiniCart extends Component {
   }
 }
 
-export default withStyles(styles, { name: "SkMiniCart" })(withCart(inject("uiStore")(MiniCart)));
+export default withComponents(withStyles(styles, { name: "SkMiniCart" })(withCart(inject("uiStore")(MiniCart))));

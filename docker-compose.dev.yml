@@ -8,12 +8,11 @@
 # To go back to running the published image:
 #  rm docker-compose.override.yml
 
-version: '3.4'
+version: "3.4"
 
 services:
   web:
     image: reactioncommerce/node-dev:12.14.1-v3
-    command: "./bin/start"
     volumes:
       - .:/usr/local/src/app
       - web-yarn:/home/node/.cache/yarn
