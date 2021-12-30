@@ -172,49 +172,49 @@ class NavigationHeader extends Component {
       <>
         {isWidthUp("sm", width) ? (
           <>
-            <Grid xs={12} md={12} lg={12} spacing={5}>
+            <Grid  xs={12} md={12} lg={12} spacing={5} key={1}>
               {/* Contenedor Principal */}
-              <Grid container xs={11} md={11} lg={11} className={classes.root}>
+              <Grid container xs={11} md={11} lg={11} key={2} className={classes.root}>
                 <AppBar className={classes.AppBar_} position="static">
                   <Toolbar>
                     {/* LOGO */}
-                    <Grid item xs={12} sm={3} md={3} lg={3} className={classes.Logo}>
+                    <Grid item xs={12} sm={3} md={3} lg={3} key={3} className={classes.Logo}>
                       <img src={Logo.urlLogo} className={classes.LogoDesktop} />
                     </Grid>
 
                     {/* Bara de busqueda */}
-                    <Grid item xs={8} sm={6} md={8} lg={8} xl={8} className={classes.searchbar}>
+                    <Grid item xs={8} sm={6} md={8} lg={8} xl={8} key={4} className={classes.searchbar}>
                       <SearchBar Metodo={MetodoBusqueda} />
                     </Grid>
 
                     {/* Iconos */}
-                    <Grid item xs={2} sm={3} md={3} lg={3} className={classes.Iconos}>
+                    <Grid item xs={2} sm={3} md={3} lg={3} key={5} className={classes.Iconos}>
                       <IconsActions                      
                       width={width}  cart={cart} />
                     </Grid>
                   </Toolbar>
                 </AppBar>
 
-                <Grid container xs={12} md={12} lg={12} className={classes.Borde}>
+                <Grid item xs={12} md={12} lg={12} key={6} className={classes.Borde}>
                   {/* Espacio Extra */}
-                  <Grid xs={11} md={11} lg={11} className={classes.Espacio}>
+                  <Grid item key={11} xs={11} md={11} lg={11} className={classes.Espacio}>
                     <h1> </h1>
                   </Grid>
                 </Grid>
 
                 {/* Espacio Extra */}
-                <Grid xs={12} md={12} lg={12} className={classes.Espacio2}>
+                <Grid key={7} item xs={12} md={12} lg={12} className={classes.Espacio2}>
                   <h1> </h1>
                 </Grid>
 
                 {/* Contenedor Navigation Menu */}
-                <Grid item xs={12} md={12} lg={12} className={classes.Menu}>
+                <Grid item key={8} xs={12} md={12} lg={12} className={classes.Menu}>
                   <NavigationDesktop />
                 </Grid>
               </Grid>
             </Grid>
             {/* Espacio Extra */}
-            <Grid xs={11} md={11} lg={11} className={classes.Espacio2}>
+            <Grid xs={11} key={9} md={11} lg={11} className={classes.Espacio2}>
               <h1> </h1>
             </Grid>
 
@@ -222,13 +222,13 @@ class NavigationHeader extends Component {
           </>
         ) : (
           <>
-            <Grid xs={12} md={12} lg={12} spacing={5} spacing={5}>
+            <Grid  key={1} xs={12} md={12} lg={12} spacing={5} spacing={5}>
               {/* Contenedor Principal */}
-              <Grid container xs={11} md={11} lg={11}>
+              <Grid container key={2} item xs={11} md={11} lg={11}>
                 {/* <AppBar className={classes.AppBar_} position="static" style={{ backgroundColor: AppColor }}>
                   <Toolbar> */}
                 {/* Contenedor Navigation Menu */}
-                <Grid item xs={4} md={4} lg={4} className={classes.Menu}>
+                <Grid key={3} item xs={4} md={4} lg={4} className={classes.Menu}>
                   <Hidden mdUp>
                     <NavigationToggleMobile
                       onClick={this.handleNavigationToggleClick}                      
@@ -238,12 +238,12 @@ class NavigationHeader extends Component {
                 </Grid>
 
                 {/* LOGO */}
-                <Grid item xs={4} md={3} lg={3} className={classes.Logo}>
+                <Grid key={4} item xs={4} md={3} lg={3} className={classes.Logo}>
                 <img src={Logo.urlLogo} className={classes.LogoMobile} />
                 </Grid>
 
                 {/* Iconos */}
-                <Grid item xs={4} md={2} lg={2} className={classes.Iconos}>
+                <Grid key={5} item xs={4} md={2} lg={2} item className={classes.Iconos}>
                   <IconsActions                   
                   width={width}  cart={cart} />
                 </Grid>
@@ -254,12 +254,12 @@ class NavigationHeader extends Component {
             </Grid>
 
             {/* Bara de busqueda */}
-            <Grid  xs={11} md={6} lg={6} className={classes.searchbar}>
+            <Grid key={6}  xs={11} md={6} lg={6} className={classes.searchbar}>
                   <SearchBar Metodo={MetodoBusqueda} />
                 </Grid>
 
             {/* Espacio Extra */}
-            <Grid xs={11} md={11} lg={11} className={classes.Espacio2}>
+            <Grid key={7} xs={11} md={11} lg={11} className={classes.Espacio2}>
               <h1> </h1>
             </Grid>
             {BanderaSlideHero ? <SlideHero title={MessageCover} subtitle={""} background={ImageCoverUrl} type={"jpg"} /> : null}            

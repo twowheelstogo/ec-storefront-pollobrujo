@@ -115,14 +115,14 @@ class NavigationMobile extends Component {
     const { classes, navItems, uiStore, shop, Logo } = this.props;
 
     const renderNavItem = (navItem, index) => (
-      <>
+    
         <NavigationItemMobile
           key={index}
           isTopLevel
           navItem={navItem}
           onClick={this.handleNavItemClick}          
         />
-      </>
+ 
     );
 
     if (navItems && navItems.items) {

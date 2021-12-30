@@ -49,7 +49,7 @@ display: -webkit-box;
 `;
 
 const CardContainerVertical = styled.div`
-    border: 1PX solid;
+border: ${({ withBorder, boderColor }) => withBorder ? boderColor : "none"};
     cursor: pointer;
     &:hover:{
         background-color: #000;
@@ -58,7 +58,7 @@ const CardContainerVertical = styled.div`
 `
 
 const CardContainerHorizontal = styled.div`
-    border: 1PX solid;
+border: ${({ withBorder, boderColor }) => withBorder ? boderColor : "none"};
     display: flex;
     height: 150px;
     cursor: pointer;
@@ -129,16 +129,15 @@ const HorizontalProductCard = props => {
         setPageSize: PropTypes.func.isRequired,
         setSortBy: PropTypes.func.isRequired,
         sortBy: PropTypes.string.isRequired,
-        tags: PropTypes.object,
+        tags: PropTypes.object
     };
 
     const { tags, classes, components: { ProgressiveImage } } = props
     console.log(props);
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.down("xs"));
-    console.log(tags)
+    const matches = useMediaQuery(theme.breakpoints.down("xs"));    
     return (
-        <Fragment style={{display:"flex",justifyContent:"center"}}>
+        <Fragment>
             {matches !== true ? (
                 <div className={classes.productPaddingHorizontaal}>
                     {
@@ -158,7 +157,7 @@ const HorizontalProductCard = props => {
                                                         href={values.slug && "/product/[...slugOrId]"}
                                                         as={values.slug && `/product/${values.slug}`}
                                                     >
-                                                        <CardContainerHorizontal >
+                                                        <CardContainerHorizontal withBorder boderColor={"1px solid #fff"}>
                                                             {
                                                                 values.primaryImage !== null ? (
                                                                     <img src={values.primaryImage.URLs.medium} className={classes.imageProduct} ></img>
@@ -210,7 +209,7 @@ const HorizontalProductCard = props => {
                                                                 href={values.slug && "/product/[...slugOrId]"}
                                                                 as={values.slug && `/product/${values.slug}`}
                                                             >
-                                                                <CardContainerVertical>
+                                                                <CardContainerVertical withBorder boderColor={"1px solid #fff"}>
                                                                     <ProductMediaWrapper>
                                                                         <ProgressiveImage
                                                                             fit={"cover"}

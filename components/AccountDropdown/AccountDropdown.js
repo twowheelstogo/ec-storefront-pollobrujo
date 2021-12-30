@@ -40,8 +40,8 @@ const useStyles = makeStyles((theme) => ({
       height: "30px",
     },
     ["@media (max-width:599px)"]: {
-      width: "23px",
-      height: "23px",
+      width: "25px",
+      height: "22px",
     }},
   Usuario: {
     color: theme.palette.colors.TextTheme,
@@ -105,9 +105,8 @@ const AccountDropdown = (props) => {
     <Fragment>
       <EntryModal onClose={onClose} resetToken={resetToken} />
       {isAuthenticated ? (
-        // <ButtonBase onClick={toggleOpen}>        
-        //   <AccountCircleOutline className={classes.Usuario}/>
-        //   {/* <ViewerInfo viewer={viewer} className={classes.InfoUsuario}/> */}
+        // <ButtonBase onClick={toggleOpen}>                  
+        // <ViewerInfo viewer={viewer} className={classes.Info_}/> 
         // </ButtonBase>
         <IconButton color="inherit" onClick={toggleOpen}>
           <AccountCircleOutline className={classes.Usuario}/>
