@@ -1,38 +1,75 @@
 import React, { useEffect } from "react";
 import throttle from "lodash/throttle";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles, useTheme } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
+import Divider from "@material-ui/core/Divider";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const tabHeight = 69;
+
 const StyledTabs = withStyles({
     indicator: {
         display: "flex",
         justifyContent: "center",
-        backgroundColor: "#fff",
+        backgroundColor: "#ffffff",
+        color: '#ffffff',
         "& > div": {
             maxWidth: "100%",
             width: "100%",
-            backgroundColor: "#fff"
+            backgroundColor: "#000",
+            color: '#fffff'
         }
     },
     scroller: {
         flexGrow: "0"
-    }
+    },
 })(props => {
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down("xs"));
     return (
         <div
             style={{
                 overflowX: "scroll",
                 overflow: "hidden",
-                scrollBehavior: "smooth"
+                scrollBehavior: "smooth",
             }}
         >
-            <Box>
-                <Tabs {...props} TabIndicatorProps={{ children: <div /> }} scrollButtons="on"
-                    variant={"scrollable"} />
-            </Box>
+            {
+                matches === true ? (
+                    <Box>
+                        <Tabs
+                            {...props}
+                            variant={"scrollable"}
+                            TabIndicatorProps={{
+                                style: {
+                                    backgroundColor: '#fff',
+                                    height: '3px',
+                                    borderRadius: '5px',
+                                },
+                            }}
+                        />
+                        <Divider />
+                    </Box>
+                ) : (
+                    <Box>
+                        <Tabs
+                            {...props}
+                            scrollButtons="on"
+                            variant={"scrollable"}
+                            TabIndicatorProps={{
+                                style: {
+                                    backgroundColor: '#fff',
+                                    height: '3px',
+                                    borderRadius: '5px',
+                                },
+                            }}
+                        />
+                        <Divider />
+                    </Box>
+                )
+            }
         </div>
     )
 });
@@ -44,6 +81,7 @@ const StyledTab = withStyles(theme => ({
         fontWeight: theme.typography.fontWeightRegular,
         fontSize: theme.typography.pxToRem(15),
         marginRight: theme.spacing(1),
+        color: '#fff',
         "&:focus": {
             opacity: 1
         }
@@ -52,10 +90,10 @@ const StyledTab = withStyles(theme => ({
 
 const useStyles = makeStyles(theme => ({
     root: {
-        flexGrow: 1
+        flexGrow: 1,
     },
     indicator: {
-        padding: theme.spacing(1)
+        // padding: theme.spacing(1)
     },
     demo2: {
         backgroundColor: "#000",
@@ -68,12 +106,6 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-/******* This is the scroll spy magic */
-/*
-Credits: Material UI
-Source: 
-https://github.com/mui-org/material-ui/blob/404c2ba16816f5c7ab7d8b2caf6bbc3d2218b820/docs/src/modules/utils/textToHash.js
-*/
 const makeUnique = (hash, unique, i = 1) => {
     const uniqueHash = i === 1 ? hash : `${hash}-${i}`;
 

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { addTypographyStyles, applyTheme } from "@reactioncommerce/components/utils";
 
 const Table = styled.table`
-  width: 100%;
+  width: 100%;  
   border-spacing: 0;
   background-color: ${(props) => (props.isDense ? applyTheme("CartSummary.denseBackgroundColor")(props) : applyTheme("CartSummary.backgroundColor")(props))};
   padding-left: ${(props) => (props.isDense ? "0" : applyTheme("CartSummary.paddingLeft")(props))};
@@ -182,7 +182,7 @@ class CartSummary extends Component {
   }
 
   static defaultProps = {
-    cartTitleText: "Resúmen De Compra",
+    cartTitleText: "Resumen De Compra",
     freeText: "FREE",
     itemLabelText: "Items",
     itemsText: "items",
@@ -195,13 +195,12 @@ class CartSummary extends Component {
 
   renderHeader() {
     const { cartTitleText, itemsQuantity, itemsText } = this.props;
-    const itemsLabel = itemsQuantity >= 0 ? `${itemsQuantity} ${itemsText}` : null;
-    console.log(this.props);
+    const itemsLabel = itemsQuantity >= 0 ? `${itemsQuantity} ${itemsText}` : null;   
     return (
       <thead>
         <tr>
           <Th>
-            <Title>{cartTitleText}</Title>
+            <Title style={{color:"#FFFFFF"}}>{cartTitleText}</Title>
           </Th>
         </tr>
       </thead>
@@ -213,7 +212,7 @@ class CartSummary extends Component {
 
     return (
       <tr>
-        <Td isDense={isDense}>{promoCodeText}:</Td>
+        <Td isDense={isDense}><p style={{color:"#FFFFFF"}}>{promoCodeText}:</p></Td>
         <TdValue isDense={isDense}>
           <Discount>{displayDiscount}</Discount>
         </TdValue>
@@ -248,27 +247,27 @@ class CartSummary extends Component {
     const discount = displayDiscount && this.renderDiscount();
     const surcharge = displaySurcharge || "-";
 
-    return (
-      <Table className={className} isDense={isDense}>
+    return (      
+      <Table style={{backgroundColor:"#202124"}} isDense={isDense}>
         {header}
         <tbody>
           <tr>
-            <Td isDense={isDense}>{itemLabelText}{`(${itemsQuantity})`}:</Td>
-            <TdValue isDense={isDense}>{displaySubtotal}</TdValue>
+            <Td style={{color:"#FFFFFF"}} isDense={isDense}>{itemLabelText}{`(${itemsQuantity})`}:</Td>
+            <TdValue style={{color:"#FFFFFF"}} isDense={isDense}>{displaySubtotal}</TdValue>
           </tr>
           <tr>
-            <Td isDense={isDense}>{shippingLabelText}:</Td>
-            <TdValue isDense={isDense}>{shipping}</TdValue>
+            <Td style={{color:"#FFFFFF"}} isDense={isDense}>{shippingLabelText}:</Td>
+            <TdValue style={{color:"#FFFFFF"}} isDense={isDense}>{shipping}</TdValue>
           </tr>
             {discount}
           <tr>
-            <TdTotal isDense={isDense} isBordered>{orderTotalLabelText}:</TdTotal>
-            <TdTotalValue isDense={isDense} isBordered>
-              <Total>{displayTotal}</Total>
+            <TdTotal style={{color:"#FFFFFF"}} isDense={isDense} isBordered>{orderTotalLabelText}:</TdTotal>
+            <TdTotalValue style={{color:"#FFFFFF"}} isDense={isDense} isBordered>
+              <Total style={{color:"#FFFFFF"}}>{displayTotal}</Total>
             </TdTotalValue>
           </tr>
         </tbody>
-      </Table>
+      </Table>      
     );
   }
 }

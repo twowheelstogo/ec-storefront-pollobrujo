@@ -36,7 +36,8 @@ const styles = ({ palette, zIndex }) => ({
     zIndex: zIndex.modal
   },
   cart: {
-    backgroundColor: palette.common.white
+    backgroundColor: "blue"
+    //palette.common.white
   },
   emptyCart: {
     display: "flex",
