@@ -65,10 +65,15 @@ import QuantityInput from "components/Quantityinput";
 import CatalogLayout from "components/CatalogLayout";
 import HorizontalTagsProducts from "components/HorizontalTagsProducts";
 import HorizontalProductCard from "components/HorizontalProductCard";
+import CardItems from "components/CardItemList";
+import CardItemSelect from "components/CardItemSelect";
+
 // Providing locales data
 const AddressFormWithLocales = withLocales(AddressForm);
 
 export default {
+  CardItems,
+  CardItemSelect,
   HorizontalTagsProducts,
   HorizontalProductCard,
   CatalogLayout,

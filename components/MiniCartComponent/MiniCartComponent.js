@@ -221,7 +221,7 @@ class MiniCartComponent extends Component {
   		onCheckoutButtonClick,
   		...props
   	} = this.props;
-     
+     console.log(summary);
   	return (
   		<Cart className={classes.Cart_}>
                   <div className={classes.Inicio}>

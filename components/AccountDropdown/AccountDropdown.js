@@ -58,6 +58,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.botones,    
     color: theme.palette.colors.BotonColor,    
     fontWeigth: "800",    
+    "&:hover": {      
+      backgroundColor: theme.palette.secondary.botones,    
+      color: theme.palette.colors.BotonColor,
+      borderColor: theme.palette.secondary.botones,   
+      }
   },  
   Borde:{
     marginTop: "0.5rem",

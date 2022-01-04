@@ -55,7 +55,7 @@ const CardContainerVertical = styled.div`
     flex-direction: column;
     flex-grow: 1;
     &:hover:{
-        background-color: #EEEEEE;
+        background-color: #000;
         transition: background-color .5s;
     }
 `
@@ -67,7 +67,7 @@ const CardContainerHorizontal = styled.div`
     height: 150px;
     cursor: pointer;
     &:hover {
-        background-color: #fff;
+        background-color: #000;
         transition: background-color .5s;
     }
 `

@@ -22,8 +22,8 @@ const styles = (theme) => ({
     "cursor": "pointer",
     "fontFamily": theme.typography.fontFamily,
     "fontSize": 14,
-    "&:hover": {
-      color: theme.palette.reaction.reactionBlue400
+    "&:hover": {      
+      color: "red"    
     }
   },
   backLinkText: {

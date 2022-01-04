@@ -43,7 +43,7 @@ export default function withCatalogItems(Component) {
         sortBy,
         sortByPriceCurrencyCode: uiStore.sortByCurrencyCode,
         sortOrder,
-        first: 100
+        first: 120
       };
 
       return (
