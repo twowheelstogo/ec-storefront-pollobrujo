@@ -50,7 +50,8 @@ import SelectableItem from "@reactioncommerce/components/SelectableItem/v1";
 import SelectableList from "@reactioncommerce/components/SelectableList/v1";
 import StockWarning from "@reactioncommerce/components/StockWarning/v1";
 import StripeForm from "@reactioncommerce/components/StripeForm/v1";
-import TextInput from "@reactioncommerce/components/TextInput/v1";
+//import TextInput from "@reactioncommerce/components/TextInput/v1";
+import TextInput from "components/TextInput";
 // import CartItemsList from "reactioncommerce/components/CartItems/v1";
 import withLocales from "../lib/utils/withLocales";
 //new components for my 
@@ -74,6 +75,7 @@ import CartEmptyMessage from "components/CartEmptyMessage";
 import Button from "@reactioncommerce/components/Button/v1";
 import AddressList from "components/AddressList";
 import RadioButtonItem from "components/RadioButtonItem";
+import BillingForm from "components/BillingForm";
 // Providing locales data
 const AddressFormWithLocales = withLocales(AddressForm);
 
@@ -145,5 +147,6 @@ export default {
   CustomFooter,
   CartEmptyMessage,
   CardItems,
-  CardItemSelect
+  CardItemSelect,
+  BillingForm
 };

@@ -18,6 +18,7 @@ import { placeOrderMutation } from "../../hooks/orders/placeOrder.gql";
 import FulfillmentTypeAction from "components/FulfillmentTypeAction";
 import deliveryMethods from "custom/deliveryMethods";
 import PaymentMethodCheckoutAction from "components/PaymentMethodCheckoutAction";
+import BillingCheckoutAction from "components/BillingCheckoutAction";
 
 const MessageDiv = styled.div`
   ${addTypographyStyles("NoPaymentMethodsMessage", "bodyText")}
@@ -41,6 +42,9 @@ class CheckoutActions extends Component {
       items: PropTypes.array
     }).isRequired,
     cartStore: PropTypes.object,
+    authStore: PropTypes.shape({
+			account: PropTypes.object.isRequired
+		}),
     checkoutMutations: PropTypes.shape({
       onSetFulfillmentOption: PropTypes.func.isRequired,
       onSetShippingAddress: PropTypes.func.isRequired
@@ -59,11 +63,31 @@ class CheckoutActions extends Component {
     },
     hasPaymentError: false,
     isPlacingOrder: false,    
+    invoiceInputs: {
+			partnerId: -1,
+			isCf: true,
+			nit: "0",
+			name: "CF",
+			address: "",
+			country: "",
+			depto: "",
+			city: ""
+		},
+    paymentInputs: {},
   };
+
   setPaymentInputs = (inputs) => {
 		this.setState(prev => ({
 			paymentInputs: {
 				...prev.paymentInputs,
+				...inputs
+			}
+		}));
+	}
+  setInvoiceInputs = (inputs) => {
+		this.setState(prev => ({
+			invoiceInputs: {
+				...prev.invoiceInputs,
 				...inputs
 			}
 		}));
@@ -160,6 +184,38 @@ class CheckoutActions extends Component {
     const [firstPayment] = this.props.cartStore.checkoutPayments;
     return firstPayment ? firstPayment.payment.method : null;
   }
+
+  handleInputBillingComponentSubmit = async () => {
+		const { invoiceInputs } = this.state;
+		const cloneInvoice = Object.assign({}, invoiceInputs);
+		if (!invoiceInputs.isCf) {
+			cloneInvoice.name = (cloneInvoice.name) ? cloneInvoice.name.trim() : "";
+			cloneInvoice.name = formatName(cloneInvoice.name);
+			cloneInvoice.nit = (cloneInvoice.nit) ? cloneInvoice.nit.trim() : "";
+			cloneInvoice.address = (cloneInvoice.address) ? cloneInvoice.address.trim() : "";
+			cloneInvoice.address = formatName(cloneInvoice.address);
+			cloneInvoice.depto = (cloneInvoice.depto) ? cloneInvoice.depto.trim() : "";
+			cloneInvoice.depto = formatName(cloneInvoice.depto);
+			cloneInvoice.city = (cloneInvoice.city) ? cloneInvoice.city.trim() : "";
+			cloneInvoice.city = formatName(cloneInvoice.city);
+
+			if (cloneInvoice.nit == "") {
+				throw new CheckoutError({
+					actionCode: 5,
+					title: "Error de facturación",
+					message: "Asegúrate de haber llenado el nit a facturar"
+				});
+			}
+			if (cloneInvoice.name == "") {
+				throw new CheckoutError({
+					actionCode: 5,
+					title: "Error de facturación",
+					message: "Asegúrate de haber llenado el nombre a facturar"
+				});
+			}
+		}
+		this.handleBillingSubmit(cloneInvoice);
+	}
 
 
   handleValidationErrors() {
@@ -305,7 +361,8 @@ class CheckoutActions extends Component {
       addressValidationResults,
       cart,
       cartStore,
-      paymentMethods
+      paymentMethods,
+      authStore,
     } = this.props;
 
     const { checkout: { fulfillmentGroups, summary }, items } = cart;
@@ -382,6 +439,24 @@ class CheckoutActions extends Component {
           //onChange: (value) => console.log(value)
         }
       },
+      {
+				id: "5",
+				activeLabel: "Datos de facturación",
+				completeLabel: "Datos de facturación",
+				incompleteLabel: "Datos de facturación",
+				status: remainingAmountDue === 0 && !hasPaymentError ? "complete" : "incomplete",
+				component: BillingCheckoutAction,
+				onSubmit: this.handleBillingSubmit,
+				props: {
+					alert: actionAlerts["5"],
+					onChange: this.setInvoiceInputs,
+					authStore,
+					isCf: this.state.invoiceInputs.isCf,
+					nitValue: this.state.invoiceInputs.nit,
+					nameValue: this.state.invoiceInputs.name,
+					addressValue: this.state.invoiceInputs.address
+				}
+			},
     ];
     return (
       <Fragment>
