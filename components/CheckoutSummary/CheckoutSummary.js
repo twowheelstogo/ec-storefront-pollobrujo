@@ -23,7 +23,8 @@ const styles = (theme) => ({
 	customSize:{
 		[theme.breakpoints.down("md")]:{
 			fontSize: "24px"
-		} 
+		} ,
+		color:"#fff"
 	}
 });
 const StyledTitle = styled.div`
@@ -41,7 +42,7 @@ const StyledHeadline = styled.div`
 const StyledText = styled.div`
 	font-size: 14px;
 	font-weight: 600;
-	color: #565656;
+	color: #fff;
 `;
 class CheckoutSummary extends Component {
   static propTypes = {

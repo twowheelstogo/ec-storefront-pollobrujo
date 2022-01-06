@@ -252,9 +252,9 @@ function EpayPaymentForm(props, ref) {
 					);
 				}}
 			/>
-			{/* <SecureCaption>
+			<SecureCaption>
 				<IconLockSpan>{iconLock}</IconLockSpan> <Span>{"Su información es privada y segura"}</Span>
-			</SecureCaption> */}
+			</SecureCaption> 
 		</div>
 	);
 }
@@ -310,7 +310,7 @@ EpayPaymentForm.propTypes = {
 	 * method is called. The object may have `data`, `displayName`,
 	 * and `amount` properties.
 	 */
-	onSubmit: PropTypes.func
+	onSubmit: PropTypes.func,	
 };
 
 EpayPaymentForm.defaultProps = {

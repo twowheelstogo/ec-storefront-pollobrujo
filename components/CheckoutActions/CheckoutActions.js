@@ -17,7 +17,6 @@ import calculateRemainderDue from "lib/utils/calculateRemainderDue";
 import { placeOrderMutation } from "../../hooks/orders/placeOrder.gql";
 import FulfillmentTypeAction from "components/FulfillmentTypeAction";
 import deliveryMethods from "custom/deliveryMethods";
-import paymentMethods_ from "custom/paymentMethods";
 import PaymentMethodCheckoutAction from "components/PaymentMethodCheckoutAction";
 
 const MessageDiv = styled.div`
@@ -136,11 +135,12 @@ class CheckoutActions extends Component {
 
 
   componentDidMount() {
-    this._isMounted = true;
+    this._isMounted = true;    
   }
 
   componentWillUnmount() {
-    this._isMounted = false;
+    this._isMounted = false;    
+      console.log(this.props.cart.checkout.summary.total.displayAmount);    
   }
 
   buildData = ({ step, action }) => ({
@@ -363,7 +363,7 @@ class CheckoutActions extends Component {
 				}
 			},
       {
-        id: "3",
+        id: "4",
         activeLabel: "Elige cómo pagarás tu orden",
         completeLabel: "Payment information",
         incompleteLabel: "Payment information",
@@ -372,12 +372,13 @@ class CheckoutActions extends Component {
         onSubmit: this.handlePaymentSubmit,
         props: {
           addresses,
-          alert: actionAlerts["3"],
+          alert: actionAlerts["4"],
           onReset: this.handlePaymentsReset,
           payments,
           paymentMethods,
           remainingAmountDue,          
-					onChange: this.setPaymentInputs,
+          summary,
+					onChange: this.setPaymentInputs,          
           //onChange: (value) => console.log(value)
         }
       },

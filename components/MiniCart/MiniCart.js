@@ -168,7 +168,7 @@ class MiniCart extends Component {
               />
             ),
             CartCheckoutButton: (cartCheckoutProps) => (
-  						<Button 
+  						<Button               
               className={classes.BotonPrincipal}      
               {...cartCheckoutProps} isFullWidth>{"Proceder a la compra - " + cart.checkout.summary.itemTotal.displayAmount}</Button>          
   					)

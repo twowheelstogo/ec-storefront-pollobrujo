@@ -42,12 +42,13 @@ function ExampleIOUPaymentForm(props, ref) {
   const {
     className,
     components: {
-      ErrorsBlock,      
+      ErrorsBlock,            
     },
     isSaving,
     onChange,
     onReadyForSaveChange,
-    onSubmit
+    onSubmit,
+    summary
   } = props;
 
   const {
@@ -80,21 +81,32 @@ function ExampleIOUPaymentForm(props, ref) {
   }));
 
   const fullNameInputId = `fullName_${uniqueInstanceIdentifier}`;
-  const amountInputId = `amount_${uniqueInstanceIdentifier}`;
+  const amountInputId = `amount_${uniqueInstanceIdentifier}`;  
+
+  function Calculo() {   
+    let Monto = getInputProps("amount").value === null ? 0 : getInputProps("amount").value; 
+    let total_ = `${summary.total.displayAmount}`.replace('$','');
+    let Cambio = parseFloat(Monto) - parseFloat(total_);    
+    let res = 
+    getInputProps("amount").value === null ? '' : 
+    (Cambio < 0 ? `Faltante por pagar: Q ${Cambio * -1}` : `Cambio: Q ${Cambio}`)
+    return res;
+  }
 
   return (
-    <div style={{backgroundColor:"!important yellow"}}>
-      <Field         
-      
+    <div>
+      {/* <Field               
         name="fullName" errors={getErrors(["fullName"])} label="Nombre completo" labelFor={fullNameInputId}>
         <TextInput id={fullNameInputId} {...getInputProps("fullName")} placeholder="Nombre completo"        
         />
         <ErrorsBlock errors={getErrors(["fullName"])} />
-      </Field>
-      <Field name="amount" errors={getErrors(["amount"])} label="Monto (opcional)" labelFor={amountInputId}>
-        <TextInput id={amountInputId} {...getInputProps("amount")} placeholder="Monto"/>
+      </Field> */}
+      <Field name="amount" errors={getErrors(["amount"])} label="Monto" labelFor={amountInputId}>
+        <TextInput id={amountInputId} {...getInputProps("amount")} placeholder="Monto" type="number"/>
         <ErrorsBlock errors={getErrors(["amount"])} />
       </Field>
+      <label>{Calculo()}</label>
+      
     </div>
   );
 }
@@ -146,7 +158,8 @@ ExampleIOUPaymentForm.propTypes = {
    * method is called. The object may have `data`, `displayName`,
    * and `amount` properties.
    */
-  onSubmit: PropTypes.func
+  onSubmit: PropTypes.func,
+  summary: PropTypes.object
 };
 
 ExampleIOUPaymentForm.defaultProps = {

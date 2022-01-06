@@ -132,7 +132,7 @@ const Checkout = ({ router }) => {
       setStripe(window.Stripe(process.env.STRIPE_PUBLIC_API_KEY));
     }
   }), [stripe]; // eslint-disable-line no-sequences
-
+  
   // eslint-disable-next-line react/no-multi-comp
   const renderCheckoutContent = () => {
     // sanity check that "tries" to render the correct /cart view if SSR doesn't provide the `cart`
