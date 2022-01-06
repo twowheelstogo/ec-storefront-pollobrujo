@@ -33,7 +33,6 @@ import CardItemSelect from "components/CardItemSelect";
 import CheckoutActionComplete from "@reactioncommerce/components/CheckoutActionComplete/v1";
 import CheckoutActionIncomplete from "@reactioncommerce/components/CheckoutActionIncomplete/v1";
 import ErrorsBlock from "@reactioncommerce/components/ErrorsBlock/v1";
-import Field from "@reactioncommerce/components/Field/v1";
 import InPageMenuItem from "@reactioncommerce/components/InPageMenuItem/v1";
 import InlineAlert from "@reactioncommerce/components/InlineAlert/v1";
 import InventoryStatus from "@reactioncommerce/components/InventoryStatus/v1";
@@ -76,10 +75,11 @@ import Button from "@reactioncommerce/components/Button/v1";
 import AddressList from "components/AddressList";
 import RadioButtonItem from "components/RadioButtonItem";
 import BillingForm from "components/BillingForm";
+import Field from "components/Field";
 // Providing locales data
 const AddressFormWithLocales = withLocales(AddressForm);
 
-export default {
+export default {  
   Accordion,
   AccordionFormList,
   AddressBook,

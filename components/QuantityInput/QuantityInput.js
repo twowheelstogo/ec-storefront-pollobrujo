@@ -129,8 +129,7 @@ class QuantityInput extends Component {
                     >
                         <Plus style={{ fontSize: "20px" }} />
                     </ButtonBase>
-                </DesignGroupItems>
-
+                </DesignGroupItems>            
             </div>
         );
     }

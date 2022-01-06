@@ -349,8 +349,10 @@ class CheckoutActions extends Component {
     const { isPlacingOrder } = this.state;
 
     return (
-      <Dialog fullScreen disableBackdropClick={true} disableEscapeKeyDown={true} open={isPlacingOrder}>
-        <PageLoading delay={0} message="Placing your order..." />
+      <Dialog fullScreen disableBackdropClick={true} disableEscapeKeyDown={true} open={isPlacingOrder}
+      
+      >
+        <PageLoading delay={0} message="Placing your order..."/>
       </Dialog>
     );
   };

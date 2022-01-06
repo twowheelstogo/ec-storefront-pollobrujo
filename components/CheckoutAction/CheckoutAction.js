@@ -21,7 +21,13 @@ const styles = theme => ({
     main: {
         paddingTop: theme.spacing(2),
         paddingBottom: theme.spacing(2),        
-    }
+        "& .fSXXHe":{
+         border: "1px solid #FFEB3B"
+      },
+      "& .iJMlmI":{
+         border: "1px solid #fff"
+      }
+    },    
 });
 const CheckoutAction = (props) => {
     const theme = useTheme();

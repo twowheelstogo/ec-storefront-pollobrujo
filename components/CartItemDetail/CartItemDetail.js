@@ -152,9 +152,9 @@ class CartItemDetail extends Component {
         return (
             <Detail className={className}>
                 <Title>
-                    <div>{title}</div>
+                    <div style={{color:"#fff"}}>{title}</div>
                 </Title>
-                {this.renderAttributes()}
+                {/* {this.renderAttributes()} */}
                 <OptionProductTitle>
                     Duos estandar
                 </OptionProductTitle>
