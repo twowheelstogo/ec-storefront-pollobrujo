@@ -86,10 +86,10 @@ function ExampleIOUPaymentForm(props, ref) {
   function Calculo() {   
     let Monto = getInputProps("amount").value === null ? 0 : getInputProps("amount").value; 
     let total_ = `${summary.total.displayAmount}`.replace('$','');
-    let Cambio = parseFloat(Monto) - parseFloat(total_);    
+    let Cambio = (parseFloat(Monto) - parseFloat(total_)).toFixed(2);    
     let res = 
     getInputProps("amount").value === null ? '' : 
-    (Cambio < 0 ? `Faltante por pagar: Q ${Cambio * -1}` : `Cambio: Q ${Cambio}`)
+    (Cambio < 0 ? `Faltante por pagar: Q ${ (Cambio * -1).toFixed(2) }` : `Cambio: Q ${Cambio}`)
     return res;
   }
 
