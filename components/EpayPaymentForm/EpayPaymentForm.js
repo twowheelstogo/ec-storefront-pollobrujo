@@ -8,13 +8,11 @@ import { Field as Input, Form } from "react-final-form";
 import { formatCVC, formatCreditCardNumber, formatExpirationDate, validateCreditCardNumber } from "../utils/index";
 import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles(() => ({
-	root: {
-
+	label_ : {
+		marginTop:"10px"
 	},
-	Field_:{
-		"& .yzCGz":{
-			color:"!important blue"
-		}
+	labelColor: {
+		color: "#fff"
 	},
 	textInput: {
 		width: "100%",
@@ -166,7 +164,7 @@ function EpayPaymentForm(props, ref) {
 		props.components.iconMastercard
 	];
 	return (
-		<div>
+		<div className={classes.label_}>
 			<AcceptedPaymentMethods>
 				{renderIcons(ccIcons)}
 			</AcceptedPaymentMethods>
@@ -185,7 +183,9 @@ function EpayPaymentForm(props, ref) {
 							<form className={className}>
 								<Grid>
 									<ColFull>
-										<Field className={classes.Field_} name="cardName" label={"Nombre completo"} labelFor={cardNameInputId}>
+										<Field name="cardName" labelFor={cardNameInputId}>
+											<label className={classes.labelColor}>Nombre Completo</label>
+											<div className={classes.label_}></div>
 											<Input
 												className={classes.textInput}
 												name="cardName"
@@ -198,7 +198,9 @@ function EpayPaymentForm(props, ref) {
 										</Field>
 									</ColFull>
 									<ColFull>
-										<Field className={classes.Field_} name="cardNumber" label={"Número de Tarjeta"} labelFor={cardNumberInputId}>
+										<Field name="cardNumber"  labelFor={cardNumberInputId}>
+										<label className={classes.labelColor}>Número de Tarjeta</label>
+										<div className={classes.label_}></div>
 											<Input
 												className={classes.textInput}
 												name="cardNumber"
@@ -213,7 +215,9 @@ function EpayPaymentForm(props, ref) {
 										</Field>
 									</ColFull>
 									<ColHalf>
-										<Field className={classes.Field_} name="cardExpiry" label={"Fecha de Vencimiento"} labelFor={cardExpiryInputId}>
+										<Field name="cardExpiry"  labelFor={cardExpiryInputId}>
+										<label className={classes.labelColor}>Fecha de Vencimiento</label>
+										<div className={classes.label_}></div>
 											<Input
 												className={classes.textInput}
 												name="cardExpiry"
@@ -227,7 +231,9 @@ function EpayPaymentForm(props, ref) {
 										</Field>
 									</ColHalf>
 									<ColHalf>
-										<Field className={classes.Field_} name={"cardCVV"} label={"Còdigo de seguridad"} labelFor={cardCVVInputId}>
+										<Field name={"cardCVV"}  labelFor={cardCVVInputId}>
+										<label className={classes.labelColor}>Código de seguridad</label>
+										<div className={classes.label_}></div>
 											<Input
 												className={classes.textInput}
 												name="cardCVV"
