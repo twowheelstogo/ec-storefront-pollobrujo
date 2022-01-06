@@ -20,7 +20,7 @@ const styles = theme => ({
     },
     main: {
         paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(2)
+        paddingBottom: theme.spacing(2),        
     }
 });
 const CheckoutAction = (props) => {
@@ -28,10 +28,10 @@ const CheckoutAction = (props) => {
 
     const { activeStepElement, activeLabel, stepNumber, classes } = props;
     const label = (activeStepElement.props && activeStepElement.props.label) || activeLabel;
-    
+
     return (
         <React.Fragment>
-            <StyledTitle color={theme.palette.primary.dark}>{`${label}`}</StyledTitle>
+            <StyledTitle color={theme.palette.colors.TextTheme}>{`${label}`}</StyledTitle>
             <section className={classes.main}>
                 {React.cloneElement(activeStepElement)}
             </section>

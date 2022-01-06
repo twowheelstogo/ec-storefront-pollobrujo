@@ -37,7 +37,7 @@ class ShippingMethodCheckoutAction extends React.Component{
       	} = this.props;
       	return <React.Fragment>
       		{alert ? <InlineAlert {...alert}/>:""}
-      		{this.renderfulfillmentList()}
+      		{/* {this.renderfulfillmentList()} */}
       	</React.Fragment>;
       }
 }
