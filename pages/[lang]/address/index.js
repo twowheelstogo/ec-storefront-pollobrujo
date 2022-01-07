@@ -1,5 +1,5 @@
-import React,{ Component, Fragment, useEffect, useState } from "react";
-import Layout from "components/CustomLayout";
+import React, { Component, Fragment, useEffect, useState } from "react";
+import Layout from "components/Layout";
 import fetchPrimaryShop from "staticUtils/shop/fetchPrimaryShop";
 import fetchTranslations from "staticUtils/translations/fetchTranslations";
 import PropTypes from "prop-types";
@@ -9,8 +9,8 @@ import { withApollo } from "lib/apollo/withApollo";
 import { locales } from "translations/config";
 import Head from "next/head";
 import styled from "styled-components";
-import { Grid,useMediaQuery,Divider,Button } from "@material-ui/core";
-import { useTheme,withStyles } from "@material-ui/core/styles";
+import { Grid, useMediaQuery, Divider, Button } from "@material-ui/core";
+import { useTheme, withStyles } from "@material-ui/core/styles";
 import RoundedButton from "components/RoundedButton";
 import withGoogleMaps from "containers/maps/withGoogleMap";
 import GoogleMapComponent from "components/GoogleMaps";
@@ -23,8 +23,7 @@ import relayConnectionToArray from "lib/utils/relayConnectionToArray";
 import PageLoading from "components/PageLoading";
 import { useRouter } from "next/router";
 
-const PlacesWithStandaloneSearchBox = (props)=>
-{
+const PlacesWithStandaloneSearchBox = (props) => {
 	return <div data-standalone-searchbox="">
 		<StandaloneSearchBox
 			ref={props.onSearchBoxMounted}
@@ -32,70 +31,69 @@ const PlacesWithStandaloneSearchBox = (props)=>
 			onPlacesChanged={() => {
 				props.onPlacesChanged(props.authStore.accessToken);
 			}}
-			controlPosition = {google.maps.ControlPosition.TOP_LEFT}
+			controlPosition={google.maps.ControlPosition.TOP_LEFT}
 		>
 			{props.children}
 		</StandaloneSearchBox>
 	</div>;
 };
-const PlacesWithSearchBox = (props)=>
-{
+const PlacesWithSearchBox = (props) => {
 	return <SearchBox
 		ref={props.onSearchBoxMounted}
 		bounds={props.bounds}
 		onPlacesChanged={() => {
 			props.onPlacesChanged(props.authStore.accessToken);
 		}}
-		controlPosition = {google.maps.ControlPosition.TOP_LEFT}
+		controlPosition={google.maps.ControlPosition.TOP_LEFT}
 	>
-		<div style={{width:"50%",padding:"10px"}}>
+		<div style={{ width: "50%", padding: "10px" }}>
 			{props.children}
 		</div>
 	</SearchBox>;
 };
 const styles = theme => ({
-	flexForm:{
+	flexForm: {
 		display: "flex",
 		flexDirection: "column",
 		height: "100%",
 	},
-	flexMap:{
+	flexMap: {
 		padding: 0,
 		flex: "1 1 auto",
-		display:"flex",
+		display: "flex",
 		height: "100%",
 		flexDirection: "column",
 		justifyContent: "space-between"
 	},
-	form:{
+	form: {
 		width: "100%",
 		maxWidth: "600px",
 		alignSelf: "center",
 		paddingLeft: "auto",
 		paddingRight: "auto",
-		display:"flex",
-		flexDirection:"column",
+		display: "flex",
+		flexDirection: "column",
 		height: "100%",
-		paddingTop:theme.spacing(5),
-		[theme.breakpoints.down("md")]:{
-			paddingLeft:theme.spacing(2),
-			paddingRight:theme.spacing(2)
+		paddingTop: theme.spacing(5),
+		[theme.breakpoints.down("md")]: {
+			paddingLeft: theme.spacing(2),
+			paddingRight: theme.spacing(2)
 		},
 		paddingBottom: theme.spacing(5),
 		justifyContent: "space-between"
 	},
-	map:{
+	map: {
 		width: "100%",
 		height: "100%",
 	},
-	searchInput:{
+	searchInput: {
 		padding: theme.spacing(2)
 	},
-	addressItems:{
-		display:"flex",
-		flexDirection:"column",
-		alignItems:"center",
-		gap:"10px"
+	addressItems: {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+		gap: "10px"
 	}
 });
 const CustomTitle = styled.div`
@@ -110,36 +108,105 @@ const RenderedForm = styled.div`
         padding-top: 50px;
       }
 `;
-const CreateAddress = props =>{	
-	return(
-		
-		<div>hola</div>
+const CreateAddress = props => {
+	const shop = useShop();
+	const theme = useTheme();
+	const [currentAddressBook, setCurrentAddressBook] = useState(null);
+	const [loading, setLoading] = useState(true);
+	const [isSent, setIsSent] = useState(false);
+	const pageTitle = `Address | New | ${shop && shop.name}`;
+	const matches = useMediaQuery(theme.breakpoints.down("sm"));
+	const router = useRouter();
+	const { authStore: { account: { addressBook } } } = props;
+	const handleAddAddress = async (value) => {
+		try {
+			setIsSent(true);
+			const { onAddressAdded, onAddressEdited } = props;
+			const { query: redirect } = router;
+			let meta = value;
+			delete value._id;
+			if (props.googleProps.locationRef.latitude != undefined) {
+				meta = {
+					...value,
+					geolocation: props.googleProps.locationRef,
+					metaddress: { ...props.googleProps.metadataMarker }
+				};
+			}
+			if (addressBookId != null) {
+				await onAddressEdited(addressBookId, meta);
+			} else {
+				await onAddressAdded(meta);
+			}
+			window.location.href = decodeURIComponent(redirect.redirect);
+		} catch (ex) {
+			setIsSent(false);
+		}
+	};
+
+	useEffect(() => {
+		const { query: { addressBookId } } = router;
+		if (addressBookId == undefined) {
+			setLoading(false);
+			return;
+		}
+		const addresses = (addressBook && relayConnectionToArray(addressBook)) || [];
+		let current = addresses.find((item) => item._id == addressBookId);
+		if (current) {
+			if (current.metaddress) {
+				props.googleProps.whenHasMetaAddress(current.metaddress);
+			}
+			if (current.geolocation) {
+				props.googleProps.whenHasLocation(current.geolocation);
+			}
+		}
+		setCurrentAddressBook(current);
+		if (current != undefined) setLoading(false);
+	}, [addressBook]);
+	const { query: { addressBookId } } = router;
+	if (loading) return <PageLoading />;
+	return (
+		<Layout shop={shop} noMaxwidth>
+			<Head>
+				<title>{pageTitle}</title>
+				<meta name="description" content={shop && shop.description} />
+			</Head>
+			{!matches && <RenderWeb {...props}
+				handleAddAddress={handleAddAddress}
+				isSent={isSent}
+				value={currentAddressBook}
+			/>}
+			{matches && <RenderMobile {...props}
+				handleAddAddress={handleAddAddress}
+				isSent={isSent}
+				value={currentAddressBook}
+			/>}
+		</Layout>
 	);
 };
 const RenderMobile = withStyles(styles)((props) => {
 	const router = useRouter();
-	const [current,setCurrent] = useState(0);
-	const {googleProps,
+	const [current, setCurrent] = useState(0);
+	const { googleProps,
 		classes,
-		components:{TextInput,AddressForm},
+		components: { TextInput, AddressForm },
 		value,
 	} = props;
-	const {query: {addressBookId}} = router;
+	const { query: { addressBookId } } = router;
 	let form = null;
-	const [state,setState] = useState({
-		address:value?value.address:"ninguna",
-		description:value?value.description:"ninguna"
+	const [state, setState] = useState({
+		address: value ? value.address : "ninguna",
+		description: value ? value.description : "ninguna"
 	});
-	const handleChange = (event) =>{
+	const handleChange = (event) => {
 		setState({
-			description:event.description?event.description:"",
-			address:event.address?event.address:""
+			description: event.description ? event.description : "",
+			address: event.address ? event.address : ""
 		});
 	};
 	return (
 		<Fragment>
-			{current==0 &&(
-				<Grid container style={{minHeight:"calc(100vh - 130px)"}}>
+			{current == 0 && (
+				<Grid container style={{ minHeight: "calc(100vh - 130px)" }}>
 					<Grid item xs={12}>
 						<div className={classes.flexMap}>
 							<div className={classes.map}>
@@ -152,15 +219,17 @@ const RenderMobile = withStyles(styles)((props) => {
 										/>
 									</PlacesWithStandaloneSearchBox>
 								</div>
-								<div style={{height:"500px"}}>
-									<GoogleMapComponent authStore={props.authStore} {...googleProps} location={value && value?.geolocation}/>
+								<div style={{ height: "500px" }}>
+									<GoogleMapComponent authStore={props.authStore} {...googleProps} location={value && value?.geolocation} />
 								</div>
 							</div>
-							<div style={{paddingBottom:"20px",
-								paddingTop:"10px",
-								paddingLeft:"10px",paddingRight:"10px"}}>
+							<div style={{
+								paddingBottom: "20px",
+								paddingTop: "10px",
+								paddingLeft: "10px", paddingRight: "10px"
+							}}>
 								<RoundedButton
-									onClick={()=>{setCurrent(1);}}
+									onClick={() => { setCurrent(1); }}
 									buttonTitle={"Guardar y continuar"}
 								/>
 							</div>
@@ -168,35 +237,35 @@ const RenderMobile = withStyles(styles)((props) => {
 					</Grid>
 				</Grid>
 			)}
-			{current==1 &&(
-				<Grid container style={{minHeight:"calc(100vh - 130px)"}}>
+			{current == 1 && (
+				<Grid container style={{ minHeight: "calc(100vh - 130px)" }}>
 					<Grid item xs={12}>
 						<div className={classes.flexForm}>
 							<div className={classes.form}>
 								<div className={classes.addressItems}>
-									<CustomTitle style={{fontSize:"30px"}}>{addressBookId?"Editar Dirección":"Crear Dirección"}</CustomTitle>
-									<Divider  style={{width:"80%"}}/>
+									<CustomTitle style={{ fontSize: "30px" }}>{addressBookId ? "Editar Dirección" : "Crear Dirección"}</CustomTitle>
+									<Divider style={{ width: "80%" }} />
 									<Button variant="outlined"
 										size="small"
-										startIcon={<LocationSearchingIcon/>}
-										onClick={()=>setCurrent(0)}
+										startIcon={<LocationSearchingIcon />}
+										onClick={() => setCurrent(0)}
 									>Cambiar la ubicación</Button>
 									<RenderedForm>
 										<AddressForm
-											ref={(formEl)=>{
+											ref={(formEl) => {
 												form = formEl;
 											}}
 											onChange={handleChange}
 											value={value}
-											onSubmit={props.handleAddAddress}/>
+											onSubmit={props.handleAddAddress} />
 									</RenderedForm>
 								</div>
 								<div>
 									<RoundedButton
 										disabled={props.isSent}
-										onClick={()=>{form.submit();}}
+										onClick={() => { form.submit(); }}
 										buttonTitle={"Guardar Cambios"}
-										buttonSubtitle = {`${state.description} - ${state.address}`}
+										buttonSubtitle={`${state.description} - ${state.address}`}
 									/>
 								</div>
 							</div>
@@ -209,40 +278,40 @@ const RenderMobile = withStyles(styles)((props) => {
 });
 const RenderWeb = withStyles(styles)((props) => {
 	const router = useRouter();
-	const {classes,components:{
+	const { classes, components: {
 		AddressForm,
 		Field,
 		TextInput
-	},googleProps,value} = props;
-	const {query: {addressBookId}} = router;
-	const [state,setState] = useState({
-		address:value?value.address:"ninguna",
-		description:value?value.description:"ninguna"
+	}, googleProps, value } = props;
+	const { query: { addressBookId } } = router;
+	const [state, setState] = useState({
+		address: value ? value.address : "ninguna",
+		description: value ? value.description : "ninguna"
 	});
 	let form = null;
-	const handleChange = (event) =>{
+	const handleChange = (event) => {
 		setState({
-			description:event.description?event.description:"",
-			address:event.address?event.address:""
+			description: event.description ? event.description : "",
+			address: event.address ? event.address : ""
 		});
 	};
-	return(
+	return (
 		<Fragment>
-			<Grid container style={{minHeight:"calc(100vh - 110px)"}}>
+			<Grid container style={{ minHeight: "calc(100vh - 110px)" }}>
 				<Grid item xs={12} md={6}>
 					<div className={classes.flexForm}>
 						<div className={classes.form}>
 							<div>
-								<CustomTitle>{addressBookId?"Editar Dirección":"Crear Dirección"}</CustomTitle>
-								<Divider/>
+								<CustomTitle>{addressBookId ? "Editar Dirección" : "Crear Dirección"}</CustomTitle>
+								<Divider />
 								<RenderedForm>
 									<AddressForm
-										ref = {(ref)=>{
+										ref={(ref) => {
 											form = ref;
 										}}
 										onChange={handleChange}
 										value={value}
-										onSubmit = {props.handleAddAddress}
+										onSubmit={props.handleAddAddress}
 
 									/>
 								</RenderedForm>
@@ -250,9 +319,9 @@ const RenderWeb = withStyles(styles)((props) => {
 							<div>
 								<RoundedButton
 									disabled={props.isSent}
-									onClick={()=>{form.submit();}}
+									onClick={() => { form.submit(); }}
 									buttonTitle={"Guardar Cambios"}
-									buttonSubtitle = {`${state.description} - ${state.address}`}
+									buttonSubtitle={`${state.description} - ${state.address}`}
 								/>
 							</div>
 						</div>
@@ -261,11 +330,11 @@ const RenderWeb = withStyles(styles)((props) => {
 				<Grid item xs={12} md={6}>
 					<div className={classes.flexMap}>
 						<div className={classes.map}>
-							<GoogleMapComponent 
+							<GoogleMapComponent
 								authStore={props.authStore}
 								{...googleProps}
 								location={value && value?.geolocation}
-								SearchBox = {
+								SearchBox={
 									<PlacesWithSearchBox
 										{...props}
 										{...googleProps}>
@@ -275,7 +344,7 @@ const RenderWeb = withStyles(styles)((props) => {
 											placeholder="buscar una dirección"
 										/>
 									</PlacesWithSearchBox>
-								}/>
+								} />
 						</div>
 					</div>
 				</Grid>
@@ -284,7 +353,7 @@ const RenderWeb = withStyles(styles)((props) => {
 	);
 });
 
-export async function getStaticProps({ params: { lang }}) {
+export async function getStaticProps({ params: { lang } }) {
 	const primaryShop = await fetchPrimaryShop(lang);
 	const translations = await fetchTranslations(lang, ["common"]);
 	if (!primaryShop) {
@@ -297,7 +366,7 @@ export async function getStaticProps({ params: { lang }}) {
 			unstable_revalidate: 1 // Revalidate immediately
 		};
 	}
-  
+
 	return {
 		props: {
 			...primaryShop,
@@ -307,8 +376,8 @@ export async function getStaticProps({ params: { lang }}) {
 		unstable_revalidate: 120 // Revalidate each two minutes
 	};
 }
-  
-  
+
+
 /**
    *  Static paths for the cart
    *
@@ -320,5 +389,5 @@ export async function getStaticPaths() {
 		fallback: false
 	};
 }
-  
-export default withApollo()(inject("routingStore","authStore")(CreateAddress));
+
+export default withApollo()(withGoogleMaps(withAddressBook(inject("routingStore", "authStore")(CreateAddress))));
