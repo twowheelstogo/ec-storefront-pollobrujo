@@ -22,6 +22,7 @@ import inject from "hocs/inject";
 import relayConnectionToArray from "lib/utils/relayConnectionToArray";
 import PageLoading from "components/PageLoading";
 import { useRouter } from "next/router";
+import CrosshairsGps  from "mdi-material-ui/CrosshairsGps";
 
 const PlacesWithStandaloneSearchBox = (props) => {
 	return <div data-standalone-searchbox="">
@@ -58,6 +59,20 @@ const styles = theme => ({
 		borderColor: theme.palette.secondary.botones, 
 		fontWeight:"800",
 		fontSize:"24px"
+	  },
+	  BotonPrincipalMovil:{
+		backgroundColor: theme.palette.secondary.botones,    
+		color: theme.palette.colors.BotonColor,
+		borderColor: theme.palette.secondary.botones, 
+		fontWeight:"800",
+		fontSize:"18px"
+	  },
+	  BotonSecundario:{
+		backgroundColor: theme.palette.secondary.botones,    
+		color: theme.palette.colors.BotonColor,
+		borderColor: theme.palette.secondary.botones, 
+		fontWeight:"800",
+		fontSize:"10px"
 	  },
 	flexForm: {
 		display: "flex",
@@ -239,7 +254,8 @@ const RenderMobile = withStyles(styles)((props) => {
 							}}>		
 								<Button
 								onClick={() => { setCurrent(1); }}
-								className={classes.BotonPrincipal}
+								className={classes.BotonPrincipalMovil}
+								isFullWidth
 								>
 									Guardar y continuar
 									</Button>														
@@ -260,7 +276,11 @@ const RenderMobile = withStyles(styles)((props) => {
 										size="small"
 										startIcon={<LocationSearchingIcon />}
 										onClick={() => setCurrent(0)}
-									>Cambiar la ubicación</Button>
+										cl
+										className={classes.BotonSecundario}
+									>										
+										<CrosshairsGps/>
+										Cambiar la ubicación</Button>
 									<RenderedForm>
 										<AddressForm
 											ref={(formEl) => {
@@ -276,7 +296,7 @@ const RenderMobile = withStyles(styles)((props) => {
 									disabled={props.isSent}
 									onClick={() => { form.submit(); }}
 									isFullWidth
-									className={classes.BotonPrincipal}
+									className={classes.BotonPrincipalMovil}
 									>
 									Guardar Cambios
 									</Button>
