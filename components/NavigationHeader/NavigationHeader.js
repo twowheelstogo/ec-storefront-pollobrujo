@@ -160,12 +160,12 @@ class NavigationHeader extends Component {
       ImageCoverUrl,
       MessageCover,            
       shop,      
-      cart,
-      BanderaSlideHero,
+      cart,      
       width,      
       components: { SearchBar },
       components: { IconsActions },
       components: { SlideHero },
+      withHero
     } = this.props;
 
     return (
@@ -218,7 +218,7 @@ class NavigationHeader extends Component {
               <h1> </h1>
             </Grid>
 
-            {BanderaSlideHero ? <SlideHero title={MessageCover} subtitle={""} background={ImageCoverUrl} type={"jpg"} /> : null}
+            {withHero ? <SlideHero title={MessageCover} subtitle={""} background={ImageCoverUrl} type={"jpg"} /> : null}
           </>
         ) : (
           <>
@@ -262,7 +262,7 @@ class NavigationHeader extends Component {
             <Grid key={7} xs={11} md={11} lg={11} className={classes.Espacio2}>
               <h1> </h1>
             </Grid>
-            {BanderaSlideHero ? <SlideHero title={MessageCover} subtitle={""} background={ImageCoverUrl} type={"jpg"} /> : null}            
+            {withHero ? <SlideHero title={MessageCover} subtitle={""} background={ImageCoverUrl} type={"jpg"} /> : null}            
           </>
         )}
       </>

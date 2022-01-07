@@ -73,7 +73,7 @@ class ProductGridPage extends Component {
 
 
     return (
-      <Layout shop={shop}>
+      <Layout shop={shop} withHero>
         <Helmet
           title={pageTitle}
           meta={[{ name: "descrition", content: shop && shop.description }]}

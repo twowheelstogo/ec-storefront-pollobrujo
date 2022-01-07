@@ -1,4 +1,3 @@
-
 import iconAmericanExpress from "@reactioncommerce/components/svg/iconAmericanExpress";
 import iconClear from "@reactioncommerce/components/svg/iconClear";
 import iconDiscover from "@reactioncommerce/components/svg/iconDiscover";
@@ -16,7 +15,8 @@ import AddressBook from "@reactioncommerce/components/AddressBook/v1";
 import Address from "@reactioncommerce/components/Address/v1";
 import AddressCapture from "@reactioncommerce/components/AddressCapture/v1";
 import AddressChoice from "@reactioncommerce/components/AddressChoice/v1";
-import AddressForm from "@reactioncommerce/components/AddressForm/v1";
+//import AddressForm from "@reactioncommerce/components/AddressForm/v1";
+import AddressForm from "components/AddressForm/v2";
 import AddressReview from "@reactioncommerce/components/AddressReview/v1";
 import BadgeOverlay from "@reactioncommerce/components/BadgeOverlay/v1";
 // import Button from "@reactioncommerce/components/Button/v1";

@@ -16,9 +16,12 @@ const styles = (theme) => ({
 	root:{
 		width:"100%",
 		height:"120px",
-		background:theme.palette.primary.dark,
-		color:"white",
+		backgroundColor: theme.palette.secondary.botones,    
+		color: theme.palette.colors.BotonColor,
 		borderRadius:"16px",
+		borderColor: theme.palette.secondary.botones, 
+		fontWeight:"800",
+		fontSize:"18px",
 		paddingLeft:theme.spacing(2),
 		paddingRight:theme.spacing(2),
 		// paddingTop:theme.spacing(3),
@@ -28,7 +31,7 @@ const styles = (theme) => ({
 		justifyContent:"space-between",
 		alignItems:"center",
 		cursor:"pointer"
-	},
+	},	
 	leading:{
 	},
 	trailing:{
@@ -39,6 +42,9 @@ const styles = (theme) => ({
 	title:{
 		fontSize:"21px",
 		fontWeight:600
+	},
+	Icono_:{
+		color: theme.palette.primary.dark
 	}
 });
 const RoundedButton = props => {
@@ -53,7 +59,7 @@ const RoundedButton = props => {
 					<CustomSubtitle>{buttonSubtitle}</CustomSubtitle>
 				</div>
 				<div className={classes.trailing}>
-					<IconButton style={{color:"white"}} onClick={onClick} disabled={disabled}>
+					<IconButton className={classes.Icono_} onClick={onClick} disabled={disabled}>
 						<ArrowRight/>
 					</IconButton>
 				</div>

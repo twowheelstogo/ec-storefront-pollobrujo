@@ -52,6 +52,13 @@ const PlacesWithSearchBox = (props) => {
 	</SearchBox>;
 };
 const styles = theme => ({
+	BotonPrincipal:{
+		backgroundColor: theme.palette.secondary.botones,    
+		color: theme.palette.colors.BotonColor,
+		borderColor: theme.palette.secondary.botones, 
+		fontWeight:"800",
+		fontSize:"24px"
+	  },
 	flexForm: {
 		display: "flex",
 		flexDirection: "column",
@@ -94,10 +101,12 @@ const styles = theme => ({
 		flexDirection: "column",
 		alignItems: "center",
 		gap: "10px"
+	},
+	Titulo: {
+	color: theme.palette.colors.TextThemes,
 	}
 });
-const CustomTitle = styled.div`
-    color: #7A6240;
+const CustomTitle = styled.div`    
     font-size: 36px;
     font-weight: 600;
     text-align: center;
@@ -188,7 +197,7 @@ const RenderMobile = withStyles(styles)((props) => {
 	const [current, setCurrent] = useState(0);
 	const { googleProps,
 		classes,
-		components: { TextInput, AddressForm },
+		components: { TextInput, AddressForm,Button },
 		value,
 	} = props;
 	const { query: { addressBookId } } = router;
@@ -227,11 +236,13 @@ const RenderMobile = withStyles(styles)((props) => {
 								paddingBottom: "20px",
 								paddingTop: "10px",
 								paddingLeft: "10px", paddingRight: "10px"
-							}}>
-								<RoundedButton
-									onClick={() => { setCurrent(1); }}
-									buttonTitle={"Guardar y continuar"}
-								/>
+							}}>		
+								<Button
+								onClick={() => { setCurrent(1); }}
+								className={classes.BotonPrincipal}
+								>
+									Guardar y continuar
+									</Button>														
 							</div>
 						</div>
 					</Grid>
@@ -243,7 +254,7 @@ const RenderMobile = withStyles(styles)((props) => {
 						<div className={classes.flexForm}>
 							<div className={classes.form}>
 								<div className={classes.addressItems}>
-									<CustomTitle style={{ fontSize: "30px" }}>{addressBookId ? "Editar Dirección" : "Crear Dirección"}</CustomTitle>
+									<CustomTitle className={classes.Titulo} style={{ fontSize: "30px" }}>{addressBookId ? "Editar Dirección" : "Crear Dirección"}</CustomTitle>
 									<Divider style={{ width: "80%" }} />
 									<Button variant="outlined"
 										size="small"
@@ -261,12 +272,20 @@ const RenderMobile = withStyles(styles)((props) => {
 									</RenderedForm>
 								</div>
 								<div>
-									<RoundedButton
+									<Button
+									disabled={props.isSent}
+									onClick={() => { form.submit(); }}
+									isFullWidth
+									className={classes.BotonPrincipal}
+									>
+									Guardar Cambios
+									</Button>
+									{/* <RoundedButton
 										disabled={props.isSent}
 										onClick={() => { form.submit(); }}
 										buttonTitle={"Guardar Cambios"}
 										buttonSubtitle={`${state.description} - ${state.address}`}
-									/>
+									/> */}
 								</div>
 							</div>
 						</div>
@@ -281,7 +300,8 @@ const RenderWeb = withStyles(styles)((props) => {
 	const { classes, components: {
 		AddressForm,
 		Field,
-		TextInput
+		TextInput,
+		Button
 	}, googleProps, value } = props;
 	const { query: { addressBookId } } = router;
 	const [state, setState] = useState({
@@ -302,7 +322,7 @@ const RenderWeb = withStyles(styles)((props) => {
 					<div className={classes.flexForm}>
 						<div className={classes.form}>
 							<div>
-								<CustomTitle>{addressBookId ? "Editar Dirección" : "Crear Dirección"}</CustomTitle>
+								<CustomTitle className={classes.Titulo}>{addressBookId ? "Editar Dirección" : "Crear Dirección"}</CustomTitle>
 								<Divider />
 								<RenderedForm>
 									<AddressForm
@@ -317,12 +337,14 @@ const RenderWeb = withStyles(styles)((props) => {
 								</RenderedForm>
 							</div>
 							<div>
-								<RoundedButton
-									disabled={props.isSent}
-									onClick={() => { form.submit(); }}
-									buttonTitle={"Guardar Cambios"}
-									buttonSubtitle={`${state.description} - ${state.address}`}
-								/>
+								<Button
+								isFullWidth
+								disabled={props.isSent}
+								onClick={() => { form.submit(); }}
+								className={classes.BotonPrincipal}   
+								>
+								Crear Dirección
+								</Button>								
 							</div>
 						</div>
 					</div>
@@ -390,4 +412,4 @@ export async function getStaticPaths() {
 	};
 }
 
-export default withApollo()(withGoogleMaps(withAddressBook(inject("routingStore", "authStore")(CreateAddress))));
+export default withApollo()(withGoogleMaps(withAddressBook(withStyles(styles)(inject("routingStore","authStore")(CreateAddress)))));
