@@ -114,6 +114,7 @@ export default function Login(props) {
         >Correo electronico</InputLabel>
         <Input id="email" aria-describedby="email-address" onChange={handleEmailChange} value={email}
           type="email"
+          className={classes.Texto_}
         />
       </FormControl>
       <FormControl>
@@ -126,6 +127,7 @@ export default function Login(props) {
           onChange={handlePasswordChange}
           value={password}
           type="password"
+          className={classes.Texto_}
         />
       </FormControl>
       <div

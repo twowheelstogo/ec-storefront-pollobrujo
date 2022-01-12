@@ -8,7 +8,7 @@ import ShippingAddressCheckoutAction from "@reactioncommerce/components/Shipping
 import FulfillmentOptionsCheckoutAction from "@reactioncommerce/components/FulfillmentOptionsCheckoutAction/v1";
 import PaymentsCheckoutAction from "@reactioncommerce/components/PaymentsCheckoutAction/v1";
 import FinalReviewCheckoutAction from "@reactioncommerce/components/FinalReviewCheckoutAction/v1";
-import { addTypographyStyles } from "@reactioncommerce/components/utils";
+import { addTypographyStyles,applyTheme } from "@reactioncommerce/components/utils";
 import withAddressValidation from "containers/address/withAddressValidation";
 import Dialog from "@material-ui/core/Dialog";
 import PageLoading from "components/PageLoading";
@@ -19,14 +19,31 @@ import FulfillmentTypeAction from "components/FulfillmentTypeAction";
 import deliveryMethods from "custom/deliveryMethods";
 import PaymentMethodCheckoutAction from "components/PaymentMethodCheckoutAction";
 import BillingCheckoutAction from "components/BillingCheckoutAction";
+import { useTheme, withStyles } from "@material-ui/core/styles";
+import { withComponents } from "@reactioncommerce/components-context";
 
 const MessageDiv = styled.div`
   ${addTypographyStyles("NoPaymentMethodsMessage", "bodyText")}
+`;
+const ButtonContent = styled.div`    
+  display: flex;
+  justify-content:center;
 `;
 
 const NoPaymentMethodsMessage = () => <MessageDiv>No payment methods available</MessageDiv>;
 
 NoPaymentMethodsMessage.renderComplete = () => "";
+
+const styles = theme => ({
+	BotonPrincipal:{
+		backgroundColor: theme.palette.secondary.botones,    
+		color: theme.palette.colors.BotonColor,
+		borderColor: theme.palette.secondary.botones, 
+		fontWeight:"800",
+		fontSize:"24px",    
+    width:"65%"
+	  },    
+  });
 
 class CheckoutActions extends Component {
   static propTypes = {
@@ -51,7 +68,11 @@ class CheckoutActions extends Component {
     }),
     clearAuthenticatedUsersCart: PropTypes.func.isRequired,
     orderEmailAddress: PropTypes.string.isRequired,
-    paymentMethods: PropTypes.array
+    paymentMethods: PropTypes.array,    
+  };
+
+  static defaultProps = {
+    classes: {},
   };
 
   state = {
@@ -365,6 +386,8 @@ class CheckoutActions extends Component {
       cartStore,
       paymentMethods,
       authStore,
+      classes,
+      components: {Button}
     } = this.props;
 
     const { checkout: { fulfillmentGroups, summary }, items } = cart;
@@ -464,9 +487,18 @@ class CheckoutActions extends Component {
       <Fragment>
         {this.renderPlacingOrderOverlay()}
         <Actions actions={actions} />
+        
+        <ButtonContent>        
+        <Button			        					
+					className={classes.BotonPrincipal}
+					isFullWidth
+				>
+					Realizar Compra
+				</Button>	        									
+				</ButtonContent>
       </Fragment>
     );
   }
 }
 
-export default withAddressValidation(CheckoutActions);
+export default withComponents(withStyles(styles)(withAddressValidation(CheckoutActions)));

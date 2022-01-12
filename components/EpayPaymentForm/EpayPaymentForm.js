@@ -30,7 +30,7 @@ import styled from "styled-components";
 const Grid = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-between;  
 `;
 const SecureCaption = styled.div`
   ${addTypographyStyles("StripePaymentInputCaption", "captionText")}
@@ -49,12 +49,12 @@ const ErrorSpan = styled.div`
   color: red;
 `;
 const CardSpan = styled.span`
-  margin-left: 5px;
+  margin-left: 5px;    
 `;
 const AcceptedPaymentMethods = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin: 20px 0;
+  margin: 20px 0;  
 `;
 const ColFull = styled.div`
   flex: 1 1 100%;

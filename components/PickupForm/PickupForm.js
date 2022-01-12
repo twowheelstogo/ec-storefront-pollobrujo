@@ -94,7 +94,8 @@ class PickupForm extends Component {
 			>
 				<Grid>
 					<ColHalf>
-						<Field name="pickupDate" label="Fecha de pickup" labelFor={pickupDateInputId} isRequired>
+						<Field style={{color:"#fff"}}
+							name="pickupDate" label="Fecha de pickup" labelFor={pickupDateInputId} isRequired>
 							<TextInput
 								id={pickupDateInputId}
 								name="pickupDate"

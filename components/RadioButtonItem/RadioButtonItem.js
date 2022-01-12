@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {CustomPropTypes } from "@reactioncommerce/components/utils";
 import Radio from "@material-ui/core/Radio";
 const Item = styled.div`
-    background: #F4F1F1;
+    background: #202124;
     display: flex;
     flex-grow: 1;
     flex-direction: row;
@@ -32,11 +32,12 @@ const ItemTrailing = styled.div`
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
+    color: !important #fff;
 `;
 const ItemTitle = styled.div`
     font-size: 18px;
     font-weight: 600;
-    color: black;
+    color: #fff;
     display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;  
@@ -45,7 +46,7 @@ const ItemTitle = styled.div`
 const ItemSubtitle = styled.div`
     font-size: 14px;
     font-weight: 600;
-    color: #565656;
+    color: #979797;
     display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;  
@@ -66,7 +67,7 @@ class RadioButtonItem extends React.Component{
     	const {handleChange,value} = this.props;
     	handleChange(value); 
     }
-    render(){
+    render() {
     	const {
     		title,
     		description,
@@ -80,6 +81,7 @@ class RadioButtonItem extends React.Component{
     		<Item>
     			<ItemLeading>
     				<Radio
+                        style={{color:"#FFFFFF"}}
     					checked={isSelected}
     					onChange={this.onChange}
     					value={value}

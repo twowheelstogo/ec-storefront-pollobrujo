@@ -15,6 +15,7 @@ const SecureCaption = styled.div`
 
 const Span = styled.span`
   vertical-align: super;
+  color:#fff;
 `;
 
 const IconLockSpan = styled.span`
@@ -74,9 +75,10 @@ class PickupCheckoutAction extends Component {
 					<SecureCaption>
 						 <Span>{"Agenda fecha y hora de pickup no menor a 20 minutos de entrega"}</Span>
 					</SecureCaption>
-					<Button
+					<Button						
+						style={{color:"#FFEB3B",backgroundColor:"#000"}}
 						title="secondary"
-						actionType="secondary"
+						//actionType="secondary"
 						isShortHeight
 						isWaiting={this.state.isLoadingDetails}
 						onClick={() => this._form.submit()}

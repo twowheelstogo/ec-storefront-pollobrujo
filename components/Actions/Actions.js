@@ -9,10 +9,10 @@ const Action = styled.div`
   padding-bottom: ${applyTheme("CheckoutActions.itemPaddingBottom")};
   padding-left: ${applyTheme("CheckoutActions.itemPaddingLeft")};
   padding-right: ${applyTheme("CheckoutActions.itemPaddingRight")};
-  padding-top: ${applyTheme("CheckoutActions.itemPaddingTop")};
+  padding-top: ${applyTheme("CheckoutActions.itemPaddingTop")};  
 `;
 
-const FormActions = styled.div`
+const FormActions = styled.div`  
   display: flex;
   justify-content: flex-end;
   padding-bottom: ${applyTheme("CheckoutActions.itemPaddingBottom")};
@@ -30,7 +30,7 @@ const PlaceOrderButtonContainer = styled.div`
   padding-left: 0;
   padding-right: 0;
   padding-top: ${applyTheme("CheckoutActions.spaceAbovePlaceOrderButton")};
-  width: ${applyTheme("CheckoutActions.placeOrderButtonWidth")};
+  width: ${applyTheme("CheckoutActions.placeOrderButtonWidth")};  
 `;
 
 class CheckoutActions extends Component {
@@ -274,6 +274,7 @@ class CheckoutActions extends Component {
   	return (
   		<Fragment>
   			<Comp
+			  style={{border: "1px solid #fff"}}
   				{...action.props}
   				onReadyForSaveChange={(ready) => {
   					this.setStateForAction(action.id, { readyForSave: ready });

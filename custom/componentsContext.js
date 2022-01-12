@@ -75,11 +75,13 @@ import Button from "@reactioncommerce/components/Button/v1";
 import AddressList from "components/AddressList";
 import RadioButtonItem from "components/RadioButtonItem";
 import BillingForm from "components/BillingForm";
+import PickupForm from "components/PickupForm";
 import Field from "components/Field";
 // Providing locales data
 const AddressFormWithLocales = withLocales(AddressForm);
 
 export default {  
+  PickupForm,
   Accordion,
   AccordionFormList,
   AddressBook,

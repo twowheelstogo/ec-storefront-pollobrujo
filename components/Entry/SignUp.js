@@ -96,6 +96,7 @@ export default function SignUp(props) {
         <InputLabel htmlFor="email"  className={classes.Texto_}>Correo electronico</InputLabel>
         <Input id="email" aria-describedby="email-address" onChange={handleEmailChange} value={email}
           type="email"
+          className={classes.Texto_}
         />
       </FormControl>
       <FormControl>
@@ -106,6 +107,7 @@ export default function SignUp(props) {
           onChange={handlePasswordChange}
           value={password}
           type="password"
+          className={classes.Texto_}
         />
       </FormControl>
       <Button

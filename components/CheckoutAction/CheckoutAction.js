@@ -13,20 +13,14 @@ const CompleteActionWrapper = styled.div`
 const StyledTitle = styled.div`
   font-size: 18px;
   font-weight: 700;
-  color: ${({ color }) => color};
+  color: #fff;
 `;
 const styles = theme => ({
     root: {
     },
     main: {
         paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(2),        
-        "& .fSXXHe":{
-         border: "1px solid #FFEB3B"
-      },
-      "& .iJMlmI":{
-         border: "1px solid #fff"
-      }
+        paddingBottom: theme.spacing(2),                      
     },    
 });
 const CheckoutAction = (props) => {
@@ -37,9 +31,9 @@ const CheckoutAction = (props) => {
 
     return (
         <React.Fragment>
-            <StyledTitle color={theme.palette.colors.TextTheme}>{`${label}`}</StyledTitle>
-            <section className={classes.main}>
-                {React.cloneElement(activeStepElement)}
+            <StyledTitle>{`${label}`}</StyledTitle>
+            <section className={classes.main}>               
+             {React.cloneElement(activeStepElement)}             
             </section>
         </React.Fragment>
     );

@@ -54,23 +54,26 @@ const PlacesWithSearchBox = (props) => {
 };
 const styles = theme => ({
 	BotonPrincipal:{
-		backgroundColor: theme.palette.secondary.botones,    
-		color: theme.palette.colors.BotonColor,
-		borderColor: theme.palette.secondary.botones, 
+		backgroundColor: "!important #FFEB3B",
+		//theme.palette.secondary.botones,    
+		color: "!important #000",
+		//theme.palette.colors.BotonColor,		
 		fontWeight:"800",
 		fontSize:"24px"
 	  },
 	  BotonPrincipalMovil:{
-		backgroundColor: theme.palette.secondary.botones,    
-		color: theme.palette.colors.BotonColor,
-		borderColor: theme.palette.secondary.botones, 
+		backgroundColor: "! important #FFEB3B",
+		//theme.palette.secondary.botones,    
+		color: "!important #000",
+		//theme.palette.colors.BotonColor,		
 		fontWeight:"800",
 		fontSize:"18px"
 	  },
 	  BotonSecundario:{
-		backgroundColor: theme.palette.secondary.botones,    
-		color: theme.palette.colors.BotonColor,
-		borderColor: theme.palette.secondary.botones, 
+		backgroundColor: "!important #FFEB3B",
+		//theme.palette.secondary.botones,    
+		color: "! important #000",
+		//theme.palette.colors.BotonColor,		
 		fontWeight:"800",
 		fontSize:"10px"
 	  },

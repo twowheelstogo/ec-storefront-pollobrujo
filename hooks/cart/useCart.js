@@ -13,7 +13,8 @@ import {
   setFulfillmentOptionCartMutation,
   setShippingAddressCartMutation,
   updateCartItemsQuantityMutation,
-  updateFulfillmentOptionsForGroup
+  updateFulfillmentOptionsForGroup,
+  updateFulfillmentTypeForGroup
 } from "./mutations.gql";
 import { accountCartByAccountIdQuery, anonymousCartByCartIdQuery } from "./queries.gql";
 
@@ -254,8 +255,10 @@ export default function useCart() {
     addItemsToCart: (items) => handleAddItemsToCart({ items }, !cart || !cart._id),
     addOrCreateCartLoading,
     cart: processedCartData,
+    
     checkoutMutations: {
       onSetFulfillmentOption: async ({ fulfillmentGroupId, fulfillmentMethodId }) => {
+
         const cartIdData = cartIdAndCartToken();
 
         if (!cartIdData.cartId) return null;
@@ -273,6 +276,28 @@ export default function useCart() {
 
         return response;
       },
+      onSetFulfillmentType: async ({ fulfillmentGroupId, fulfillmentType }) => {
+				const cartIdData = cartIdAndCartToken();
+
+				if (!cartIdData.cartId) return null;
+
+				const response = await apolloClient.mutate({
+					mutation: updateFulfillmentTypeForGroup,
+					variables: {
+						input: {
+							...cartIdData,
+							fulfillmentGroupId,
+							fulfillmentType
+						}
+					}
+				});
+				
+				// Update fulfillment options for current cart
+				const { data: { updateFulfillmentTypeForGroup: fulfillmentResponse } } = response;
+				handleUpdateFulfillmentOptionsForGroup(fulfillmentResponse.cart.checkout.fulfillmentGroups[0]._id);
+				return response;
+
+			},
       onSetShippingAddress: async (address) => {
         const addressId = address._id;
 				delete address._id;

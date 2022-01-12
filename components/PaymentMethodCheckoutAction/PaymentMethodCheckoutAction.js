@@ -5,7 +5,7 @@ import { CustomPropTypes } from "@reactioncommerce/components/utils";
 import styled from "styled-components";
 
 const InputContent = styled.div`
-    padding-top: 15px;
+    padding-top: 15px;	
 `;
 class PaymentMethodCheckoutAction extends Component{
 	constructor(props){
@@ -116,7 +116,8 @@ class PaymentMethodCheckoutAction extends Component{
                		<selectedPaymentMethod.InputComponent 
                			{...this.props}
                			onChange = {this.handleChange}
-               			onSubmit={this.handleSubmit}/>
+               			onSubmit={this.handleSubmit}						
+						   />
                	</InputContent>
                )}
       		</div>

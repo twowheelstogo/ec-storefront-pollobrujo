@@ -10,7 +10,7 @@ const Items = styled.div`
     grid-auto-flow: column;
     justify-content: flex-start;
     grid-auto-columns: minmax(180px,180px);
-    scrollbar-width: none;
+    scrollbar-width: none;    
 `;
 class CardItemList extends Component {
     static propTypes = {
