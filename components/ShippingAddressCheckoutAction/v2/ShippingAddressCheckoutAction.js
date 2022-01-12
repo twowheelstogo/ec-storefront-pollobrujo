@@ -47,7 +47,9 @@ class ShippingAddressCheckoutAction extends React.Component {
 		} = this.props;
 		const date = new Date();
 		date.setHours(date.getHours() + 1);
-		const estimatedTime = `${date.getHours()}:${date.getMinutes()}`;
+		const hora = parseInt(date.getHours()) > 9 ? `${parseInt(date.getHours())}` : `0${parseInt(date.getHours())}`;
+		const minutos = parseInt(date.getMinutes()) > 9 ? `${parseInt(date.getMinutes())}` : `0${parseInt(date.getMinutes())}`;
+		const estimatedTime = `${hora}:${minutos}`;
 
 		return (
 			<React.Fragment>
