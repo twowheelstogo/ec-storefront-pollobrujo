@@ -8,7 +8,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import CheckoutButtons from "components/CheckoutButtons";
 
-
 const styles = (theme) => ({
   container: {
     "alignItems": "center",

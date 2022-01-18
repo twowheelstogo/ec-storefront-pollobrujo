@@ -36,7 +36,8 @@ const styles = ({ palette, zIndex }) => ({
     zIndex: zIndex.modal
   },
   cart: {
-    backgroundColor: palette.common.white
+    backgroundColor: "blue"
+    //palette.common.white
   },
   emptyCart: {
     display: "flex",
@@ -44,16 +45,22 @@ const styles = ({ palette, zIndex }) => ({
     alignItems: "center",
     width: 360,
     height: 320,
-    border: palette.borders.default
+    border: palette.borders.default,
+    backgroundColor: palette.background.Carrito,  
   },
   badge: {
     width: 20,
-    height: 20,
-    top: 10,
-    left: 20,
+    height: 20,    
+    ["@media (min-width:600px)"]: {
+      left: 20,
+      top: 10,
+    },    
+    ["@media (max-width:599px)"]: {
+      left:7,
+      top: 5,
+    },    
     background: palette.primary.main,
-    color: palette.primary.light,
-     
+    color: palette.primary.light,     
   },  
 });
 
@@ -161,7 +168,7 @@ class MiniCart extends Component {
               />
             ),
             CartCheckoutButton: (cartCheckoutProps) => (
-  						<Button 
+  						<Button               
               className={classes.BotonPrincipal}      
               {...cartCheckoutProps} isFullWidth>{"Proceder a la compra - " + cart.checkout.summary.itemTotal.displayAmount}</Button>          
   					)
@@ -196,8 +203,7 @@ class MiniCart extends Component {
               ? (
                 <Badge                  
                   badgeContent={cart.totalItemQuantity}                  
-                  classes={{ badge: classes.badge                  
-                  }}
+                  classes={{ badge: classes.badge}}
                 >
                    <ShoppingOutline className={classes.Compra}  />
                 </Badge>

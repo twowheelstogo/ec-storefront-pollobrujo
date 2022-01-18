@@ -88,7 +88,7 @@ class IconsActions extends Component {
       }
       return nuevo;
     };
-    console.log(width);
+    
     return (
       <Grid container xs={12} md={12} lg={12} className={classes.root} spacing={() => Validar(width)}>
         <Grid item xs={1} md={2} lg={2} className={classes.Usuario}>

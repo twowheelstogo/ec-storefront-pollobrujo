@@ -20,6 +20,7 @@ import useAvailablePaymentMethods from "hooks/availablePaymentMethods/useAvailab
 import useTranslation from "hooks/useTranslation";
 import definedPaymentMethods from "custom/paymentMethods";
 
+
 import { locales } from "translations/config";
 import fetchPrimaryShop from "staticUtils/shop/fetchPrimaryShop";
 import fetchTranslations from "staticUtils/translations/fetchTranslations";
@@ -30,15 +31,13 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "1440px",
     alignSelf: "center",
     [theme.breakpoints.up("md")]: {
-      paddingRight: "2rem"
     }
   },
   cartSummary: {
     maxWidth: "400px",
     alignSelf: "flex-start",
-    [theme.breakpoints.up("md")]: {
-      paddingRight: "2rem"
-    }
+    backgroundColor: theme.palette.colors.CartSummary,
+    padding: '5px 10px'
   },
   checkoutContent: {
     flex: "1",
@@ -84,6 +83,12 @@ const useStyles = makeStyles((theme) => ({
       padding: `${theme.spacing(10)}px ${theme.spacing(3)}px 0`
     }
   },
+  titleResume:{
+    fontSize: '24px',
+    fontWeight: 800,
+    textAlign: 'center',
+    color: theme.palette.primary.dark
+  },
   root: {}
 }));
 
@@ -127,7 +132,7 @@ const Checkout = ({ router }) => {
       setStripe(window.Stripe(process.env.STRIPE_PUBLIC_API_KEY));
     }
   }), [stripe]; // eslint-disable-line no-sequences
-
+  
   // eslint-disable-next-line react/no-multi-comp
   const renderCheckoutContent = () => {
     // sanity check that "tries" to render the correct /cart view if SSR doesn't provide the `cart`
@@ -170,6 +175,20 @@ const Checkout = ({ router }) => {
           <div className={classes.checkoutContentContainer}>
             <div className={classes.checkoutContent}>
               <Grid container spacing={3}>
+                <Grid item xs={12} md={5}>
+                  <div className={classes.flexContainer}>
+                    <div className={classes.cartSummary}>
+                      <div className={classes.titleResume}>Revisa Tu Orden</div>
+                      <CheckoutSummary
+                        cart={cart}
+                        hasMoreCartItems={hasMoreCartItems}
+                        onRemoveCartItems={onRemoveCartItems}
+                        onChangeCartItemsQuantity={onChangeCartItemsQuantity}
+                        onLoadMoreCartItems={loadMoreCartItems}
+                      />
+                    </div>
+                  </div>
+                </Grid>
                 <Grid item xs={12} md={7}>
                   <div className={classes.flexContainer}>
                     <div className={classes.checkoutActions}>
@@ -181,19 +200,6 @@ const Checkout = ({ router }) => {
                         clearAuthenticatedUsersCart={clearAuthenticatedUsersCart}
                         orderEmailAddress={orderEmailAddress}
                         paymentMethods={paymentMethods}
-                      />
-                    </div>
-                  </div>
-                </Grid>
-                <Grid item xs={12} md={5}>
-                  <div className={classes.flexContainer}>
-                    <div className={classes.cartSummary}>
-                      <CheckoutSummary
-                        cart={cart}
-                        hasMoreCartItems={hasMoreCartItems}
-                        onRemoveCartItems={onRemoveCartItems}
-                        onChangeCartItemsQuantity={onChangeCartItemsQuantity}
-                        onLoadMoreCartItems={loadMoreCartItems}
                       />
                     </div>
                   </div>

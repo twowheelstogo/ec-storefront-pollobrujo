@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import CartEmptyMessage from "@reactioncommerce/components/CartEmptyMessage/v1";
-import CartSummary from "@reactioncommerce/components/CartSummary/v1";
+import CartSummary from "components/CartSummary";
 import withCart from "containers/cart/withCart";
 import CartItems from "components/CartItems";
 import CheckoutButtons from "components/CheckoutButtons";
@@ -15,9 +15,9 @@ import Layout from "components/Layout";
 import Router from "translations/i18nRouter";
 import PageLoading from "components/PageLoading";
 import { withApollo } from "lib/apollo/withApollo";
-
 import fetchPrimaryShop from "staticUtils/shop/fetchPrimaryShop";
 import fetchTranslations from "staticUtils/translations/fetchTranslations";
+import { withComponents } from "@reactioncommerce/components-context";
 
 const styles = (theme) => ({
   cartEmptyMessageContainer: {
@@ -34,9 +34,10 @@ const styles = (theme) => ({
     fontWeight: theme.typography.fontWeightBold
   },
   title: {
-    fontWeight: theme.typography.fontWeightRegular,
+    fontWeight: 700,
     marginTop: "1.6rem",
-    marginBottom: "3.1rem"
+    marginBottom: "3.1rem",
+    fontSize: "36px",
   },
   itemWrapper: {
     borderTop: theme.palette.borders.default,
@@ -91,8 +92,8 @@ class CartPage extends Component {
 
     if (cart && Array.isArray(cart.items) && cart.items.length) {
       return (
-        <Grid item xs={12} md={8}>
-          <div className={classes.itemWrapper}>
+          <Grid item xs={12} md={8} style={{padding:'12px'}}>
+            {/* <div className={classes.itemWrapper}> */}
             <CartItems
               hasMoreCartItems={hasMoreCartItems}
               onLoadMoreCartItems={loadMoreCartItems}
@@ -100,8 +101,8 @@ class CartPage extends Component {
               onChangeCartItemQuantity={this.handleItemQuantityChange}
               onRemoveItemFromCart={this.handleRemoveItem}
             />
-          </div>
-        </Grid>
+            {/* </div> */}
+          </Grid>
       );
     }
 
@@ -115,9 +116,16 @@ class CartPage extends Component {
   renderCartSummary() {
     const { cart, classes } = this.props;
 
+
     if (cart && cart.checkout && cart.checkout.summary && Array.isArray(cart.items) && cart.items.length) {
       const { fulfillmentTotal, itemTotal, surchargeTotal, taxTotal, total } = cart.checkout.summary;
-
+      console.log({
+        fulfillmentTotal,
+        itemTotal,
+        surchargeTotal,
+        taxTotal,
+        total
+      })
       return (
         <Grid item xs={12} md={3}>
           <CartSummary
@@ -139,7 +147,7 @@ class CartPage extends Component {
   }
 
   render() {
-    const { cart, classes, shop } = this.props;
+    const { cart, classes, shop, components: { CartItem, CartSummary } } = this.props;
     // when a user has no item in cart in a new session, this.props.cart is null
     // when the app is still loading, this.props.cart is undefined
     if (typeof cart === "undefined") return <PageLoading delay={0} />;
@@ -150,14 +158,23 @@ class CartPage extends Component {
           title={`Cart | ${shop && shop.name}`}
           meta={[{ name: "description", content: shop && shop.description }]}
         />
+
+        {/* <Grid container>
+          <Grid item xs = {12} md = {6}>
+            <CartItem/>
+          </Grid>
+          <Grid item xs = {12} md = {6}>
+            <CartSummary/>
+          </Grid>
+        </Grid> */}
         <section>
           <Typography className={classes.title} variant="h6" align="center">
-            Shopping Cart
+            Mi Carrito
           </Typography>
-          <Grid container spacing={3}>
+          <Grid container>
             {this.renderCartItems()}
             {this.renderCartSummary()}
-            <Grid className={classes.customerSupportCopy} item>
+            {/* <Grid className={classes.customerSupportCopy} item>
               <Typography paragraph variant="caption">
                 Have questions? call <span className={classes.phoneNumber}>1.800.555.5555</span>
               </Typography>
@@ -167,14 +184,13 @@ class CartPage extends Component {
               <Typography paragraph variant="caption">
                 <Link href="#">Return policy</Link>
               </Typography>
-            </Grid>
+            </Grid> */}
           </Grid>
         </section>
       </Layout>
     );
   }
 }
-
 /**
  *  Server props for the cart route
  *
@@ -190,4 +206,4 @@ export async function getServerSideProps({ params: { lang } }) {
   };
 }
 
-export default withApollo()(withStyles(styles)(withCart(inject("uiStore")(CartPage))));
+export default withApollo()(withComponents(withStyles(styles)(withCart(inject("uiStore")(CartPage)))));

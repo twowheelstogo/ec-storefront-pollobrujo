@@ -60,7 +60,7 @@ const styles = (theme) => ({
     color: theme.palette.colors.TextTheme,
   },
   Divider_:{
-    backgroundColor: theme.palette.background.theme_, 
+    backgroundColor: theme.palette.colors.TextTheme, 
     height: "3px"
   },
   MenuList_:{    
@@ -115,14 +115,14 @@ class NavigationMobile extends Component {
     const { classes, navItems, uiStore, shop, Logo } = this.props;
 
     const renderNavItem = (navItem, index) => (
-      <>
+    
         <NavigationItemMobile
           key={index}
           isTopLevel
           navItem={navItem}
           onClick={this.handleNavItemClick}          
         />
-      </>
+ 
     );
 
     if (navItems && navItems.items) {

@@ -157,7 +157,8 @@ class NavigationItemMobile extends Component {
     }
 
     if (icon) {
-      return <ListItemIcon className={classes.icon}>{icon}</ListItemIcon>;
+      return <ListItemIcon       
+      className={classes.icon}>{icon}</ListItemIcon>;
     }
 
     return null;
