@@ -8,7 +8,7 @@ import ShippingAddressCheckoutAction from "@reactioncommerce/components/Shipping
 import FulfillmentOptionsCheckoutAction from "@reactioncommerce/components/FulfillmentOptionsCheckoutAction/v1";
 import PaymentsCheckoutAction from "@reactioncommerce/components/PaymentsCheckoutAction/v1";
 import FinalReviewCheckoutAction from "@reactioncommerce/components/FinalReviewCheckoutAction/v1";
-import { addTypographyStyles,applyTheme } from "@reactioncommerce/components/utils";
+import { addTypographyStyles, applyTheme } from "@reactioncommerce/components/utils";
 import withAddressValidation from "containers/address/withAddressValidation";
 import Dialog from "@material-ui/core/Dialog";
 import PageLoading from "components/PageLoading";
@@ -21,6 +21,7 @@ import PaymentMethodCheckoutAction from "components/PaymentMethodCheckoutAction"
 import BillingCheckoutAction from "components/BillingCheckoutAction";
 import { useTheme, withStyles } from "@material-ui/core/styles";
 import { withComponents } from "@reactioncommerce/components-context";
+import { Mutex } from "async-mutex";
 
 const MessageDiv = styled.div`
   ${addTypographyStyles("NoPaymentMethodsMessage", "bodyText")}
@@ -35,17 +36,29 @@ const NoPaymentMethodsMessage = () => <MessageDiv>No payment methods available</
 NoPaymentMethodsMessage.renderComplete = () => "";
 
 const styles = theme => ({
-	BotonPrincipal:{
-		backgroundColor: theme.palette.secondary.botones,    
-		color: theme.palette.colors.BotonColor,
-		borderColor: theme.palette.secondary.botones, 
-		fontWeight:"800",
-		fontSize:"24px",    
-    width:"65%"
-	  },    
-  });
+  BotonPrincipal: {
+    backgroundColor: theme.palette.secondary.botones,
+    color: theme.palette.colors.BotonColor,
+    borderColor: theme.palette.secondary.botones,
+    fontWeight: "800",
+    fontSize: "24px",
+    width: "65%"
+  },
+});
+
+class CheckoutError {
+  constructor(props) {
+    this.actionCode = props.actionCode;
+    this.message = props.message;
+    this.title = props.title;
+  }
+}
 
 class CheckoutActions extends Component {
+  constructor(props) {
+    super(props);
+    this.mutex = new Mutex();
+  }
   static propTypes = {
     addressValidation: PropTypes.func.isRequired,
     addressValidationResults: PropTypes.object,
@@ -60,15 +73,15 @@ class CheckoutActions extends Component {
     }).isRequired,
     cartStore: PropTypes.object,
     authStore: PropTypes.shape({
-			account: PropTypes.object.isRequired
-		}),
+      account: PropTypes.object.isRequired
+    }),
     checkoutMutations: PropTypes.shape({
       onSetFulfillmentOption: PropTypes.func.isRequired,
       onSetShippingAddress: PropTypes.func.isRequired
     }),
     clearAuthenticatedUsersCart: PropTypes.func.isRequired,
     orderEmailAddress: PropTypes.string.isRequired,
-    paymentMethods: PropTypes.array,    
+    paymentMethods: PropTypes.array,
   };
 
   static defaultProps = {
@@ -83,36 +96,36 @@ class CheckoutActions extends Component {
       4: null
     },
     hasPaymentError: false,
-    isPlacingOrder: false,    
+    isPlacingOrder: false,
     invoiceInputs: {
-			partnerId: -1,
-			isCf: true,
-			nit: "0",
-			name: "CF",
-			address: "",
-			country: "",
-			depto: "",
-			city: ""
-		},
+      partnerId: -1,
+      isCf: true,
+      nit: "0",
+      name: "CF",
+      address: "",
+      country: "",
+      depto: "",
+      city: ""
+    },
     paymentInputs: {},
   };
 
   setPaymentInputs = (inputs) => {
-		this.setState(prev => ({
-			paymentInputs: {
-				...prev.paymentInputs,
-				...inputs
-			}
-		}));
-	}
+    this.setState(prev => ({
+      paymentInputs: {
+        ...prev.paymentInputs,
+        ...inputs
+      }
+    }));
+  }
   setInvoiceInputs = (inputs) => {
-		this.setState(prev => ({
-			invoiceInputs: {
-				...prev.invoiceInputs,
-				...inputs
-			}
-		}));
-	}
+    this.setState(prev => ({
+      invoiceInputs: {
+        ...prev.invoiceInputs,
+        ...inputs
+      }
+    }));
+  }
 
   componentDidUpdate({ addressValidationResults: prevAddressValidationResults }) {
     const { addressValidationResults } = this.props;
@@ -126,66 +139,66 @@ class CheckoutActions extends Component {
   }
 
   // setShippingMethod = async (shippingMethod) => {
-	// 	const { checkoutMutations: { onSetFulfillmentOption } } = this.props;
-	// 	const { checkout: { fulfillmentGroups } } = this.props.cart;
-	// 	const fulfillmentOption = {
-	// 		fulfillmentGroupId: fulfillmentGroups[0]._id,
-	// 		fulfillmentMethodId: shippingMethod.selectedFulfillmentOption.fulfillmentMethod._id
-	// 	};
+  // 	const { checkoutMutations: { onSetFulfillmentOption } } = this.props;
+  // 	const { checkout: { fulfillmentGroups } } = this.props.cart;
+  // 	const fulfillmentOption = {
+  // 		fulfillmentGroupId: fulfillmentGroups[0]._id,
+  // 		fulfillmentMethodId: shippingMethod.selectedFulfillmentOption.fulfillmentMethod._id
+  // 	};
 
-	// 	await onSetFulfillmentOption(fulfillmentOption);
-	// };
+  // 	await onSetFulfillmentOption(fulfillmentOption);
+  // };
 
 
   setFulfillmentType = async (type) => {
     console.log('type');
-		const { checkoutMutations: { onSetFulfillmentType } } = this.props;
-		const { checkout: { fulfillmentGroups } } = this.props.cart;
+    const { checkoutMutations: { onSetFulfillmentType } } = this.props;
+    const { checkout: { fulfillmentGroups } } = this.props.cart;
     console.log(fulfillmentTypeInput);
     console.log(onSetFulfillmentType);
-		const fulfillmentTypeInput = {
-			fulfillmentGroupId: fulfillmentGroups[0]._id,
-			fulfillmentType: type
-		};
-		await onSetFulfillmentType(fulfillmentTypeInput);
-	};
+    const fulfillmentTypeInput = {
+      fulfillmentGroupId: fulfillmentGroups[0]._id,
+      fulfillmentType: type
+    };
+    await onSetFulfillmentType(fulfillmentTypeInput);
+  };
 
   setShippingAddress = async (address) => {
-		const { checkoutMutations: { onSetShippingAddress } } = this.props;
-		delete address.isValid;
-		const { data, error } = await onSetShippingAddress(address);
+    const { checkoutMutations: { onSetShippingAddress } } = this.props;
+    delete address.isValid;
+    const { data, error } = await onSetShippingAddress(address);
 
-		if (data && !error && this._isMounted) {
-			this.setState({
-				actionAlerts: {
-					1: {}
-				}
-			});
-		}
-	};
+    if (data && !error && this._isMounted) {
+      this.setState({
+        actionAlerts: {
+          1: {}
+        }
+      });
+    }
+  };
 
   setPickupDetails = async (details) => {
-		const { checkoutMutations: { onSetPickupDetails } } = this.props;
+    const { checkoutMutations: { onSetPickupDetails } } = this.props;
 
-		const { data, error } = await onSetPickupDetails(details);
+    const { data, error } = await onSetPickupDetails(details);
 
-		if (data && !error && this._isMounted) {
-			this.setState({
-				actionAlerts: {
-					1: {}
-				}
-			});
-		}
-	};
+    if (data && !error && this._isMounted) {
+      this.setState({
+        actionAlerts: {
+          1: {}
+        }
+      });
+    }
+  };
 
 
   componentDidMount() {
-    this._isMounted = true;    
+    this._isMounted = true;
   }
 
   componentWillUnmount() {
-    this._isMounted = false;    
-      console.log(this.props.cart.checkout.summary.total.displayAmount);    
+    this._isMounted = false;
+    console.log(this.props.cart.checkout.summary.total.displayAmount);
   }
 
   buildData = ({ step, action }) => ({
@@ -206,38 +219,81 @@ class CheckoutActions extends Component {
     return firstPayment ? firstPayment.payment.method : null;
   }
 
+  get getAddresses() {
+    const { cart } = this.props;
+    const {
+      checkout: { fulfillmentGroups, summary },
+      items,
+    } = cart;
+    const addresses = fulfillmentGroups.reduce((list, group) => {
+      if (group.shippingAddress) list.push(group.shippingAddress);
+      return list;
+    }, []);
+    return addresses;
+  }
+
   handleInputBillingComponentSubmit = async () => {
-		const { invoiceInputs } = this.state;
-		const cloneInvoice = Object.assign({}, invoiceInputs);
-		if (!invoiceInputs.isCf) {
-			cloneInvoice.name = (cloneInvoice.name) ? cloneInvoice.name.trim() : "";
-			cloneInvoice.name = formatName(cloneInvoice.name);
-			cloneInvoice.nit = (cloneInvoice.nit) ? cloneInvoice.nit.trim() : "";
-			cloneInvoice.address = (cloneInvoice.address) ? cloneInvoice.address.trim() : "";
-			cloneInvoice.address = formatName(cloneInvoice.address);
-			cloneInvoice.depto = (cloneInvoice.depto) ? cloneInvoice.depto.trim() : "";
-			cloneInvoice.depto = formatName(cloneInvoice.depto);
-			cloneInvoice.city = (cloneInvoice.city) ? cloneInvoice.city.trim() : "";
-			cloneInvoice.city = formatName(cloneInvoice.city);
+    const { invoiceInputs } = this.state;
+    const cloneInvoice = Object.assign({}, invoiceInputs);
+    if (!invoiceInputs.isCf) {
+      cloneInvoice.name = (cloneInvoice.name) ? cloneInvoice.name.trim() : "";
+      cloneInvoice.name = formatName(cloneInvoice.name);
+      cloneInvoice.nit = (cloneInvoice.nit) ? cloneInvoice.nit.trim() : "";
+      cloneInvoice.address = (cloneInvoice.address) ? cloneInvoice.address.trim() : "";
+      cloneInvoice.address = formatName(cloneInvoice.address);
+      cloneInvoice.depto = (cloneInvoice.depto) ? cloneInvoice.depto.trim() : "";
+      cloneInvoice.depto = formatName(cloneInvoice.depto);
+      cloneInvoice.city = (cloneInvoice.city) ? cloneInvoice.city.trim() : "";
+      cloneInvoice.city = formatName(cloneInvoice.city);
 
-			if (cloneInvoice.nit == "") {
-				throw new CheckoutError({
-					actionCode: 5,
-					title: "Error de facturación",
-					message: "Asegúrate de haber llenado el nit a facturar"
-				});
-			}
-			if (cloneInvoice.name == "") {
-				throw new CheckoutError({
-					actionCode: 5,
-					title: "Error de facturación",
-					message: "Asegúrate de haber llenado el nombre a facturar"
-				});
-			}
-		}
-		this.handleBillingSubmit(cloneInvoice);
-	}
+      if (cloneInvoice.nit == "") {
+        throw new CheckoutError({
+          actionCode: 5,
+          title: "Error de facturación",
+          message: "Asegúrate de haber llenado el nit a facturar"
+        });
+      }
+      if (cloneInvoice.name == "") {
+        throw new CheckoutError({
+          actionCode: 5,
+          title: "Error de facturación",
+          message: "Asegúrate de haber llenado el nombre a facturar"
+        });
+      }
+    }
+    this.handleBillingSubmit(cloneInvoice);
+  }
 
+  handleInputComponentSubmit = async () => {
+    const {
+      paymentInputs: { data, displayName, billingAddress, selectedPaymentMethodName, amount = null },
+    } = this.state;
+    const { paymentMethods, remainingAmountDue } = this.props;
+    let addresses = this.getAddresses;
+    let bAddress = billingAddress || (addresses && addresses[0]) ? addresses[0] : null;
+    const selectedPaymentMethod = paymentMethods.find((method) => method.name === selectedPaymentMethodName);
+    let cappedPaymentAmount = amount;
+    if (cappedPaymentAmount && typeof remainingAmountDue === "number") {
+      cappedPaymentAmount = Math.min(cappedPaymentAmount, remainingAmountDue);
+    }
+    Object.keys(data).forEach((key) => {
+      if (data[key] == null)
+        throw new CheckoutError({
+          actionCode: 4,
+          title: "Error de pago",
+          message: "Asegúrate de haber llenado todos los campos de pago",
+        });
+    });
+    this.handlePaymentSubmit({
+      displayName: displayName,
+      payment: {
+        amount: cappedPaymentAmount,
+        billingAddress: bAddress,
+        data,
+        method: selectedPaymentMethodName,
+      },
+    });
+  };
 
   handleValidationErrors() {
     const { addressValidationResults } = this.props;
@@ -282,41 +338,68 @@ class CheckoutActions extends Component {
     const cartId = cartStore.hasAccountCart ? cartStore.accountCartId : cartStore.anonymousCartId;
     const { checkout } = cart;
 
-    const fulfillmentGroups = checkout.fulfillmentGroups.map((group) => {
-      const { data } = group;
-      const { selectedFulfillmentOption } = group;
+    console.log("building order");
+    try {
+      //await this.handleInputPickupComponentSubmit();
+      //await this.handleInputShippingComponentSubmit();
+      await this.handleInputComponentSubmit();
+      const fulfillmentGroups = checkout.fulfillmentGroups.map((group) => {
+        const { data } = group;
+        let { selectedFulfillmentOption } = group;
 
-      const items = cart.items.map((item) => ({
-        addedAt: item.addedAt,
-        price: item.price.amount,
-        productConfiguration: item.productConfiguration,
-        quantity: item.quantity
-      }));
-
-      return {
-        data,
-        items,
-        selectedFulfillmentMethodId: selectedFulfillmentOption.fulfillmentMethod._id,
-        shopId: group.shop._id,
-        totalPrice: checkout.summary.total.amount,
-        type: group.type
+        const items = cart.items.map((item) => ({
+          addedAt: item.addedAt,
+          price: item.price.amount,
+          productConfiguration: item.productConfiguration,
+          quantity: item.quantity,
+          metafields: item.metafields || [],
+        }));
+        if (!selectedFulfillmentOption || selectedFulfillmentOption == null) {
+          throw new CheckoutError({
+            message: "La dirección seleccionada está fuera del rango de envío",
+            actionCode: 6,
+            title: "Error de envío",
+          });
+        }
+        return {
+          data,
+          items,
+          selectedFulfillmentMethodId: selectedFulfillmentOption.fulfillmentMethod._id,
+          shopId: group.shop._id,
+          totalPrice: checkout.summary.total.amount,
+          type: group.type,
+        };
+      });
+      const order = {
+        cartId,
+        currencyCode: checkout.summary.total.currency.code,
+        email: orderEmailAddress,
+        fulfillmentGroups,
+        shopId: cart.shop._id,
       };
-    });
 
-    const order = {
-      cartId,
-      currencyCode: checkout.summary.total.currency.code,
-      email: orderEmailAddress,
-      fulfillmentGroups,
-      shopId: cart.shop._id
-    };
-
-    return this.setState({ isPlacingOrder: true }, () => this.placeOrder(order));
+      return this.setState({ isPlacingOrder: true }, () => this.placeOrder(order));
+    } catch (error) {
+      console.error(error.message)
+      this.setState({
+        hasPaymentError: true,
+        hasBillingError: true,
+        hasGiftError: true,
+        isPlacingOrder: false,
+        actionAlerts: {
+          [error.actionCode]: {
+            alertType: "error",
+            title: error.title,
+            message: error.message,
+          },
+        },
+      });
+    }
   };
 
   placeOrder = async (order) => {
     const { cartStore, clearAuthenticatedUsersCart, apolloClient } = this.props;
-
+    console.log("placing order...")
     // Payments can have `null` amount to mean "remaining".
     let remainingAmountDue = order.fulfillmentGroups.reduce((sum, group) => sum + group.totalPrice, 0);
     const payments = cartStore.checkoutPayments.map(({ payment }) => {
@@ -324,16 +407,23 @@ class CheckoutActions extends Component {
       remainingAmountDue -= amount;
       return { ...payment, amount };
     });
-
+    const billing = cartStore.checkoutBilling;
+    const giftNote = cartStore.checkoutGift;
     try {
-      const { data } = await apolloClient.mutate({
-        mutation: placeOrderMutation,
-        variables: {
-          input: {
-            order,
-            payments
-          }
-        }
+      let data = null;
+      await this.mutex.runExclusive(async function () {
+        const resApolloClient = await apolloClient.mutate({
+          mutation: placeOrderMutation,
+          variables: {
+            input: {
+              order,
+              payments,
+              billing,
+              giftNote,
+            },
+          },
+        });
+        data = resApolloClient.data;
       });
 
       // Placing the order was successful, so we should clear the
@@ -345,22 +435,25 @@ class CheckoutActions extends Component {
       // Also destroy the collected and cached payment input
       cartStore.resetCheckoutPayments();
 
-      const { placeOrder: { orders, token } } = data;
-
+      const {
+        placeOrder: { orders, token },
+      } = data;
       // Send user to order confirmation page
       Router.push(`/checkout/order?orderId=${orders[0].referenceId}${token ? `&token=${token}` : ""}`);
     } catch (error) {
+      console.error("placing order error: ", error.message);
       if (this._isMounted) {
+        this.handlePaymentsReset();
         this.setState({
           hasPaymentError: true,
           isPlacingOrder: false,
           actionAlerts: {
-            3: {
+            4: {
               alertType: "error",
               title: "Payment method failed",
-              message: error.toString().replace("Error: GraphQL error:", "")
-            }
-          }
+              message: error.toString().replace("Error: GraphQL error:", ""),
+            },
+          },
         });
       }
     }
@@ -371,9 +464,9 @@ class CheckoutActions extends Component {
 
     return (
       <Dialog fullScreen disableBackdropClick={true} disableEscapeKeyDown={true} open={isPlacingOrder}
-      
+
       >
-        <PageLoading delay={0} message="Placing your order..."/>
+        <PageLoading delay={0} message="Placing your order..." />
       </Dialog>
     );
   };
@@ -387,7 +480,7 @@ class CheckoutActions extends Component {
       paymentMethods,
       authStore,
       classes,
-      components: {Button}
+      components: { Button }
     } = this.props;
 
     const { checkout: { fulfillmentGroups, summary }, items } = cart;
@@ -421,29 +514,29 @@ class CheckoutActions extends Component {
 
     const actions = [
       {
-				id: "1",
-				activeLabel: "Elige un método de entrega",
-				completeLabel: "Método de entrega",
-				incompleteLabel: "Método de entrega",
-				status: fulfillmentGroup.type !== "shipping" || fulfillmentGroup.shippingAddress ? "complete" : "incomplete",
-				component: FulfillmentTypeAction,
-				onSubmit: this.setShippingAddress,
-				props: {
-					alert: actionAlerts["1"],
-					deliveryMethods,
-					fulfillmentGroup,
-					actionAlerts: {
-						"2": actionAlerts["2"],
-						"3": actionAlerts["3"],
-					},
-					submits: {
-						onSubmitShippingAddress: this.setShippingAddress,
-						// onSetShippingMethod: this.setShippingMethod,
-						onSelectFulfillmentType: this.setFulfillmentType,
-						onSubmitPickupDetails: this.setPickupDetails
-					}
-				}
-			},
+        id: "1",
+        activeLabel: "Elige un método de entrega",
+        completeLabel: "Método de entrega",
+        incompleteLabel: "Método de entrega",
+        status: fulfillmentGroup.type !== "shipping" || fulfillmentGroup.shippingAddress ? "complete" : "incomplete",
+        component: FulfillmentTypeAction,
+        onSubmit: this.setShippingAddress,
+        props: {
+          alert: actionAlerts["1"],
+          deliveryMethods,
+          fulfillmentGroup,
+          actionAlerts: {
+            "2": actionAlerts["2"],
+            "3": actionAlerts["3"],
+          },
+          submits: {
+            onSubmitShippingAddress: this.setShippingAddress,
+            // onSetShippingMethod: this.setShippingMethod,
+            onSelectFulfillmentType: this.setFulfillmentType,
+            onSubmitPickupDetails: this.setPickupDetails
+          }
+        }
+      },
       {
         id: "4",
         activeLabel: "Elige cómo pagarás tu orden",
@@ -458,44 +551,45 @@ class CheckoutActions extends Component {
           onReset: this.handlePaymentsReset,
           payments,
           paymentMethods,
-          remainingAmountDue,          
+          remainingAmountDue,
           summary,
-					onChange: this.setPaymentInputs,          
+          onChange: this.setPaymentInputs,
           //onChange: (value) => console.log(value)
         }
       },
       {
-				id: "5",
-				activeLabel: "Datos de facturación",
-				completeLabel: "Datos de facturación",
-				incompleteLabel: "Datos de facturación",
-				status: remainingAmountDue === 0 && !hasPaymentError ? "complete" : "incomplete",
-				component: BillingCheckoutAction,
-				onSubmit: this.handleBillingSubmit,
-				props: {
-					alert: actionAlerts["5"],
-					onChange: this.setInvoiceInputs,
-					authStore,
-					isCf: this.state.invoiceInputs.isCf,
-					nitValue: this.state.invoiceInputs.nit,
-					nameValue: this.state.invoiceInputs.name,
-					addressValue: this.state.invoiceInputs.address
-				}
-			},
+        id: "5",
+        activeLabel: "Datos de facturación",
+        completeLabel: "Datos de facturación",
+        incompleteLabel: "Datos de facturación",
+        status: remainingAmountDue === 0 && !hasPaymentError ? "complete" : "incomplete",
+        component: BillingCheckoutAction,
+        onSubmit: this.handleBillingSubmit,
+        props: {
+          alert: actionAlerts["5"],
+          onChange: this.setInvoiceInputs,
+          authStore,
+          isCf: this.state.invoiceInputs.isCf,
+          nitValue: this.state.invoiceInputs.nit,
+          nameValue: this.state.invoiceInputs.name,
+          addressValue: this.state.invoiceInputs.address
+        }
+      },
     ];
     return (
       <Fragment>
         {this.renderPlacingOrderOverlay()}
         <Actions actions={actions} />
-        
-        <ButtonContent>        
-        <Button			        					
-					className={classes.BotonPrincipal}
-					isFullWidth
-				>
-					Realizar Compra
-				</Button>	        									
-				</ButtonContent>
+
+        <ButtonContent>
+          <Button
+            className={classes.BotonPrincipal}
+            isFullWidth
+            onClick={this.buildOrder}
+          >
+            Realizar Compra
+          </Button>
+        </ButtonContent>
       </Fragment>
     );
   }

@@ -3311,7 +3311,7 @@ async-each@^1.0.1:
 
 async-mutex@^0.3.2:
   version "0.3.2"
-  resolved "https://registry.npmjs.org/async-mutex/-/async-mutex-0.3.2.tgz"
+  resolved "https://registry.yarnpkg.com/async-mutex/-/async-mutex-0.3.2.tgz#1485eda5bda1b0ec7c8df1ac2e815757ad1831df"
   integrity sha512-HuTK7E7MT7jZEh1P9GtRW9+aTWiDWWi9InbZ5hjxrnRa39KS4BW04+xLBhYNS2aXhHUIKZSw3gj4Pn1pj+qGAA==
   dependencies:
     tslib "^2.3.1"
