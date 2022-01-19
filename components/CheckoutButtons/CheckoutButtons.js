@@ -59,6 +59,10 @@ class CheckoutButtons extends Component {
     Router.push(primaryButtonRoute);
   }
 
+  handleOnClick2 = () => {
+    Router.push("/");
+  }
+
   render() {
     const {
       isDisabled,
@@ -77,7 +81,7 @@ class CheckoutButtons extends Component {
             className={Button2_}
             variant="contained"
             disableRipple
-
+            onClick={this.handleOnClick2}
           >
             {secondButtonText}
           </Button>

@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "400px",
     alignSelf: "flex-start",
     //backgroundColor: theme.palette.colors.CartSummary,
-    backgroundColor: "#202124",
+    backgroundColor: "#202124",    
     padding: '5px 10px'
   },
   checkoutContent: {
