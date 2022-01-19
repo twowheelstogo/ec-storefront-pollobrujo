@@ -24,7 +24,7 @@ const styles = (theme) => ({
     margin: "80px 0"
   },
   checkoutButtonsContainer: {
-    backgroundColor: theme.palette.reaction.black02,
+    backgroundColor: "#202124",    
     padding: theme.spacing(2)
   },
   customerSupportCopy: {

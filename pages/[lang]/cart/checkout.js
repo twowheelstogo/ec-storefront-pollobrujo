@@ -36,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
   cartSummary: {
     maxWidth: "400px",
     alignSelf: "flex-start",
-    backgroundColor: theme.palette.colors.CartSummary,
+    //backgroundColor: theme.palette.colors.CartSummary,
+    backgroundColor: "#202124",
     padding: '5px 10px'
   },
   checkoutContent: {
@@ -45,11 +46,11 @@ const useStyles = makeStyles((theme) => ({
     padding: "1rem",
     [theme.breakpoints.down("md")]: {
       maxWidth: "100%"
-    }
+    },    
   },
   checkoutContentContainer: {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",    
   },
 
   flexContainer: {
@@ -175,10 +176,9 @@ const Checkout = ({ router }) => {
           <div className={classes.checkoutContentContainer}>
             <div className={classes.checkoutContent}>
               <Grid container spacing={3}>
-                <Grid item xs={12} md={5}>
+                <Grid item xs={12} md={5} style={{backgroundColor: "#202124"}}>
                   <div className={classes.flexContainer}>
-                    <div className={classes.cartSummary}>
-                      <div className={classes.titleResume}>Revisa Tu Orden</div>
+                    <div className={classes.cartSummary}>                      
                       <CheckoutSummary
                         cart={cart}
                         hasMoreCartItems={hasMoreCartItems}

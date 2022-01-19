@@ -4,6 +4,7 @@ import { makeStyles, withStyles, useTheme } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -50,7 +51,8 @@ const StyledTabs = withStyles({
                                 },
                             }}
                         />
-                        <Divider />
+                        <Divider                        
+                        />
                     </Box>
                 ) : (
                     <Box>
@@ -65,10 +67,10 @@ const StyledTabs = withStyles({
                                     borderRadius: '5px',
                                 },
                             }}
-                        />
+                        />                        
                         <Divider 
-                        //style={{backgroundColor:"#fff"}}
-                        />
+                        style={{backgroundColor:"#fff"}}
+                        />                        
                     </Box>
                 )
             }

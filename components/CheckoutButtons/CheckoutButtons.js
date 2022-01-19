@@ -7,7 +7,9 @@ import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
 import { addTypographyStyles, applyTheme } from "@reactioncommerce/components/utils";
 
-const Div = styled.div``;
+const Div = styled.div`
+  background-color: #202124;
+`;
 
 const styles = (theme) => ({
   Button_:{

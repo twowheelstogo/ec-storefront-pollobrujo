@@ -25,12 +25,11 @@ const styles = (theme) => ({
     gap: "20px",
   },
   divider: {
-    borderBottomStyle: "solid",
+    borderBottom: `1px solid ${theme.palette.colors.TextTheme}`,    
     opacity: "50%",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: "10px",
-    borderBottomColor: theme.palette.colors.TextTheme,
+    marginTop: "10px",    
   },
   bottomItems: {
     display: "flex",
@@ -80,15 +79,12 @@ const CustomFooter = (props) => {
   };
   return (
     <>
-      <br></br>
-      <br></br>
-
       <div
         className={classes.root}        
       >
         <Grid container direction="row" spacing={2} xs={12} md={11} lg={11}>
           <Grid item xs={12} md={3} lg={3}>
-            <img src={Descripcion.urlLogo} width={"130px"} />
+            <img src={Descripcion.urlLogo} width={106} height={68} />
           </Grid>
           <Grid item xs={12} md={3} className={classes.items}></Grid>
 

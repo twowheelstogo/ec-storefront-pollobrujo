@@ -15,8 +15,7 @@ const styles = (theme) => ({
     marginRight: "auto",
   },
   Borde: {
-    borderBottomStyle: "solid",
-    borderBottomColor: "#979797",
+    borderBottom: "1px solid #979797",    
   },
   Logo: {
     [theme.breakpoints.up("xs")]: {
@@ -64,8 +63,12 @@ const styles = (theme) => ({
       marginLeft:"2%",      
     }
   },
-  Menu: {    
-    ["@media (max-width:599px)"]: {
+  Menu: {
+    ["@media (max-width:498px)"]: {
+      marginLeft:"-4%",
+      marginTop:"auto"
+    },    
+    ["@media (max-width:599px) and (min-width:499px) "]: {
       marginLeft:"-3%",
       marginTop:"auto"
     },    
