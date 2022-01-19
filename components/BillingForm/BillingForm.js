@@ -204,7 +204,7 @@ class BillingFormAction extends Component {
 				{alert ? <InlineAlert {...alert} /> : ""}
 				<Grid>
 					<ColFull>
-						<Checkbox label={cfBillingLabelText} name="isCf" value={isCf} onChange={(val) => { this.handleOnChange("isCf", val) }} />
+						<Checkbox label={cfBillingLabelText} style={{color: "fff" }} name="isCf" value={isCf} onChange={(val) => { this.handleOnChange("isCf", val) }} />
 					</ColFull>
 					<ColHalf style={this.getHiddenStyles()}>
 						<Field name="nit"  labelFor={nitbillingForm} >

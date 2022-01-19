@@ -2,6 +2,15 @@ import React, { Fragment, Component } from "react";
 import { withComponents } from "@reactioncommerce/components-context";
 import styled from "styled-components";
 import {addTypographyStyles } from "@reactioncommerce/components/utils";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+	Boton: {
+		backgroundColor: "#FFEB3B", 
+		color: "#000",
+		fontWeight: "bold"
+	}
+});
 
 const Grid = styled.div`
     display: flex;
@@ -67,7 +76,7 @@ class PickupCheckoutAction extends Component {
 		);
 	}
 	render() {
-		const { components: { Button } } = this.props;
+		const { components: { Button },classes, } = this.props;
 		return (
 			<Fragment>
 				<Grid>
@@ -75,9 +84,9 @@ class PickupCheckoutAction extends Component {
 					<SecureCaption>
 						 <Span>{"Agenda fecha y hora de pickup no menor a 20 minutos de entrega"}</Span>
 					</SecureCaption>
-					<Button						
-						style={{color:"#FFEB3B",backgroundColor:"#000"}}
+					<Button												
 						title="secondary"
+						className={classes.Boton}
 						//actionType="secondary"
 						isShortHeight
 						isWaiting={this.state.isLoadingDetails}
@@ -89,4 +98,4 @@ class PickupCheckoutAction extends Component {
 		);
 	}
 }
-export default withComponents(PickupCheckoutAction);
+export default withStyles(styles)(withComponents(PickupCheckoutAction));

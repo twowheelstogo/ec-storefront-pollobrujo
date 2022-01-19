@@ -5,7 +5,7 @@ import { useApolloClient } from "@apollo/client";
 import Head from "next/head";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import CartEmptyMessage from "@reactioncommerce/components/CartEmptyMessage/v1";
+import CartEmptyMessage from "components/CartEmptyMessage";
 import { StripeProvider } from "react-stripe-elements";
 import CheckoutActions from "components/CheckoutActions";
 import CheckoutSummary from "components/CheckoutSummary";
@@ -36,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
   cartSummary: {
     maxWidth: "400px",
     alignSelf: "flex-start",
-    backgroundColor: theme.palette.colors.CartSummary,
+    //backgroundColor: theme.palette.colors.CartSummary,
+    backgroundColor: "#202124",    
     padding: '5px 10px'
   },
   checkoutContent: {
@@ -45,11 +46,11 @@ const useStyles = makeStyles((theme) => ({
     padding: "1rem",
     [theme.breakpoints.down("md")]: {
       maxWidth: "100%"
-    }
+    },    
   },
   checkoutContentContainer: {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",    
   },
 
   flexContainer: {
@@ -88,6 +89,11 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 800,
     textAlign: 'center',
     color: theme.palette.primary.dark
+  },
+  Contenedor:{
+    ["@media (max-width:599px)"]: {
+    backgroundColor: "#202124"
+    }
   },
   root: {}
 }));
@@ -142,7 +148,7 @@ const Checkout = ({ router }) => {
         <div className={classes.emptyCartContainer}>
           <div className={classes.emptyCart}>
             <div>
-              <CartEmptyMessage onClick={() => Router.push("/")} messageText="Your cart is empty." buttonText="Go to main page" />
+              <CartEmptyMessage onClick={() => Router.push("/")} messageText="Tu carro se encuentra vacío." buttonText="Ir a página principal" />
             </div>
           </div>
         </div>
@@ -155,7 +161,7 @@ const Checkout = ({ router }) => {
           <div className={classes.emptyCartContainer}>
             <div className={classes.emptyCart}>
               <div>
-                <CartEmptyMessage onClick={() => Router.push("/")} messageText="Your cart is empty." buttonText="Go to main page" />
+                <CartEmptyMessage onClick={() => Router.push("/")} messageText="Tu carro se encuentra vacío." buttonText="Ir a la página principal" />
               </div>
             </div>
           </div>
@@ -175,10 +181,9 @@ const Checkout = ({ router }) => {
           <div className={classes.checkoutContentContainer}>
             <div className={classes.checkoutContent}>
               <Grid container spacing={3}>
-                <Grid item xs={12} md={5}>
+                <Grid item xs={12} md={5} className={classes.Contenedor} >
                   <div className={classes.flexContainer}>
-                    <div className={classes.cartSummary}>
-                      <div className={classes.titleResume}>Revisa Tu Orden</div>
+                    <div className={classes.cartSummary}>                      
                       <CheckoutSummary
                         cart={cart}
                         hasMoreCartItems={hasMoreCartItems}

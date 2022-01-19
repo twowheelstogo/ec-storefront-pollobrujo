@@ -26,7 +26,8 @@ import CartItems from "@reactioncommerce/components/CartItems/v1";
 // import CartSummary from "@reactioncommerce/components/CartSummary/v1";
 import CatalogGrid from "@reactioncommerce/components/CatalogGrid/v1";
 import CatalogGridItem from "components/CatalogGridItem";
-import Checkbox from "@reactioncommerce/components/Checkbox/v1";
+//import Checkbox from "@reactioncommerce/components/Checkbox/v1";
+import Checkbox from "components/Checkbox";
 import CheckoutAction from "components/CheckoutAction";
 import CardItems from "components/CardItems";
 import CardItemSelect from "components/CardItemSelect";
@@ -70,7 +71,6 @@ import SlideHero from "components/SlideHero";
 import CustomFooter from "components/CustomFooter";
 import NavigationHeader from "components/NavigationHeader";
 import CartEmptyMessage from "components/CartEmptyMessage";
-//import Button from "components/Button";
 import Button from "@reactioncommerce/components/Button/v1";
 import AddressList from "components/AddressList";
 import RadioButtonItem from "components/RadioButtonItem";
@@ -150,5 +150,5 @@ export default {
   CartEmptyMessage,
   CardItems,
   CardItemSelect,
-  BillingForm
+  BillingForm,  
 };

@@ -24,7 +24,7 @@ const styles = (theme) => ({
     margin: "80px 0"
   },
   checkoutButtonsContainer: {
-    backgroundColor: theme.palette.reaction.black02,
+    backgroundColor: "#202124",    
     padding: theme.spacing(2)
   },
   customerSupportCopy: {
@@ -92,7 +92,7 @@ class CartPage extends Component {
 
     if (cart && Array.isArray(cart.items) && cart.items.length) {
       return (
-          <Grid item xs={12} md={8} style={{padding:'12px'}}>
+          <>
             {/* <div className={classes.itemWrapper}> */}
             <CartItems
               hasMoreCartItems={hasMoreCartItems}
@@ -102,7 +102,7 @@ class CartPage extends Component {
               onRemoveItemFromCart={this.handleRemoveItem}
             />
             {/* </div> */}
-          </Grid>
+          </>
       );
     }
 
@@ -127,7 +127,7 @@ class CartPage extends Component {
         total
       })
       return (
-        <Grid item xs={12} md={3}>
+        <>
           <CartSummary
             displayShipping={fulfillmentTotal && fulfillmentTotal.displayAmount}
             displaySubtotal={itemTotal && itemTotal.displayAmount}
@@ -139,7 +139,7 @@ class CartPage extends Component {
           <div className={classes.checkoutButtonsContainer}>
             <CheckoutButtons />
           </div>
-        </Grid>
+        </>
       );
     }
 
@@ -171,9 +171,18 @@ class CartPage extends Component {
           <Typography className={classes.title} variant="h6" align="center">
             Mi Carrito
           </Typography>
+          <br/>
           <Grid container>
+
+          <Grid item xs={12} md={5} lg={7} style={{padding:'12px'}}>
             {this.renderCartItems()}
+          </Grid>
+
+          <Grid item xs={1} md={1} lg={1}></Grid>
+
+            <Grid item xs={12} md={3}>
             {this.renderCartSummary()}
+            </Grid>
             {/* <Grid className={classes.customerSupportCopy} item>
               <Typography paragraph variant="caption">
                 Have questions? call <span className={classes.phoneNumber}>1.800.555.5555</span>

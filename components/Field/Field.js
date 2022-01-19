@@ -32,12 +32,12 @@ const StyledField = styled.div`
   margin-bottom: ${applyTheme("Field.spacingBelow")};
   margin-left: 0;
   margin-right: 0;
-  margin-top: ${applyTheme("Field.spacingAbove")};
+  margin-top: ${applyTheme("Field.spacingAbove")};  
 `;
 
 const StyledLabel = styled.label`
   ${addTypographyStyles("FieldLabel", "labelText")}
-  color: ${applyValidationColor("FieldLabel.color")};
+  color: #fff;
   display: block;
   margin-bottom: ${applyTheme("FieldLabel.spacingToInput")};
   margin-left: 0;

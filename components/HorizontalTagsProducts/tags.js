@@ -4,12 +4,19 @@ import { makeStyles, withStyles, useTheme } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const tabHeight = 69;
 
 const StyledTabs = withStyles({
+    Separador: {
+        ["@media (min-width:600px)"]: {
+            backgroundColor: "#fff",
+            marginLeft: "40px"
+        }
+    },
     indicator: {
         display: "flex",
         justifyContent: "center",
@@ -45,12 +52,14 @@ const StyledTabs = withStyles({
                             TabIndicatorProps={{
                                 style: {
                                     backgroundColor: '#fff',
-                                    height: '3px',
+                                    height: '5px',
                                     borderRadius: '5px',
                                 },
                             }}
                         />
-                        <Divider />
+                        <Divider  
+                        style={{backgroundColor:"#fff"}}                      
+                        />
                     </Box>
                 ) : (
                     <Box>
@@ -61,12 +70,15 @@ const StyledTabs = withStyles({
                             TabIndicatorProps={{
                                 style: {
                                     backgroundColor: '#fff',
-                                    height: '3px',
+                                    height: '5px',
                                     borderRadius: '5px',
                                 },
                             }}
-                        />
-                        <Divider />
+                        />                        
+                        <Divider 
+                        style={{backgroundColor: "#fff",
+                        marginLeft: "40px"}}
+                        />                        
                     </Box>
                 )
             }
