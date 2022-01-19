@@ -5,7 +5,7 @@ import { useApolloClient } from "@apollo/client";
 import Head from "next/head";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import CartEmptyMessage from "@reactioncommerce/components/CartEmptyMessage/v1";
+import CartEmptyMessage from "components/CartEmptyMessage";
 import { StripeProvider } from "react-stripe-elements";
 import CheckoutActions from "components/CheckoutActions";
 import CheckoutSummary from "components/CheckoutSummary";
@@ -148,7 +148,7 @@ const Checkout = ({ router }) => {
         <div className={classes.emptyCartContainer}>
           <div className={classes.emptyCart}>
             <div>
-              <CartEmptyMessage onClick={() => Router.push("/")} messageText="Your cart is empty." buttonText="Go to main page" />
+              <CartEmptyMessage onClick={() => Router.push("/")} messageText="Tu carro se encuentra vacío." buttonText="Ir a página principal" />
             </div>
           </div>
         </div>
@@ -161,7 +161,7 @@ const Checkout = ({ router }) => {
           <div className={classes.emptyCartContainer}>
             <div className={classes.emptyCart}>
               <div>
-                <CartEmptyMessage onClick={() => Router.push("/")} messageText="Your cart is empty." buttonText="Go to main page" />
+                <CartEmptyMessage onClick={() => Router.push("/")} messageText="Tu carro se encuentra vacío." buttonText="Ir a la página principal" />
               </div>
             </div>
           </div>
