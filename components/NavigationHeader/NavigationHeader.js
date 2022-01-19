@@ -63,7 +63,6 @@ const styles = (theme) => ({
     ["@media (max-width:599px)"]: {
       marginLeft:"2%",      
     }
-
   },
   Menu: {    
     ["@media (max-width:599px)"]: {
