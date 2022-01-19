@@ -66,7 +66,9 @@ const StyledTabs = withStyles({
                                 },
                             }}
                         />
-                        <Divider />
+                        <Divider 
+                        //style={{backgroundColor:"#fff"}}
+                        />
                     </Box>
                 )
             }

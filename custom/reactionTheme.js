@@ -20,10 +20,10 @@ const theme = createMuiTheme({
     },
     //Tamaño del logo
     Logo:{
-      WidthDesktop: "120px",
-      WidthMobile: "71px",
-      HeightDesktop: "111px",
-      HeightMobile: "60px",
+      WidthDesktop: "111px",
+      WidthMobile: "59px",
+      HeightDesktop: "71px",
+      HeightMobile: "38px",
     },
     secondary: {
       light: "#5d8ea9",

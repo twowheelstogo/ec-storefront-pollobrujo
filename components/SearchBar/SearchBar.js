@@ -20,15 +20,32 @@ const styles = (theme) => ({
     borderColor: "#E3E3E3 !important",
   },
   Magnify_: {
+    ["@media (min-width:600px)"]: {
     color: theme.palette.colors.SearchColor,
+    },
+    ["@media (max-width:599px)"]: {
+      color: "#979797"
+    },
     cursor: "pointer"
   },
   InputAdornment_: {
+    ["@media (min-width:600px)"]: {
     borderRightColor: theme.palette.colors.SearchColor,
-    borderRightStyle: "solid"
+    },    
   },
   TextField_:{
-    backgroundColor: theme.palette.background.theme_,
+    ["@media (min-width:600px)"]: {
+      backgroundColor: theme.palette.background.theme_,
+    },
+
+    ["@media (max-width:599px)"]: {
+      backgroundColor: "rgba(216, 216, 216, 0.2)"
+    }    
+  },
+  Contenedor:{
+    ["@media (max-width:599px)"]: {
+      borderLeft: "2px solid #979797",      
+    }  
   }
 });
 
@@ -71,8 +88,9 @@ class SearchBar extends Component {
               notchedOutline: classes.notchedOutline,
             },
             endAdornment: (
-              <InputAdornment position="end" className={classes.InputAdornment_}>                
-                <Magnify className={classes.Magnify_}  onClick={() => Metodo(this.state.Busqueda)} />
+              <InputAdornment position="end" className={classes.InputAdornment_}>
+                <div className={classes.Contenedor}><p style={{color:"transparent"}}>ss</p></div>   
+                <Magnify className={classes.Magnify_}  onClick={() => Metodo(this.state.Busqueda)} />                             
               </InputAdornment>
             ),
           }}

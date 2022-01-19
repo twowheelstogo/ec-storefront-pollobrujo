@@ -22,18 +22,24 @@ const styles = (theme) => ({
     [theme.breakpoints.up("xs")]: {
       display: "flex",
       justifyContent: "flex-start",
+      marginTop: "2%",
     },
     [theme.breakpoints.down("xs")]: {
       display: "flex",
       justifyContent: "center",
-    },
-    marginTop: "2%",
+      marginTop: "15px",
+    },  
+  },
+  ContenedorMovil:{
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   searchbar: {
     color: "white",
     ["@media (max-width:599px)"]: {
       marginLeft: "auto",
       marginRight: "auto",
+      marginTop:"10px"
     },
     ["@media (min-width:600px)"]: {
       marginTop: "1%",
@@ -54,13 +60,16 @@ const styles = (theme) => ({
     ["@media (min-width:1280px) "]: {
       marginLeft: "auto",
     },
+    ["@media (max-width:599px)"]: {
+      marginLeft:"2%",      
+    }
+
   },
   Menu: {    
     ["@media (max-width:599px)"]: {
-      display: "flex",
-      justifyContent: "flex-start",
+      marginLeft:"-3%",
       marginTop:"auto"
-    },
+    },    
     ["@media (min-width:600px)"]: {
       display: "flex",
       justifyContent: "center",
@@ -110,11 +119,11 @@ const styles = (theme) => ({
   },
   LogoDesktop:{
     width: theme.palette.Logo.WidthDesktop,
-    heigth: theme.palette.Logo.HeightDesktop
+    height: theme.palette.Logo.HeightDesktop
   },
   LogoMobile:{
     width: theme.palette.Logo.WidthMobile,
-    heigth: theme.palette.Logo.HeightMobile
+    height: theme.palette.Logo.HeightMobile
   }
 });
 
@@ -222,13 +231,13 @@ class NavigationHeader extends Component {
           </>
         ) : (
           <>
-            <Grid  key={1} xs={12} md={12} lg={12} spacing={5} spacing={5}>
+            <Grid key={1} xs={12} md={12} lg={12} spacing={5}>
               {/* Contenedor Principal */}
-              <Grid container key={2} item xs={11} md={11} lg={11}>
+              <Grid container key={2} item xs={11} md={11} lg={11} className={classes.ContenedorMovil}>
                 {/* <AppBar className={classes.AppBar_} position="static" style={{ backgroundColor: AppColor }}>
                   <Toolbar> */}
                 {/* Contenedor Navigation Menu */}
-                <Grid key={3} item xs={4} md={4} lg={4} className={classes.Menu}>
+                <Grid key={3} item xs={4} className={classes.Menu}>
                   <Hidden mdUp>
                     <NavigationToggleMobile
                       onClick={this.handleNavigationToggleClick}                      
@@ -243,18 +252,16 @@ class NavigationHeader extends Component {
                 </Grid>
 
                 {/* Iconos */}
-                <Grid key={5} item xs={4} md={2} lg={2} item className={classes.Iconos}>
+                <Grid key={5} item xs={4} md={2} lg={2} className={classes.Iconos}>
                   <IconsActions                   
                   width={width}  cart={cart} />
-                </Grid>
-                {/* </Toolbar> */}
-                
-                {/* </AppBar> */}
-              </Grid>
-            </Grid>
+                </Grid>                                
+              </Grid>              
+
+            </Grid>                
 
             {/* Bara de busqueda */}
-            <Grid key={6}  xs={11} md={6} lg={6} className={classes.searchbar}>
+            <Grid key={6} xs={11} className={classes.searchbar}>
                   <SearchBar Metodo={MetodoBusqueda} />
                 </Grid>
 
