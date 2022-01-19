@@ -11,6 +11,12 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 const tabHeight = 69;
 
 const StyledTabs = withStyles({
+    Separador: {
+        ["@media (min-width:600px)"]: {
+            backgroundColor: "#fff",
+            marginLeft: "40px"
+        }
+    },
     indicator: {
         display: "flex",
         justifyContent: "center",
@@ -46,12 +52,13 @@ const StyledTabs = withStyles({
                             TabIndicatorProps={{
                                 style: {
                                     backgroundColor: '#fff',
-                                    height: '3px',
+                                    height: '5px',
                                     borderRadius: '5px',
                                 },
                             }}
                         />
-                        <Divider                        
+                        <Divider  
+                        style={{backgroundColor:"#fff"}}                      
                         />
                     </Box>
                 ) : (
@@ -63,13 +70,14 @@ const StyledTabs = withStyles({
                             TabIndicatorProps={{
                                 style: {
                                     backgroundColor: '#fff',
-                                    height: '3px',
+                                    height: '5px',
                                     borderRadius: '5px',
                                 },
                             }}
                         />                        
                         <Divider 
-                        style={{backgroundColor:"#fff"}}
+                        style={{backgroundColor: "#fff",
+                        marginLeft: "40px"}}
                         />                        
                     </Box>
                 )
