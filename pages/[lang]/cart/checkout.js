@@ -90,6 +90,11 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.primary.dark
   },
+  Contenedor:{
+    ["@media (max-width:599px)"]: {
+    backgroundColor: "#202124"
+    }
+  },
   root: {}
 }));
 
@@ -176,7 +181,7 @@ const Checkout = ({ router }) => {
           <div className={classes.checkoutContentContainer}>
             <div className={classes.checkoutContent}>
               <Grid container spacing={3}>
-                <Grid item xs={12} md={5} style={{backgroundColor: "#202124"}}>
+                <Grid item xs={12} md={5} className={classes.Contenedor} >
                   <div className={classes.flexContainer}>
                     <div className={classes.cartSummary}>                      
                       <CheckoutSummary
