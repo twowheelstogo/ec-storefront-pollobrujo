@@ -57,7 +57,8 @@ const styles = (theme) => ({
       justifyContent: "flex-start",
     },
     ["@media (min-width:1280px) "]: {
-      marginLeft: "auto",
+      display: "flex",
+      justifyContent: "flex-end",
     },
     ["@media (max-width:599px) and (min-width:499px) "]: {
       marginLeft:"1%",      

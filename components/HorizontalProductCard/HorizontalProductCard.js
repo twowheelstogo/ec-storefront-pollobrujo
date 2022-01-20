@@ -151,7 +151,7 @@ const HorizontalProductCard = props => {
     return (
         <Fragment>
             {matches !== true ? (
-                <Div>
+                <Div className={classes.productPaddingHorizontaal}>
                     {
                         tags.catalogProducts.length !== 0 && (
                             <Div>
