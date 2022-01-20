@@ -53,29 +53,23 @@ const PlacesWithSearchBox = (props) => {
 	</SearchBox>;
 };
 const styles = theme => ({
-	BotonPrincipal:{
-		backgroundColor: "!important #FFEB3B",
-		//theme.palette.secondary.botones,    
-		color: "!important #000",
-		//theme.palette.colors.BotonColor,		
-		fontWeight:"800",
-		fontSize:"24px"
+	BotonPrincipal: {
+		backgroundColor: "#FFEB3B !important",		
+		color: "#000 !important",			
+		fontWeight: "800",
+		fontSize: "24px"
 	  },
-	  BotonPrincipalMovil:{
-		backgroundColor: "! important #FFEB3B",
-		//theme.palette.secondary.botones,    
-		color: "!important #000",
-		//theme.palette.colors.BotonColor,		
-		fontWeight:"800",
-		fontSize:"18px"
+	  BotonPrincipalMovil: {
+		backgroundColor: "#FFEB3B !important",		
+		color: "#000 !important",			
+		fontWeight: "800",
+		fontSize: "18px"
 	  },
-	  BotonSecundario:{
-		backgroundColor: "!important #FFEB3B",
-		//theme.palette.secondary.botones,    
-		color: "! important #000",
-		//theme.palette.colors.BotonColor,		
-		fontWeight:"800",
-		fontSize:"10px"
+	  BotonSecundario: {
+		backgroundColor: "#FFEB3B !important",		
+		color: "#000 !important",			
+		fontWeight: "800",
+		fontSize: "10px"
 	  },
 	flexForm: {
 		display: "flex",
@@ -307,7 +301,7 @@ const RenderMobile = withStyles(styles)((props) => {
 										disabled={props.isSent}
 										onClick={() => { form.submit(); }}
 										buttonTitle={"Guardar Cambios"}
-										buttonSubtitle={`${state.description} - ${state.address}`}
+										Buttonubtitle={`${state.description} - ${state.address}`}
 									/> */}
 								</div>
 							</div>
@@ -435,4 +429,4 @@ export async function getStaticPaths() {
 	};
 }
 
-export default withApollo()(withGoogleMaps(withAddressBook(withStyles(styles)(inject("routingStore","authStore")(CreateAddress)))));
+export default withApollo()(withGoogleMaps(withAddressBook((withStyles(styles ,{ withTheme: true }))(inject("routingStore","authStore")(CreateAddress)))));

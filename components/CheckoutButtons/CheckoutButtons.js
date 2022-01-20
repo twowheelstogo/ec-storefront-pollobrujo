@@ -7,7 +7,9 @@ import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
 import { addTypographyStyles, applyTheme } from "@reactioncommerce/components/utils";
 
-const Div = styled.div``;
+const Div = styled.div`
+  background-color: #202124;
+`;
 
 const styles = (theme) => ({
   Button_:{
@@ -57,6 +59,10 @@ class CheckoutButtons extends Component {
     Router.push(primaryButtonRoute);
   }
 
+  handleOnClick2 = () => {
+    Router.push("/");
+  }
+
   render() {
     const {
       isDisabled,
@@ -75,7 +81,7 @@ class CheckoutButtons extends Component {
             className={Button2_}
             variant="contained"
             disableRipple
-
+            onClick={this.handleOnClick2}
           >
             {secondButtonText}
           </Button>

@@ -15,25 +15,30 @@ const styles = (theme) => ({
     marginRight: "auto",
   },
   Borde: {
-    borderBottomStyle: "solid",
-    borderBottomColor: "#979797",
+    borderBottom: "1px solid #979797",    
   },
   Logo: {
     [theme.breakpoints.up("xs")]: {
       display: "flex",
       justifyContent: "flex-start",
+      marginTop: "2%",
     },
     [theme.breakpoints.down("xs")]: {
       display: "flex",
       justifyContent: "center",
-    },
-    marginTop: "2%",
+      marginTop: "15px",
+    },  
+  },
+  ContenedorMovil:{
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   searchbar: {
     color: "white",
     ["@media (max-width:599px)"]: {
       marginLeft: "auto",
       marginRight: "auto",
+      marginTop:"10px"
     },
     ["@media (min-width:600px)"]: {
       marginTop: "1%",
@@ -52,15 +57,32 @@ const styles = (theme) => ({
       justifyContent: "flex-start",
     },
     ["@media (min-width:1280px) "]: {
-      marginLeft: "auto",
-    },
-  },
-  Menu: {    
-    ["@media (max-width:599px)"]: {
       display: "flex",
-      justifyContent: "flex-start",
+      justifyContent: "flex-end",
+    },
+    ["@media (max-width:599px) and (min-width:499px) "]: {
+      marginLeft:"1%",      
+    },
+    ["@media (max-width:498px) and (min-width:450px) "]: {
+      marginLeft:"2%",
+    },
+    ["@media (max-width:449px)"]: {
+      marginLeft:"3%",
+    }
+  },
+  Menu: {
+    ["@media (max-width:449px)"]: {
+      marginLeft:"-4%",
       marginTop:"auto"
     },
+    ["@media (max-width:498px) and (min-width:450px) "]: {
+      marginLeft:"-3%",
+      marginTop:"auto"
+    },    
+    ["@media (max-width:599px) and (min-width:499px) "]: {
+      marginLeft:"-2%",
+      marginTop:"auto"
+    },    
     ["@media (min-width:600px)"]: {
       display: "flex",
       justifyContent: "center",
@@ -110,11 +132,11 @@ const styles = (theme) => ({
   },
   LogoDesktop:{
     width: theme.palette.Logo.WidthDesktop,
-    heigth: theme.palette.Logo.HeightDesktop
+    height: theme.palette.Logo.HeightDesktop
   },
   LogoMobile:{
     width: theme.palette.Logo.WidthMobile,
-    heigth: theme.palette.Logo.HeightMobile
+    height: theme.palette.Logo.HeightMobile
   }
 });
 
@@ -139,7 +161,7 @@ class NavigationHeader extends Component {
   static defaultProps = {
     classes: {},
   };
-
+  
   hideAlert = () => this.setState({ showAlert: false });
   handleNavigationToggleClick = () => {
     this.props.uiStore.toggleMenuDrawerOpen();
@@ -167,30 +189,31 @@ class NavigationHeader extends Component {
       components: { SlideHero },
       withHero
     } = this.props;
+    
 
     return (
       <>
         {isWidthUp("sm", width) ? (
           <>
-            <Grid  xs={12} md={12} lg={12} spacing={5} key={1}>
+            <Grid style={{width:"100%"}} container spacing={5} key={1}>
               {/* Contenedor Principal */}
-              <Grid container xs={11} md={11} lg={11} key={2} className={classes.root}>
+              <Grid item xs={11} sm={11} md={11} lg={11} key={2} className={classes.root}>
                 <AppBar className={classes.AppBar_} position="static">
                   <Toolbar>
                     {/* LOGO */}
-                    <Grid item xs={12} sm={3} md={3} lg={3} key={3} className={classes.Logo}>
+                    <Grid item xs={12} sm={3} md={3} lg={3} xl={3} key={3} className={classes.Logo}>
                       <img src={Logo.urlLogo} className={classes.LogoDesktop} />
                     </Grid>
 
                     {/* Bara de busqueda */}
-                    <Grid item xs={8} sm={6} md={8} lg={8} xl={8} key={4} className={classes.searchbar}>
+                    <Grid item xs={8} sm={8} md={9} lg={9} xl={8} key={4} className={classes.searchbar}>
                       <SearchBar Metodo={MetodoBusqueda} />
                     </Grid>
 
                     {/* Iconos */}
-                    <Grid item xs={2} sm={3} md={3} lg={3} key={5} className={classes.Iconos}>
+                    <Grid item xs={2} sm={2} md={2} lg={3} xl={3} key={5} className={classes.Iconos}>
                       <IconsActions                      
-                      width={width}  cart={cart} />
+                      width={width}    cart={cart} />
                     </Grid>
                   </Toolbar>
                 </AppBar>
@@ -214,53 +237,58 @@ class NavigationHeader extends Component {
               </Grid>
             </Grid>
             {/* Espacio Extra */}
-            <Grid xs={11} key={9} md={11} lg={11} className={classes.Espacio2}>
+            <Grid container style={{width:"100%"}}>
+            <Grid item xs={11} key={9} md={11} lg={11} className={classes.Espacio2}>
               <h1> </h1>
+            </Grid>
             </Grid>
 
             {withHero ? <SlideHero title={MessageCover} subtitle={""} background={ImageCoverUrl} type={"jpg"} /> : null}
           </>
         ) : (
           <>
-            <Grid  key={1} xs={12} md={12} lg={12} spacing={5} spacing={5}>
+          <Grid style = {{ width: "100%" }} container columns={{ xs: 11, md: 11, lg: 11 }} spacing={5} key={1}
+          className={classes.ContenedorMovil}
+          >            
               {/* Contenedor Principal */}
-              <Grid container key={2} item xs={11} md={11} lg={11}>
+              
                 {/* <AppBar className={classes.AppBar_} position="static" style={{ backgroundColor: AppColor }}>
                   <Toolbar> */}
                 {/* Contenedor Navigation Menu */}
-                <Grid key={3} item xs={4} md={4} lg={4} className={classes.Menu}>
+                <Grid key={3} item xs={4} className={classes.Menu}>
                   <Hidden mdUp>
                     <NavigationToggleMobile
                       onClick={this.handleNavigationToggleClick}                      
                     />
                   </Hidden>
-                  <NavigationMobile  shop={shop} Logo={Logo.urlLogo} />
+                  <NavigationMobile shop={shop} Logo={Logo.urlLogo} />
                 </Grid>
 
                 {/* LOGO */}
                 <Grid key={4} item xs={4} md={3} lg={3} className={classes.Logo}>
-                <img src={Logo.urlLogo} className={classes.LogoMobile} />
+                <img src = {Logo.urlLogo} className={classes.LogoMobile} />
                 </Grid>
 
                 {/* Iconos */}
-                <Grid key={5} item xs={4} md={2} lg={2} item className={classes.Iconos}>
+                <Grid key={5} item xs={4} md={2} lg={2} className={classes.Iconos}>
                   <IconsActions                   
-                  width={width}  cart={cart} />
-                </Grid>
-                {/* </Toolbar> */}
-                
-                {/* </AppBar> */}
-              </Grid>
-            </Grid>
+                  width={width}  
+                  cart={cart} />
+                </Grid>                                                        
+            </Grid>                
 
             {/* Bara de busqueda */}
-            <Grid key={6}  xs={11} md={6} lg={6} className={classes.searchbar}>
+            <Grid container style={{width:"100%"}}>
+            <Grid item key={6} xs={11} className={classes.searchbar}>
                   <SearchBar Metodo={MetodoBusqueda} />
                 </Grid>
+            </Grid>
 
             {/* Espacio Extra */}
-            <Grid key={7} xs={11} md={11} lg={11} className={classes.Espacio2}>
+            <Grid container style={{width:"100%"}}>
+            <Grid item key={7} xs={11} md={11} lg={11} className={classes.Espacio2}>
               <h1> </h1>
+            </Grid>
             </Grid>
             {withHero ? <SlideHero title={MessageCover} subtitle={""} background={ImageCoverUrl} type={"jpg"} /> : null}            
           </>

@@ -73,24 +73,26 @@ class IconsActions extends Component {
   };
 
   render() {
-    const { classes, width, cart} = this.props;
-    const Validar = (tamaño) => {
-      let nuevo = "";
-      switch (tamaño) {
-        case "xs":
-          nuevo = 3;
-          break;
-        case "xl":
-          nuevo = 1;
-          break;
-        default:
-          nuevo = 4;
-      }
-      return nuevo;
-    };
+    const { classes, width, cart} = this.props;    
+
+    // const Validar = () => {
+    //   var nuevo = "";
+    //   switch (width) {
+    //     case "xs":
+    //       nuevo = 3;
+    //       break;
+    //     case "xl":
+    //       nuevo = 1;
+    //       break;
+    //     default:
+    //       nuevo = 4;
+    //   }
+    //   return nuevo;
+    // };
     
     return (
-      <Grid container xs={12} md={12} lg={12} className={classes.root} spacing={() => Validar(width)}>
+      <Grid container style={{width:"100%"}} className={classes.root} spacing={
+        width == "xs" ? 1 : width == "lg" ? 2 :1}>
         <Grid item xs={1} md={2} lg={2} className={classes.Usuario}>
           <AccountDropdown/>
         </Grid>
