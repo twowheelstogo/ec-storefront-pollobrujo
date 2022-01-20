@@ -197,21 +197,21 @@ class NavigationHeader extends Component {
           <>
             <Grid style={{width:"100%"}} container spacing={5} key={1}>
               {/* Contenedor Principal */}
-              <Grid item xs={11} md={11} lg={11} key={2} className={classes.root}>
+              <Grid item xs={11} sm={11} md={11} lg={11} key={2} className={classes.root}>
                 <AppBar className={classes.AppBar_} position="static">
                   <Toolbar>
                     {/* LOGO */}
-                    <Grid item xs={12} sm={3} md={3} lg={3} key={3} className={classes.Logo}>
+                    <Grid item xs={12} sm={3} md={3} lg={3} xl={3} key={3} className={classes.Logo}>
                       <img src={Logo.urlLogo} className={classes.LogoDesktop} />
                     </Grid>
 
                     {/* Bara de busqueda */}
-                    <Grid item xs={8} sm={6} md={8} lg={8} xl={8} key={4} className={classes.searchbar}>
+                    <Grid item xs={8} sm={8} md={9} lg={9} xl={8} key={4} className={classes.searchbar}>
                       <SearchBar Metodo={MetodoBusqueda} />
                     </Grid>
 
                     {/* Iconos */}
-                    <Grid item xs={2} sm={3} md={3} lg={3} key={5} className={classes.Iconos}>
+                    <Grid item xs={2} sm={2} md={2} lg={3} xl={3} key={5} className={classes.Iconos}>
                       <IconsActions                      
                       width={width}    cart={cart} />
                     </Grid>

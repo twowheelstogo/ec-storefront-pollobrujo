@@ -92,7 +92,7 @@ class IconsActions extends Component {
     
     return (
       <Grid container style={{width:"100%"}} className={classes.root} spacing={
-        width == "xs" ? 1 : width == "xl" ? 1 : width == "lg" ? 2 :1}>
+        width == "xs" ? 1 : width == "lg" ? 2 :1}>
         <Grid item xs={1} md={2} lg={2} className={classes.Usuario}>
           <AccountDropdown/>
         </Grid>
