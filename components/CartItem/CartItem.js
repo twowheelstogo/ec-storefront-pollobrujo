@@ -7,7 +7,6 @@ import { CustomPropTypes } from "@reactioncommerce/components/utils";
 const Item = styled.div`
 display: table;
 width: 100%;
-padding-left: 20px;
 `;
 
 const ItemContent = styled.div`
@@ -259,7 +258,10 @@ class CartItem extends Component {
         } = components || {};
 
         return (
-            <Item style={{ borderBottom: '1px solid #dcdcdc' }} className={className}>
+            <Item style={{ borderBottom: '1px solid #dcdcdc' }} 
+            //className={className}
+            className={{display:"flex",justifyContent:"flex-start !important"}}
+            >
                 {this.renderImage()}
                 <ItemContent>
                     <ItemContentDetail>

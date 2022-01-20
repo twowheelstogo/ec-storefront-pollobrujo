@@ -12,7 +12,8 @@ const styles = (theme) => ({
 		borderTop: theme.palette.borders.default
 	},
 	cartItems:{
-		paddingTop:theme.spacing(2),
+	display:"flex",
+	justifyContent:"flex-start !important"		
 	},
 	divider:{
 		color:theme.palette.color,
@@ -92,7 +93,7 @@ class CheckoutSummary extends Component {
 
   	if (cart && Array.isArray(cart.items)) {
   		return (
-  			<Grid item xs={12}>
+  			<Grid item xs={12} md={12} lg={12}>
   				<div className={classes.cartItems}>
   					<CartItems
   						isMiniCart

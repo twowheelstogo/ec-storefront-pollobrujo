@@ -71,7 +71,7 @@ class CartItemsList extends Component {
   render() {
     const { className, items, components: { CartItem, ...components }, ...props } = this.props;
     return (
-      <Items className={className}>
+      <Items className={{display:"flex",justifyContent:"flex-start !important"}}>
         {items.map((item) => <CartItem key={item._id} item={item} components={components} {...props} />)}
       </Items>
     );
