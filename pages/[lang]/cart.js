@@ -5,7 +5,7 @@ import inject from "hocs/inject";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-import CartEmptyMessage from "@reactioncommerce/components/CartEmptyMessage/v1";
+import CartEmptyMessage from "components/CartEmptyMessage";
 import CartSummary from "components/CartSummary";
 import withCart from "containers/cart/withCart";
 import CartItems from "components/CartItems";
@@ -21,7 +21,8 @@ import { withComponents } from "@reactioncommerce/components-context";
 
 const styles = (theme) => ({
   cartEmptyMessageContainer: {
-    margin: "80px 0"
+    marginLeft: "auto",
+    marginRight: "auto"
   },
   checkoutButtonsContainer: {
     backgroundColor: "#202124",    
@@ -87,6 +88,24 @@ class CartPage extends Component {
     await onRemoveCartItems(itemId);
   };
 
+  renderEmpty()
+  {
+    const { cart, classes, hasMoreCartItems, loadMoreCartItems } = this.props;
+
+    if (cart && Array.isArray(cart.items) && cart.items.length) {
+      return (
+          <div>            
+          </div>
+      );
+    }
+
+    return (
+      <Grid item xs={9} md={2} lg={2} className={classes.cartEmptyMessageContainer}>
+        <CartEmptyMessage onClick={this.handleClick} />
+      </Grid>
+    );
+  }
+
   renderCartItems() {
     const { cart, classes, hasMoreCartItems, loadMoreCartItems } = this.props;
 
@@ -107,9 +126,8 @@ class CartPage extends Component {
     }
 
     return (
-      <Grid item xs={12} className={classes.cartEmptyMessageContainer}>
-        <CartEmptyMessage onClick={this.handleClick} />
-      </Grid>
+      <div>            
+      </div>
     );
   }
 
@@ -183,17 +201,10 @@ class CartPage extends Component {
             <Grid item xs={12} md={3}>
             {this.renderCartSummary()}
             </Grid>
-            {/* <Grid className={classes.customerSupportCopy} item>
-              <Typography paragraph variant="caption">
-                Have questions? call <span className={classes.phoneNumber}>1.800.555.5555</span>
-              </Typography>
-              <Typography paragraph variant="caption">
-                <Link href="#">Shipping information</Link>
-              </Typography>
-              <Typography paragraph variant="caption">
-                <Link href="#">Return policy</Link>
-              </Typography>
-            </Grid> */}
+            
+            
+            {this.renderEmpty()}
+
           </Grid>
         </section>
       </Layout>

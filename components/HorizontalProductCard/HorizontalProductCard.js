@@ -59,7 +59,9 @@ const CardContainerVertical = styled.div`
         transition: background-color .5s;
     }
 `
-const Div = styled.div``;
+const Div = styled.div`
+    padding-left: 0px;
+`;
 
 const CardContainerHorizontal = styled.div`
     border: ${({ withBorder, boderColor }) => withBorder ? boderColor : "none"};

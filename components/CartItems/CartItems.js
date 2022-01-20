@@ -7,8 +7,8 @@ import { withComponents } from "@reactioncommerce/components-context";
 
 const styles = (theme) => ({
   loadMore: {
-    display: "flex",
-    justifyContent: "center",
+    display:"flex",
+    justifyContent:"flex-start !important",
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2)
   },

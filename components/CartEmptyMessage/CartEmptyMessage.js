@@ -10,7 +10,7 @@ const styles = (theme) => ({
     backgroundColor: theme.palette.secondary.botones,    
     color: theme.palette.colors.BotonColor,
     borderColor: theme.palette.secondary.botones, 
-    fontWeigth: "800",
+    fontWeight: "bold",
     fontSize:"18px"
   },
   Texto_:{

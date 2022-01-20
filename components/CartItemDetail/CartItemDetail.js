@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { addTypographyStyles, applyTheme } from "@reactioncommerce/components/utils";
 
 const Detail = styled.div`
-  flex: 0 0 fit;
+  margin-right: 10px;
 `;
 
 const Title = styled.h3`
