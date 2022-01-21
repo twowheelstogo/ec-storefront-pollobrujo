@@ -5,7 +5,7 @@ import inject from "hocs/inject";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-import CartEmptyMessage from "components/CartEmptyMessage";
+import CartEmptyMessage from "@reactioncommerce/components/CartEmptyMessage/v1";
 import CartSummary from "components/CartSummary";
 import withCart from "containers/cart/withCart";
 import CartItems from "components/CartItems";
@@ -21,11 +21,10 @@ import { withComponents } from "@reactioncommerce/components-context";
 
 const styles = (theme) => ({
   cartEmptyMessageContainer: {
-    marginLeft: "auto",
-    marginRight: "auto"
+    margin: "80px 0"
   },
   checkoutButtonsContainer: {
-    backgroundColor: "#202124",    
+    backgroundColor: "#202124",
     padding: theme.spacing(2)
   },
   customerSupportCopy: {
@@ -43,6 +42,9 @@ const styles = (theme) => ({
   itemWrapper: {
     borderTop: theme.palette.borders.default,
     borderBottom: theme.palette.borders.default
+  },
+  cartSummarySpacing:{
+    padding: "12px"
   }
 });
 
@@ -88,30 +90,12 @@ class CartPage extends Component {
     await onRemoveCartItems(itemId);
   };
 
-  renderEmpty()
-  {
-    const { cart, classes, hasMoreCartItems, loadMoreCartItems } = this.props;
-
-    if (cart && Array.isArray(cart.items) && cart.items.length) {
-      return (
-          <div>            
-          </div>
-      );
-    }
-
-    return (
-      <Grid item xs={9} md={2} lg={2} className={classes.cartEmptyMessageContainer}>
-        <CartEmptyMessage onClick={this.handleClick} />
-      </Grid>
-    );
-  }
-
   renderCartItems() {
     const { cart, classes, hasMoreCartItems, loadMoreCartItems } = this.props;
 
     if (cart && Array.isArray(cart.items) && cart.items.length) {
       return (
-          <>
+          <Grid item xs={12} md={8} className={classes.cartSummarySpacing}>
             {/* <div className={classes.itemWrapper}> */}
             <CartItems
               hasMoreCartItems={hasMoreCartItems}
@@ -121,13 +105,14 @@ class CartPage extends Component {
               onRemoveItemFromCart={this.handleRemoveItem}
             />
             {/* </div> */}
-          </>
+          </Grid>
       );
     }
 
     return (
-      <div>            
-      </div>
+      <Grid item xs={12} className={classes.cartEmptyMessageContainer}>
+        <CartEmptyMessage onClick={this.handleClick} />
+      </Grid>
     );
   }
 
@@ -137,15 +122,8 @@ class CartPage extends Component {
 
     if (cart && cart.checkout && cart.checkout.summary && Array.isArray(cart.items) && cart.items.length) {
       const { fulfillmentTotal, itemTotal, surchargeTotal, taxTotal, total } = cart.checkout.summary;
-      console.log({
-        fulfillmentTotal,
-        itemTotal,
-        surchargeTotal,
-        taxTotal,
-        total
-      })
       return (
-        <>
+        <Grid item xs={12} md={3}>
           <CartSummary
             displayShipping={fulfillmentTotal && fulfillmentTotal.displayAmount}
             displaySubtotal={itemTotal && itemTotal.displayAmount}
@@ -157,7 +135,7 @@ class CartPage extends Component {
           <div className={classes.checkoutButtonsContainer}>
             <CheckoutButtons />
           </div>
-        </>
+        </Grid>
       );
     }
 
@@ -176,35 +154,13 @@ class CartPage extends Component {
           title={`Cart | ${shop && shop.name}`}
           meta={[{ name: "description", content: shop && shop.description }]}
         />
-
-        {/* <Grid container>
-          <Grid item xs = {12} md = {6}>
-            <CartItem/>
-          </Grid>
-          <Grid item xs = {12} md = {6}>
-            <CartSummary/>
-          </Grid>
-        </Grid> */}
         <section>
           <Typography className={classes.title} variant="h6" align="center">
             Mi Carrito
           </Typography>
-          <br/>
           <Grid container>
-
-          <Grid item xs={12} md={5} lg={7} style={{padding:'12px'}}>
             {this.renderCartItems()}
-          </Grid>
-
-          <Grid item xs={1} md={1} lg={1}></Grid>
-
-            <Grid item xs={12} md={3}>
             {this.renderCartSummary()}
-            </Grid>
-            
-            
-            {this.renderEmpty()}
-
           </Grid>
         </section>
       </Layout>

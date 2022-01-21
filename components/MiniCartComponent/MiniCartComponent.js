@@ -232,9 +232,8 @@ class MiniCartComponent extends Component {
   				<CartItems items={items} {...props} isMiniCart /> 
                   {/* <CartItem*/}                  
   			</Items>
-  			<Footer count={items.length}>         
-           <Grid xs={12} md={12} lg={12}>
-           <Grid xs={12} md={12} lg={12} container style={{marginLeft:"auto",marginRight:"auto"}}>
+  			<Footer count={items.length}>                    
+           <Grid container columns={{ xs: 12, md: 12, lg: 12 }} style={{marginLeft:"auto",marginRight:"auto"}}>
 
            <Grid item xs={6} md={6} lg={6} style={{display:"flex",justifyContent:"flex-start"}}>
                <p className={classes.SubTotal_}>Subtotal</p>
@@ -249,8 +248,7 @@ class MiniCartComponent extends Component {
               <Grid item xs={6} md={6} lg={6} style={{display:"flex",justifyContent:"flex-end"}}>
                  <p className={classes.Total_}>{summary.total.displayAmount}</p> </Grid>
            </Grid>
-
-           </Grid>
+           
               {/* {"Total " + summary.total.displayAmount} */}
                          
   				{(CartCheckoutButton && <CartCheckoutButton onClick={onCheckoutButtonClick} />) || (
