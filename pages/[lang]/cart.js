@@ -20,6 +20,14 @@ import fetchTranslations from "staticUtils/translations/fetchTranslations";
 import { withComponents } from "@reactioncommerce/components-context";
 
 const styles = (theme) => ({
+  contenedorPrincipal:{
+    ["@media (min-width:800px)"]: {
+      display:"flex",justifyContent:"center"
+    },
+    ["@media(min-width:600px) and (max-width:799px)"]: {
+      display:"flex",justifyContent:"space-evenly"
+    }
+  },
   cartEmptyMessageContainer: {
     marginLeft: "auto",
     marginRight: "auto"
@@ -112,7 +120,7 @@ class CartPage extends Component {
     if (cart && Array.isArray(cart.items) && cart.items.length) {
       return (
           <>
-            {/* <div className={classes.itemWrapper}> */}
+            {/* <div className={classes.itemWrapper}>  */}
             <CartItems
               hasMoreCartItems={hasMoreCartItems}
               onLoadMoreCartItems={loadMoreCartItems}
@@ -120,7 +128,7 @@ class CartPage extends Component {
               onChangeCartItemQuantity={this.handleItemQuantityChange}
               onRemoveItemFromCart={this.handleRemoveItem}
             />
-            {/* </div> */}
+            {/* </div>  */}
           </>
       );
     }
@@ -153,10 +161,7 @@ class CartPage extends Component {
             displayTax={taxTotal && taxTotal.displayAmount}
             displayTotal={total && total.displayAmount}
             itemsQuantity={cart.totalItemQuantity}
-          />
-          <div className={classes.checkoutButtonsContainer}>
-            <CheckoutButtons />
-          </div>
+          />          
         </>
       );
     }
@@ -190,16 +195,19 @@ class CartPage extends Component {
             Mi Carrito
           </Typography>
           <br/>
-          <Grid container>
+          <Grid container className={classes.contenedorPrincipal}>
 
-          <Grid item xs={12} md={5} lg={7} style={{padding:'12px'}}>
+          <Grid item xs={12} sm={5} md={5} lg={7} style={{padding:'12px'}}>
             {this.renderCartItems()}
           </Grid>
 
-          <Grid item xs={1} md={1} lg={1}></Grid>
+          <Grid item xs={1} sm={1} md={2} lg={1}></Grid>
 
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} sm={3} md={3} lg={3}>
             {this.renderCartSummary()}
+            <div className={classes.checkoutButtonsContainer}>
+            <CheckoutButtons />
+            </div>
             </Grid>
             
             
