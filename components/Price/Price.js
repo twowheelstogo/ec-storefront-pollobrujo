@@ -7,6 +7,7 @@ const PriceDiv = styled.div`
   ${addTypographyStyles("Price", "labelText")}
   font-size: 14px; 
   font-weight: 700;
+  color: #fff;
 `;
 
 const Del = styled.del`

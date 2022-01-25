@@ -11,12 +11,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 const tabHeight = 69;
 
 const StyledTabs = withStyles({
-    Separador: {
-        ["@media (min-width:600px)"]: {
-            backgroundColor: "#fff",
-            marginLeft: "40px"
-        }
-    },
+    
     indicator: {
         display: "flex",
         justifyContent: "center",

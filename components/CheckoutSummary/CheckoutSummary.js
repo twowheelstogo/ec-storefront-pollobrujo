@@ -38,7 +38,7 @@ const StyledTitle = styled.div`
 const StyledHeadline = styled.div`
 	font-size: 18px;
 	font-weight: 600;
-	color: #000000;
+	color: #fff;
 `;
 const StyledText = styled.div`
 	font-size: 14px;
@@ -154,7 +154,8 @@ class CheckoutSummary extends Component {
 		classes } = this.props;
 	   const [ fulfillmentGroup ] = fulfillmentGroups;
 	  return (
-		<Grid xs={12} className={classes.summary}>
+		<Grid container columns={{ xs: 12, md: 12, lg: 12 }}>
+		<Grid item xs={12} className={classes.summary}>
 			{fulfillmentGroup.type === "shipping" && fulfillmentGroup.data.shippingAddress && (
 				<div>
 					<br></br>
@@ -172,6 +173,7 @@ class CheckoutSummary extends Component {
 				</div>
 			)}
 		</Grid>
+		</Grid>
 	  );
   }
 
@@ -184,7 +186,7 @@ class CheckoutSummary extends Component {
   				<Divider className={classes.divider}/>
   				{this.renderCartItems()}
   				{this.renderCartSummary()}
-				{this.renderDeliveryDetails()}
+				{/* {this.renderDeliveryDetails()} */}
   			</Grid>
   		</aside>
   	);
