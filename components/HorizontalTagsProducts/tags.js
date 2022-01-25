@@ -113,8 +113,7 @@ const useStyles = makeStyles(theme => ({
         top: 0,
         left: 0,
         right: 0,
-        width: "100%",
-        zIndex: 10000
+        width: "100%",        
     }
 }));
 

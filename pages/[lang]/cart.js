@@ -26,7 +26,7 @@ const styles = (theme) => ({
     },
     ["@media(min-width:600px) and (max-width:799px)"]: {
       display:"flex",justifyContent:"space-evenly"
-    }
+    },   
   },
   cartEmptyMessageContainer: {
     marginLeft: "auto",
@@ -108,8 +108,10 @@ class CartPage extends Component {
     }
 
     return (
-      <Grid item xs={9} md={2} lg={2} className={classes.cartEmptyMessageContainer}>
+      <Grid item xs={9} sm={5} md={5} lg={5} className={classes.cartEmptyMessageContainer}>
+        <br/><br/>
         <CartEmptyMessage onClick={this.handleClick} />
+        <br/><br/><br/><br/><br/><br/>
       </Grid>
     );
   }
@@ -120,6 +122,10 @@ class CartPage extends Component {
     if (cart && Array.isArray(cart.items) && cart.items.length) {
       return (
           <>
+           <Typography className={classes.title} variant="h6" align="center">
+            Mi Carrito
+          </Typography>
+          <br/>
             {/* <div className={classes.itemWrapper}>  */}
             <CartItems
               hasMoreCartItems={hasMoreCartItems}
@@ -161,7 +167,10 @@ class CartPage extends Component {
             displayTax={taxTotal && taxTotal.displayAmount}
             displayTotal={total && total.displayAmount}
             itemsQuantity={cart.totalItemQuantity}
-          />          
+          />      
+             <div className={classes.checkoutButtonsContainer}>
+            <CheckoutButtons />
+            </div>    
         </>
       );
     }
@@ -182,11 +191,7 @@ class CartPage extends Component {
           meta={[{ name: "description", content: shop && shop.description }]}
         />
         
-        <section>
-          <Typography className={classes.title} variant="h6" align="center">
-            Mi Carrito
-          </Typography>
-          <br/>
+        <section>         
           <Grid container className={classes.contenedorPrincipal}>
 
           <Grid item xs={12} sm={12} md={5} lg={7} style={{padding:'12px'}}>
@@ -196,10 +201,7 @@ class CartPage extends Component {
           <Grid item xs={1} sm={12} md={2} lg={1}></Grid>
 
             <Grid item xs={12} sm={12} md={3} lg={3}>
-            {this.renderCartSummary()}
-            <div className={classes.checkoutButtonsContainer}>
-            <CheckoutButtons />
-            </div>
+            {this.renderCartSummary()}         
             </Grid>
             
             

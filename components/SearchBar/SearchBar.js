@@ -13,7 +13,7 @@ const styles = (theme) => ({
   },
   input: {
     color: "#979797",
-    fontWeight: "600",
+    fontWeight: "300",
   },
   notchedOutline: {
     borderWidth: "1px",
@@ -33,18 +33,19 @@ const styles = (theme) => ({
     borderRightColor: theme.palette.colors.SearchColor,
     },    
   },
-  TextField_:{
+  TextField_:{    
     ["@media (min-width:600px)"]: {
-      backgroundColor: theme.palette.background.theme_,
+      backgroundColor: theme.palette.background.theme_,        
     },
 
     ["@media (max-width:599px)"]: {
-      backgroundColor: "rgba(216, 216, 216, 0.2)"
+      backgroundColor: "rgba(216, 216, 216, 0.2)",      
     }    
   },
   Contenedor:{
     ["@media (max-width:599px)"]: {
-      borderLeft: "2px solid #979797",      
+      borderLeft: "2px solid #979797",  
+      height: "41px"    
     }  
   }
 });
@@ -64,12 +65,12 @@ class SearchBar extends Component {
   };
 
   render() {
-    const { classes, Metodo } = this.props;
+    const { classes, Metodo , size } = this.props;
     return (
       <div className={classes.root}>
         <TextField
           variant="outlined"
-          rows="10"
+          size={size}
           placeholder="Buscar producto..."
           fullWidth
           className={classes.TextField_}

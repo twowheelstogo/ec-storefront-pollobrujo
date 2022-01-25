@@ -21,24 +21,16 @@ const imageContainerQueries = {
 
 const ImageWrapper = styled.div`
   background-color: #000;
-  display: block;
-  height: 0;
   overflow: hidden;
-  padding-top: 65%;
-  position: relative;
+  height: 110px;
   width: 100%;
 `;
 
 const Img = styled.img`
   width: ${({ fit }) => (fit === "contain" && "100%") || "auto"};
   height: ${({ fit }) => (fit === "cover" && "100%") || "auto"};
-  left: 50%;
   opacity: 1;
-  position: absolute;
   transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  top: 50%;
-  transform: translate(-50%, -50%);
-
   ${({ isLoading, isLoaded, isHidden }) => {
     let styles = "";
 
