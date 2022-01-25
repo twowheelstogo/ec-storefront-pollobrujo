@@ -6,9 +6,11 @@ import { Button } from "@material-ui/core";
 import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
 import { addTypographyStyles, applyTheme } from "@reactioncommerce/components/utils";
+import Grid from "@material-ui/core/Grid";
 
 const Div = styled.div`
   background-color: #202124;
+  width: 100%;
 `;
 
 const styles = (theme) => ({

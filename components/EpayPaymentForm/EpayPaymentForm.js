@@ -26,11 +26,12 @@ const useStyles = makeStyles(() => ({
 		bordeRadius: "4px",		
 	}
 }));
+
 import styled from "styled-components";
 const Grid = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;  
+  justify-content: space-between;
 `;
 const SecureCaption = styled.div`
   ${addTypographyStyles("StripePaymentInputCaption", "captionText")}
@@ -49,12 +50,12 @@ const ErrorSpan = styled.div`
   color: red;
 `;
 const CardSpan = styled.span`
-  margin-left: 5px;    
+  margin-left: 5px;
 `;
 const AcceptedPaymentMethods = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin: 20px 0;  
+  margin: 20px 0;
 `;
 const ColFull = styled.div`
   flex: 1 1 100%;
@@ -104,7 +105,6 @@ function EpayPaymentForm(props, ref) {
 	} = useReactoForm({
 		isReadOnly: isSaving,
 		onChange(formData) {
-			console.log(formData)
 			const resultDoc = buildResult(formData);
 			const stringDoc = JSON.stringify(resultDoc);
 			if (stringDoc !== lastDocRef.current) {
@@ -177,7 +177,7 @@ function EpayPaymentForm(props, ref) {
 					values,
 					errors
 				}) => {
-					handleChange(values);
+					// handleChange(values);
 					return (
 						<div onSubmit={handleSubmit}>
 							<form className={className}>

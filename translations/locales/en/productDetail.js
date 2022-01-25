@@ -1,4 +1,4 @@
 export default {
-  addToCart: "Add to cart",
-  quantity: "Quantity"
+  addToCart: "Añadir a carrito de compra",
+  quantity: "Cantidad"
 };

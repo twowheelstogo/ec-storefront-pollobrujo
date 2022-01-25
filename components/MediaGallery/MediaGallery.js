@@ -16,7 +16,7 @@ const styles = (theme) => ({
   },
   featuredImage: {
     flex: 0,
-    height: "100%"
+    height: "90%"
   }
 });
 
@@ -93,13 +93,13 @@ class MediaGallery extends Component {
         <Grid item xs={12} sm={12}>
           <div className={classes.featured}>{this.renderFeaturedImage()}</div>
 
-          <Grid container spacing={1}>
+          {/* <Grid container spacing={1}>
             {mediaItems.map((media, index) => (
               <Grid item key={index} xs={3} sm={2}>
                 <MediaGalleryItem index={index} media={media} onClick={this.handleMediaItemClick} />
               </Grid>
             ))}
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
     );
