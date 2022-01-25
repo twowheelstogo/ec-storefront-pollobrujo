@@ -5,10 +5,12 @@ import { addTypographyStyles, applyTheme } from "@reactioncommerce/components/ut
 
 const Detail = styled.div`
   margin-right: 10px;
+  color: #fff;
 `;
 
 const Title = styled.h3`
   ${addTypographyStyles("CartItemDetailTitle", "headingTextBold")}
+  color: #fff;
   margin-top: ${applyTheme("CartItemDetailTitle.marginTop")};
   margin-bottom: ${applyTheme("CartItemDetailTitle.marginBottom")};
   margin-left: ${applyTheme("CartItemDetailTitle.marginLeft")};
@@ -152,7 +154,7 @@ class CartItemDetail extends Component {
         return (
             <Detail className={className}>
                 <Title>
-                    <div style={{color:"#fff"}}>{title}</div>
+                   {title}
                 </Title>
                 {/* {this.renderAttributes()} */}
                 <OptionProductTitle>

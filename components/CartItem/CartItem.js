@@ -32,6 +32,7 @@ padding-bottom: 10px;
 `;
 
 const ItemContentPrice = styled.div`
+color: #fff;
 display: table-cell;
 position: relative;
 text-align: right;
