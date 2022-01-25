@@ -181,15 +181,7 @@ class CartPage extends Component {
           title={`Cart | ${shop && shop.name}`}
           meta={[{ name: "description", content: shop && shop.description }]}
         />
-
-        {/* <Grid container>
-          <Grid item xs = {12} md = {6}>
-            <CartItem/>
-          </Grid>
-          <Grid item xs = {12} md = {6}>
-            <CartSummary/>
-          </Grid>
-        </Grid> */}
+        
         <section>
           <Typography className={classes.title} variant="h6" align="center">
             Mi Carrito
@@ -197,13 +189,13 @@ class CartPage extends Component {
           <br/>
           <Grid container className={classes.contenedorPrincipal}>
 
-          <Grid item xs={12} sm={5} md={5} lg={7} style={{padding:'12px'}}>
+          <Grid item xs={12} sm={12} md={5} lg={7} style={{padding:'12px'}}>
             {this.renderCartItems()}
           </Grid>
 
-          <Grid item xs={1} sm={1} md={2} lg={1}></Grid>
+          <Grid item xs={1} sm={12} md={2} lg={1}></Grid>
 
-            <Grid item xs={12} sm={3} md={3} lg={3}>
+            <Grid item xs={12} sm={12} md={3} lg={3}>
             {this.renderCartSummary()}
             <div className={classes.checkoutButtonsContainer}>
             <CheckoutButtons />
