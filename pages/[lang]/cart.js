@@ -121,11 +121,7 @@ class CartPage extends Component {
 
     if (cart && Array.isArray(cart.items) && cart.items.length) {
       return (
-          <>
-           <Typography className={classes.title} variant="h6" align="center">
-            Mi Carrito
-          </Typography>
-          <br/>
+          <>          
             {/* <div className={classes.itemWrapper}>  */}
             <CartItems
               hasMoreCartItems={hasMoreCartItems}
@@ -178,6 +174,24 @@ class CartPage extends Component {
     return null;
   }
 
+  Titulo(){
+    const { cart, classes } = this.props;
+
+
+    if (cart && cart.checkout && cart.checkout.summary && Array.isArray(cart.items) && cart.items.length) {
+      return <>
+       <Typography className={classes.title} variant="h6" align="center">
+            Mi Carrito
+          </Typography>
+          <br/>
+      </>
+    }
+    else{
+      return null;
+    }
+
+  }
+
   render() {
     const { cart, classes, shop, components: { CartItem, CartSummary } } = this.props;
     // when a user has no item in cart in a new session, this.props.cart is null
@@ -190,9 +204,9 @@ class CartPage extends Component {
           title={`Cart | ${shop && shop.name}`}
           meta={[{ name: "description", content: shop && shop.description }]}
         />
-        
+        {this.Titulo()}
         <section>         
-          <Grid container className={classes.contenedorPrincipal}>
+          <Grid container className={classes.contenedorPrincipal}>            
 
           <Grid item xs={12} sm={12} md={5} lg={7} style={{padding:'12px'}}>
             {this.renderCartItems()}
