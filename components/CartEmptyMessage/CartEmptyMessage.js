@@ -11,7 +11,11 @@ const styles = (theme) => ({
     color: theme.palette.colors.BotonColor,
     borderColor: theme.palette.secondary.botones, 
     fontWeight: "bold",
-    fontSize:"18px"
+    fontSize:"18px",
+    "&:hover": {      
+      backgroundColor: theme.palette.secondary.botones,    
+    color: theme.palette.colors.BotonColor,
+    },
   },
   Texto_:{
     color: theme.palette.colors.TextTheme,

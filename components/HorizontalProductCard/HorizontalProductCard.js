@@ -22,7 +22,7 @@ display: -webkit-box;
 const StyledTitleVertical = styled.div`
 font-size:18px;
 font-weight:700;
-color:#000000;
+color:#fff;
 display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;  
@@ -112,7 +112,7 @@ const styles = (theme) => ({
         fontSize: '24px',
         paddingTop: '40px',
         paddingBottom: '40px',
-        color: '#000000'
+        color: '#fff'
     },
     titleMobil: {
         fontWeight: 800,
@@ -120,7 +120,7 @@ const styles = (theme) => ({
         paddingTop: '40px',
         paddingBottom: '40px',
         paddingLeft: '7px',
-        color: '#000000'
+        color: '#fff'
     },
     productPadding: {
         paddingLeft: '10px',
@@ -135,7 +135,8 @@ const styles = (theme) => ({
         paddingBottom: '20px',
     },
     gridSpacing:{
-        paddingRight:'30px'
+        paddingRight:'30px',
+        paddingBottom: '30px'
     }
 })
 
@@ -245,15 +246,13 @@ const HorizontalProductCard = props => {
                                                                 href={values.slug && "/product/[...slugOrId]"}
                                                                 as={values.slug && `/product/${values.slug}`}
                                                             >
-                                                                <CardContainerVertical withBorder boderColor={"2px solid rgba(151, 151, 151, 0.5)"}>
-                                                                    <ProductMediaWrapper>
+                                                                <CardContainerVertical withBorder boderColor={"2px solid rgba(151, 151, 151, 0.5)"}>                                                                    
                                                                         <ProgressiveImage
                                                                             fit={"cover"}
                                                                             altText={"description"}
                                                                             presrc={values.primaryImage !== null ? values.primaryImage.URLs.thumbnail : "/images/placeholder.gif"}
                                                                             srcs={values.primaryImage !== null ? values.primaryImage.URLs : "/images/placeholder.gif"}
-                                                                        />
-                                                                    </ProductMediaWrapper>
+                                                                        />                                                                    
                                                                     <CardContent>
                                                                         <div>
                                                                             <StyledTitleVertical>{values.title}</StyledTitleVertical>

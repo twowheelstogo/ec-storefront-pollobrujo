@@ -26,7 +26,7 @@ const styles = (theme) => ({
     [theme.breakpoints.down("xs")]: {
       display: "flex",
       justifyContent: "center",
-      marginTop: "15px",
+      marginTop: "20px",
     },  
   },
   ContenedorMovil:{
@@ -38,7 +38,8 @@ const styles = (theme) => ({
     ["@media (max-width:599px)"]: {
       marginLeft: "auto",
       marginRight: "auto",
-      marginTop:"10px"
+      marginTop:"-1px",
+      marginBottom: "-17px"
     },
     ["@media (min-width:600px)"]: {
       marginTop: "1%",
@@ -54,34 +55,37 @@ const styles = (theme) => ({
   Iconos: {
     ["@media (max-width:1279px) and (min-width:600px) "]: {
       display: "flex",
-      justifyContent: "flex-start",
+      justifyContent: "flex-start",      
     },
     ["@media (min-width:1280px) "]: {
       display: "flex",
       justifyContent: "flex-end",
     },
     ["@media (max-width:599px) and (min-width:499px) "]: {
-      marginLeft:"1%",      
+      marginLeft:"1%",
+      marginTop: "5px"      
     },
     ["@media (max-width:498px) and (min-width:450px) "]: {
       marginLeft:"2%",
+      marginTop: "5px"
     },
     ["@media (max-width:449px)"]: {
       marginLeft:"3%",
+      marginTop: "5px"
     }
   },
   Menu: {
     ["@media (max-width:449px)"]: {
       marginLeft:"-4%",
-      marginTop:"auto"
+      marginTop:"16px"
     },
     ["@media (max-width:498px) and (min-width:450px) "]: {
       marginLeft:"-3%",
-      marginTop:"auto"
+      marginTop:"16px"
     },    
     ["@media (max-width:599px) and (min-width:499px) "]: {
       marginLeft:"-2%",
-      marginTop:"auto"
+      marginTop:"21px"      
     },    
     ["@media (min-width:600px)"]: {
       display: "flex",
@@ -279,8 +283,8 @@ class NavigationHeader extends Component {
 
             {/* Bara de busqueda */}
             <Grid container style={{width:"100%"}}>
-            <Grid item key={6} xs={11} className={classes.searchbar}>
-                  <SearchBar Metodo={MetodoBusqueda} />
+            <Grid item key={6} xs={11} className={classes.searchbar}>                  
+                  <SearchBar size={"small"} Metodo={MetodoBusqueda} />
                 </Grid>
             </Grid>
 
