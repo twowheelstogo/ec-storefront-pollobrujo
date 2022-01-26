@@ -64,8 +64,8 @@ class Layout extends Component {
       Mensaje1: "Contáctenos",
       Mensaje2: "Encuétrenos",
       ContenidoMensaje1: [
-        "+502 41427517",
-        "20 calle 24-26 bodega 15 zona 10 Ofibodegas Pradera",
+        "+502 2320 3434",
+        "Calle 19, Boulevard Vista Hermosa II - Zona 15 - Guatemala",
         "Lunes- Sábado: 8am - 8pm",
         "Domingo: 10am - 8pm",
       ],

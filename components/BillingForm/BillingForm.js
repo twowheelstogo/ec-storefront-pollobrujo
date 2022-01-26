@@ -105,7 +105,8 @@ class BillingFormAction extends Component {
 				return;
 			}
 			this.setState({ loading: true, hasData: false, partnerId: -1, searchNit: true });
-			let nitRes = await NitService.getNit(value, authStore.accessToken);
+			let nitRes = true;
+			//await NitService.getNit(value, authStore.accessToken);
 			onChange({
 				isCf: false,
 				nit: nitRes.vat,

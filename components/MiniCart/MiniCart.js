@@ -117,7 +117,9 @@ class MiniCart extends Component {
 
   handlePopperClose = () => {
     const { closeCart } = this.props.uiStore;
-    closeCart(0);
+    setTimeout(function() {
+      closeCart(0);
+    }, 1000);    
   }
 
   handleEnterPopper = () => {
