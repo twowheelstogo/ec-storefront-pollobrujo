@@ -8,6 +8,7 @@ import { NavigationDesktop } from "components/NavigationDesktop";
 import { NavigationMobile, NavigationToggleMobile } from "components/NavigationMobile";
 import Hidden from "@material-ui/core/Hidden";
 import inject from "hocs/inject";
+import Router from "translations/i18nRouter";
 
 const styles = (theme) => ({  
   root: {
@@ -136,11 +137,13 @@ const styles = (theme) => ({
   },
   LogoDesktop:{
     width: theme.palette.Logo.WidthDesktop,
-    height: theme.palette.Logo.HeightDesktop
+    height: theme.palette.Logo.HeightDesktop,
+    cursor: "pointer"
   },
   LogoMobile:{
     width: theme.palette.Logo.WidthMobile,
-    height: theme.palette.Logo.HeightMobile
+    height: theme.palette.Logo.HeightMobile,
+    cursor: "pointer"
   }
 });
 
@@ -170,6 +173,10 @@ class NavigationHeader extends Component {
   handleNavigationToggleClick = () => {
     this.props.uiStore.toggleMenuDrawerOpen();
   };
+
+  handleOnClick2 = () => {
+    Router.push("/");
+  }
 
   render() {
     //urlLogo: Contiene la url de logo
@@ -206,7 +213,9 @@ class NavigationHeader extends Component {
                   <Toolbar>
                     {/* LOGO */}
                     <Grid item xs={12} sm={3} md={3} lg={3} xl={3} key={3} className={classes.Logo}>
-                      <img src={Logo.urlLogo} className={classes.LogoDesktop} />
+                      <img src={Logo.urlLogo} className={classes.LogoDesktop} 
+                      onClick={this.handleOnClick2}
+                      />
                     </Grid>
 
                     {/* Bara de busqueda */}
@@ -270,7 +279,9 @@ class NavigationHeader extends Component {
 
                 {/* LOGO */}
                 <Grid key={4} item xs={4} md={3} lg={3} className={classes.Logo}>
-                <img src = {Logo.urlLogo} className={classes.LogoMobile} />
+                <img src = {Logo.urlLogo} className={classes.LogoMobile} 
+                onClick={this.handleOnClick2}
+                />
                 </Grid>
 
                 {/* Iconos */}
