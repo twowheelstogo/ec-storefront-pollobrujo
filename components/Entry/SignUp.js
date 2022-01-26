@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.botones,    
     color: theme.palette.colors.BotonColor,
     borderColor: theme.palette.secondary.botones, 
-    fontWeigth: "800",
+    fontWeight: "800",
     fontSize:"18px",
     "&:hover": {      
       backgroundColor: theme.palette.secondary.botones,    

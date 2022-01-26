@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   BotonPrincipal:{
     backgroundColor: theme.palette.secondary.botones,    
     color: theme.palette.colors.BotonColor,    
-    fontWeigth: "800",    
+    fontWeight: "800",    
     "&:hover": {      
       backgroundColor: theme.palette.secondary.botones,    
       color: theme.palette.colors.BotonColor,
