@@ -215,8 +215,7 @@ class BillingFormAction extends Component {
 								id={nitbillingForm}
 								name='nit'
 								placeholder={placeholderProps}
-								isOnDarkBackground={isOnDarkBackground}
-								isReadOnly={isCf || isSaving || isReadOnly}
+								isOnDarkBackground={isOnDarkBackground}								
 								onChange={(val) => this.handleOnChangeNit(val)}
 								value={nitValue}
 							/>
@@ -235,8 +234,7 @@ class BillingFormAction extends Component {
 								id={namebillingForm}
 								name='name'
 								placeholder={placeholderProps}
-								isOnDarkBackground={isOnDarkBackground}
-								isReadOnly={isCf || isSaving || isReadOnly || this.state.hasData}
+								isOnDarkBackground={isOnDarkBackground}								
 								onChange={(val) => this.handleOnChange('name', val)}
 								value={nameValue}
 							/>
@@ -250,8 +248,7 @@ class BillingFormAction extends Component {
 								id={addresbillingForm}
 								name='address'
 								placeholder={placeholderProps}
-								isOnDarkBackground={isOnDarkBackground}
-								isReadOnly={isCf || isSaving || isReadOnly || (this.state.partnerId != -1)}
+								isOnDarkBackground={isOnDarkBackground}								
 								onChange={(val) => this.handleOnChange('address', val)}
 								value={addressValue}
 							/>

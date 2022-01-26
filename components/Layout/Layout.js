@@ -70,8 +70,8 @@ class Layout extends Component {
         "Domingo: 10am - 8pm",
       ],
       ContenidoMensaje2: [
-        { Titulo: "Sobre Nosotros", ruta: "/sobre" },
-        { Titulo: "Extra", ruta: "/sobre" },
+        { Titulo: "Sobre Nosotros", ruta: "/Nosotros" },
+        { Titulo: "Extra", ruta: "/Ubicaciones" },
       ],
       NombreEmpresa: "Pollo Brujo",
       RedesSociales: [
