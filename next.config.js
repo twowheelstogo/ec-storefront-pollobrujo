@@ -58,6 +58,11 @@ module.exports = {
     redirects() {
       return [
         {
+          source: "/empleos",
+          destination: "https://conectate.app/pollobrujo",
+          permanent: true
+          },
+        {
           source: "/graphiql",
           destination: appConfig.EXTERNAL_GRAPHQL_URL,
           permanent: true
