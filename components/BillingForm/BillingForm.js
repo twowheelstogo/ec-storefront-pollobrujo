@@ -10,14 +10,12 @@ import { Button } from "@material-ui/core";
 const styles = theme => ({
     input: {		
 		width: "100%",
-		border: "none",
-		borderRadius: "5px",
-		height: "40px",		
-		padding: "10px",
+		border: "none",				
+		background: "#F4F1F1",		
 		backgroundColor:"#202124",
 		color: "#B8BCCA",
-		bordeRadius: "4px",		
-	},
+		bordeRadius: "4px",			
+	},    
 	label_ : {
 		marginTop:"10px"
 	},
@@ -212,6 +210,7 @@ class BillingFormAction extends Component {
                             <label className={classes.labelColor}>Nit</label>
                             <div className={classes.label_}></div>
                             <TextInput
+                                className={classes.input}
                                 id={nitbillingForm}
                                 name='nit'
                                 placeholder={placeholderProps}
@@ -232,6 +231,7 @@ class BillingFormAction extends Component {
                             <label className={classes.labelColor}>Nombre de facturación</label>
                             <div className={classes.label_}></div>
                             <TextInput
+                                className={classes.input}
                                 id={namebillingForm}
                                 name='name'
                                 placeholder={placeholderProps}
@@ -247,6 +247,7 @@ class BillingFormAction extends Component {
                             <label className={classes.labelColor}>Dirección de facturación</label>
                             <div className={classes.label_}></div>
                             <TextInput
+                                className={classes.input}
                                 id={addresbillingForm}
                                 name='address'
                                 placeholder={placeholderProps}

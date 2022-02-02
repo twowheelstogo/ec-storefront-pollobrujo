@@ -19,8 +19,7 @@ import useAvailablePaymentMethods from "hooks/availablePaymentMethods/useAvailab
 // import useAddressValidation from "hooks/address/useAddressValidation";
 import useTranslation from "hooks/useTranslation";
 import definedPaymentMethods from "custom/paymentMethods";
-
-
+import Breadcrumbs from "components/Breadcrumbs/v2";
 import { locales } from "translations/config";
 import fetchPrimaryShop from "staticUtils/shop/fetchPrimaryShop";
 import fetchTranslations from "staticUtils/translations/fetchTranslations";
@@ -95,7 +94,38 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#202124"
     }
   },
-  root: {}
+  root: {},
+  breadcrumbGrid: {		      
+    padding: theme.spacing(1),  
+    ["@media (min-width:960px)"]: {
+      marginLeft: theme.spacing(2),
+    },
+    ["@media (max-width:959px)"]: {
+      marginLeft: theme.spacing(0)
+    },    
+    
+    ["@media (min-width:600px)"]: {
+      marginBottom: theme.spacing(0.5),
+		marginTop: theme.spacing(0.5),  
+    },
+    ["@media (max-width:959px)"]: {      
+		  marginTop: "-1px",  
+    },          
+	},
+  page: {
+    backgroundColor: "#202124",
+    ["@media (min-width:600px)"]: {
+      height: '43px',   
+    },
+    ["@media (max-width:599px)"]: {
+      height: '33px',   
+    },    		
+	},
+  Dividers:{
+    ["@media (min-width:600px)"]: {
+      height: '60px',   
+    },    
+  }
 }));
 
 const Checkout = ({ router }) => {
@@ -116,7 +146,8 @@ const Checkout = ({ router }) => {
     hasMoreCartItems,
     loadMoreCartItems,
     onRemoveCartItems,
-    onChangeCartItemsQuantity
+    onChangeCartItemsQuantity,
+    
   } = useCart();
 
   const [availablePaymentMethods = [], isLoadingAvailablePaymentMethods] = useAvailablePaymentMethods();
@@ -138,6 +169,7 @@ const Checkout = ({ router }) => {
       setStripe(window.Stripe(process.env.STRIPE_PUBLIC_API_KEY));
     }
   }), [stripe]; // eslint-disable-line no-sequences
+  
   
   // eslint-disable-next-line react/no-multi-comp
   const renderCheckoutContent = () => {
@@ -230,6 +262,15 @@ const Checkout = ({ router }) => {
 
   return (
     <Layout shop={shop}>
+        <div className = { classes.page }>
+  			  <Grid container>                    
+            <Grid item xs={12} className={classes.breadcrumbGrid}>            
+  					<Breadcrumbs isPDP path={router.pathname} tagId={'Checkout page'} />
+            </Grid>
+  				</Grid>
+          </div>
+      <div className={classes.Dividers}><p style={{color:'transparent'}}>s</p></div>  
+
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={shop && shop.description} />
@@ -240,7 +281,7 @@ const Checkout = ({ router }) => {
 };
 
 Checkout.propTypes = {
-  router: PropTypes.object
+  router: PropTypes.object,  
 };
 
 /**
