@@ -10,17 +10,18 @@ const styles = (theme) => ({
   container: {
     display: "flex",
     alignItems: "center",
+    backgroundColor: '#202124',
     maxWidth: theme.layout.mainContentMaxWidth,
     marginLeft: "auto",
     marginRight: "auto",
     [theme.breakpoints.down("xs")]: {
-      justifyContent: "center"
+      justifyContent: "flex-start"
     }
   },
   breadcrumbLink: {
     fontSize: "14px",
     fontFamily: theme.typography.fontFamily,
-    color: "#3c3c3c",
+    color: "#fff",
     border: 0,
     textDecoration: "underline",
     margin: "0 7px"

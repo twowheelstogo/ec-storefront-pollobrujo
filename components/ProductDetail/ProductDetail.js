@@ -250,7 +250,7 @@ class ProductDetail extends Component {
   			</Fragment>
   		);
   	}
-
+	
   	return (
   		<div className = { classes.page }>
   			<Grid container spacing={5}>

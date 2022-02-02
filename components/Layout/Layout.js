@@ -17,12 +17,13 @@ const styles = (theme) => ({
   },
   main: {
     flex: "1 1 auto",
-    maxWidth: theme.layout.mainContentMaxWidth,
+    maxWidth: '100%',
+    //theme.layout.mainContentMaxWidth,
     marginLeft: "auto",
     marginRight: "auto"
   },
   article: {
-    padding: theme.spacing(3),
+    //padding: theme.spacing(3),
     [theme.breakpoints.down("sm")]: {
       padding: theme.spacing(0)
     }

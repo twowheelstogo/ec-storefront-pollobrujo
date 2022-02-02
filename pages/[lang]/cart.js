@@ -18,6 +18,7 @@ import { withApollo } from "lib/apollo/withApollo";
 import fetchPrimaryShop from "staticUtils/shop/fetchPrimaryShop";
 import fetchTranslations from "staticUtils/translations/fetchTranslations";
 import { withComponents } from "@reactioncommerce/components-context";
+import Breadcrumbs from "components/Breadcrumbs/v2";
 
 const styles = (theme) => ({
   contenedorPrincipal:{
@@ -51,6 +52,35 @@ const styles = (theme) => ({
   itemWrapper: {
     borderTop: theme.palette.borders.default,
     borderBottom: theme.palette.borders.default
+  },
+  breadcrumbGrid: {		      
+    padding: theme.spacing(1),  
+    ["@media (min-width:960px)"]: {
+      marginLeft: theme.spacing(5),
+    },
+    ["@media (max-width:959px)"]: {
+      marginLeft: theme.spacing(0)
+    },    
+    
+    ["@media (min-width:600px)"]: {
+      marginBottom: theme.spacing(0.5),
+		marginTop: theme.spacing(0.5),  
+    },
+    ["@media (max-width:959px)"]: {      
+		  marginTop: "-1px",  
+    },          
+	},
+  page: {
+    backgroundColor: "#202124",
+    ["@media (min-width:600px)"]: {
+      height: '43px',   
+    },
+    ["@media (max-width:599px)"]: {
+      height: '33px',   
+    },    		
+	},
+  Dividers:{
+    border: 'solid 1px transparent'
   }
 });
 
@@ -72,6 +102,7 @@ class CartPage extends Component {
       })
     }),
     classes: PropTypes.object,
+    routingStore: PropTypes.object.isRequired,
     hasMoreCartItems: PropTypes.bool,
     loadMoreCartItems: PropTypes.func,
     onChangeCartItemsQuantity: PropTypes.func,
@@ -193,17 +224,28 @@ class CartPage extends Component {
   }
 
   render() {
-    const { cart, classes, shop, components: { CartItem, CartSummary } } = this.props;
+    const { cart, classes, shop, components: { CartItem, CartSummary },routingStore, } = this.props;
     // when a user has no item in cart in a new session, this.props.cart is null
     // when the app is still loading, this.props.cart is undefined
     if (typeof cart === "undefined") return <PageLoading delay={0} />;
-
+    
     return (
       <Layout shop={shop}>
         <Helmet
           title={`Cart | ${shop && shop.name}`}
           meta={[{ name: "description", content: shop && shop.description }]}
         />
+
+        <div className = { classes.page }>
+  			  <Grid container>                    
+            <Grid item xs={12} className={classes.breadcrumbGrid}>            
+  					<Breadcrumbs isPDP path={routingStore.pathname} tagId={'Shopping cart'} />
+            </Grid>
+  				</Grid>
+          </div>
+
+          <hr className={classes.Dividers}/>                    
+
         {this.Titulo()}
         <section>         
           <Grid container className={classes.contenedorPrincipal}>            
@@ -212,7 +254,7 @@ class CartPage extends Component {
             {this.renderCartItems()}
           </Grid>
 
-          <Grid item xs={1} sm={12} md={2} lg={1}></Grid>
+          <Grid item xs={12} sm={12} md={2} lg={1}><span style={{color:'transparent'}}>s</span></Grid>
 
             <Grid item xs={12} sm={12} md={3} lg={3}>
             {this.renderCartSummary()}         
