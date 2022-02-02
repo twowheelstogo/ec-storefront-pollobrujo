@@ -14,6 +14,7 @@ import fetchPrimaryShop from "staticUtils/shop/fetchPrimaryShop";
 import fetchCatalogProduct from "staticUtils/catalog/fetchCatalogProduct";
 import fetchAllTags from "staticUtils/tags/fetchAllTags";
 import fetchTranslations from "staticUtils/translations/fetchTranslations";
+import { withStyles } from "@material-ui/core/styles";
 
 /**
  *
@@ -23,6 +24,24 @@ import fetchTranslations from "staticUtils/translations/fetchTranslations";
  * @summary Builds a JSONLd object from product properties.
  * @return {String} Stringified product jsonld
  */
+
+ const styles = (theme) => ({    
+  main: {
+    flex: "1 1 auto",
+    maxWidth: theme.layout.mainContentMaxWidth,
+    marginLeft: "auto",
+    marginRight: "auto"
+  },
+  article: {
+      ["@media (min-width:900px)"]: {
+          padding: theme.spacing(3),
+        },
+        ["@media (max-width:899px)"]: {
+          padding: theme.spacing(0)
+        },      
+  }
+});
+
 function buildJSONLd(product, shop) {
   if (!product || !shop) return "";
 

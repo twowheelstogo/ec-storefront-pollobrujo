@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { withComponents } from "@reactioncommerce/components-context";
+import BreadcrumbsSwitch from "components/BreadcrumbsSwitch";
+
 import {
   Facebook as FacebookIcon,
   Instagram as InstagramIcon,
@@ -17,17 +19,19 @@ const styles = (theme) => ({
   },
   main: {
     flex: "1 1 auto",
-    maxWidth: '100%',
-    //theme.layout.mainContentMaxWidth,
+    maxWidth: theme.layout.mainContentMaxWidth,
     marginLeft: "auto",
     marginRight: "auto"
   },
   article: {
-    //padding: theme.spacing(3),
+    padding: theme.spacing(3),
     [theme.breakpoints.down("sm")]: {
       padding: theme.spacing(0)
     }
-  }
+  }, 
+  Dividers:{
+    border: '10px solid transparent'
+     }
 });
 
 class Layout extends Component {
@@ -35,9 +39,13 @@ class Layout extends Component {
     children: PropTypes.node,
     classes: PropTypes.object,
     shop: PropTypes.shape({
-      name: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
     }),
     viewer: PropTypes.object,
+    routerLabel: PropTypes.string,
+    router: PropTypes.object,
+    routerType: PropTypes.number,
+    catalogItems: PropTypes.array 
   };
 
   static defaultProps = {
@@ -52,8 +60,14 @@ class Layout extends Component {
       shop,
       components: { NavigationHeader },
       components: { CustomFooter },
-      withHero
-    } = this.props;
+      withHero,      
+      catalogItems,
+      routerLabel,
+      router,
+      routerType           
+    } = this.props;     
+    
+    console.log(routerType);
 
     const Logo = {
       urlLogo:
@@ -99,6 +113,9 @@ class Layout extends Component {
             }
             MessageCover={"SABOR ÚNICO A LA PARILLA"}              
           />                      
+
+        <BreadcrumbsSwitch routerLabel={routerLabel} router={router} routerType={routerType}/>
+        <hr className={classes.Dividers}/>                    
 
           <main className={classes.main}>
             <article className={classes.article}>{children}</article>

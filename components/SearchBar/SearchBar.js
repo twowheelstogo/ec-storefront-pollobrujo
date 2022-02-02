@@ -4,6 +4,7 @@ import { Magnify } from "mdi-material-ui";
 //import { withComponents } from "@reactioncommerce/components-context";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import withCatalogItems from "containers/catalog/withCatalogItems";
 
 const styles = (theme) => ({
   root: {
@@ -58,6 +59,7 @@ class SearchBar extends Component {
 
   static propTypes = {
     classes: PropTypes.object,
+    catalogItems: PropTypes.array,
   };
 
   static defaultProps = {
@@ -65,7 +67,11 @@ class SearchBar extends Component {
   };
 
   render() {
-    const { classes, Metodo , size } = this.props;
+    const { classes, Metodo , size , catalogItems } = this.props;
+    console.log(catalogItems);
+
+    let products = (catalogItems || []).map((items) => items.node.product);    
+
     return (
       <div className={classes.root}>
         <TextField

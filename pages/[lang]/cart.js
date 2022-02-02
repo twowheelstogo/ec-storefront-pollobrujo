@@ -18,7 +18,6 @@ import { withApollo } from "lib/apollo/withApollo";
 import fetchPrimaryShop from "staticUtils/shop/fetchPrimaryShop";
 import fetchTranslations from "staticUtils/translations/fetchTranslations";
 import { withComponents } from "@reactioncommerce/components-context";
-import Breadcrumbs from "components/Breadcrumbs/v2";
 
 const styles = (theme) => ({
   contenedorPrincipal:{
@@ -230,21 +229,15 @@ class CartPage extends Component {
     if (typeof cart === "undefined") return <PageLoading delay={0} />;
     
     return (
-      <Layout shop={shop}>
+      <Layout shop={shop}
+      router={routingStore}
+      routerLabel={'Shopping cart'}
+      routerType={1}
+      >
         <Helmet
           title={`Cart | ${shop && shop.name}`}
           meta={[{ name: "description", content: shop && shop.description }]}
-        />
-
-        <div className = { classes.page }>
-  			  <Grid container>                    
-            <Grid item xs={12} className={classes.breadcrumbGrid}>            
-  					<Breadcrumbs isPDP path={routingStore.pathname} tagId={'Shopping cart'} />
-            </Grid>
-  				</Grid>
-          </div>
-
-          <hr className={classes.Dividers}/>                    
+        />             
 
         {this.Titulo()}
         <section>         

@@ -19,7 +19,6 @@ import useAvailablePaymentMethods from "hooks/availablePaymentMethods/useAvailab
 // import useAddressValidation from "hooks/address/useAddressValidation";
 import useTranslation from "hooks/useTranslation";
 import definedPaymentMethods from "custom/paymentMethods";
-import Breadcrumbs from "components/Breadcrumbs/v2";
 import { locales } from "translations/config";
 import fetchPrimaryShop from "staticUtils/shop/fetchPrimaryShop";
 import fetchTranslations from "staticUtils/translations/fetchTranslations";
@@ -261,16 +260,11 @@ const Checkout = ({ router }) => {
   }
 
   return (
-    <Layout shop={shop}>
-        <div className = { classes.page }>
-  			  <Grid container>                    
-            <Grid item xs={12} className={classes.breadcrumbGrid}>            
-  					<Breadcrumbs isPDP path={router.pathname} tagId={'Checkout page'} />
-            </Grid>
-  				</Grid>
-          </div>
-      <div className={classes.Dividers}><p style={{color:'transparent'}}>s</p></div>  
-
+    <Layout shop={shop}
+      router={router}
+      routerLabel={'Checkout page'}
+      routerType={1}
+    >           
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={shop && shop.description} />

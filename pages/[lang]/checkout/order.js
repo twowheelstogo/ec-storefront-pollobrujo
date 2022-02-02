@@ -12,7 +12,6 @@ import { withApollo } from "lib/apollo/withApollo";
 import { locales } from "translations/config";
 import fetchPrimaryShop from "staticUtils/shop/fetchPrimaryShop";
 import fetchTranslations from "staticUtils/translations/fetchTranslations";
-import Breadcrumbs from "components/Breadcrumbs/v2";
 
 const styles = (theme) => ({
   orderThankYou: {
@@ -95,16 +94,11 @@ class CheckoutComplete extends Component {
     }
 
     return (
-      <Layout shop={shop}>
-        <div className = { classes.page }>
-  			  <Grid container>                    
-            <Grid item xs={12} className={classes.breadcrumbGrid}>            
-  					<Breadcrumbs isPDP path={router.pathname} tagId={'Single order page'} />
-            </Grid>
-  				</Grid>
-          </div>
-
-          <div className={classes.Dividers}><p style={{color:'transparent'}}>s</p></div>  
+      <Layout shop={shop}
+      router={router}
+      routerLabel={'Single order page'}
+      routerType={1}
+      >                  
 
         <Helmet>
           <title>{shop && shop.name} | Checkout</title>
