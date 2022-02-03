@@ -154,6 +154,7 @@ class NavigationHeader extends Component {
   }
 
   static propTypes = {
+    catalogItems: PropTypes.array,
     classes: PropTypes.object,
     width: PropTypes.string.isRequired,
     shop: PropTypes.shape({
@@ -198,7 +199,8 @@ class NavigationHeader extends Component {
       components: { SearchBar },
       components: { IconsActions },
       components: { SlideHero },
-      withHero
+      withHero,
+      catalogItems
     } = this.props;
     
 
@@ -220,7 +222,9 @@ class NavigationHeader extends Component {
 
                     {/* Bara de busqueda */}
                     <Grid item xs={8} sm={8} md={9} lg={9} xl={8} key={4} className={classes.searchbar}>
-                      <SearchBar Metodo={MetodoBusqueda} />
+                      <SearchBar Metodo={MetodoBusqueda}
+                      catalogItems={catalogItems}
+                      />
                     </Grid>
 
                     {/* Iconos */}
@@ -295,7 +299,9 @@ class NavigationHeader extends Component {
             {/* Bara de busqueda */}
             <Grid container style={{width:"100%"}}>
             <Grid item key={6} xs={11} className={classes.searchbar}>                  
-                  <SearchBar size={"small"} Metodo={MetodoBusqueda} />
+                  <SearchBar size={"small"} Metodo={MetodoBusqueda} 
+                  catalogItems={catalogItems}
+                  />
                 </Grid>
             </Grid>
 
@@ -314,5 +320,5 @@ class NavigationHeader extends Component {
 }
 
 export default withComponents(
-  withWidth({ initialWidth: "md" })(withStyles(styles)(inject("uiStore")(NavigationHeader))),
+  withWidth({ initialWidth: "md" })(withStyles(styles)(inject("catalogItems", "uiStore")(NavigationHeader))),
 );

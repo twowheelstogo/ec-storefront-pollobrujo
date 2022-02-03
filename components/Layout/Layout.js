@@ -130,6 +130,7 @@ class Layout extends Component {
         <div className={classes.root}>
           {/* <Header shop={shop} viewer={viewer} /> */}          
           <NavigationHeader
+            catalogItems={catalogItems}
             withHero={withHero}
             shop={shop}
             viewer={viewer}

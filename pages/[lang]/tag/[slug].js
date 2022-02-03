@@ -121,7 +121,7 @@ class TagGridPage extends Component {
     }
 
     return (
-      <Layout shop={shop}>
+      <Layout shop={shop} catalogItems={catalogItems}>
         <Helmet
           title={`${tag && tag.name} | ${shop && shop.name}`}
           meta={

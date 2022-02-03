@@ -95,7 +95,7 @@ function buildJSONLd(product, shop) {
  * @param {Object} shop - the shop this product belong to
  * @return {React.Component} The product detail page
  */
-function ProductDetailPage({ addItemsToCart, product, isLoadingProduct, shop, routingStore}) {
+function ProductDetailPage({ addItemsToCart, product, isLoadingProduct, shop, routingStore, catalogItems}) {
   const router = useRouter();
   const currencyCode = (shop && shop.currency.code) || "USD";
   const JSONLd = useMemo(() => {
@@ -113,6 +113,7 @@ function ProductDetailPage({ addItemsToCart, product, isLoadingProduct, shop, ro
     routerType={2}
     product={product}
     routerLabel={routingStore.tagId}
+    catalogItems={catalogItems}
     >
       
       <Helmet
@@ -149,7 +150,8 @@ ProductDetailPage.propTypes = {
       code: PropTypes.string.isRequired
     })
   }),
-  routingStore: PropTypes.object.isRequired
+  routingStore: PropTypes.object.isRequired,
+  catalogItems: PropTypes.array,
 };
 
 /**
@@ -198,4 +200,4 @@ export async function getStaticPaths() {
   };
 }
 
-export default withApollo()(inject("routingStore", "uiStore")(withCart(ProductDetailPage)));
+export default withApollo()(inject("routingStore", "catalogItems", "uiStore")(withCart(ProductDetailPage)));
