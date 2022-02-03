@@ -8,13 +8,14 @@ import ProductDetail from "components/ProductDetail";
 import PageLoading from "components/PageLoading";
 import Layout from "components/Layout";
 import { withApollo } from "lib/apollo/withApollo";
-
 import { locales } from "translations/config";
 import fetchPrimaryShop from "staticUtils/shop/fetchPrimaryShop";
 import fetchCatalogProduct from "staticUtils/catalog/fetchCatalogProduct";
 import fetchAllTags from "staticUtils/tags/fetchAllTags";
 import fetchTranslations from "staticUtils/translations/fetchTranslations";
 import { withStyles } from "@material-ui/core/styles";
+import inject from "hocs/inject";
+
 
 /**
  *
@@ -84,6 +85,7 @@ function buildJSONLd(product, shop) {
   return JSON.stringify(productJSON);
 }
 
+
 /**
  * Layout for the product detail page
  *
@@ -93,7 +95,7 @@ function buildJSONLd(product, shop) {
  * @param {Object} shop - the shop this product belong to
  * @return {React.Component} The product detail page
  */
-function ProductDetailPage({ addItemsToCart, product, isLoadingProduct, shop }) {
+function ProductDetailPage({ addItemsToCart, product, isLoadingProduct, shop, routingStore}) {
   const router = useRouter();
   const currencyCode = (shop && shop.currency.code) || "USD";
   const JSONLd = useMemo(() => {
@@ -107,7 +109,12 @@ function ProductDetailPage({ addItemsToCart, product, isLoadingProduct, shop }) 
   if (!product || !shop) return <Typography>Producto no enconrado</Typography>;
 
   return (
-    <Layout shop={shop}>
+    <Layout shop={shop}
+    routerType={2}
+    product={product}
+    routerLabel={routingStore.tagId}
+    >
+      
       <Helmet
         title={`${product && product.title} | ${shop && shop.name}`}
         meta={[{ name: "description", content: product && product.description }]}
@@ -141,7 +148,8 @@ ProductDetailPage.propTypes = {
     currency: PropTypes.shape({
       code: PropTypes.string.isRequired
     })
-  })
+  }),
+  routingStore: PropTypes.object.isRequired
 };
 
 /**
@@ -190,4 +198,4 @@ export async function getStaticPaths() {
   };
 }
 
-export default withApollo()(withCart(ProductDetailPage));
+export default withApollo()(inject("routingStore", "uiStore")(withCart(ProductDetailPage)));

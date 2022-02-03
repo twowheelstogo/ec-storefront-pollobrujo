@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { withComponents } from "@reactioncommerce/components-context";
 import BreadcrumbsSwitch from "components/BreadcrumbsSwitch";
+import Breadcrumbs from "components/Breadcrumbs";
+import { Grid } from "@material-ui/core";
 
 import {
   Facebook as FacebookIcon,
@@ -31,7 +33,33 @@ const styles = (theme) => ({
   }, 
   Dividers:{
     border: '10px solid transparent'
-     }
+     },
+     breadcrumbGrid: {		      
+      padding: theme.spacing(1),  
+      ["@media (min-width:960px)"]: {
+        marginLeft: theme.spacing(5),
+      },
+      ["@media (max-width:959px)"]: {
+        marginLeft: theme.spacing(0)
+      },    
+      
+      ["@media (min-width:600px)"]: {
+        marginBottom: theme.spacing(0.5),
+          marginTop: theme.spacing(0.5),  
+      },
+      ["@media (max-width:959px)"]: {      
+            marginTop: "-1px",  
+      },          
+      },
+    page: {
+      backgroundColor: "#202124",
+      ["@media (min-width:600px)"]: {
+        height: '43px',   
+      },
+      ["@media (max-width:599px)"]: {
+        height: '33px',   
+      },    		
+      },      
 });
 
 class Layout extends Component {
@@ -45,7 +73,8 @@ class Layout extends Component {
     routerLabel: PropTypes.string,
     router: PropTypes.object,
     routerType: PropTypes.number,
-    catalogItems: PropTypes.array 
+    catalogItems: PropTypes.array,
+    product: PropTypes.object
   };
 
   static defaultProps = {
@@ -64,10 +93,10 @@ class Layout extends Component {
       catalogItems,
       routerLabel,
       router,
-      routerType           
+      routerType,
+      product           
     } = this.props;     
-    
-    console.log(routerType);
+        
 
     const Logo = {
       urlLogo:
@@ -114,7 +143,20 @@ class Layout extends Component {
             MessageCover={"SABOR ÚNICO A LA PARILLA"}              
           />                      
 
-        <BreadcrumbsSwitch routerLabel={routerLabel} router={router} routerType={routerType}/>
+        {
+          <>
+          {routerType === 2 ? 
+          <div className = { classes.page }>
+          <Grid container> 
+          <Grid item xs={12} className={classes.breadcrumbGrid}>
+          <Breadcrumbs isPDP tagId={routerLabel} product={product} />
+          </Grid>
+          </Grid>
+          </div>
+           :
+          <BreadcrumbsSwitch routerLabel={routerLabel} router={router} routerType={routerType}/>}
+          </>
+          }
         <hr className={classes.Dividers}/>                    
 
           <main className={classes.main}>

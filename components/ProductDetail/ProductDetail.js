@@ -254,9 +254,9 @@ class ProductDetail extends Component {
   	return (
   		<div className = { classes.page }>
   			<Grid container spacing={5}>
-  				<Grid item className={classes.breadcrumbGrid} xs={12}>
+  				{/* <Grid item className={classes.breadcrumbGrid} xs={12}>
   					<Breadcrumbs isPDP tagId={routingStore.tagId} product={product} />
-  				</Grid>
+  				</Grid> */}
   				<Grid item xs={12} sm={6}>
   					<div className={classes.section}>
   						<MediaGallery mediaItems={pdpMediaItems} />
