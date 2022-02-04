@@ -71,6 +71,7 @@ const Entry = (props) => {
           >
             INICIAR SESIÓN
           </Button>
+          <hr style={{border:"1px solid transparent"}}/>
           <Button
             onClick={() => setEntryModal("signup")}
             actionType="secondary"

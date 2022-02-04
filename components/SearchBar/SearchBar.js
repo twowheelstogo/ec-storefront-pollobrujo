@@ -54,8 +54,29 @@ const styles = (theme) => ({
     color: '#000'
   },
   ImageBorder: {
-    border: "2px solid #000"
-  }
+    border: "2px solid #fff"
+  },
+  ContenedorPrincipal: {    
+    borderBottom: "2px solid #fff",
+    color: "#fff",  
+    '&:hover':{
+      backgroundColor: '#363739'
+    }
+  },
+  ContenedorSecundario: {
+    backgroundColor: "#202124",    
+  },
+  option: {
+    backgroundColor: "#202124",  
+    // Hover
+    '&[data-focus="true"]': {
+       backgroundColor: '#363739',       
+    },
+    // Selected
+    '&[aria-selected="true"]': {
+       backgroundColor: '#363739',
+    },
+ }
 });
 
 class SearchBar extends Component {
@@ -89,9 +110,8 @@ class SearchBar extends Component {
     
     const renderBox = (option) =>{
       return(
-        <Grid container style={{borderBottom: "2px solid #000"}}>
-
-        <Grid item xs={4} sm={1} md={1} lg={1}>
+        <Grid container className={classes.ContenedorPrincipal}>      
+        <Grid item xs={4} sm={1} md={2} lg={2} >
       <img   
         className={classes.ImageBorder}           
         width="80%"
@@ -100,12 +120,11 @@ class SearchBar extends Component {
       />   
       </Grid>         
 
-      <Grid item xs={8} sm={11} md={11} lg={11}>
+      <Grid item xs={8} sm={11} md={10} lg={10}>
       {option.name}               
       <br/>            
       {option.price}
-      </Grid>
-
+      </Grid>     
       </Grid>
 
       );
@@ -114,6 +133,10 @@ class SearchBar extends Component {
     return (
       <div className={classes.root}>
          <Autocomplete
+          classes={{
+            option: classes.option,
+            paper: classes.option
+        }}
       id="country-select-demo"            
       // onKeyDown={(event) => {
       //   if (event.key === 'Enter') {

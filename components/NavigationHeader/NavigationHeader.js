@@ -155,13 +155,13 @@ class NavigationHeader extends Component {
 
   static propTypes = {    
     classes: PropTypes.object,
-    width: PropTypes.string.isRequired,
+    width: PropTypes.string,
     shop: PropTypes.shape({
-      name: PropTypes.string.isRequired,
+      name: PropTypes.string,
     }),
     uiStore: PropTypes.shape({
-      toggleMenuDrawerOpen: PropTypes.func.isRequired,
-    }).isRequired,
+      toggleMenuDrawerOpen: PropTypes.func,
+    }),
     viewer: PropTypes.object,
     catalogItems: PropTypes.array,
   };
