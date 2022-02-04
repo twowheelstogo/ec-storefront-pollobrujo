@@ -69,7 +69,8 @@ class ProductGridPage extends Component {
     }
 
     return (
-      <Layout withHero shop={shop} catalogItems={catalogItems}
+      <Layout withHero shop={shop} 
+      catalogItems={catalogItems}
       routerType={-1}
       >
         <Helmet

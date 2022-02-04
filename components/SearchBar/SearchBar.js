@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { TextField, InputAdornment,Box } from "@material-ui/core";
+import { TextField, InputAdornment,Box,CircularProgress,Grid } from "@material-ui/core";
 import { Magnify } from "mdi-material-ui";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 //import { withComponents } from "@reactioncommerce/components-context";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import withCatalogItems from "containers/catalog/withCatalogItems";
-import inject from "hocs/inject";
+import Router from "translations/i18nRouter";
 
 const styles = (theme) => ({
   root: {
@@ -53,13 +52,16 @@ const styles = (theme) => ({
   },
   Letra:{
     color: '#000'
+  },
+  ImageBorder: {
+    border: "2px solid #000"
   }
 });
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { Busqueda: "", productList: [{name:'s',photo:'s',price:'s',slug:''}], bandera: false  };
+    this.state = { Busqueda: "", open: false};
   }
 
   static propTypes = {
@@ -71,32 +73,10 @@ class SearchBar extends Component {
     classes: {},
   };
 
-  productList_ = (product_) => {
-    let tmpList = [];
-    Object.keys(product_).map( (index) => {
-      let items = product_[index];
-      tmpList.push(
-        {name: items["title"], slug: items['slug'], price: items["pricing"][0]["displayPrice"],photo: items['primaryImage']['URLs']['small'] } 
-      )
-    });       
-    
-    return tmpList;
-  }
-
-  componentDidMount()
-  {
-    let products = (this.props.catalogItems || []).map((items) => items.node.product); 
-    
-    if(products.length > 0)
-    {
-      this.setState({productList: this.productList_(products),bandera: true});         
-    }                
-  }
-
   searchProduct(data)
   {
     if(typeof data === 'object'){
-      alert('yes');
+      Router.push("/product/" + data["slug"] + "/" + data["tagsID"]);
     }
     else{
       alert('nop')
@@ -104,34 +84,45 @@ class SearchBar extends Component {
   }
 
   render() {
-    const { classes, Metodo , size  } = this.props;    
-    console.log(this.state.Busqueda);  
+    const { classes, Metodo , size, catalogItems } = this.props; 
+    const loading = this.state.open && catalogItems.length === 0;     
     
     const renderBox = (option) =>{
       return(
-        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }}>
-      <img              
-        width="20"
+        <Grid container style={{borderBottom: "2px solid #000"}}>
+
+        <Grid item xs={4} sm={1} md={1} lg={1}>
+      <img   
+        className={classes.ImageBorder}           
+        width="80%"
+        height="90%"
         src={option.photo}                            
-      />            
+      />   
+      </Grid>         
+
+      <Grid item xs={8} sm={11} md={11} lg={11}>
       {option.name}               
       <br/>            
       {option.price}
-      </Box>
+      </Grid>
+
+      </Grid>
+
       );
     }
 
     return (
       <div className={classes.root}>
          <Autocomplete
-      id="country-select-demo"      
-      onKeyDown={(event) => {
-        if (event.key === 'Enter') {
-          event.defaultMuiPrevented = true;          
-          this.searchProduct(this.state.Busqueda);          
-        }
-      }}
-      options={this.state.productList}      
+      id="country-select-demo"            
+      // onKeyDown={(event) => {
+      //   if (event.key === 'Enter') {
+      //     event.defaultMuiPrevented = true;          
+      //     this.searchProduct(this.state.Busqueda);          
+      //   }
+      // }}
+      options={catalogItems} 
+      loading={loading}     
       onChange={(event, newValue) => {
         this.setState({Busqueda: newValue});
       }}      
@@ -162,11 +153,11 @@ class SearchBar extends Component {
           classes: {
             notchedOutline: classes.notchedOutline,
           },
-          endAdornment: (
+          endAdornment: (                      
             <InputAdornment position="end" className={classes.InputAdornment_}>
               <div className={classes.Contenedor}><p style={{color:"transparent"}}>ss</p></div>   
               <Magnify className={classes.Magnify_}  onClick={() => this.searchProduct(this.state.Busqueda)} />                             
-            </InputAdornment>
+            </InputAdornment>            
           ),
         }}
       />
@@ -177,4 +168,4 @@ class SearchBar extends Component {
   }
 }
 
-export default (withStyles(styles))(SearchBar);
+export default withStyles(styles)(SearchBar);

@@ -7,8 +7,8 @@ import withWidth, { isWidthUp, isWidthDown } from "@material-ui/core/withWidth";
 import { NavigationDesktop } from "components/NavigationDesktop";
 import { NavigationMobile, NavigationToggleMobile } from "components/NavigationMobile";
 import Hidden from "@material-ui/core/Hidden";
-import inject from "hocs/inject";
 import Router from "translations/i18nRouter";
+
 
 const styles = (theme) => ({  
   root: {
@@ -153,8 +153,7 @@ class NavigationHeader extends Component {
     this.state = { value: "", bandera: false, showAlert: false };
   }
 
-  static propTypes = {
-    catalogItems: PropTypes.array,
+  static propTypes = {    
     classes: PropTypes.object,
     width: PropTypes.string.isRequired,
     shop: PropTypes.shape({
@@ -164,6 +163,7 @@ class NavigationHeader extends Component {
       toggleMenuDrawerOpen: PropTypes.func.isRequired,
     }).isRequired,
     viewer: PropTypes.object,
+    catalogItems: PropTypes.array,
   };
 
   static defaultProps = {
@@ -202,7 +202,7 @@ class NavigationHeader extends Component {
       withHero,
       catalogItems
     } = this.props;
-    
+        
 
     return (
       <>
@@ -319,6 +319,4 @@ class NavigationHeader extends Component {
   }
 }
 
-export default withComponents(
-  withWidth({ initialWidth: "md" })(withStyles(styles)(inject("catalogItems", "uiStore")(NavigationHeader))),
-);
+export default withComponents(withWidth({ initialWidth: "md" })((withStyles(styles)(NavigationHeader))));

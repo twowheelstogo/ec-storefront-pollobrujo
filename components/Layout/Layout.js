@@ -5,6 +5,8 @@ import { withComponents } from "@reactioncommerce/components-context";
 import BreadcrumbsSwitch from "components/BreadcrumbsSwitch";
 import Breadcrumbs from "components/Breadcrumbs";
 import { Grid } from "@material-ui/core";
+import withCatalogItems from "containers/catalog/withCatalogItems";
+import { withApollo } from "lib/apollo/withApollo";
 
 import {
   Facebook as FacebookIcon,
@@ -81,6 +83,18 @@ class Layout extends Component {
     classes: {},
   };
 
+  productList_ = (product_) => {
+    let tmpList = [];
+    Object.keys(product_).map( (index) => {
+      let items = product_[index];
+      tmpList.push(
+        {name: items["title"], slug: items['slug'], price: items["pricing"][0]["displayPrice"],photo: items['primaryImage']['URLs']['small'],tagsID:items['tagIds'][0] } 
+      )
+    });       
+    
+    return tmpList;
+  }
+
   render() {
     const {
       classes,
@@ -124,13 +138,17 @@ class Layout extends Component {
         { Icono: <Twitter />, ruta: "https://twitter.com/pollobrujogt" },
       ],      
     };
+   
+
+    let products = this.productList_((this.props.catalogItems || []).map((items) => items.node.product)); 
+    console.log(this.props.catalogItems);
 
     return (
       <React.Fragment>
         <div className={classes.root}>
           {/* <Header shop={shop} viewer={viewer} /> */}          
           <NavigationHeader
-            catalogItems={catalogItems}
+            catalogItems={products}
             withHero={withHero}
             shop={shop}
             viewer={viewer}
@@ -170,4 +188,4 @@ class Layout extends Component {
   }
 }
 
-export default withComponents(withStyles(styles)(Layout));
+export default withApollo()(withComponents(withCatalogItems(withStyles(styles)(Layout))));
