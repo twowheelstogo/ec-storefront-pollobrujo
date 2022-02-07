@@ -111,7 +111,7 @@ class SearchBar extends Component {
     const renderBox = (option) =>{
       return(
         <Grid container className={classes.ContenedorPrincipal}>      
-        <Grid item xs={4} sm={1} md={2} lg={2} >
+        <Grid item xs={4} sm={2} md={2} lg={2} >
       <img   
         className={classes.ImageBorder}           
         width="80%"
@@ -120,7 +120,7 @@ class SearchBar extends Component {
       />   
       </Grid>         
 
-      <Grid item xs={8} sm={11} md={10} lg={10}>
+      <Grid item xs={8} sm={10} md={10} lg={10}>
       {option.name}               
       <br/>            
       {option.price}
@@ -155,6 +155,13 @@ class SearchBar extends Component {
       getOptionLabel={(option) => option.name}
       renderOption={(option) => {
         return renderBox(option) }}
+        open={this.state.open}
+        onOpen={() => {
+         this.setState({open: true});
+        }}
+        onClose={() => {
+          this.setState({open: false});
+        }}
 
       renderInput={(params) => (
         <TextField
@@ -176,11 +183,14 @@ class SearchBar extends Component {
           classes: {
             notchedOutline: classes.notchedOutline,
           },
-          endAdornment: (                      
+          endAdornment: (  
+            <React.Fragment>     
+            {loading ? <CircularProgress style={{color:"white"}} size={20} /> : null}               
             <InputAdornment position="end" className={classes.InputAdornment_}>
               <div className={classes.Contenedor}><p style={{color:"transparent"}}>ss</p></div>   
               <Magnify className={classes.Magnify_}  onClick={() => this.searchProduct(this.state.Busqueda)} />                             
-            </InputAdornment>            
+            </InputAdornment>   
+          </React.Fragment>         
           ),
         }}
       />
