@@ -85,7 +85,7 @@ class CheckoutComplete extends Component {
           <div className={classes.checkoutContentContainer}>
             <div className={classes.orderDetails}>
               <section className={classes.section}>
-                <Typography className={classes.title} variant="h6">Order not found</Typography>
+                <Typography className={classes.title} variant="h6">Orden no encontrada</Typography>
               </section>
             </div>
           </div>
@@ -108,7 +108,7 @@ class CheckoutComplete extends Component {
           <Grid item xs={false} md={3} /> {/* MUI grid doesn't have an offset. Use blank grid item instead. */}
           <Grid item xs={12} md={6}>
             <Grid item className={classes.orderThankYou} xs={12} md={12}>
-              <Typography className={classes.title} variant="h6">Thank you for your order</Typography>
+              <Typography className={classes.title} variant="h6">Gracias Por Tu Compra!</Typography>
               <Typography variant="body1">
                 {"Your order ID is:"} <strong>{order.referenceId}</strong>
               </Typography>
