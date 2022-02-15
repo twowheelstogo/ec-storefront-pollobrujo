@@ -4,13 +4,10 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
-import Avatar from "@material-ui/core/Avatar";
-import ButtonBase from "@material-ui/core/ButtonBase";
 import { AccountCircleOutline } from "mdi-material-ui";
 //import AccountIcon from "mdi-material-ui/Account";
 import Popover from "@material-ui/core/Popover";
 import useViewer from "hooks/viewer/useViewer";
-import ViewerInfo from "@reactioncommerce/components/ViewerInfo/v1";
 import Link from "components/Link";
 import useStores from "hooks/useStores";
 import EntryModal from "../Entry/EntryModal";
@@ -28,21 +25,37 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.theme_, 
     border:"1px solid"
   },
-  Info_: {
-    color: theme.palette.colors.TextTheme,
-    ["@media(max-width:1099px) and (min-width:600px)"]: {
-      width: "26px",
-      height: "26px",
-      marginRight:"1%"
-    },
-    ["@media (min-width:1100px)"]: {
-      width: "30px",
-      height: "30px",
+  emailUser: {
+    fontWeight: "700",
+    ["@media (min-width:600px)"]: {
+      marginTop: "6px"
     },
     ["@media (max-width:599px)"]: {
-      width: "25px",
-      height: "22px",
-    }},
+      marginTop: "2px"
+    },
+  },
+  emailIcon: {
+    backgroundColor: theme.palette.colors.TextTheme,
+    color: "#000",    
+    display: "flex",
+    justifyContent:"center",    
+    ["@media (min-width:900px)"]: {
+      width: "31px",
+      height: "31px",
+      fontSize: "18px",
+    },
+    ["@media (max-width:899px) and (min-width:600px)"]: {
+      width: "30px",
+      height: "30px",
+      fontSize: "17px",
+    },
+    ["@media (max-width:599px)"]: {
+      width: "21px",
+      height: "21px",
+      fontSize: "15px",
+    },
+    borderRadius: "20px"
+  },
   Usuario: {
     color: theme.palette.colors.TextTheme,
     ["@media (min-width:600px)"]: {
@@ -104,7 +117,7 @@ const AccountDropdown = (props) => {
     setAnchorElement(event.currentTarget);
   };
   
-
+  console.log(viewer);
   
   return (
     <Fragment>
@@ -112,9 +125,11 @@ const AccountDropdown = (props) => {
       {isAuthenticated ? (
         // <ButtonBase onClick={toggleOpen}>                  
         // <ViewerInfo viewer={viewer} className={classes.Info_}/> 
-        // </ButtonBase>
+        // </ButtonBase>        
         <IconButton color="inherit" onClick={toggleOpen}>
-          <AccountCircleOutline className={classes.Usuario}/>
+          <div className={classes.emailIcon}>
+          <span className={classes.emailUser}>{viewer.emailRecords[0].address.substring(0,1).toUpperCase()}</span>
+          </div>
         </IconButton>
       ) : (
         <IconButton color="inherit" onClick={toggleOpen}>

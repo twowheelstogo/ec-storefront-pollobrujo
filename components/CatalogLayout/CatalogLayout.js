@@ -30,8 +30,7 @@ const CatalogLayout = props => {
                 currencyCode={currencyCode}
                 isLoadingCatalogItems={isLoadingCatalogItems}
                 pageInfo={pageInfo}
-                pageSize={pageSize}
-                tags={tags}
+                pageSize={pageSize}                
                 setPageSize={setPageSize}
                 setSortBy={setSortBy}
                 sortBy={sortBy} 

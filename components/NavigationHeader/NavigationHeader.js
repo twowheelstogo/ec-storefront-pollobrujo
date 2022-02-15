@@ -7,8 +7,8 @@ import withWidth, { isWidthUp, isWidthDown } from "@material-ui/core/withWidth";
 import { NavigationDesktop } from "components/NavigationDesktop";
 import { NavigationMobile, NavigationToggleMobile } from "components/NavigationMobile";
 import Hidden from "@material-ui/core/Hidden";
-import inject from "hocs/inject";
 import Router from "translations/i18nRouter";
+
 
 const styles = (theme) => ({  
   root: {
@@ -153,16 +153,17 @@ class NavigationHeader extends Component {
     this.state = { value: "", bandera: false, showAlert: false };
   }
 
-  static propTypes = {
+  static propTypes = {    
     classes: PropTypes.object,
-    width: PropTypes.string.isRequired,
+    width: PropTypes.string,
     shop: PropTypes.shape({
-      name: PropTypes.string.isRequired,
+      name: PropTypes.string,
     }),
     uiStore: PropTypes.shape({
-      toggleMenuDrawerOpen: PropTypes.func.isRequired,
-    }).isRequired,
+      toggleMenuDrawerOpen: PropTypes.func,
+    }),
     viewer: PropTypes.object,
+    catalogItems: PropTypes.array,
   };
 
   static defaultProps = {
@@ -198,9 +199,10 @@ class NavigationHeader extends Component {
       components: { SearchBar },
       components: { IconsActions },
       components: { SlideHero },
-      withHero
+      withHero,
+      catalogItems
     } = this.props;
-    
+        
 
     return (
       <>
@@ -220,7 +222,9 @@ class NavigationHeader extends Component {
 
                     {/* Bara de busqueda */}
                     <Grid item xs={8} sm={8} md={9} lg={9} xl={8} key={4} className={classes.searchbar}>
-                      <SearchBar Metodo={MetodoBusqueda} />
+                      <SearchBar Metodo={MetodoBusqueda}
+                      catalogItems={catalogItems}
+                      />
                     </Grid>
 
                     {/* Iconos */}
@@ -295,7 +299,9 @@ class NavigationHeader extends Component {
             {/* Bara de busqueda */}
             <Grid container style={{width:"100%"}}>
             <Grid item key={6} xs={11} className={classes.searchbar}>                  
-                  <SearchBar size={"small"} Metodo={MetodoBusqueda} />
+                  <SearchBar size={"small"} Metodo={MetodoBusqueda} 
+                  catalogItems={catalogItems}
+                  />
                 </Grid>
             </Grid>
 
@@ -313,6 +319,4 @@ class NavigationHeader extends Component {
   }
 }
 
-export default withComponents(
-  withWidth({ initialWidth: "md" })(withStyles(styles)(inject("uiStore")(NavigationHeader))),
-);
+export default withComponents(withWidth({ initialWidth: "md" })((withStyles(styles)(NavigationHeader))));

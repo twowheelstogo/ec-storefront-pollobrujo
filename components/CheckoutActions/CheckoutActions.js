@@ -466,7 +466,7 @@ class CheckoutActions extends Component {
       <Dialog fullScreen disableBackdropClick={true} disableEscapeKeyDown={true} open={isPlacingOrder}
 
       >
-        <PageLoading delay={0} message="Placing your order..." />
+        <PageLoading delay={0} message="Haciendo tu pedido..." />
       </Dialog>
     );
   };

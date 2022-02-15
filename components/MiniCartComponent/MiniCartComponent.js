@@ -6,6 +6,7 @@ import { addTypographyStyles, applyTheme, CustomPropTypes } from "@reactioncomme
 import { withStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 
+
 const styles = (theme) => ({
    Inicio: {
       height: "75px",  
@@ -17,7 +18,7 @@ const styles = (theme) => ({
       alignItems:"center",
       backgroundColor: theme.palette.background.Carrito,    
       color: theme.palette.colors.TextTheme,
-   } ,
+   } ,  
    Titulo:{
       marginLeft:"10px"
    }, 
@@ -190,7 +191,7 @@ class MiniCartComponent extends Component {
   	/**
      * Product URL path to be prepended before the slug
      */
-  	productURLPath: PropTypes.string
+  	productURLPath: PropTypes.string,     
   };
 
   static defaultProps = {
@@ -217,13 +218,13 @@ class MiniCartComponent extends Component {
         classes,
   		checkoutButtonText,
   		components: { Button, CartCheckoutButton, CartItems, MiniCartSummary },
-  		footerMessageText,          
+  		footerMessageText,                
   		onCheckoutButtonClick,
   		...props
   	} = this.props;
-     console.log(summary);
+     
   	return (
-  		<Cart className={classes.Cart_}>
+  		<Cart className={classes.Cart_}>       
                   <div className={classes.Inicio}>
                                     <div className={classes.Titulo}>Mi Carrito</div>                                                                        
                                     </div> 

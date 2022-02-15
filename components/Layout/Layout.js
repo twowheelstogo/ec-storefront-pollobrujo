@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { withComponents } from "@reactioncommerce/components-context";
+import BreadcrumbsSwitch from "components/BreadcrumbsSwitch";
+import Breadcrumbs from "components/Breadcrumbs";
+import { Grid } from "@material-ui/core";
+import withCatalogItems from "containers/catalog/withCatalogItems";
+import { withApollo } from "lib/apollo/withApollo";
+
 import {
   Facebook as FacebookIcon,
   Instagram as InstagramIcon,
@@ -26,7 +32,36 @@ const styles = (theme) => ({
     [theme.breakpoints.down("sm")]: {
       padding: theme.spacing(0)
     }
-  }
+  }, 
+  Dividers:{
+    border: '10px solid transparent'
+     },
+     breadcrumbGrid: {		      
+      padding: theme.spacing(1),  
+      ["@media (min-width:960px)"]: {
+        marginLeft: theme.spacing(5),
+      },
+      ["@media (max-width:959px)"]: {
+        marginLeft: theme.spacing(0)
+      },    
+      
+      ["@media (min-width:600px)"]: {
+        marginBottom: theme.spacing(0.5),
+          marginTop: theme.spacing(0.5),  
+      },
+      ["@media (max-width:959px)"]: {      
+            marginTop: "-1px",  
+      },          
+      },
+    page: {
+      backgroundColor: "#202124",
+      ["@media (min-width:600px)"]: {
+        height: '43px',   
+      },
+      ["@media (max-width:599px)"]: {
+        height: '33px',   
+      },    		
+      },      
 });
 
 class Layout extends Component {
@@ -34,14 +69,31 @@ class Layout extends Component {
     children: PropTypes.node,
     classes: PropTypes.object,
     shop: PropTypes.shape({
-      name: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
     }),
     viewer: PropTypes.object,
+    routerLabel: PropTypes.string,
+    router: PropTypes.object,
+    routerType: PropTypes.number,
+    catalogItems: PropTypes.array,
+    product: PropTypes.object
   };
 
   static defaultProps = {
     classes: {},
   };
+
+  productList_ = (product_) => {
+    let tmpList = [];
+    Object.keys(product_).map( (index) => {
+      let items = product_[index];
+      tmpList.push(
+        {name: items["title"], slug: items['slug'], price: items["pricing"][0]["displayPrice"],photo: items['primaryImage']['URLs']['small'],tagsID:items['tagIds'][0] } 
+      )
+    });       
+    
+    return tmpList;
+  }
 
   render() {
     const {
@@ -51,8 +103,14 @@ class Layout extends Component {
       shop,
       components: { NavigationHeader },
       components: { CustomFooter },
-      withHero
-    } = this.props;
+      withHero,      
+      catalogItems,
+      routerLabel,
+      router,
+      routerType,
+      product           
+    } = this.props;     
+        
 
     const Logo = {
       urlLogo:
@@ -80,12 +138,17 @@ class Layout extends Component {
         { Icono: <Twitter />, ruta: "https://twitter.com/pollobrujogt" },
       ],      
     };
+   
+
+    let products = this.productList_((this.props.catalogItems || []).map((items) => items.node.product)); 
+    console.log(this.props.catalogItems);
 
     return (
       <React.Fragment>
         <div className={classes.root}>
           {/* <Header shop={shop} viewer={viewer} /> */}          
           <NavigationHeader
+            catalogItems={products}
             withHero={withHero}
             shop={shop}
             viewer={viewer}
@@ -99,6 +162,22 @@ class Layout extends Component {
             MessageCover={"SABOR ÚNICO A LA PARILLA"}              
           />                      
 
+        {
+          <>
+          {routerType === 2 ? 
+          <div className = { classes.page }>
+          <Grid container> 
+          <Grid item xs={12} className={classes.breadcrumbGrid}>
+          <Breadcrumbs isPDP tagId={routerLabel} product={product} />
+          </Grid>
+          </Grid>
+          </div>
+           :
+          <BreadcrumbsSwitch routerLabel={routerLabel} router={router} routerType={routerType}/>}
+          </>
+          }
+        <hr className={classes.Dividers}/>                    
+
           <main className={classes.main}>
             <article className={classes.article}>{children}</article>
           </main>
@@ -109,4 +188,4 @@ class Layout extends Component {
   }
 }
 
-export default withComponents(withStyles(styles)(Layout));
+export default withApollo()(withComponents(withCatalogItems(withStyles(styles)(Layout))));

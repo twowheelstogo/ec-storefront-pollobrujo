@@ -77,7 +77,7 @@ class ProductDetail extends Component {
   		selectOptionId = variant.options[0]._id;
   	}
 
-  	uiStore.setPDPSelectedVariantId(variantId, selectOptionId);
+  	uiStore.setPDPSelectedVariantId(variantId, selectOptionId);	
 
   	Router.replace("/product/[...slugOrId]", `/product/${product.slug}/${selectOptionId || variantId}`);
   }
@@ -250,13 +250,13 @@ class ProductDetail extends Component {
   			</Fragment>
   		);
   	}
-
+	
   	return (
   		<div className = { classes.page }>
   			<Grid container spacing={5}>
-  				<Grid item className={classes.breadcrumbGrid} xs={12}>
+  				{/* <Grid item className={classes.breadcrumbGrid} xs={12}>
   					<Breadcrumbs isPDP tagId={routingStore.tagId} product={product} />
-  				</Grid>
+  				</Grid> */}
   				<Grid item xs={12} sm={6}>
   					<div className={classes.section}>
   						<MediaGallery mediaItems={pdpMediaItems} />
