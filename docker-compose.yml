@@ -13,7 +13,7 @@ networks:
 
 services:
   web:
-    image: luiscelano/pb-storefront:pre-launch
+    image: loginsolutions/pb-storefront:pre-launch
     env_file:
       - ./.env
     networks:

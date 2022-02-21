@@ -11,6 +11,7 @@ module.exports = {
     STRIPE_PUBLIC_API_KEY: appConfig.STRIPE_PUBLIC_API_KEY
   },
   webpack: (webpackConfig) => {
+    
     webpackConfig.module.rules.push({
       test: /\.(gql|graphql)$/,
       loader: "graphql-tag/loader",
