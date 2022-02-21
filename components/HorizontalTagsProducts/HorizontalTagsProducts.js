@@ -17,7 +17,8 @@ const HorizontalTagsProducts = (props) => {
     } = props;
 
     const categoryProducts = (tags || []).map((items) => items);
- if (categoryProducts.length === 0) return <h1>NO EXISTEN NINGUN PRODUCTO EN LA TIENDA</h1>
+ if (categoryProducts.length === 0) return (<h1>NO EXISTEN NINGUN PRODUCTO EN LA TIENDA</h1>);
+ else
     return (
         <div
             style={{
@@ -25,9 +26,9 @@ const HorizontalTagsProducts = (props) => {
                 fontSize: 15,
                 backgroundColor: "#000000",
                 color:"#FFFFFF"
-            }}
+            }}      
         >
-            {
+            {     
                 categoryProducts.length !== 0 ? (
                     <ScrollSpyTabs
                         tabsInScroll={categoryProducts.map((e) => {
@@ -49,8 +50,8 @@ const HorizontalTagsProducts = (props) => {
                         })}
                     />
                 ) : (
-                    <div>NO HAY CATEGORIAS</div>
-                )
+                    <p>NO HAY CATEGORIAS</p>
+                )            
             }
         </div>
     )

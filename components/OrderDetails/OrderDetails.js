@@ -28,8 +28,8 @@ const OrderDetails = (props) => {
         { "title": "Dirección de entrega", "label": order.payments[0].billingAddress.address },
         { "title": "Teléfono", "label": "32068534" },
         { "title": "Correo", "label": order.email },
-        { "title": "Dirección de facturación", "label": order.email },
-        { "title": "Nit", "label": order.email },
+        { "title": "Dirección de facturación", "label": "2 CALLE 9-71" },
+        { "title": "Nit", "label": "CF" },
         { "title": "Método de pago", "label": order.payments[0].method.name === "epay_card" ? "Tarjeta" : "Efectivo"}
     ]
 

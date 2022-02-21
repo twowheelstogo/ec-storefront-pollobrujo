@@ -17,14 +17,14 @@ const styles = (theme) => ({
     padding: "25px",
   },
   orderCardInfoText: {
-    color: theme.palette.primary.light,
+    color: "#FFF",
     fontWeight: 800,
   },
   orderCardInfoHeaderText: {
     marginBottom: theme.spacing(0.5)
   },
   orderCardInfoTextBold: {
-    color: theme.palette.primary.light,
+    color: "#FFF",
     fontWeight: 800,
   },
   orderCardInfoTextDetails: {
@@ -47,7 +47,7 @@ const styles = (theme) => ({
     marginBottom: theme.spacing(1.5)
   },
   orderAddressText: {
-    color: theme.palette.reaction.black65,
+    color: "#fff",
     fontSize: "14px"
   }
 });

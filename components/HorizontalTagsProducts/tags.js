@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
+
 const tabHeight = 69;
 
 const StyledTabs = withStyles({
@@ -243,7 +244,7 @@ function ScrollSpyTabs(props) {
     const classes = useStyles();
 
     return (
-        <div>
+        <>
             <nav className={classes.demo2}>
                 <StyledTabs value={activeState ? activeState : itemsServer[0].hash}>
                     {itemsServer.map(item2 => (
@@ -257,14 +258,16 @@ function ScrollSpyTabs(props) {
                 </StyledTabs>
                 <div className={classes.indicator} />
             </nav>
-            <div className="container">
-                {itemsServer.map(item1 => (
-                    <article id={item1.hash} key={item1.text}>
+       
+          
+            {itemsServer.map(item1 => (
+                <article id={item1.hash} key={item1.text}>
                         {item1.component}
-                    </article>
-                ))}
-            </div>
-        </div>
+                </article>
+            ))}  
+                                
+        
+        </>
     );
 }
 

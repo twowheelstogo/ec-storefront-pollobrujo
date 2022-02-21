@@ -111,7 +111,7 @@ class TagGridPage extends Component {
 
     if (!tag && !shop) {
       return (
-        <Layout shop={shop}>
+        <Layout shop={shop} uiStore={uiStore}>
           <ProductGridEmptyMessage
             actionMessage="Go Home"
             resetLink="/"
@@ -121,7 +121,7 @@ class TagGridPage extends Component {
     }
 
     return (
-      <Layout shop={shop} catalogItems={catalogItems}>
+      <Layout shop={shop} catalogItems={catalogItems} uiStore={uiStore}>
         <Helmet
           title={`${tag && tag.name} | ${shop && shop.name}`}
           meta={

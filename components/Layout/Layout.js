@@ -7,6 +7,7 @@ import Breadcrumbs from "components/Breadcrumbs";
 import { Grid } from "@material-ui/core";
 import withCatalogItems from "containers/catalog/withCatalogItems";
 import { withApollo } from "lib/apollo/withApollo";
+import { createTheme } from '@material-ui/core/styles'
 
 import {
   Facebook as FacebookIcon,
@@ -76,7 +77,8 @@ class Layout extends Component {
     router: PropTypes.object,
     routerType: PropTypes.number,
     catalogItems: PropTypes.array,
-    product: PropTypes.object
+    product: PropTypes.object,
+    uiStore: PropTypes.object
   };
 
   static defaultProps = {
@@ -103,12 +105,14 @@ class Layout extends Component {
       shop,
       components: { NavigationHeader },
       components: { CustomFooter },
+      components: { TextInput },
       withHero,      
       catalogItems,
       routerLabel,
       router,
       routerType,
-      product           
+      product,
+      uiStore        
     } = this.props;     
         
 
@@ -142,12 +146,13 @@ class Layout extends Component {
 
     let products = this.productList_((this.props.catalogItems || []).map((items) => items.node.product)); 
     console.log(this.props.catalogItems);
-
+    
     return (
       <React.Fragment>
         <div className={classes.root}>
           {/* <Header shop={shop} viewer={viewer} /> */}          
           <NavigationHeader
+            uiStore={uiStore}
             catalogItems={products}
             withHero={withHero}
             shop={shop}
@@ -160,7 +165,7 @@ class Layout extends Component {
               "https://firebasestorage.googleapis.com/v0/b/twg-vehicle-dashboard.appspot.com/o/Iconos%2FBanner-de-inicio-pollo-sabor-unico-a-la-parrilla-1.jpg?alt=media&token=c5a89313-1e99-4f9d-ba04-a8c9be3763e3"
             }
             MessageCover={"SABOR ÚNICO A LA PARILLA"}              
-          />                      
+          />          
 
         {
           <>

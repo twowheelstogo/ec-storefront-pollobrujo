@@ -13,7 +13,7 @@ import Router from "translations/i18nRouter";
 const styles = (theme) => ({  
   root: {
     marginLeft: "auto",
-    marginRight: "auto",
+    marginRight: "auto",    
   },
   Borde: {
     borderBottom: "1px solid #979797",    
@@ -147,6 +147,7 @@ const styles = (theme) => ({
   }
 });
 
+
 class NavigationHeader extends Component {
   constructor(props) {
     super(props);
@@ -202,7 +203,7 @@ class NavigationHeader extends Component {
       withHero,
       catalogItems
     } = this.props;
-        
+           
 
     return (
       <>
