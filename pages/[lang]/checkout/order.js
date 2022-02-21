@@ -110,10 +110,10 @@ class CheckoutComplete extends Component {
             <Grid item className={classes.orderThankYou} xs={12} md={12}>
               <Typography className={classes.title} variant="h6">Gracias Por Tu Compra!</Typography>
               <Typography variant="body1">
-                {"Your order ID is:"} <strong>{order.referenceId}</strong>
+                {"El identificador de tu orden es:"} <strong>{order.referenceId}</strong>
               </Typography>
               <Typography variant="body1">
-                {"We've sent a confirmation email to:"} <strong>{order.email}</strong>
+                {"Se envío un correo electronico de confirmación a:"} <strong>{order.email}</strong>
               </Typography>
             </Grid>
             <Grid item xs={12} md={12}>
