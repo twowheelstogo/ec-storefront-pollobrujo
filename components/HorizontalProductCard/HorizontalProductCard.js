@@ -5,52 +5,10 @@ import { withStyles, useTheme } from "@material-ui/core/styles";
 import { withComponents } from "@reactioncommerce/components-context";
 import Link from "components/Link";
 import styled from "styled-components";
-import RenderProductPaddingHorizontal from "./renderProductPaddingHorizontal"
-
-const ProductMediaWrapper = styled.div`
-`;
+import RenderDesktop from "./renderDesktop"
+import RenderPhone  from "./renderPhone";
 
 
-const StyledTitleVertical = styled.div`
-font-size:18px;
-font-weight:700;
-color:#fff;
-display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;  
-  overflow: hidden;
-`;
-
-const StyledSubtitleVertical = styled.div`
-font-size:14px;
-color:#979797;
-display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;  
-  overflow: hidden;
-`;
-
-const CardContainerVertical = styled.div`
-    border: ${({ withBorder, boderColor }) => withBorder ? boderColor : "none"};
-    cursor: pointer;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    &:hover:{
-        background-color: #EEEEEE;
-        transition: background-color .5s;
-    }
-`
-const Div = styled.div``;
-
-const CardContent = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-padding: 5px;
-flex: 1 1 auto;
-`;
 
 const styles = (theme) => ({
     imageProduct: {
@@ -144,61 +102,18 @@ const HorizontalProductCard = props => {
     return (
     <>      
             {matches !== true ? (                        
-                <RenderProductPaddingHorizontal
+                <RenderDesktop
                 tags={tags}
                 classes={classes}
                 />                                                       
-            ) : (
-                <Div>
-                    {
-                        <Div>
-                            {
-                                tags.catalogProducts.length !== 0 && (
-                                    <Div>
-                                        <Typography className={classes.titleMobil}>
-                                            {tags.displayTitle}
-                                        </Typography>
-                                        <Grid container>
-                                            {
-                                                tags.catalogProducts.length !== 0 && (
-                                                    tags.catalogProducts.map((values) => (
-                                                        <Grid item xs={6} className={classes.cardMobil} key={values._id}>
-                                                            <Link
-                                                                href={values.slug && "/product/[...slugOrId]"}
-                                                                as={values.slug && `/product/${values.slug}`}
-                                                            >
-                                                                <CardContainerVertical withBorder boderColor={"2px solid rgba(151, 151, 151, 0.5)"}>                                                                    
-                                                                        <ProgressiveImage
-                                                                            fit={"cover"}
-                                                                            altText={"description"}
-                                                                            presrc={values.primaryImage !== null ? values.primaryImage.URLs.thumbnail : "/images/placeholder.gif"}
-                                                                            srcs={values.primaryImage !== null ? values.primaryImage.URLs : "/images/placeholder.gif"}
-                                                                        />                                                                    
-                                                                    <CardContent>
-                                                                        <div>
-                                                                            <StyledTitleVertical>{values.title}</StyledTitleVertical>
-                                                                            <StyledSubtitleVertical>{values.description}</StyledSubtitleVertical>
-                                                                        </div>
-                                                                        <div>
-                                                                            <Typography className={classes.textPrice}>{values.pricing[0].displayPrice}</Typography>
-                                                                        </div>
-                                                                    </CardContent>
-                                                                </CardContainerVertical>
-                                                            </Link>
-                                                        </Grid>
-                                                    ))
-                                                )
-                                            }
-                                        </Grid>
-                                    </Div>
-                                )
-                            }
-                        </Div>
-                    }
-                </Div>
+            ) : (                
+                <RenderPhone
+                tags={tags}
+                classes={classes}
+                />                         
             )
             }                  
-        </ >
+        </>
     )
 
 }

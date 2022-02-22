@@ -29,7 +29,7 @@ const HorizontalTagsProducts = (props) => {
             }}      
         >
             {     
-                categoryProducts.length !== 0 ? (
+                (categoryProducts.length > 0 && categoryProducts !== null) ? (
                     <ScrollSpyTabs
                         tabsInScroll={categoryProducts.map((e) => {
                                 return {
