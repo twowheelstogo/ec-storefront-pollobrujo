@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,Fragment } from "react";
 import throttle from "lodash/throttle";
 import { makeStyles, withStyles, useTheme } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
@@ -258,15 +258,12 @@ function ScrollSpyTabs(props) {
                 </StyledTabs>
                 <div className={classes.indicator} />
             </nav>
-       
-          
-            {itemsServer.map(item1 => (
-                <article id={item1.hash} key={item1.text}>
-                        {item1.component}
-                </article>
-            ))}  
-                                
-        
+                {
+                Object.keys(itemsServer).map(item1 =>   
+                    <div key={item1}>
+                    {itemsServer[item1].component}
+                    </div>                    
+                )}                                   
         </>
     );
 }
