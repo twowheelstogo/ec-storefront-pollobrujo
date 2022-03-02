@@ -1,3 +1,4 @@
+
 # This docker-compose file is used to run the project's published image
 #
 # Usage: docker-compose up [-d]
@@ -14,8 +15,6 @@ networks:
 services:
   web:
     image: luiscelano/pb-storefront:pre-launch
-    build:
-      context: .
     env_file:
       - ./.env
     networks:

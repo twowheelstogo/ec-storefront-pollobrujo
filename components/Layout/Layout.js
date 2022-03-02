@@ -164,7 +164,7 @@ class Layout extends Component {
             ImageCoverUrl={
               "https://firebasestorage.googleapis.com/v0/b/twg-vehicle-dashboard.appspot.com/o/Iconos%2FBanner-de-inicio-pollo-sabor-unico-a-la-parrilla-1.jpg?alt=media&token=c5a89313-1e99-4f9d-ba04-a8c9be3763e3"
             }
-            MessageCover={"SABOR ÚNICO A LA PARILLA"}              
+            MessageCover={"SABOR ÚNICO A LA PARILLA hi"}              
           />          
 
         {

@@ -216,7 +216,7 @@ class ProductDetail extends Component {
   	}
 
   	const productPrice = this.determineProductPrice();
-  	const compareAtDisplayPrice = (productPrice.compareAtPrice && productPrice.compareAtPrice.displayAmount) || null;
+  	const compareAtDisplayPrice = (productPrice.compareAtPrice && productPrice.compareAtPrice.displayAmount) || '';
 
 
   	// Phone size
