@@ -1,18 +1,15 @@
-import React, { useEffect,Fragment } from "react";
+import React, { useEffect } from "react";
 import throttle from "lodash/throttle";
 import { makeStyles, withStyles, useTheme } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-
 
 const tabHeight = 69;
 
 const StyledTabs = withStyles({
-    
     indicator: {
         display: "flex",
         justifyContent: "center",
@@ -48,14 +45,12 @@ const StyledTabs = withStyles({
                             TabIndicatorProps={{
                                 style: {
                                     backgroundColor: '#fff',
-                                    height: '5px',
+                                    height: '3px',
                                     borderRadius: '5px',
                                 },
                             }}
                         />
-                        <Divider  
-                        style={{backgroundColor:"#fff"}}                      
-                        />
+                        <Divider    style={{backgroundColor:"#fff"}}      />
                     </Box>
                 ) : (
                     <Box>
@@ -66,15 +61,13 @@ const StyledTabs = withStyles({
                             TabIndicatorProps={{
                                 style: {
                                     backgroundColor: '#fff',
-                                    height: '5px',
+                                    height: '3px',
                                     borderRadius: '5px',
                                 },
                             }}
-                        />                        
-                        <Divider 
-                        style={{backgroundColor: "#fff",
-                        marginLeft: "40px"}}
-                        />                        
+                        />
+                                    <Divider style={{backgroundColor: "#fff",
+                        marginLeft: "40px"}}     />
                     </Box>
                 )
             }
@@ -109,7 +102,8 @@ const useStyles = makeStyles(theme => ({
         top: 0,
         left: 0,
         right: 0,
-        width: "100%",        
+        width: "100%",
+        zIndex: 400
     }
 }));
 
@@ -244,7 +238,7 @@ function ScrollSpyTabs(props) {
     const classes = useStyles();
 
     return (
-        <>
+        <div>
             <nav className={classes.demo2}>
                 <StyledTabs value={activeState ? activeState : itemsServer[0].hash}>
                     {itemsServer.map(item2 => (
@@ -258,13 +252,14 @@ function ScrollSpyTabs(props) {
                 </StyledTabs>
                 <div className={classes.indicator} />
             </nav>
-                {
-                Object.keys(itemsServer).map(item1 =>   
-                    <div key={item1}>
-                    {itemsServer[item1].component}
-                    </div>                    
-                )}                                   
-        </>
+            <div className="container">
+                {itemsServer.map(item1 => (
+                    <article id={item1.hash} key={item1.text}>
+                        {item1.component}
+                    </article>
+                ))}
+            </div>
+        </div>
     );
 }
 

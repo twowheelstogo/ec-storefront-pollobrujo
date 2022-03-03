@@ -66,7 +66,7 @@ const RenderDesktop = props => {
         tags: PropTypes.object,
     };
 
-    const { tags, classes } = props
+    const { tags, classes,currencyCode,isLoadingCatalogItems,pageInfo,pageSize,setPageSize,setSortBy,sortBy } = props
     const [titleWeb_,setTitleWeb_] = useState('');  
     const [isLoad,setisLoad] = useState(false);  
     let title = tags !== null ?  (tags.catalogProducts.length > 0 ? tags.displayTitle : ' ') : ' ';
