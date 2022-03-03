@@ -150,7 +150,8 @@ class Layout extends Component {
     return (
       <React.Fragment>
         <div className={classes.root}>
-          {/* <Header shop={shop} viewer={viewer} /> */}          
+          {/* <Header shop={shop} viewer={viewer} /> */}   
+                 
           <NavigationHeader
             uiStore={uiStore}
             catalogItems={products}
