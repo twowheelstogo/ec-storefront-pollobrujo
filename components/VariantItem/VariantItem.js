@@ -14,7 +14,7 @@ const styles = (theme) => ({
     "textTransform": "none",
     "width": "100%",
     "borderRadius": "2px",
-    "backgroundColor": theme.palette.primary.contrastText,
+    color:"black",backgroundColor:"#FFEB3B",
     "border": "1px solid",
     "borderColor": theme.palette.reaction.borderColor,
     "padding": theme.spacing(2),
